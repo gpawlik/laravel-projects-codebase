@@ -12,5 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect("auth/login");
+});
+
+//Auth Routes: not explicit
+Route::controllers([
+    'auth' => '\App\Http\Controllers\Auth\AuthController',
+    'password' => '\App\Http\Controllers\Auth\PasswordController',
+]);
+
+
+//Dashboard routes
+Route::group(['middleware' => 'auth', 'prefix' => "dashboard"], function()
+{
+
+	Route::get('/','DashboardController@index');
+
 });

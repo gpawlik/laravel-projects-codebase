@@ -1,0 +1,52 @@
+@font-face {
+    font-family: Regencie Light;
+    src: url('/fonts/RegencieLight.ttf');
+}
+
+body{
+  margin:0;
+  padding:0;
+  background-color: #F5F5F5;
+  font-family: Regencie Light;
+  font-size: 14px;
+}
+
+nav#main-nav{
+  float:left;
+  width:15%;
+  background-color: #607D8B;
+}
+
+nav#main-nav header{
+  height:40px;
+  background-color: #546E7A;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+nav#main-nav header h2{
+  line-height: 40px;
+  font-size: 16px;
+  color:#FFF;
+  margin: 0;
+  padding:0;
+}
+
+div#content-wrapper{
+  float:right;
+  width:85%;
+}
+
+div#content{
+  padding:20px;
+}
+
+div#content-wrapper header{
+  background-color: #FFF;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
+  height: 40px;
+}
+
+.clear-floats{
+  clear:both;
+}
