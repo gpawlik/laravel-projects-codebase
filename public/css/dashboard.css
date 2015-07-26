@@ -11,6 +11,11 @@ body{
   font-size: 14px;
 }
 
+a{
+  text-decoration: none;
+  color:inherit;
+}
+
 nav#main-nav{
   float:left;
   width:15%;
@@ -19,9 +24,11 @@ nav#main-nav{
 
 nav#main-nav header{
   height:40px;
-  background-color: #546E7A;
+  background-color: #37474F;
   box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
-  text-align: center;
+  padding-left: 10px;
+  position: relative;
+  z-index: 9999;
 }
 
 nav#main-nav header h2{
@@ -30,6 +37,32 @@ nav#main-nav header h2{
   color:#FFF;
   margin: 0;
   padding:0;
+}
+
+nav#main-nav ul{
+  padding:0;
+  margin:0;
+}
+
+nav#main-nav ul li{
+  list-style: none;
+}
+
+nav#main-nav ul li a{
+  color:#FFF;
+  display: block;
+}
+
+nav#main-nav ul li a.main-link{
+  font-weight: bold;
+  background-color: #455A64;
+  padding:10px;
+  cursor: pointer;
+}
+
+nav#main-nav ul li a.sub-link{
+  background-color: #546E7A;
+  padding:5px 10px;
 }
 
 div#content-wrapper{
@@ -45,6 +78,130 @@ div#content-wrapper header{
   background-color: #FFF;
   box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
   height: 40px;
+  line-height: 40px;
+}
+
+div#logout-btn{
+  cursor: pointer;
+  background-color: #D1D1D1;
+}
+
+div#logout-btn:hover{
+  background-color: #f44336;
+  color:#FFF;
+}
+
+/*** TABLE STYLES ***/
+.view-table{
+  width: 100%;
+}
+
+.view-table th{
+  text-align: left;
+  padding:5px;
+  color:#FFF;
+  background-color: #4183D7;
+}
+
+.view-table td{
+  padding:5px;
+  border-bottom: 1px solid #E1E1E1;
+}
+
+div.card{
+  padding:5px;
+  background-color: #FFF;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1)
+}
+
+.full{
+  width:98%;
+}
+
+.half{
+  width:48%;
+}
+
+.quarter{
+  width:23%;
+}
+
+.mini_btn{
+	border:none;
+	outline: none;
+	cursor: pointer;
+	padding:5px 8px;
+	border-radius: 3px;
+	color:#FFF;
+	background: #3b60b8;
+}
+
+/******************************* Form styles ***********************************/
+table.form-element{
+
+}
+
+table.form-element td{
+  padding:5px;
+}
+
+table.form-element .text-input{
+  padding:5px 0px;
+  width: 100%;
+  border:1px solid #B0BEC5;
+  border:none;
+  border-bottom:2px solid #E1E1E1;
+  outline: none;
+}
+
+table.form-element .text-input:focus{
+  border-bottom:2px solid #4183D7;
+}
+
+table.form-element .select-input{
+  padding:5px 0px;
+  width: 100%;
+  border:none;
+  border-bottom:2px solid #E1E1E1;
+  outline: none;
+}
+
+table.form-element .submit-button{
+  border:none;
+  outline: none;
+  color:#FFF;
+  background-color: #2980b9;
+  padding:7px;
+  border-radius: 3px;
+}
+
+div.error-box{
+  background-color: #ffcdd2;
+  width:94%;
+  border-radius: 5px;
+  padding:0px 10px;
+}
+
+div.error-box ul{
+  padding:5px 20px;
+  margin: 0;
+}
+
+div.error-box ul li{
+  font-size: 12px;
+  color:#c62828;
+}
+
+.box{
+  padding:0px 10px;
+}
+
+.float-left{
+  float:left;
+}
+
+.float-right{
+  float:right;
 }
 
 .clear-floats{

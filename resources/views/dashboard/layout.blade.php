@@ -28,11 +28,32 @@
     <header>
       <h2><i class="fa fa-dashcube"></i>  &nbsp; Dashboard</h2>
     </header>
+
+    <ul>
+      <li><a class = "main-link"><i class="fa fa-cogs"></i> &nbsp; System</a>
+        <li><a href = "#" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a></li>
+        <li><a href = "/dashboard/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a></li>
+      </li>
+
+    </ul>
+
   </nav>
 
   <div id = "content-wrapper">
     <header>
+			<div class = "float-left">
+				<div class = "box" id = "logout-btn" title = "Logout">
+					<i class="fa fa-power-off"></i>
+				</div>
+			</div>
+			<div class = "float-right">
+				<div class = "box">
+					{{Auth::user()->first_name}} {{Auth::user()->last_name}}
+				</div>
+				<div class = "box">
 
+				</div>
+			</div>
     </header>
 
     <div id = "content">

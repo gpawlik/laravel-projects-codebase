@@ -15,17 +15,35 @@ Route::get('/', function () {
     return redirect("auth/login");
 });
 
+Route::get('/home', function () {
+    return redirect("/dashboard");
+});
+
 //Auth Routes: not explicit
 Route::controllers([
     'auth' => '\App\Http\Controllers\Auth\AuthController',
     'password' => '\App\Http\Controllers\Auth\PasswordController',
 ]);
 
+Route::get('/auth/change_password',function(){
+  return "ddd";
+});
+
 
 //Dashboard routes
-Route::group(['middleware' => 'auth', 'prefix' => "dashboard"], function()
+Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
 {
+    	Route::get('/','DashboardController@index');
 
-	Route::get('/','DashboardController@index');
+      //users routes
+      Route::get('/users','UserController@index');
+      Route::get('/users/add','UserController@add');
+      Route::post('/users/create','UserController@create');
 
+});
+
+//inner application API routes
+Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
+{
+  	Route::get('/users','UserController@apiGetUsers');
 });
