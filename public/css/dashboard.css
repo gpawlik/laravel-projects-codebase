@@ -114,6 +114,28 @@ div.card{
   box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1)
 }
 
+div#session-box{
+	width:100%;
+	background: #FFFF99;
+	height:25px;
+	text-align: center;
+	color:#616161;
+	line-height: 25px;
+}
+
+.mini-link{
+  display: inline-block;
+  width:30px;
+  height:30px;
+  text-align: center;
+  line-height: 30px;
+  background-color: #4183D7;
+  color:#FFF;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
 .full{
   width:98%;
 }

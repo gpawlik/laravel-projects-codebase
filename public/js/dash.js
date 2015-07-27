@@ -3,6 +3,8 @@ $(document).ready(function(){
 	setup();
 	hideSubLinks();
 	handleMenuClick();
+	handleMainMenu(window.location.pathname.split("/")[1]);
+	handleSessionBox();
 });
 
 function setup()
@@ -36,4 +38,18 @@ function handleMenuClick()
 function hideSubLinks()
 {
 	$(".sub-link").hide();
+}
+
+function handleMainMenu(id)
+{
+	setTimeout(function(){
+		$("#"+id).children("a.sub-link").slideDown();
+	},2000);
+}
+
+function handleSessionBox()
+{
+	setTimeout(function(){
+		$("#session-box").slideToggle("slow");
+	},4000);
 }

@@ -35,11 +35,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
 {
     	Route::get('/','DashboardController@index');
 
+});
+
+Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
+{
       //users routes
       Route::get('/users','UserController@index');
       Route::get('/users/add','UserController@add');
       Route::post('/users/create','UserController@create');
-
+      Route::get('/users/edit/{id}','UserController@edit');
+      Route::post('/users/update','UserController@update');
 });
 
 //inner application API routes

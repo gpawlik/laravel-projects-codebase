@@ -6,9 +6,9 @@
 
   @include('errors.error_list')
 
-  {!! Form::open(['method' => 'POST','action' => 'UserController@create'] ) !!}
+  {!! Form::open(['method' => 'POST','action' => 'UserController@create','files'=>true] ) !!}
 
-    @include('dashboard.users.partials._form',['submitButtonText'=>'Save'])
+    @include('dashboard.users.partials._form',['submitButtonText'=>'Save','context'=>'add'])
 
   {!! Form::close() !!}
 

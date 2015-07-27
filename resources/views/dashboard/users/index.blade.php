@@ -8,7 +8,7 @@
 
       'data' => $users,
 
-      'route' => 'dashboard/users',
+      'route' => 'system/users',
 
       'foreign' => array
         (

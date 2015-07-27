@@ -25,16 +25,20 @@
 <body>
 
   <nav id = "main-nav">
-    <header>
-      <h2><i class="fa fa-dashcube"></i>  &nbsp; Dashboard</h2>
-    </header>
+		<a href = "/dashboard">
+	    <header>
+	      <h2><i class="fa fa-dashcube"></i>  &nbsp; Dashboard</h2>
+	    </header>
+		</a>
 
     <ul>
-      <li><a class = "main-link"><i class="fa fa-cogs"></i> &nbsp; System</a>
-        <li><a href = "#" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a></li>
-        <li><a href = "/dashboard/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a></li>
+      <li>
+				<a id = "system" class = "main-link">
+						<i class="fa fa-cogs"></i> &nbsp; System
+		        <li><a href = "#" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a></li>
+		        <li><a href = "/system/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a></li>
+				</a>
       </li>
-
     </ul>
 
   </nav>
@@ -42,9 +46,11 @@
   <div id = "content-wrapper">
     <header>
 			<div class = "float-left">
-				<div class = "box" id = "logout-btn" title = "Logout">
-					<i class="fa fa-power-off"></i>
-				</div>
+				<a href = "/auth/logout">
+					<div class = "box" id = "logout-btn" title = "Logout">
+						<i class="fa fa-power-off"></i>
+					</div>
+				</a>
 			</div>
 			<div class = "float-right">
 				<div class = "box">
@@ -55,8 +61,24 @@
 				</div>
 			</div>
     </header>
+		@if(Session::has('message'))
+      <div id = "session-box">
+        {{ Session::get('message') }}
+      </div>
+    @endif
 
     <div id = "content">
+
+			@if(isset($subLinks))
+				@foreach($subLinks as $subLink)
+					<a @if(isset($subLink['route'])) href = "{{$subLink['route']}}" @endif>
+						<div class = "mini-link" title = "{{$subLink['title']}}">
+							{!! $subLink['icon'] !!}
+						</div>
+					</a>
+				@endforeach
+			@endif
+
       @yield("content")
     </div>
   </div>
