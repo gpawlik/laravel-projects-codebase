@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Role;
+use App\User;
 use Validator;
 use Image;
 use Hash;
@@ -125,11 +126,48 @@ class RoleController extends Controller {
 
   public function view($id)
   {
+		$role = Role::find($id);
 
+		$data['title'] = "View Role Details";
+		$data['subLinks'] = array(
+				array
+				(
+					"title" => "Role List",
+					"route" => "/system/roles",
+					"icon" => "<i class='fa fa-th-list'></i>"
+				),
+				array
+				(
+					"title" => "Add Role",
+					"route" => "/system/roles/add",
+					"icon" => "<i class='fa fa-plus'></i>"
+				)
+			);
+
+			$data['role'] = $role;
+
+			return view('dashboard.roles.view',$data);
   }
 
   public function delete($id)
   {
+		$role = Role::find($id);
+
+		//check if users are assigned to this role, if not delete role else error (to avoid cascade delete)
+		$affiliatedUsers = \DB::table("users")->where("role_id",$role->id)->count();
+
+		if($affiliatedUsers > 0)
+		{
+			Session::flash('message', 'Cannot delete role, Users are assigned to it');
+			return Redirect::to("/system/roles");
+		}
+		else
+		{
+			$role -> delete();
+
+			Session::flash('message', 'Role deleted');
+			return Redirect::to("/system/roles");
+		}
 
   }
 

@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/roles/create','RoleController@create');
       Route::get('/roles/edit/{id}','RoleController@edit');
       Route::post('/roles/update/{id}','RoleController@update');
-      Route::get('/roles/delete/{id}','roleController@delete');
+      Route::get('/roles/delete/{id}','RoleController@delete');
       Route::get('/roles/view/{id}','RoleController@view');
 });
 

@@ -8,12 +8,13 @@
       </tr>
     @endforeach
 
-    @foreach($foreign as $f)
-      <tr>
-        <th> {{ $f['name'] }} </th><td> {{ $f['model']::find($data->$f['key'])->$f['property'] }}</td>
-      </tr>
-    @endforeach
-
+    @if(isset($foreign))
+      @foreach($foreign as $f)
+        <tr>
+          <th> {{ $f['name'] }} </th><td> {{ $f['model']::find($data->$f['key'])->$f['property'] }}</td>
+        </tr>
+      @endforeach
+    @endif
 
   </table>
 </div>
