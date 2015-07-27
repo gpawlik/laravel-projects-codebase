@@ -94,6 +94,7 @@ div#logout-btn:hover{
 /*** TABLE STYLES ***/
 .view-table{
   width: 100%;
+  background-color: #FFF;
 }
 
 .view-table th{
@@ -121,6 +122,15 @@ div#session-box{
 	text-align: center;
 	color:#616161;
 	line-height: 25px;
+}
+
+#small-image{
+  width:50px;
+  margin-top:10px;
+}
+
+#small-image img{
+  width: 100%;
 }
 
 .mini-link{

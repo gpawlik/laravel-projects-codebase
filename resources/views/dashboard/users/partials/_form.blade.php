@@ -29,7 +29,18 @@
     @endif
 
     @if($context == 'update')
-
+      <tr>
+        <td>{!! Form::label("image_name","Image (optional)") !!}</td>
+        <td>
+          {!! Form::file("image_name") !!}
+          @if(isset($user->image_name))
+            <div id = "small-image">
+              <img src = "/uploads/{{$user->image_name}}" />
+            </div>
+            <input type = "checkbox" name = "clear_check" value = "yes" /> Clear Image (<span class = "small-text">Check to delete image</span>)
+          @endif
+        </td>
+      </tr>
     @endif
   @endif
 

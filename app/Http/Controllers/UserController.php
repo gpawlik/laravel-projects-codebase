@@ -62,12 +62,7 @@ class UserController extends Controller {
 
   public function create()
   {
-		$rules = array(
-			'first_name' => 'required',
-			'last_name' => 'required',
-			'username' => 'required',
-			'email' => 'required',
-		);
+		$rules = self::getRules();
 
 		$validator = Validator::make(Input::all(), $rules);
 
@@ -143,9 +138,87 @@ class UserController extends Controller {
 		return view('dashboard.users.edit',$data);
 	}
 
-	public function update()
+	public function update($id)
 	{
+		$user = User::find($id);
 
+		$rules = self::getRules();
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->fails())
+		{
+			return Redirect::to('/system/users/edit/'.$id)
+        		->withErrors($validator)
+        		->withInput();
+		}
+    else
+    {
+			//DEAL WITH IMAGE FILE
+      if(Input::file(('image_name')))
+      {
+          if($user->image_name != null)
+          {
+            if (file_exists(public_path('uploads/'.$user -> image_name)))
+        		{
+              unlink(public_path('uploads/'.$user -> image_name));
+        		}
+          }
+
+          $image = Input::file('image_name');
+
+          $destinationImagePath = public_path('uploads/' . str_replace(" ","_",$image->getClientOriginalName()));
+
+          $resizedImage = Image::make($image)->resize(200,200);
+
+          $user -> image_name = str_replace(" ","_",$image->getClientOriginalName());
+
+          $resizedImage -> save($destinationImagePath);
+
+      }
+      else
+      {
+				if(Input::get("clear_check") == 'yes')
+        {
+          if(file_exists(public_path('uploads/'.$user -> image_name)))
+          {
+            unlink(public_path('uploads/'.$user -> image_name));
+          }
+          $user->image_name = null;
+        }
+			}
+
+			$user -> first_name = Input::get("first_name");
+			$user -> last_name = Input::get("last_name");
+			$user -> email = Input::get("email");
+			$user -> username = Input::get("username");
+			$user -> role_id = Input::get("role_id");
+
+			$user -> push();
+			Session::flash('message', "User Details Updated");
+			return Redirect::to("/system/users");
+		}
+
+	}
+
+	public function delete($id)
+	{
+		$user = User::find($id);
+
+    if($user -> image_name != null)
+		{
+
+      if (file_exists(public_path('uploads/'.$user -> image_name)))
+  		{
+        unlink(public_path('uploads/'.$user -> image_name));
+  		}
+
+    }
+
+    $user -> delete();
+
+    Session::flash('message', 'User deleted');
+		return Redirect::to("/system/users");
 	}
 
   public function apiGetUsers()
@@ -155,5 +228,16 @@ class UserController extends Controller {
         	$users
     	);
   }
+
+	public function getRules()
+	{
+		return array(
+			'first_name' => 'required',
+			'last_name' => 'required',
+			'username' => 'required',
+			'email' => 'required',
+		);
+
+	}
 
 }

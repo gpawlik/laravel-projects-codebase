@@ -6,7 +6,7 @@
 
     @include('errors.error_list')
 
-    {!! Form::model($user, ['method' => 'PATCH','action' => ['UserController@update',$user->id] ] ) !!}
+    {!! Form::model($user, ['method' => 'POST','url' => ['system/users/update',$user->id], 'files'=>true ] ) !!}
 
       @include('dashboard.users.partials._form',['submitButtonText'=>'Update','roles'=>$roles,'context'=>'update'])
 
