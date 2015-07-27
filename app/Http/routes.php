@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::get('/users/edit/{id}','UserController@edit');
       Route::post('/users/update/{id}','UserController@update');
       Route::get('/users/delete/{id}','UserController@delete');
+      Route::get('/users/view/{id}','UserController@view');
 });
 
 //inner application API routes

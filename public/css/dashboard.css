@@ -109,6 +109,20 @@ div#logout-btn:hover{
   border-bottom: 1px solid #E1E1E1;
 }
 
+.details-table{
+  width:100%;
+}
+
+
+.details-table th{
+  text-align: left;
+  padding:5px;
+}
+
+.details-table td{
+  padding:5px;
+}
+
 div.card{
   padding:5px;
   background-color: #FFF;
@@ -144,6 +158,10 @@ div#session-box{
   border-radius: 50%;
   cursor: pointer;
   margin-bottom: 10px;
+}
+
+.confirm_delete{
+  background-color: #f44336 !important;
 }
 
 .full{

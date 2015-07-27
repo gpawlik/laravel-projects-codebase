@@ -201,6 +201,24 @@ class UserController extends Controller {
 
 	}
 
+	public function view($id)
+	{
+		$user = User::find($id);
+
+		$data['title'] = "View User Details";
+		$data['subLinks'] = array(
+			array
+			(
+				"title" => "User List",
+				"route" => "/system/users",
+				"icon" => "<i class='fa fa-th-list'></i>"
+			)
+		);
+		$data['user'] = $user;
+
+		return view('dashboard.users.view',$data);
+	}
+
 	public function delete($id)
 	{
 		$user = User::find($id);
