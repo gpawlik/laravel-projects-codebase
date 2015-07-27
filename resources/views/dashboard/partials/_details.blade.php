@@ -12,7 +12,7 @@
       <tr>
         <th> {{ $f['name'] }} </th><td> {{ $f['model']::find($data->$f['key'])->$f['property'] }}</td>
       </tr>
-    @endforeach`
+    @endforeach
 
 
   </table>

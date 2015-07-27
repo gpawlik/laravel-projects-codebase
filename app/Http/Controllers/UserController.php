@@ -212,6 +212,12 @@ class UserController extends Controller {
 				"title" => "User List",
 				"route" => "/system/users",
 				"icon" => "<i class='fa fa-th-list'></i>"
+			),
+			array
+			(
+				"title" => "Add User",
+				"route" => "/system/users/add",
+				"icon" => "<i class='fa fa-plus'></i>"
 			)
 		);
 		$data['user'] = $user;

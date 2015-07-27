@@ -3,6 +3,11 @@
     src: url('/fonts/RegencieLight.ttf');
 }
 
+@font-face {
+    font-family: Monoid Regular;
+    src: url('/fonts/Monoid-Regular.ttf');
+}
+
 body{
   margin:0;
   padding:0;
@@ -89,6 +94,15 @@ div#logout-btn{
 div#logout-btn:hover{
   background-color: #f44336;
   color:#FFF;
+}
+
+#profile-pic{
+  width:40px;
+  height:40px;
+}
+
+#profile-pic img{
+  width:100%;
 }
 
 /*** TABLE STYLES ***/
@@ -243,7 +257,12 @@ div.error-box ul li{
 }
 
 .box{
+  float:right;
+}
+
+.box-padding{
   padding:0px 10px;
+  float:right;
 }
 
 .float-left{

@@ -35,7 +35,7 @@
       <li>
 				<a id = "system" class = "main-link">
 						<i class="fa fa-cogs"></i> &nbsp; System
-		        <li><a href = "#" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a></li>
+		        <li><a href = "/system/roles" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a></li>
 		        <li><a href = "/system/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a></li>
 				</a>
       </li>
@@ -47,17 +47,26 @@
     <header>
 			<div class = "float-left">
 				<a href = "/auth/logout">
-					<div class = "box" id = "logout-btn" title = "Logout">
+					<div class = "box-padding" id = "logout-btn" title = "Logout">
 						<i class="fa fa-power-off"></i>
 					</div>
 				</a>
 			</div>
 			<div class = "float-right">
-				<div class = "box">
-					{{Auth::user()->first_name}} {{Auth::user()->last_name}}
-				</div>
-				<div class = "box">
 
+					@if(isset(Auth::user()->image_name))
+						<div class = "box">
+							<div id = "profile-pic">
+								<img src = "/uploads/{{Auth::user()->image_name}}" />
+							</div>
+						</div>
+					@else
+						<div class = "box-padding">
+							<i class="fa fa-user"></i>
+						</div>
+					@endif
+				<div class = "box-padding">
+					{{Auth::user()->first_name}} {{Auth::user()->last_name}}
 				</div>
 			</div>
     </header>

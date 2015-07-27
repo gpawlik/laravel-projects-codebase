@@ -10,8 +10,20 @@
       "properties" => array
         (
           array(
-          'name'=>'First Name',
-          'property' => 'first_name'
+            'name'=>'First Name',
+            'property' => 'first_name'
+          ),
+          array(
+            'name'=>'Last Name',
+            'property' => 'last_name'
+          ),
+          array(
+            'name'=>'Email',
+            'property' => 'email'
+          ),
+          array(
+            'name'=>'Username',
+            'property' => 'username'
           )
         ),
 
