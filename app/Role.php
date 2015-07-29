@@ -8,4 +8,13 @@ class Role extends Model{
 
 	protected $fillable = ['role_name'];
 
+	public static function getPermissions()
+	{
+		return array(
+			"system_role_can_add",
+			"system_role_can_edit",
+			"system_role_can_delete"
+		);
+	}
+
 }

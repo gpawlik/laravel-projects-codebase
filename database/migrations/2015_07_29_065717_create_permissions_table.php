@@ -16,7 +16,6 @@ class CreatePermissionsTable extends Migration
             $table->increments('id');
 
             $table->string("permission_name");
-            $table->string("");
 
             $table -> integer('role_id')->unsigned();
 			      $table -> foreign('role_id')->references('id')->on('roles');

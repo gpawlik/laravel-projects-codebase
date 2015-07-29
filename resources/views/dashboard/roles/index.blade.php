@@ -10,7 +10,15 @@
 
       'route' => 'system/roles',
 
-      'actions' => ['view','edit','delete']
+      'actions' => ['view','edit','delete'],
+
+      'extraActions' => array(
+        array(
+          "route" => "system/roles/permissions",
+          "title" => "Permissions",
+          "icon" => "<i class='fa fa-key'></i>"
+        )
+      )
 
     )
   )

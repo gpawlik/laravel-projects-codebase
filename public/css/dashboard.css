@@ -137,6 +137,43 @@ div#logout-btn:hover{
   padding:5px;
 }
 
+.table-actions{
+  text-align: right;
+}
+
+/* PAGINATION STYLES **************************/
+.page_links ul li{
+	display: inline-block;
+	padding:2px 5px;
+	margin:2px;
+	background-color: #D1D1D1;
+}
+
+.pagination .active{
+	background: #4183D7;
+}
+
+.pagination .active span{
+	color:#FFF;
+}
+
+.pagination .disabled{
+	background-color: #E1E1E1;
+}
+
+
+.page_links ul li span{
+	color:#717171;
+
+}
+
+.page_links ul li a{
+	text-decoration: none;
+	color:#616161;
+}
+
+/**************************************************/
+
 div.card{
   padding:5px;
   background-color: #FFF;

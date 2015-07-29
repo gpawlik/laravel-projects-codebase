@@ -32,4 +32,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    public static function getPermissions()
+    {
+      return array(
+        "system_user_can_add",
+        "system_user_can_edit",
+        "system_user_can_delete",
+        "system_user_can_view"
+      );
+    }
 }

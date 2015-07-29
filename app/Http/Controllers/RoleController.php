@@ -171,6 +171,32 @@ class RoleController extends Controller {
 
   }
 
+	public function permissions($id)
+	{
+		$role = Role::find($id);
+
+		$data['title'] = "Role Permissions";
+		$data['subLinks'] = array(
+				array
+				(
+					"title" => "Role List",
+					"route" => "/system/roles",
+					"icon" => "<i class='fa fa-th-list'></i>"
+				),
+				array
+				(
+					"title" => "Add Role",
+					"route" => "/system/roles/add",
+					"icon" => "<i class='fa fa-plus'></i>"
+				)
+			);
+
+			$data['role'] = $role;
+
+			return view('dashboard.roles.permissions',$data);
+
+	}
+
 	public function getRules()
 	{
 		return array(

@@ -1,0 +1,161 @@
+<?php namespace App\Http\Controllers;
+
+use App\Role;
+use App\Permission;
+use Validator;
+use Image;
+use Hash;
+use Session;
+use Input;
+use Redirect;
+use Response;
+use Auth;
+
+
+class PermissionController extends Controller {
+
+	public function index()
+	{
+    $data['title'] = "Permissions";
+    $data['permissions'] = Permission::orderBy("permission_name","ASC")->paginate(20);
+		$data['subLinks'] = array(
+			array
+			(
+				"title" => "Add Permission",
+				"route" => "/system/permissions/add",
+				"icon" => "<i class='fa fa-plus'></i>"
+			),
+			array
+			(
+				"title" => "Search for permission",
+				"icon" => "<i class='fa fa-search'></i>"
+			)
+		);
+
+		return view('dashboard.permissions.index',$data);
+  }
+
+  public function add()
+  {
+    $data['title'] = "Add Permission";
+    $data['subLinks'] = array(
+      array
+      (
+        "title" => "Permission List",
+        "route" => "/system/permissions",
+        "icon" => "<i class='fa fa-th-list'></i>"
+      )
+    );
+
+    //Obtain list of roles
+    $roles = Role::all();
+    $roles_array = array();
+
+    foreach ($roles as $role) {
+      $roles_array[$role->id] = $role->role_name;
+    }
+
+    $data['roles'] = $roles_array;
+
+    return view('dashboard.permissions.add',$data);
+  }
+
+  public function create()
+  {
+    $rules = self::getRules();
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->fails())
+		{
+			return Redirect::to('/system/permissions/add')
+						->withErrors($validator)
+						->withInput();
+		}
+		else
+		{
+      $permission = new Permission;
+
+      $permission -> permission_name = Input::get("permission_name");
+      $permission -> role_id = Input::get("role_id");
+
+			$permission -> save();
+			Session::flash('message','Permission Added');
+			return Redirect::to('/system/permissions');
+    }
+  }
+
+  public function edit($id)
+  {
+    $permission = Permission::find($id);
+
+    $data['title'] = "Edit Permission";
+    $data['subLinks'] = array(
+      array
+      (
+        "title" => "Permission List",
+        "route" => "/system/permissions",
+        "icon" => "<i class='fa fa-th-list'></i>"
+      )
+    );
+    $data['permission'] = $permission;
+
+    //Obtain list of roles
+    $roles = Role::all();
+    $roles_array = array();
+
+    foreach ($roles as $role) {
+      $roles_array[$role->id] = $role->role_name;
+    }
+
+    $data['roles'] = $roles_array;
+    $data['permissions_role'] = Role::where('id','=',$permission -> role_id)->first();
+
+    return view('dashboard.permissions.edit',$data);
+  }
+
+  public function update($id)
+  {
+    $permission = Permission::find($id);
+
+		$rules = self::getRules();
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->fails())
+		{
+			return Redirect::to('/system/permissions/edit/'.$id)
+        		->withErrors($validator)
+        		->withInput();
+		}
+    else
+    {
+			$permission -> permission_name = Input::get("permission_name");
+			$permission -> role_id = Input::get("role_id");
+
+			$permission -> push();
+			Session::flash('message', "Permission Details Updated");
+			return Redirect::to("/system/permissions");
+		}
+
+  }
+
+  public function delete($id)
+  {
+    $permission = Permission::find($id);
+
+    $permission -> delete();
+
+    Session::flash('message', 'Permission deleted');
+		return Redirect::to("/system/permissions");
+  }
+
+  public function getRules()
+  {
+    return array(
+      'permission_name' => 'required'
+    );
+
+  }
+
+}

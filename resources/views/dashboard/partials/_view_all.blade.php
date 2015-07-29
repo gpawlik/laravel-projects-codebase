@@ -18,9 +18,18 @@
        ?>
     @endif
 
-    @foreach($actions as $action)
-      <th></th>
-    @endforeach
+    @if(isset($actions))
+      @foreach($actions as $action)
+        <th></th>
+      @endforeach
+    @endif
+
+    @if(isset($extraActions))
+      @foreach($extraActions as $extraAction)
+        <th></th>
+      @endforeach
+    @endif
+
 
   </tr>
 
@@ -50,7 +59,7 @@
 
     @foreach($actions as $action)
 
-        <td>
+        <td class = "table-actions">
 
           @if($action == 'delete')
             <a href = '#' title = 'delete' ><i class='fa fa-trash delete_btn'></i></a>
@@ -79,10 +88,18 @@
 
     @endforeach
 
+    @if(isset($extraActions))
+      @foreach($extraActions as $extraAction)
+        <td class = "table-actions">
+            <a href = '/{{ $extraAction['route'] }}/{{ strtolower($d->id) }}' title = {{ $extraAction['title'] }} > {!! $extraAction['icon'] !!} </a>
+        </td>
+      @endforeach
+    @endif
+
   </tr>
 
   @endforeach
 
 </table>
 
-<div class = "page_links">	{{ $data -> render() }} </div>
+<div class = "page_links">	{!! $data -> render() !!} </div>

@@ -35,6 +35,7 @@
       <li>
 				<a id = "system" class = "main-link">
 						<i class="fa fa-cogs"></i> &nbsp; System
+						<li><a href = "/system/permissions" class = "sub-link"><i class="fa fa-key"></i></i> &nbsp; Permissions</a></li>
 		        <li><a href = "/system/roles" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a></li>
 		        <li><a href = "/system/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a></li>
 				</a>
