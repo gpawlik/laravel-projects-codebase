@@ -2,6 +2,7 @@
 
 use App\Role;
 use App\User;
+use App\Permission;
 use Validator;
 use Image;
 use Hash;
@@ -192,7 +193,7 @@ class RoleController extends Controller {
 			);
 
 			$roles_permissions = \DB::table("permissions")->where("role_id",$role->id)->get();
-
+			
 			$data['role'] = $role;
 			$data['permissions_parents'] = \Config::get("Permission.parents");
 			$data['roles_permissions'] = $roles_permissions;
