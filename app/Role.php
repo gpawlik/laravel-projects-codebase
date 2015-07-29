@@ -13,7 +13,8 @@ class Role extends Model{
 		return array(
 			"system_role_can_add",
 			"system_role_can_edit",
-			"system_role_can_delete"
+			"system_role_can_delete",
+			"system_role_can_view"
 		);
 	}
 

@@ -191,10 +191,30 @@ class RoleController extends Controller {
 				)
 			);
 
+			$roles_permissions = \DB::table("permissions")->where("role_id",$role->id)->get();
+
 			$data['role'] = $role;
+			$data['permissions_parents'] = \Config::get("Permission.parents");
+			$data['roles_permissions'] = $roles_permissions;
+			$data['models'] = self::getModels();
 
 			return view('dashboard.roles.permissions',$data);
+	}
 
+	public function getModels()
+	{
+		$scan = scandir('../app');
+    $models = array();
+
+    foreach($scan as $file)
+    {
+      if(!is_dir("../app/$file"))
+      {
+        array_push($models, str_replace(".php", "", "App\\".$file));
+      }
+    }
+
+		return $models;
 	}
 
 	public function getRules()
