@@ -293,6 +293,29 @@ div.error-box ul li{
   color:#c62828;
 }
 
+.submit-button{
+ border:none;
+ outline: none;
+ color:#FFF;
+ background-color: #2980b9;
+ padding:7px;
+ border-radius: 3px;
+ margin-top:15px;
+}
+
+/************* permission styles *************/
+h3.permission-header{
+  margin:0;
+  cursor: pointer;
+  padding:5px;
+  background-color: #E1E1E1;
+  color:#818181;
+}
+
+table.permission-table{
+  background-color: #F1F1F1;
+}
+
 .box{
   float:right;
 }

@@ -5,6 +5,7 @@ $(document).ready(function(){
 	handleMenuClick();
 	handleMainMenu(window.location.pathname.split("/")[1]);
 	handleSessionBox();
+	handlePermissions();
 });
 
 function setup()
@@ -52,4 +53,13 @@ function handleSessionBox()
 	setTimeout(function(){
 		$("#session-box").slideToggle("slow");
 	},4000);
+}
+
+function handlePermissions()
+{
+	$(".permission-table").hide();
+
+	$(".permission-header").click(function(){
+		$(this).next(".permission-table").slideToggle("slow");
+	});
 }

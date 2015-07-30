@@ -193,13 +193,49 @@ class RoleController extends Controller {
 			);
 
 			$roles_permissions = \DB::table("permissions")->where("role_id",$role->id)->get();
-			
+
 			$data['role'] = $role;
 			$data['permissions_parents'] = \Config::get("Permission.parents");
 			$data['roles_permissions'] = $roles_permissions;
 			$data['models'] = self::getModels();
 
 			return view('dashboard.roles.permissions',$data);
+	}
+
+	public function savePermissions($id)
+	{
+		//all checked permissions
+		$selectedPermissions = Input::all();
+
+		//remove the form token in front of input array
+		array_shift($selectedPermissions);
+
+		//select all where role_id = selected id
+		$role = Role::find($id);
+
+		//select all permissions with that role id
+		$rolesPermissions = \DB::table("permissions")->where("role_id",$role->id);
+
+		//var_dump($rolesPermissions);die();
+
+		//delete all permissions with that role id
+		$rolesPermissions->delete();
+
+		//add all selected permissions
+		foreach($selectedPermissions as $selectedPermission)
+		{
+			$permission = new Permission;
+
+			$permission -> permission_name = $selectedPermission;
+			$permission -> role_id = $role->id;
+
+			$permission -> save();
+		}
+
+		Session::flash('message', 'Permissions Saved');
+		return Redirect::to("/system/roles/permissions/$id");
+
+
 	}
 
 	public function getModels()

@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::get('/roles/delete/{id}','RoleController@delete');
       Route::get('/roles/view/{id}','RoleController@view');
       Route::get('/roles/permissions/{id}','RoleController@permissions');
+      Route::post('/roles/save_permissions/{id}','RoleController@savePermissions');
 
       //permission routes
       Route::get('/permissions','PermissionController@index');
