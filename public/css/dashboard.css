@@ -310,6 +310,7 @@ h3.permission-header{
   padding:5px;
   background-color: #E1E1E1;
   color:#818181;
+  border-bottom: 1px solid #D1D1D1;
 }
 
 table.permission-table{

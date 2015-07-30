@@ -13,7 +13,8 @@ class Permission extends Model{
 		return array(
 			"system_permission_can_add",
 			"system_permission_can_edit",
-			"system_permission_can_delete"
+			"system_permission_can_delete",
+			"system_permission_can_search"
 		);
 	}
 

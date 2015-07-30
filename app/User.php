@@ -40,7 +40,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         "system_user_can_add",
         "system_user_can_edit",
         "system_user_can_delete",
-        "system_user_can_view"
+        "system_user_can_view",
+        "system_user_can_search"
       );
     }
 }

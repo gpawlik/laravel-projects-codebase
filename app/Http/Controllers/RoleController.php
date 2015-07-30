@@ -24,12 +24,14 @@ class RoleController extends Controller {
       (
         "title" => "Add Role",
         "route" => "/system/roles/add",
-        "icon" => "<i class='fa fa-plus'></i>"
+        "icon" => "<i class='fa fa-plus'></i>",
+				"permission" => "system_role_can_add"
       ),
       array
       (
         "title" => "Search for Role",
-        "icon" => "<i class='fa fa-search'></i>"
+        "icon" => "<i class='fa fa-search'></i>",
+				"permission" => "system_role_can_search"
       )
     );
 
@@ -44,7 +46,8 @@ class RoleController extends Controller {
       (
         "title" => "Role list",
 				"route" => "/system/roles",
-        "icon" => "<i class='fa fa-th-list'></i>"
+        "icon" => "<i class='fa fa-th-list'></i>",
+				"permission" => "system_role_can_view"
       )
     );
 
@@ -87,13 +90,15 @@ class RoleController extends Controller {
       (
         "title" => "Role list",
 				"route" => "/system/roles",
-        "icon" => "<i class='fa fa-th-list'></i>"
+        "icon" => "<i class='fa fa-th-list'></i>",
+				"permission" => "system_role_can_view"
       ),
 			array
       (
         "title" => "Add Role",
         "route" => "/system/roles/add",
-        "icon" => "<i class='fa fa-plus'></i>"
+        "icon" => "<i class='fa fa-plus'></i>",
+				"permission" => "system_role_can_add"
       ),
     );
 
@@ -135,13 +140,15 @@ class RoleController extends Controller {
 				(
 					"title" => "Role List",
 					"route" => "/system/roles",
-					"icon" => "<i class='fa fa-th-list'></i>"
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_role_can_view"
 				),
 				array
 				(
 					"title" => "Add Role",
 					"route" => "/system/roles/add",
-					"icon" => "<i class='fa fa-plus'></i>"
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_role_can_add"
 				)
 			);
 
@@ -182,13 +189,15 @@ class RoleController extends Controller {
 				(
 					"title" => "Role List",
 					"route" => "/system/roles",
-					"icon" => "<i class='fa fa-th-list'></i>"
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_role_can_view"
 				),
 				array
 				(
 					"title" => "Add Role",
 					"route" => "/system/roles/add",
-					"icon" => "<i class='fa fa-plus'></i>"
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_role_can_add"
 				)
 			);
 
@@ -238,7 +247,7 @@ class RoleController extends Controller {
 
 	}
 
-	public function getModels()
+	public static function getModels()
 	{
 		$scan = scandir('../app');
     $models = array();

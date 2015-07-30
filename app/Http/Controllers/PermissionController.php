@@ -23,12 +23,14 @@ class PermissionController extends Controller {
 			(
 				"title" => "Add Permission",
 				"route" => "/system/permissions/add",
-				"icon" => "<i class='fa fa-plus'></i>"
+				"icon" => "<i class='fa fa-plus'></i>",
+				"permission" => "system_permission_can_add"
 			),
 			array
 			(
 				"title" => "Search for permission",
-				"icon" => "<i class='fa fa-search'></i>"
+				"icon" => "<i class='fa fa-search'></i>",
+				"permission" => "system_permission_can_search"
 			)
 		);
 
@@ -43,7 +45,8 @@ class PermissionController extends Controller {
       (
         "title" => "Permission List",
         "route" => "/system/permissions",
-        "icon" => "<i class='fa fa-th-list'></i>"
+        "icon" => "<i class='fa fa-th-list'></i>",
+				"permission" => "system_permission_can_view"
       )
     );
 
@@ -95,7 +98,8 @@ class PermissionController extends Controller {
       (
         "title" => "Permission List",
         "route" => "/system/permissions",
-        "icon" => "<i class='fa fa-th-list'></i>"
+        "icon" => "<i class='fa fa-th-list'></i>",
+				"permission" => "system_permission_can_view"
       )
     );
     $data['permission'] = $permission;

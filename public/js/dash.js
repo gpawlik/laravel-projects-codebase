@@ -32,7 +32,7 @@ function setup()
 function handleMenuClick()
 {
 	$(".main-link").click(function(){
-		$(this + " .sub-link").slideToggle("fast");
+		$(this).nextAll(".sub-link").slideToggle("fast");
 	});
 }
 
@@ -44,8 +44,8 @@ function hideSubLinks()
 function handleMainMenu(id)
 {
 	setTimeout(function(){
-		$("#"+id).children("a.sub-link").slideDown();
-	},2000);
+		$("#"+id).nextAll(".sub-link").slideDown();
+	},1000);
 }
 
 function handleSessionBox()

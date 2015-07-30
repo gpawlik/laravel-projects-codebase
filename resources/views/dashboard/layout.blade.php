@@ -31,15 +31,53 @@
 	    </header>
 		</a>
 
+		<!-- check if user has permissions -->
+		<?php
+			//variables for permissions
+
+			$permissions = \DB::table("permissions")->where("role_id",Auth::user()->role_id)->get();
+			$configParentPermissions = \Config::get("Permission.parents");
+			$models = App\Http\Controllers\RoleController::getModels();
+
+			foreach($permissions as $permission)
+			{
+
+				foreach($configParentPermissions as $configPerm)
+				{
+
+					if(explode("_",$permission->permission_name)[0] == $configPerm)
+					{
+						${$configPerm . "Permission"} = 1;
+						break;
+					}
+
+				}
+
+				foreach($models as $model)
+				{
+
+					if(explode("_",$permission->permission_name)[1] == str_replace("app\\","",strtolower($model)))
+					{
+						${explode("_",$permission->permission_name)[1] . "Permission"} = 1;
+						break;
+					}
+
+				}
+
+			}
+		?>
+
     <ul>
       <li>
-				<a id = "system" class = "main-link">
-						<i class="fa fa-cogs"></i> &nbsp; System
-						<li><a href = "/system/permissions" class = "sub-link"><i class="fa fa-key"></i></i> &nbsp; Permissions</a></li>
-		        <li><a href = "/system/roles" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a></li>
-		        <li><a href = "/system/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a></li>
-				</a>
+
+				@if(isset($systemPermission))
+					<a id = "system" class = "main-link"> <i class="fa fa-cogs"></i> &nbsp; System	</a>
+							@if(isset($permissionPermission))<a href = "/system/permissions" class = "sub-link"><i class="fa fa-key"></i></i> &nbsp; Permissions</a>@endif
+			        @if(isset($rolePermission))<a href = "/system/roles" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a>@endif
+			        @if(isset($userPermission))<a href = "/system/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a>@endif
+				@endif
       </li>
+
     </ul>
 
   </nav>
@@ -81,11 +119,28 @@
 
 			@if(isset($subLinks))
 				@foreach($subLinks as $subLink)
-					<a @if(isset($subLink['route'])) href = "{{$subLink['route']}}" @endif>
-						<div class = "mini-link" title = "{{$subLink['title']}}">
-							{!! $subLink['icon'] !!}
-						</div>
-					</a>
+				<?php
+
+					$subLinkAccess = null;
+
+					foreach($permissions as $permission)
+					{
+						if($permission->permission_name == $subLink['permission'])
+						{
+							$subLinkAccess = 1;
+							break;
+
+						}
+					}
+
+				?>
+					@if(isset($subLinkAccess))
+						<a @if(isset($subLink['route'])) href = "{{$subLink['route']}}" @endif>
+							<div class = "mini-link" title = "{{$subLink['title']}}">
+								{!! $subLink['icon'] !!}
+							</div>
+						</a>
+					@endif
 				@endforeach
 			@endif
 

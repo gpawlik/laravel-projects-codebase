@@ -23,12 +23,14 @@ class UserController extends Controller {
 			(
 				"title" => "Add User",
 				"route" => "/system/users/add",
-				"icon" => "<i class='fa fa-plus'></i>"
+				"icon" => "<i class='fa fa-plus'></i>",
+				"permission" => "system_user_can_add"
 			),
 			array
 			(
 				"title" => "Search for User",
-				"icon" => "<i class='fa fa-search'></i>"
+				"icon" => "<i class='fa fa-search'></i>",
+				"permission" => "system_user_can_search"
 			)
 		);
 
@@ -43,7 +45,8 @@ class UserController extends Controller {
 				(
 					"title" => "User List",
 					"route" => "/system/users",
-					"icon" => "<i class='fa fa-th-list'></i>"
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_user_can_view"
 				)
 			);
 
@@ -119,7 +122,8 @@ class UserController extends Controller {
 			(
 				"title" => "User List",
 				"route" => "/system/users",
-				"icon" => "<i class='fa fa-th-list'></i>"
+				"icon" => "<i class='fa fa-th-list'></i>",
+				"permission" => "system_user_can_view"
 			)
 		);
 		$data['user'] = $user;
@@ -211,13 +215,15 @@ class UserController extends Controller {
 			(
 				"title" => "User List",
 				"route" => "/system/users",
-				"icon" => "<i class='fa fa-th-list'></i>"
+				"icon" => "<i class='fa fa-th-list'></i>",
+				"permission" => "system_user_can_view"
 			),
 			array
 			(
 				"title" => "Add User",
 				"route" => "/system/users/add",
-				"icon" => "<i class='fa fa-plus'></i>"
+				"icon" => "<i class='fa fa-plus'></i>",
+				"permission" => "system_user_can_add"
 			)
 		);
 		$data['user'] = $user;
