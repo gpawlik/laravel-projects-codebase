@@ -19,7 +19,7 @@
           "route" => "system/roles/permissions",
           "title" => "Permissions",
           "icon" => "<i class='fa fa-key'></i>",
-          "permission" => "system_role_can_permission"
+          "permission" => "system_role_can_permit"
         )
       )
 

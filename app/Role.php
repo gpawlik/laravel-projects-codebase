@@ -16,7 +16,7 @@ class Role extends Model{
 			"system_role_can_delete",
 			"system_role_can_view",
 			"system_role_can_search",
-			"system_role_can_permission"
+			"system_role_can_permit"
 		);
 	}
 
