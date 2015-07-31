@@ -17,233 +17,296 @@ class RoleController extends Controller {
 
 	public function index()
 	{
-    $data['title'] = "Roles";
-    $data['roles'] = Role::orderBy("updated_at","ASC")->paginate(20);
-    $data['subLinks'] = array(
-      array
-      (
-        "title" => "Add Role",
-        "route" => "/system/roles/add",
-        "icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_role_can_add"
-      ),
-      array
-      (
-        "title" => "Search for Role",
-        "icon" => "<i class='fa fa-search'></i>",
-				"permission" => "system_role_can_search"
-      )
-    );
+		if(self::checkUserPermissions("system_role_can_view"))
+		{
+	    $data['title'] = "Roles";
+	    $data['roles'] = Role::orderBy("updated_at","ASC")->paginate(20);
+	    $data['subLinks'] = array(
+	      array
+	      (
+	        "title" => "Add Role",
+	        "route" => "/system/roles/add",
+	        "icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_role_can_add"
+	      ),
+	      array
+	      (
+	        "title" => "Search for Role",
+	        "icon" => "<i class='fa fa-search'></i>",
+					"permission" => "system_role_can_search"
+	      )
+	    );
 
-    return view('dashboard.roles.index',$data);
+	    return view('dashboard.roles.index',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
   }
 
   public function add()
   {
-		$data['title'] = "Add Role";
-    $data['subLinks'] = array(
-      array
-      (
-        "title" => "Role list",
-				"route" => "/system/roles",
-        "icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_role_can_view"
-      )
-    );
+		if(self::checkUserPermissions("system_role_can_add"))
+		{
+			$data['title'] = "Add Role";
+	    $data['subLinks'] = array(
+	      array
+	      (
+	        "title" => "Role list",
+					"route" => "/system/roles",
+	        "icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_role_can_view"
+	      )
+	    );
 
-    return view('dashboard.roles.add',$data);
+	    return view('dashboard.roles.add',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
   }
 
   public function create()
   {
-		$rules = self::getRules();
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->fails())
+		if(self::checkUserPermissions("system_role_can_add"))
 		{
-			return Redirect::to('/system/roles/add')
-						->withErrors($validator)
-						->withInput();
+			$rules = self::getRules();
+
+			$validator = Validator::make(Input::all(), $rules);
+
+			if ($validator->fails())
+			{
+				return Redirect::to('/system/roles/add')
+							->withErrors($validator)
+							->withInput();
+			}
+			else
+			{
+				$role = new Role;
+
+				$role -> role_name = Input::get("role_name");
+
+				$role -> save();
+
+				Session::flash('message','Role Added');
+				return Redirect::to('/system/roles');
+			}
 		}
 		else
 		{
-			$role = new Role;
-
-			$role -> role_name = Input::get("role_name");
-
-			$role -> save();
-
-			Session::flash('message','Role Added');
-			return Redirect::to('/system/roles');
+			return "You are not authorized";die();
 		}
   }
 
   public function edit($id)
   {
-		$role = Role::find($id);
+		if(self::checkUserPermissions("system_role_can_edit"))
+		{
+			$role = Role::find($id);
 
-		$data['title'] = "Add Role";
-		$data['role'] = $role;
-    $data['subLinks'] = array(
-      array
-      (
-        "title" => "Role list",
-				"route" => "/system/roles",
-        "icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_role_can_view"
-      ),
-			array
-      (
-        "title" => "Add Role",
-        "route" => "/system/roles/add",
-        "icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_role_can_add"
-      ),
-    );
+			$data['title'] = "Add Role";
+			$data['role'] = $role;
+	    $data['subLinks'] = array(
+	      array
+	      (
+	        "title" => "Role list",
+					"route" => "/system/roles",
+	        "icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_role_can_view"
+	      ),
+				array
+	      (
+	        "title" => "Add Role",
+	        "route" => "/system/roles/add",
+	        "icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_role_can_add"
+	      ),
+	    );
 
-    return view('dashboard.roles.edit',$data);
+	    return view('dashboard.roles.edit',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
   }
 
   public function update($id)
   {
-		$role = Role::find($id);
-
-		$rules = self::getRules();
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->fails())
+		if(self::checkUserPermissions("system_role_can_edit"))
 		{
-			return Redirect::to('/system/roles/edit/'.$id)
-        		->withErrors($validator)
-        		->withInput();
-		}
-    else
-    {
-			$role -> role_name = Input::get("role_name");
+			$role = Role::find($id);
 
-			$role -> push();
-			Session::flash('message', "Role Details Updated");
-			return Redirect::to("/system/roles");
+			$rules = self::getRules();
+
+			$validator = Validator::make(Input::all(), $rules);
+
+			if ($validator->fails())
+			{
+				return Redirect::to('/system/roles/edit/'.$id)
+	        		->withErrors($validator)
+	        		->withInput();
+			}
+	    else
+	    {
+				$role -> role_name = Input::get("role_name");
+
+				$role -> push();
+				Session::flash('message', "Role Details Updated");
+				return Redirect::to("/system/roles");
+			}
+		}
+		else
+		{
+			return "You are not authorized";die();
 		}
 
   }
 
   public function view($id)
   {
-		$role = Role::find($id);
+		if(self::checkUserPermissions("system_role_can_view"))
+		{
+			$role = Role::find($id);
 
-		$data['title'] = "View Role Details";
-		$data['subLinks'] = array(
-				array
-				(
-					"title" => "Role List",
-					"route" => "/system/roles",
-					"icon" => "<i class='fa fa-th-list'></i>",
-					"permission" => "system_role_can_view"
-				),
-				array
-				(
-					"title" => "Add Role",
-					"route" => "/system/roles/add",
-					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "system_role_can_add"
-				)
-			);
+			$data['title'] = "View Role Details";
+			$data['subLinks'] = array(
+					array
+					(
+						"title" => "Role List",
+						"route" => "/system/roles",
+						"icon" => "<i class='fa fa-th-list'></i>",
+						"permission" => "system_role_can_view"
+					),
+					array
+					(
+						"title" => "Add Role",
+						"route" => "/system/roles/add",
+						"icon" => "<i class='fa fa-plus'></i>",
+						"permission" => "system_role_can_add"
+					)
+				);
 
-			$data['role'] = $role;
+				$data['role'] = $role;
 
-			return view('dashboard.roles.view',$data);
+				return view('dashboard.roles.view',$data);
+			}
+			else
+			{
+				return "You are not authorized";die();
+			}
   }
 
   public function delete($id)
   {
-		$role = Role::find($id);
-
-		//check if users are assigned to this role, if not delete role else error (to avoid cascade delete)
-		$affiliatedUsers = \DB::table("users")->where("role_id",$role->id)->count();
-
-		if($affiliatedUsers > 0)
+		if(self::checkUserPermissions("system_role_can_delete"))
 		{
-			Session::flash('message', 'Cannot delete role, Users are assigned to it');
-			return Redirect::to("/system/roles");
+			$role = Role::find($id);
+
+			//check if users are assigned to this role, if not delete role else error (to avoid cascade delete)
+			$affiliatedUsers = \DB::table("users")->where("role_id",$role->id)->count();
+
+			if($affiliatedUsers > 0)
+			{
+				Session::flash('message', 'Cannot delete role, Users are assigned to it');
+				return Redirect::to("/system/roles");
+			}
+			else
+			{
+				$role -> delete();
+
+				Session::flash('message', 'Role deleted');
+				return Redirect::to("/system/roles");
+			}
 		}
 		else
 		{
-			$role -> delete();
-
-			Session::flash('message', 'Role deleted');
-			return Redirect::to("/system/roles");
+			return "You are not authorized";die();
 		}
 
   }
 
 	public function permissions($id)
 	{
-		$role = Role::find($id);
+		if(self::checkUserPermissions("system_role_can_permit"))
+		{
+			$role = Role::find($id);
 
-		$data['title'] = "Role Permissions";
-		$data['subLinks'] = array(
-				array
-				(
-					"title" => "Role List",
-					"route" => "/system/roles",
-					"icon" => "<i class='fa fa-th-list'></i>",
-					"permission" => "system_role_can_view"
-				),
-				array
-				(
-					"title" => "Add Role",
-					"route" => "/system/roles/add",
-					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "system_role_can_add"
-				)
-			);
+			$data['title'] = "Role Permissions";
+			$data['subLinks'] = array(
+					array
+					(
+						"title" => "Role List",
+						"route" => "/system/roles",
+						"icon" => "<i class='fa fa-th-list'></i>",
+						"permission" => "system_role_can_view"
+					),
+					array
+					(
+						"title" => "Add Role",
+						"route" => "/system/roles/add",
+						"icon" => "<i class='fa fa-plus'></i>",
+						"permission" => "system_role_can_add"
+					)
+				);
 
-			$roles_permissions = \DB::table("permissions")->where("role_id",$role->id)->get();
+				$roles_permissions = \DB::table("permissions")->where("role_id",$role->id)->get();
 
-			$data['role'] = $role;
-			$data['permissions_parents'] = \Config::get("Permission.parents");
-			$data['roles_permissions'] = $roles_permissions;
-			$data['models'] = self::getModels();
+				$data['role'] = $role;
+				$data['permissions_parents'] = \Config::get("Permission.parents");
+				$data['roles_permissions'] = $roles_permissions;
+				$data['models'] = self::getModels();
 
-			return view('dashboard.roles.permissions',$data);
+				return view('dashboard.roles.permissions',$data);
+			}
+			else
+			{
+				return "You are not authorized";die();
+			}
 	}
 
 	public function savePermissions($id)
 	{
-		//all checked permissions
-		$selectedPermissions = Input::all();
-
-		//remove the form token in front of input array
-		array_shift($selectedPermissions);
-
-		//select all where role_id = selected id
-		$role = Role::find($id);
-
-		//select all permissions with that role id
-		$rolesPermissions = \DB::table("permissions")->where("role_id",$role->id);
-
-		//var_dump($rolesPermissions);die();
-
-		//delete all permissions with that role id
-		$rolesPermissions->delete();
-
-		//add all selected permissions
-		foreach($selectedPermissions as $selectedPermission)
+		if(self::checkUserPermissions("system_role_can_permit"))
 		{
-			$permission = new Permission;
+			//all checked permissions
+			$selectedPermissions = Input::all();
 
-			$permission -> permission_name = $selectedPermission;
-			$permission -> role_id = $role->id;
+			//remove the form token in front of input array
+			array_shift($selectedPermissions);
 
-			$permission -> save();
+			//select all where role_id = selected id
+			$role = Role::find($id);
+
+			//select all permissions with that role id
+			$rolesPermissions = \DB::table("permissions")->where("role_id",$role->id);
+
+			//var_dump($rolesPermissions);die();
+
+			//delete all permissions with that role id
+			$rolesPermissions->delete();
+
+			//add all selected permissions
+			foreach($selectedPermissions as $selectedPermission)
+			{
+				$permission = new Permission;
+
+				$permission -> permission_name = $selectedPermission;
+				$permission -> role_id = $role->id;
+
+				$permission -> save();
+			}
+
+			Session::flash('message', 'Permissions Saved');
+			return Redirect::to("/system/roles/permissions/$id");
+
 		}
-
-		Session::flash('message', 'Permissions Saved');
-		return Redirect::to("/system/roles/permissions/$id");
-
+		else
+		{
+			return "You are not authorized";die();
+		}
 
 	}
 

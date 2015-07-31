@@ -40,7 +40,7 @@ class PermissionController extends Controller {
 		}
 		else
 		{
-				echo "You are not authorized";die();
+				return "You are not authorized";die();
 		}
   }
 
@@ -73,99 +73,128 @@ class PermissionController extends Controller {
 		}
 		else
 		{
-			echo "You are not authorized";die();
+			return "You are not authorized";die();
 		}
   }
 
   public function create()
   {
-    $rules = self::getRules();
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->fails())
+		if(self::checkUserPermissions("system_permission_can_add"))
 		{
-			return Redirect::to('/system/permissions/add')
-						->withErrors($validator)
-						->withInput();
+	    $rules = self::getRules();
+
+			$validator = Validator::make(Input::all(), $rules);
+
+			if ($validator->fails())
+			{
+				return Redirect::to('/system/permissions/add')
+							->withErrors($validator)
+							->withInput();
+			}
+			else
+			{
+	      $permission = new Permission;
+
+	      $permission -> permission_name = Input::get("permission_name");
+	      $permission -> role_id = Input::get("role_id");
+
+				$permission -> save();
+				Session::flash('message','Permission Added');
+				return Redirect::to('/system/permissions');
+	    }
 		}
 		else
 		{
-      $permission = new Permission;
-
-      $permission -> permission_name = Input::get("permission_name");
-      $permission -> role_id = Input::get("role_id");
-
-			$permission -> save();
-			Session::flash('message','Permission Added');
-			return Redirect::to('/system/permissions');
-    }
+			return "You are not authorized";die();
+		}
   }
 
   public function edit($id)
   {
-    $permission = Permission::find($id);
+		if(self::checkUserPermissions("system_permission_can_edit"))
+		{
+	    $permission = Permission::find($id);
 
-    $data['title'] = "Edit Permission";
-    $data['subLinks'] = array(
-      array
-      (
-        "title" => "Permission List",
-        "route" => "/system/permissions",
-        "icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_permission_can_view"
-      )
-    );
-    $data['permission'] = $permission;
+	    $data['title'] = "Edit Permission";
+	    $data['subLinks'] = array(
+	      array
+	      (
+	        "title" => "Permission List",
+	        "route" => "/system/permissions",
+	        "icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_permission_can_view"
+	      )
+	    );
+	    $data['permission'] = $permission;
 
-    //Obtain list of roles
-    $roles = Role::all();
-    $roles_array = array();
+	    //Obtain list of roles
+	    $roles = Role::all();
+	    $roles_array = array();
 
-    foreach ($roles as $role) {
-      $roles_array[$role->id] = $role->role_name;
-    }
+	    foreach ($roles as $role) {
+	      $roles_array[$role->id] = $role->role_name;
+	    }
 
-    $data['roles'] = $roles_array;
-    $data['permissions_role'] = Role::where('id','=',$permission -> role_id)->first();
+	    $data['roles'] = $roles_array;
+	    $data['permissions_role'] = Role::where('id','=',$permission -> role_id)->first();
 
-    return view('dashboard.permissions.edit',$data);
+	    return view('dashboard.permissions.edit',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
   }
 
   public function update($id)
   {
-    $permission = Permission::find($id);
-
-		$rules = self::getRules();
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->fails())
+		if(self::checkUserPermissions("system_permission_can_edit"))
 		{
-			return Redirect::to('/system/permissions/edit/'.$id)
-        		->withErrors($validator)
-        		->withInput();
-		}
-    else
-    {
-			$permission -> permission_name = Input::get("permission_name");
-			$permission -> role_id = Input::get("role_id");
+	    $permission = Permission::find($id);
 
-			$permission -> push();
-			Session::flash('message', "Permission Details Updated");
-			return Redirect::to("/system/permissions");
+			$rules = self::getRules();
+
+			$validator = Validator::make(Input::all(), $rules);
+
+			if ($validator->fails())
+			{
+				return Redirect::to('/system/permissions/edit/'.$id)
+	        		->withErrors($validator)
+	        		->withInput();
+			}
+	    else
+	    {
+				$permission -> permission_name = Input::get("permission_name");
+				$permission -> role_id = Input::get("role_id");
+
+				$permission -> push();
+				Session::flash('message', "Permission Details Updated");
+				return Redirect::to("/system/permissions");
+			}
+
+		}
+		else
+		{
+			return "You are not authorized";die();
 		}
 
   }
 
   public function delete($id)
   {
-    $permission = Permission::find($id);
+		if(self::checkUserPermissions("system_permission_can_edit"))
+		{
+	    $permission = Permission::find($id);
 
-    $permission -> delete();
+	    $permission -> delete();
 
-    Session::flash('message', 'Permission deleted');
-		return Redirect::to("/system/permissions");
+	    Session::flash('message', 'Permission deleted');
+			return Redirect::to("/system/permissions");
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
   }
 
   public function getRules()
