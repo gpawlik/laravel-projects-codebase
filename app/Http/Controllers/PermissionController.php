@@ -16,51 +16,65 @@ class PermissionController extends Controller {
 
 	public function index()
 	{
-    $data['title'] = "Permissions";
-    $data['permissions'] = Permission::orderBy("permission_name","ASC")->paginate(20);
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "Add Permission",
-				"route" => "/system/permissions/add",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_permission_can_add"
-			),
-			array
-			(
-				"title" => "Search for permission",
-				"icon" => "<i class='fa fa-search'></i>",
-				"permission" => "system_permission_can_search"
-			)
-		);
+		if(self::checkUserPermissions("system_permission_can_view"))
+		{
+	    $data['title'] = "Permissions";
+	    $data['permissions'] = Permission::orderBy("permission_name","ASC")->paginate(20);
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Add Permission",
+					"route" => "/system/permissions/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_permission_can_add"
+				),
+				array
+				(
+					"title" => "Search for permission",
+					"icon" => "<i class='fa fa-search'></i>",
+					"permission" => "system_permission_can_search"
+				)
+			);
 
-		return view('dashboard.permissions.index',$data);
+			return view('dashboard.permissions.index',$data);
+		}
+		else
+		{
+				echo "You are not authorized";die();
+		}
   }
 
   public function add()
   {
-    $data['title'] = "Add Permission";
-    $data['subLinks'] = array(
-      array
-      (
-        "title" => "Permission List",
-        "route" => "/system/permissions",
-        "icon" => "<i class='fa fa-th-list'></i>",
-				"permission" => "system_permission_can_view"
-      )
-    );
+		if(self::checkUserPermissions("system_permission_can_add"))
+		{
+	    $data['title'] = "Add Permission";
+	    $data['subLinks'] = array(
+	      array
+	      (
+	        "title" => "Permission List",
+	        "route" => "/system/permissions",
+	        "icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_permission_can_view"
+	      )
+	    );
 
-    //Obtain list of roles
-    $roles = Role::all();
-    $roles_array = array();
+	    //Obtain list of roles
+	    $roles = Role::all();
+	    $roles_array = array();
 
-    foreach ($roles as $role) {
-      $roles_array[$role->id] = $role->role_name;
-    }
+	    foreach ($roles as $role) {
+	      $roles_array[$role->id] = $role->role_name;
+	    }
 
-    $data['roles'] = $roles_array;
+	    $data['roles'] = $roles_array;
 
-    return view('dashboard.permissions.add',$data);
+	    return view('dashboard.permissions.add',$data);
+		}
+		else
+		{
+			echo "You are not authorized";die();
+		}
   }
 
   public function create()
@@ -161,5 +175,6 @@ class PermissionController extends Controller {
     );
 
   }
+
 
 }

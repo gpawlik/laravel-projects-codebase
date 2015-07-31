@@ -11,4 +11,19 @@ abstract class Controller extends BaseController
 {
     use DispatchesJobs, ValidatesRequests;
 
+    public static function checkUserPermissions($permission)
+    {
+      $userPermissions = \DB::table("permissions")->where("role_id",Auth::user()->role_id)->get();
+
+      foreach($userPermissions as $userPermission)
+      {
+        if($permission == $userPermission->permission_name)
+        {
+          return true;
+        }
+
+      }
+      return false;
+    }
+
 }

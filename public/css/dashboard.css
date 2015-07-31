@@ -73,6 +73,7 @@ nav#main-nav ul li a.sub-link{
 div#content-wrapper{
   float:right;
   width:85%;
+  overflow-y: scroll;
 }
 
 div#content{

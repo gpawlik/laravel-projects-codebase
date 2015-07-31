@@ -14,6 +14,7 @@ class Permission extends Model{
 			"system_permission_can_add",
 			"system_permission_can_edit",
 			"system_permission_can_delete",
+			"system_permission_can_view",
 			"system_permission_can_search"
 		);
 	}
