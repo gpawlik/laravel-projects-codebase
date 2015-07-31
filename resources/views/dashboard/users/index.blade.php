@@ -10,6 +10,8 @@
 
       'route' => 'system/users',
 
+      'permission_prefix' => 'system_user',
+
       'foreign' => array
         (
           array(

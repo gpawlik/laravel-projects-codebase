@@ -12,11 +12,14 @@
 
       'actions' => ['view','edit','delete'],
 
+      'permission_prefix' => 'system_role',
+
       'extraActions' => array(
         array(
           "route" => "system/roles/permissions",
           "title" => "Permissions",
-          "icon" => "<i class='fa fa-key'></i>"
+          "icon" => "<i class='fa fa-key'></i>",
+          "permission" => "system_role_can_permission"
         )
       )
 

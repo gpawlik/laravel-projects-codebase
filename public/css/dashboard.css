@@ -137,6 +137,7 @@ div#logout-btn:hover{
   padding:5px;
 }
 
+
 .table-actions{
   text-align: right;
 }
@@ -315,6 +316,16 @@ h3.permission-header{
 
 table.permission-table{
   background-color: #F1F1F1;
+}
+
+
+.details-image{
+  width:100px;
+}
+
+.details-image img{
+  width:100%;
+  border-radius: 50%;
 }
 
 .box{

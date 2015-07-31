@@ -6,6 +6,8 @@
 
 <div class = "card half">
 
+  <h3>Permissions for role : {{ $role->role_name }}</h3>
+
   @foreach($permissions_parents as $parent)
 
     <div>

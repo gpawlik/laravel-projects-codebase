@@ -10,6 +10,8 @@
 
       'route' => 'system/permissions',
 
+      'permission_prefix' => 'system_permission',
+
       'foreign' => array
         (
           array(
