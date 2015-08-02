@@ -75,6 +75,7 @@
 							@if(isset($permissionPermission))<a href = "/system/permissions" class = "sub-link"><i class="fa fa-key"></i></i> &nbsp; Permissions</a>@endif
 			        @if(isset($rolePermission))<a href = "/system/roles" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a>@endif
 			        @if(isset($userPermission))<a href = "/system/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a>@endif
+							@if(isset($companyPermission))<a href = "/system/company" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Company Details</a>@endif
 				@endif
       </li>
 

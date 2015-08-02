@@ -67,6 +67,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/permissions/update/{id}','PermissionController@update');
       Route::get('/permissions/delete/{id}','PermissionController@delete');
       Route::get('/permissions/view/{id}','PermissionController@view');
+
+      //company info routes
+      Route::get('/company','CompanyController@index');
+      Route::get('/company/save','CompanyController@save');
 });
 
 //inner application API routes

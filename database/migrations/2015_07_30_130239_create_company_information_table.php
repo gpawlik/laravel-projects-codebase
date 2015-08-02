@@ -12,7 +12,7 @@ class CreateCompanyInformationTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_information', function (Blueprint $table) {
+        Schema::create('company', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string("company_name");
@@ -30,6 +30,6 @@ class CreateCompanyInformationTable extends Migration
      */
     public function down()
     {
-        Schema::drop('company_information');
+        Schema::drop('company');
     }
 }
