@@ -22,6 +22,27 @@ class CreatePermissionsTable extends Migration
 
             $table->timestamps();
         });
+
+        //insert super user data
+        DB::table('permissions')->insert(
+            array(
+                'permission_name' => 'system_role_can_permit',
+                'role_id' => '1',
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time())
+              )
+        );
+
+        //insert super user data
+        DB::table('permissions')->insert(
+            array(
+                'permission_name' => 'system_role_can_view',
+                'role_id' => '1',
+                'created_at' => date('Y-m-d H:i:s', time()),
+                'updated_at' => date('Y-m-d H:i:s', time())
+              )
+        );
+
     }
 
     /**

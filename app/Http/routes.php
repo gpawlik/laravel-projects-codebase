@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
 
       //company info routes
       Route::get('/company','CompanyController@index');
-      Route::get('/company/save','CompanyController@save');
+      Route::post('/company/save','CompanyController@save');
 });
 
 //inner application API routes

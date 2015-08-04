@@ -17,7 +17,7 @@ class CreateCompanyInformationTable extends Migration
 
             $table->string("company_name");
             $table->text("company_description");
-            $table->string("compnay_logo_name");
+            $table->string("company_logo_name")->nullable();
 
             $table->timestamps();
         });
