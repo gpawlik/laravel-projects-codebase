@@ -93,6 +93,19 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::get('/identification/view/{id}','IdentificationController@view');
 });
 
+Route::group(['middleware' => ['auth'], 'prefix' => "employees"], function()
+{
+      //employee routes
+      Route::get('/employees_data','EmployeeController@index');
+      Route::get('/employees_data/add','EmployeeController@add');
+      Route::post('/employees_data/create','EmployeeController@create');
+      Route::get('/employees_data/edit/{id}','EmployeeController@edit');
+      Route::post('/employees_data/update/{id}','EmployeeController@update');
+      Route::get('/employees_data/delete/{id}','EmployeeController@delete');
+      Route::get('/employees_data/view/{id}','EmployeeController@view');
+
+});
+
 //inner application API routes
 Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
 {

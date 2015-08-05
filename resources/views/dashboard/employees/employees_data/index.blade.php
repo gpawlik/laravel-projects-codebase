@@ -4,13 +4,13 @@
 
   @include('dashboard.partials._view_all', array
     (
-      'cols' => array('Identification Name'),
+      'cols' => array('Bank Name','Bank Swift Code'),
 
       'data' => $banks,
 
-      'route' => 'system/identification',
+      'route' => 'employees/employees_data',
 
-      'permission_prefix' => 'system_identification',
+      'permission_prefix' => 'employees_employee',
 
       'actions' => ['view','edit','delete']
 

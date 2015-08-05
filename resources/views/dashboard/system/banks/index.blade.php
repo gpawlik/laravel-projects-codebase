@@ -10,7 +10,7 @@
 
       'route' => 'system/banks',
 
-      'permission_prefix' => 'system_user',
+      'permission_prefix' => 'system_bank',
 
       'actions' => ['view','edit','delete']
 

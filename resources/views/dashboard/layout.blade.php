@@ -102,6 +102,15 @@
 								<a href = "/system/users" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'user') { echo 'active-link'; } } ?>"><i class="fa fa-user"></i> &nbsp; Users</a>
 							@endif
 				@endif
+
+				@if(isset($employeesPermission))
+						<a id = "employees" class = "main-link"><i class="fa fa-users"></i> &nbsp; Employees	</a>
+						@if(isset($employeePermission))
+							<a href = "/employees/employees_data" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'bank') { echo 'active-link'; } } ?>">
+								<i class="fa fa-database"></i> &nbsp; Employees Data
+							</a>
+						@endif
+				@endif
       </li>
 
     </ul>
