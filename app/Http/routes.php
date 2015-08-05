@@ -71,6 +71,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       //company info routes
       Route::get('/company','CompanyController@index');
       Route::post('/company/save','CompanyController@save');
+
+      //banks routes
+      Route::get('/banks','BankController@index');
+      Route::get('/banks/add','BankController@add');
+      Route::post('/banks/create','BankController@create');
+      Route::get('/banks/edit/{id}','BankController@edit');
+      Route::post('/banks/update/{id}','BankController@update');
+      Route::get('/banks/delete/{id}','BankController@delete');
+      Route::get('/banks/view/{id}','BankController@view');
 });
 
 //inner application API routes

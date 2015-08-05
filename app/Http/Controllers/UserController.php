@@ -19,7 +19,8 @@ class UserController extends Controller {
 		if(self::checkUserPermissions("system_user_can_view"))
 		{
 			$data['title'] = "Users";
-	    $data['users'] = User::orderBy("updated_at","ASC")->paginate(20);
+			$data['activeLink'] = "user";
+	    $data['users'] = User::orderBy("updated_at","DESC")->paginate(20);
 			$data['subLinks'] = array(
 				array
 				(
@@ -36,7 +37,7 @@ class UserController extends Controller {
 				)
 			);
 
-			return view('dashboard.users.index',$data);
+			return view('dashboard.system.users.index',$data);
 		}
 		else
 		{
@@ -49,6 +50,7 @@ class UserController extends Controller {
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
 	    	$data['title'] = "Add User";
+				$data['activeLink'] = "user";
 				$data['subLinks'] = array(
 					array
 					(
@@ -69,7 +71,7 @@ class UserController extends Controller {
 
 	      $data['roles'] = $roles_array;
 
-	      return view('dashboard.users.add',$data);
+	      return view('dashboard.system.users.add',$data);
 			}
 			else
 			{
@@ -140,6 +142,7 @@ class UserController extends Controller {
 			$user = User::find($id);
 
 			$data['title'] = "Edit User";
+			$data['activeLink'] = "user";
 			$data['subLinks'] = array(
 				array
 				(
@@ -162,7 +165,7 @@ class UserController extends Controller {
 			$data['roles'] = $roles_array;
 			$data['users_role'] = Role::where('id','=',$user -> role_id)->first();
 
-			return view('dashboard.users.edit',$data);
+			return view('dashboard.system.users.edit',$data);
 		}
 		else
 		{
@@ -247,6 +250,7 @@ class UserController extends Controller {
 			$user = User::find($id);
 
 			$data['title'] = "View User Details";
+			$data['activeLink'] = "user";
 			$data['subLinks'] = array(
 				array
 				(
@@ -265,7 +269,7 @@ class UserController extends Controller {
 			);
 			$data['user'] = $user;
 
-			return view('dashboard.users.view',$data);
+			return view('dashboard.system.users.view',$data);
 		}
 		else
 		{

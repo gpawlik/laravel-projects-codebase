@@ -19,6 +19,7 @@ class PermissionController extends Controller {
 		if(self::checkUserPermissions("system_permission_can_view"))
 		{
 	    $data['title'] = "Permissions";
+			$data['activeLink'] = "permission";
 	    $data['permissions'] = Permission::orderBy("permission_name","ASC")->paginate(20);
 			$data['subLinks'] = array(
 				array
@@ -36,7 +37,7 @@ class PermissionController extends Controller {
 				)
 			);
 
-			return view('dashboard.permissions.index',$data);
+			return view('dashboard.system.permissions.index',$data);
 		}
 		else
 		{
@@ -49,6 +50,7 @@ class PermissionController extends Controller {
 		if(self::checkUserPermissions("system_permission_can_add"))
 		{
 	    $data['title'] = "Add Permission";
+			$data['activeLink'] = "permission";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -69,7 +71,7 @@ class PermissionController extends Controller {
 
 	    $data['roles'] = $roles_array;
 
-	    return view('dashboard.permissions.add',$data);
+	    return view('dashboard.system.permissions.add',$data);
 		}
 		else
 		{
@@ -116,6 +118,7 @@ class PermissionController extends Controller {
 	    $permission = Permission::find($id);
 
 	    $data['title'] = "Edit Permission";
+			$data['activeLink'] = "permission";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -138,7 +141,7 @@ class PermissionController extends Controller {
 	    $data['roles'] = $roles_array;
 	    $data['permissions_role'] = Role::where('id','=',$permission -> role_id)->first();
 
-	    return view('dashboard.permissions.edit',$data);
+	    return view('dashboard.system.permissions.edit',$data);
 		}
 		else
 		{

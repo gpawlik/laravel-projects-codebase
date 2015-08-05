@@ -4,7 +4,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Company | {{$title}}</title>
+	<?php
+		//get company details
+		$company = App\Company::all()->first();
+	?>
+	<title>@if(isset($company->company_name)) {{ $company->company_name }} @else Company @endif | {{$title}}</title>
 
   <link href="{{ asset('/css/normalize.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dashboard.css') }}" rel="stylesheet">
@@ -72,10 +76,25 @@
 
 				@if(isset($systemPermission))
 					<a id = "system" class = "main-link"> <i class="fa fa-cogs"></i> &nbsp; System	</a>
-							@if(isset($permissionPermission))<a href = "/system/permissions" class = "sub-link"><i class="fa fa-key"></i></i> &nbsp; Permissions</a>@endif
-			        @if(isset($rolePermission))<a href = "/system/roles" class = "sub-link"><i class="fa fa-gavel"></i> &nbsp; Roles</a>@endif
-			        @if(isset($userPermission))<a href = "/system/users" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Users</a>@endif
-							@if(isset($companyPermission))<a href = "/system/company" class = "sub-link"><i class="fa fa-user"></i> &nbsp; Company Details</a>@endif
+							@if(isset($bankPermission))
+								<a href = "/system/banks" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'bank') { echo 'active-link'; } } ?>"><i class="fa fa-university"></i> &nbsp; Banks</a>
+							@endif
+
+							@if(isset($companyPermission))
+								<a href = "/system/company" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'company') { echo 'active-link'; } } ?>"><i class="fa fa-user"></i> &nbsp; Company Details</a>
+							@endif
+
+							@if(isset($permissionPermission))
+								<a href = "/system/permissions" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'permission') { echo 'active-link'; } } ?>"><i class="fa fa-key"></i></i> &nbsp; Permissions</a>
+							@endif
+
+			        @if(isset($rolePermission))
+								<a href = "/system/roles" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'role') { echo 'active-link'; } } ?>"><i class="fa fa-gavel"></i> &nbsp; Roles</a>
+							@endif
+
+			        @if(isset($userPermission))
+								<a href = "/system/users" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'user') { echo 'active-link'; } } ?>"><i class="fa fa-user"></i> &nbsp; Users</a>
+							@endif
 				@endif
       </li>
 

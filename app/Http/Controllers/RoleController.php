@@ -20,7 +20,8 @@ class RoleController extends Controller {
 		if(self::checkUserPermissions("system_role_can_view"))
 		{
 	    $data['title'] = "Roles";
-	    $data['roles'] = Role::orderBy("updated_at","ASC")->paginate(20);
+			$data['activeLink'] = "role";
+	    $data['roles'] = Role::orderBy("updated_at","DESC")->paginate(20);
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -37,7 +38,7 @@ class RoleController extends Controller {
 	      )
 	    );
 
-	    return view('dashboard.roles.index',$data);
+	    return view('dashboard.system.roles.index',$data);
 		}
 		else
 		{
@@ -50,6 +51,7 @@ class RoleController extends Controller {
 		if(self::checkUserPermissions("system_role_can_add"))
 		{
 			$data['title'] = "Add Role";
+			$data['activeLink'] = "role";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -60,7 +62,7 @@ class RoleController extends Controller {
 	      )
 	    );
 
-	    return view('dashboard.roles.add',$data);
+	    return view('dashboard.system.roles.add',$data);
 		}
 		else
 		{
@@ -107,6 +109,7 @@ class RoleController extends Controller {
 			$role = Role::find($id);
 
 			$data['title'] = "Add Role";
+			$data['activeLink'] = "role";
 			$data['role'] = $role;
 	    $data['subLinks'] = array(
 	      array
@@ -125,7 +128,7 @@ class RoleController extends Controller {
 	      ),
 	    );
 
-	    return view('dashboard.roles.edit',$data);
+	    return view('dashboard.system.roles.edit',$data);
 		}
 		else
 		{
@@ -172,6 +175,7 @@ class RoleController extends Controller {
 			$role = Role::find($id);
 
 			$data['title'] = "View Role Details";
+			$data['activeLink'] = "role";
 			$data['subLinks'] = array(
 					array
 					(
@@ -191,7 +195,7 @@ class RoleController extends Controller {
 
 				$data['role'] = $role;
 
-				return view('dashboard.roles.view',$data);
+				return view('dashboard.system.roles.view',$data);
 			}
 			else
 			{
@@ -259,7 +263,7 @@ class RoleController extends Controller {
 				$data['roles_permissions'] = $roles_permissions;
 				$data['models'] = self::getModels();
 
-				return view('dashboard.roles.permissions',$data);
+				return view('dashboard.system.roles.permissions',$data);
 			}
 			else
 			{

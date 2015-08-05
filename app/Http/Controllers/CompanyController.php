@@ -20,7 +20,8 @@ class CompanyController extends Controller {
 		if(self::checkUserPermissions("system_company_can_edit"))
 		{
 	    $data['title'] = "Company Details";
-
+			$data['activeLink'] = "company";
+			
 			$companyDetailsContent = Company::all()->count();
 
 			if($companyDetailsContent > 0)
@@ -28,7 +29,7 @@ class CompanyController extends Controller {
 				$data['companyDetails'] =  Company::all()->first();
 			}
 
-			return view('dashboard.company.index',$data);
+			return view('dashboard.system.company.index',$data);
 		}
 		else
 		{

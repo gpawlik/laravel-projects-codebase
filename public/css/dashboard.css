@@ -61,6 +61,7 @@ nav#main-nav ul li a{
 nav#main-nav ul li a.main-link{
   font-weight: bold;
   background-color: #455A64;
+  border-bottom: 1px solid #37474F;
   padding:10px;
   cursor: pointer;
 }
@@ -319,6 +320,10 @@ table.permission-table{
   background-color: #F1F1F1;
 }
 
+table.permission-table tr:hover{
+  background-color: #E1E1E1;
+}
+
 
 .details-image{
   width:100px;
@@ -327,6 +332,10 @@ table.permission-table{
 .details-image img{
   width:100%;
   border-radius: 50%;
+}
+
+.active-link{
+  background-color: #455A64 !important;
 }
 
 .box{

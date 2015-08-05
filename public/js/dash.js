@@ -45,7 +45,7 @@ function handleMainMenu(id)
 {
 	setTimeout(function(){
 		$("#"+id).nextAll(".sub-link").slideDown();
-	},1000);
+	},100);
 }
 
 function handleSessionBox()
