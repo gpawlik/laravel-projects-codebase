@@ -19,7 +19,7 @@ class BankController extends Controller {
 	{
     if(self::checkUserPermissions("system_bank_can_view"))
 		{
-      $data['title'] = "Permissions";
+      $data['title'] = "Banks";
 	    $data['banks'] = Bank::orderBy("updated_at","DESC")->paginate(20);
       $data['activeLink'] = "bank";
 			$data['subLinks'] = array(
@@ -50,7 +50,7 @@ class BankController extends Controller {
   {
     if(self::checkUserPermissions("system_bank_can_add"))
 		{
-      $data['title'] = "Banks";
+      $data['title'] = "Add Bank";
       $data['activeLink'] = "bank";
       $data['subLinks'] = array(
         array

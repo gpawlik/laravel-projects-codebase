@@ -84,8 +84,14 @@
 								<a href = "/system/company" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'company') { echo 'active-link'; } } ?>"><i class="fa fa-user"></i> &nbsp; Company Details</a>
 							@endif
 
+							@if(isset($identificationPermission))
+								<a href = "/system/identification" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'identification') { echo 'active-link'; } } ?>">
+									<i class="fa fa-credit-card"></i> &nbsp; Identification
+								</a>
+							@endif
+
 							@if(isset($permissionPermission))
-								<a href = "/system/permissions" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'permission') { echo 'active-link'; } } ?>"><i class="fa fa-key"></i></i> &nbsp; Permissions</a>
+								<a href = "/system/permissions" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'permission') { echo 'active-link'; } } ?>"><i class="fa fa-key"></i> &nbsp; Permissions</a>
 							@endif
 
 			        @if(isset($rolePermission))

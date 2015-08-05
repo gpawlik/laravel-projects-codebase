@@ -82,6 +82,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/banks/update/{id}','BankController@update');
       Route::get('/banks/delete/{id}','BankController@delete');
       Route::get('/banks/view/{id}','BankController@view');
+
+      //identification routes
+      Route::get('/identification','IdentificationController@index');
+      Route::get('/identification/add','IdentificationController@add');
+      Route::post('/identification/create','IdentificationController@create');
+      Route::get('/identification/edit/{id}','IdentificationController@edit');
+      Route::post('/identification/update/{id}','IdentificationController@update');
+      Route::get('/identification/delete/{id}','IdentificationController@delete');
+      Route::get('/identification/view/{id}','IdentificationController@view');
 });
 
 //inner application API routes
