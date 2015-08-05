@@ -98,6 +98,16 @@ div#logout-btn:hover{
   color:#FFF;
 }
 
+div#profile-btn{
+  cursor: pointer;
+  background-color: #D1D1D1;
+}
+
+div#profile-btn:hover{
+  background-color: #27ae60;
+  color:#FFF;
+}
+
 #profile-pic{
   width:40px;
   height:40px;
@@ -336,6 +346,11 @@ table.permission-table tr:hover{
 
 .active-link{
   background-color: #455A64 !important;
+}
+
+.red-note{
+  color:#e74c3c;
+  font-size: 12px;
 }
 
 .box{

@@ -58,7 +58,7 @@ class BankController extends Controller {
           "title" => "Bank List",
           "route" => "/system/banks",
           "icon" => "<i class='fa fa-th-list'></i>",
-          "permission" => "system_banks_can_view"
+          "permission" => "system_bank_can_view"
         )
       );
 

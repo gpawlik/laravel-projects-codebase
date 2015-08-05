@@ -105,6 +105,11 @@
   <div id = "content-wrapper">
     <header>
 			<div class = "float-left">
+				<a href = "/dashboard/profile">
+					<div class = "box-padding" id = "profile-btn" title = "Profile Settings">
+						<i class="fa fa-cog"></i>
+					</div>
+				</a>
 				<a href = "/auth/logout">
 					<div class = "box-padding" id = "logout-btn" title = "Logout">
 						<i class="fa fa-power-off"></i>

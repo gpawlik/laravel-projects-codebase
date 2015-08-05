@@ -33,7 +33,9 @@ Route::get('/auth/change_password',function(){
 //Dashboard routes
 Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
 {
-    	Route::get('/','DashboardController@index');
+  Route::get('/','DashboardController@index');
+  Route::get('/profile','DashboardController@profile');
+  Route::post('/profile/save','DashboardController@saveProfile');
 
 });
 
