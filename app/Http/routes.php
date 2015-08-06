@@ -113,6 +113,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/departments/delete/{id}','DepartmentController@delete');
       Route::get('/departments/view/{id}','DepartmentController@view');
 
+      //jobs routes
+      Route::get('/jobs','JobController@index');
+      Route::get('/jobs/add','JobController@add');
+      Route::post('/jobs/create','JobController@create');
+      Route::get('/jobs/edit/{id}','JobController@edit');
+      Route::post('/jobs/update/{id}','JobController@update');
+      Route::get('/jobs/delete/{id}','JobController@delete');
+      Route::get('/jobs/view/{id}','JobController@view');
+
 });
 
 //inner application API routes
