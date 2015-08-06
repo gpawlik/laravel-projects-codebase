@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Job;
+use App\User;
 use App\Role;
 use App\Department;
 use Auth;
