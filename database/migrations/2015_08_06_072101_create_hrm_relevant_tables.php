@@ -71,7 +71,6 @@ class CreateHrmRelevantTables extends Migration
         $table->string('alergies')->nullable();
         $table->string('fathers_name');
         $table->string('mothers_name');
-        $table->string('bank_account');
         $table->string('bank_account_number');
         $table->string('picture_name')->nullable();
         $table->string('qualifications');
@@ -81,6 +80,9 @@ class CreateHrmRelevantTables extends Migration
         //foreign keys
         $table->integer('job_id')->unsigned();
 			  $table->foreign('job_id')->references('id')->on('jobs');
+
+        $table->integer('bank_id')->unsigned();
+			  $table->foreign('bank_id')->references('id')->on('banks');
 
         $table->timestamps();
       });

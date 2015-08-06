@@ -47,4 +47,46 @@ class EmployeeController extends Controller {
     }
   }
 
+	public function add()
+	{
+		if(self::checkUserPermissions("hrm_employee_can_add"))
+		{
+			$data['title'] = "Add Employee";
+			$data['activeLink'] = "employee";
+
+			//get banks
+			$banks = \DB::table("banks")->orderBy("bank_name","ASC")->get();
+
+			$banks_array = array();
+
+      foreach ($banks as $bank) {
+        $banks_array[$bank->id] = $bank->bank_name;
+      }
+
+			$data['banks'] = $banks_array;
+
+			//get jobs
+			$jobs = \DB::table("jobs")->orderBy("job_title","ASC")->get();
+
+			$jobs_array = array();
+
+      foreach ($jobs as $job) {
+        $jobs_array[$job->id] = $job->job_title;
+      }
+
+			$data['jobs'] = $jobs_array;
+
+      return view('dashboard.hrm.employees.add',$data);
+    }
+    else
+    {
+        return "You are not authorized";die();
+    }
+	}
+
+	public function create()
+	{
+
+	}
+
 }
