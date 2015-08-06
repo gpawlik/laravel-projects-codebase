@@ -122,6 +122,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/jobs/delete/{id}','JobController@delete');
       Route::get('/jobs/view/{id}','JobController@view');
 
+      //jobs routes
+      Route::get('/pay_grades','PayGradeController@index');
+      Route::get('/pay_grades/add','PayGradeController@add');
+      Route::post('/pay_grades/create','PayGradeController@create');
+      Route::get('/pay_grades/edit/{id}','PayGradeController@edit');
+      Route::post('/pay_grades/update/{id}','PayGradeController@update');
+      Route::get('/pay_grades/delete/{id}','PayGradeController@delete');
+      Route::get('/pay_grades/view/{id}','PayGradeController@view');
+
 });
 
 //inner application API routes

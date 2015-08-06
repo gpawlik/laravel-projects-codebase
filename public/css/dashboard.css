@@ -143,10 +143,12 @@ div#profile-btn:hover{
 
 .details-table th{
   text-align: left;
+  width:50%;
   padding:5px;
 }
 
 .details-table td{
+  width:50%;
   padding:5px;
 }
 

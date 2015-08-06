@@ -88,6 +88,12 @@
 							</a>
 						@endif
 
+						@if(isset($paygradePermission))
+							<a href = "/hrm/pay_grades" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'paygrade') { echo 'active-link'; } } ?>">
+							<i class="fa fa-money"></i> &nbsp; Pay Grades
+							</a>
+						@endif
+
 						@if(isset($departmentPermission))
 							<a href = "/hrm/departments" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'department') { echo 'active-link'; } } ?>">
 								<i class="fa fa-building"></i> &nbsp; Departments

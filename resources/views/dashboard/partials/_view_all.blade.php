@@ -60,7 +60,7 @@
       <?php
         $val = str_replace(' ', '_', strtolower($col));
       ?>
-      <td>{{ $d-> $val }}</td>
+      <td>{{ str_limit($d-> $val,55) }}</td>
     @endforeach
 
     @if(isset($foreign))
