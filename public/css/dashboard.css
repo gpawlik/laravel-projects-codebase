@@ -356,6 +356,11 @@ table.permission-table tr:hover{
   font-size: 12px;
 }
 
+.inline{
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
 .box{
   float:right;
 }

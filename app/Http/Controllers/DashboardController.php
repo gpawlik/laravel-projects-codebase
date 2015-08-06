@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers;
 
-use App\User;
+use App\Job;
 use App\Role;
+use App\Department;
 use Auth;
 use Validator;
 use Input;
@@ -16,6 +17,12 @@ class DashboardController extends Controller {
 	public function index()
 	{
 		$data['title'] = "Dashboard";
+
+		$departmentsCount = Department::all()->count();
+		$data['departmentsCount'] = $departmentsCount;
+
+		$jobCount = Job::all()->count();
+		$data['jobCount'] = $jobCount;
 
 		return view('dashboard.index',$data);
 	}
