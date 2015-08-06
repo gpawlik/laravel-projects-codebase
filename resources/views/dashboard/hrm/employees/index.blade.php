@@ -4,9 +4,9 @@
 
   @include('dashboard.partials._view_all', array
     (
-      'cols' => array('Bank Name','Bank Swift Code'),
+      'cols' => array('Staff Number','First Name','Last Name', 'Other Names','Telephone Number'),
 
-      'data' => $banks,
+      'data' => $employees,
 
       'route' => 'hrm/employees',
 

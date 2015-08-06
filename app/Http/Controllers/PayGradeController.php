@@ -124,7 +124,7 @@ class PayGradeController extends Controller
           $payGrade -> description = Input::get("description");
           $payGrade -> minimum_salary = Input::get("minimum_salary");
           $payGrade -> maximum_salary = Input::get("maximum_salary");
-          $payGrade -> job_id = Input::get("job_id");
+          $payGrade -> job_id = Input::get("job");
 
           $payGrade -> save();
   				Session::flash('message','Pay Grade Added');
@@ -252,7 +252,7 @@ class PayGradeController extends Controller
           $payGrade -> description = Input::get("description");
           $payGrade -> minimum_salary = Input::get("minimum_salary");
           $payGrade -> maximum_salary = Input::get("maximum_salary");
-          $payGrade -> job_id = Input::get("job_id");
+          $payGrade -> job_id = Input::get("job");
 
           $payGrade -> push();
   				Session::flash('message','Pay Grade Updated');
@@ -293,7 +293,8 @@ class PayGradeController extends Controller
       return array(
         'description' => 'required',
         'minimum_salary' => 'required',
-        'maximum_salary' => 'required'
+        'maximum_salary' => 'required',
+        'job'  => 'required'
       );
 
     }

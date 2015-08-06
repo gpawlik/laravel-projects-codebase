@@ -101,7 +101,7 @@ class JobController extends Controller {
         $job = new Job;
 
         $job -> job_title = Input::get("job_title");
-        $job -> department_id = Input::get("department_id");
+        $job -> department_id = Input::get("department");
 
         $job -> save();
 				Session::flash('message','Job Added');
@@ -171,7 +171,7 @@ class JobController extends Controller {
 			else
 			{
         $job -> job_title = Input::get("job_title");
-        $job -> department_id = Input::get("department_id");
+        $job -> department_id = Input::get("department");
 
         $job -> push();
 				Session::flash('message','Job updated');
@@ -204,7 +204,8 @@ class JobController extends Controller {
   public function getRules()
 	{
 		return array(
-			'job_title' => 'required'
+			'job_title' => 'required',
+			'department' => 'required'
 		);
 
 	}

@@ -27,7 +27,7 @@ class EmployeeController extends Controller {
 				array
 				(
 					"title" => "Add Employee",
-					"route" => "/hrm/employees_data/add",
+					"route" => "/hrm/employees/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "hrm_employee_can_add"
 				),

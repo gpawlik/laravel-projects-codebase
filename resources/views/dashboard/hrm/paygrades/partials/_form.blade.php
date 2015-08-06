@@ -17,15 +17,15 @@
 
   @if(isset($jobs))
   <tr>
-    <td>{!! Form::label("job_id","Job") !!}</td>
+    <td>{!! Form::label("job","Job") !!}</td>
 
     @if(isset($paygrades_job))
     <td>
-      {!! Form::select("job_id", array( $paygrades_job -> id => $paygrades_job -> job_title ) +  $jobs, $paygrades_job, array('class' => 'select-input') ) !!}
+      {!! Form::select("job", array( $paygrades_job -> id => $paygrades_job -> job_title ) +  $jobs, $paygrades_job, array('class' => 'select-input') ) !!}
     </td>
     @else
     <td>
-      {!! Form::select("job_id", $jobs,null,array('class' => 'select-input') ) !!}
+      {!! Form::select("job", $jobs,null,array('class' => 'select-input') ) !!}
     </td>
     @endif
   </tr>

@@ -60,7 +60,7 @@ class CreateHrmRelevantTables extends Migration
         $table->string('marital_status');
         $table->string('spouse_name')->nullable();;
         $table->string('gender');
-        $table->string('social_security_number');
+        $table->string('social_security_number')->nullable();
         $table->string('email');
         $table->string('telephone_number');
         $table->text('mailing_address');
@@ -73,9 +73,9 @@ class CreateHrmRelevantTables extends Migration
         $table->string('mothers_name');
         $table->string('bank_account');
         $table->string('bank_account_number');
-        $table->string('picture_name');
+        $table->string('picture_name')->nullable();
         $table->string('qualifications');
-        $table->string('date_of_hire');
+        $table->date('date_of_hire');
         $table->string('basic_salary');
 
         //foreign keys
@@ -115,6 +115,7 @@ class CreateHrmRelevantTables extends Migration
     {
         Schema::drop('dependants');
         Schema::drop('employees');
+        Schema::drop('paygrades');
         Schema::drop('jobs');
         Schema::drop('departments');
     }
