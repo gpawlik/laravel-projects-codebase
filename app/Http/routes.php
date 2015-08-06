@@ -93,16 +93,25 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::get('/identification/view/{id}','IdentificationController@view');
 });
 
-Route::group(['middleware' => ['auth'], 'prefix' => "employees"], function()
+Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
 {
       //employee routes
-      Route::get('/employees_data','EmployeeController@index');
-      Route::get('/employees_data/add','EmployeeController@add');
-      Route::post('/employees_data/create','EmployeeController@create');
-      Route::get('/employees_data/edit/{id}','EmployeeController@edit');
-      Route::post('/employees_data/update/{id}','EmployeeController@update');
-      Route::get('/employees_data/delete/{id}','EmployeeController@delete');
-      Route::get('/employees_data/view/{id}','EmployeeController@view');
+      Route::get('/employees','EmployeeController@index');
+      Route::get('/employees/add','EmployeeController@add');
+      Route::post('/employees/create','EmployeeController@create');
+      Route::get('/employees/edit/{id}','EmployeeController@edit');
+      Route::post('/employees/update/{id}','EmployeeController@update');
+      Route::get('/employees/delete/{id}','EmployeeController@delete');
+      Route::get('/employees/view/{id}','EmployeeController@view');
+
+      //departments routes
+      Route::get('/departments','DepartmentController@index');
+      Route::get('/departments/add','DepartmentController@add');
+      Route::post('/departments/create','DepartmentController@create');
+      Route::get('/departments/edit/{id}','DepartmentController@edit');
+      Route::post('/departments/update/{id}','DepartmentController@update');
+      Route::get('/departments/delete/{id}','DepartmentController@delete');
+      Route::get('/departments/view/{id}','DepartmentController@view');
 
 });
 

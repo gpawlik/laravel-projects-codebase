@@ -18,28 +18,28 @@ class EmployeeController extends Controller {
 
 	public function index()
 	{
-    if(self::checkUserPermissions("employees_employee_can_view"))
+    if(self::checkUserPermissions("hrm_employee_can_view"))
 		{
       $data['title'] = "Employees Data";
 	    $data['employees'] = Employee::orderBy("updated_at","DESC")->paginate(20);
-      $data['activeLink'] = "identification";
+      $data['activeLink'] = "employee";
 			$data['subLinks'] = array(
 				array
 				(
 					"title" => "Add Employee",
-					"route" => "/employees/employees_data/add",
+					"route" => "/hrm/employees_data/add",
 					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "system_identification_can_add"
+					"permission" => "hrm_employee_can_add"
 				),
 				array
 				(
 					"title" => "Search for employee",
 					"icon" => "<i class='fa fa-search'></i>",
-					"permission" => "employees_employee_can_search"
+					"permission" => "hrm_employee_can_search"
 				)
 			);
 
-      return view('dashboard.employees.employees_data.index',$data);
+      return view('dashboard.hrm.employees.index',$data);
     }
     else
     {

@@ -8,9 +8,9 @@
 
       'data' => $banks,
 
-      'route' => 'employees/employees_data',
+      'route' => 'hrm/employees',
 
-      'permission_prefix' => 'employees_employee',
+      'permission_prefix' => 'hrm_employee',
 
       'actions' => ['view','edit','delete']
 

@@ -11,11 +11,11 @@ class Employee extends Model{
 	public static function getPermissions()
 	{
 		return array(
-      "employees_employee_can_add",
-			"employees_employee_can_edit",
-      "employees_employee_can_view",
-      "employees_employee_can_delete",
-      "employees_employee_can_search"
+      "hrm_employee_can_add",
+			"hrm_employee_can_edit",
+      "hrm_employee_can_view",
+      "hrm_employee_can_delete",
+      "hrm_employee_can_search"
 		);
 	}
 

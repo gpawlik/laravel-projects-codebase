@@ -61,6 +61,7 @@ nav#main-nav ul li a{
 nav#main-nav ul li a.main-link{
   font-weight: bold;
   background-color: #455A64;
+  border-top: 1px solid #37474F;
   border-bottom: 1px solid #37474F;
   padding:10px;
   cursor: pointer;

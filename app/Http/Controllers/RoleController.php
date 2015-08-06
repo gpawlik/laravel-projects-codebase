@@ -108,7 +108,7 @@ class RoleController extends Controller {
 		{
 			$role = Role::find($id);
 
-			$data['title'] = "Add Role";
+			$data['title'] = "Edit Role";
 			$data['activeLink'] = "role";
 			$data['role'] = $role;
 	    $data['subLinks'] = array(
@@ -239,6 +239,7 @@ class RoleController extends Controller {
 			$role = Role::find($id);
 
 			$data['title'] = "Role Permissions";
+			$data['activeLink'] = "role";
 			$data['subLinks'] = array(
 					array
 					(

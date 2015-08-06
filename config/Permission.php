@@ -5,7 +5,7 @@ return [
   'parents' => [
 
       'system',
-      'employees'
+      'hrm'
 
   ],
 
