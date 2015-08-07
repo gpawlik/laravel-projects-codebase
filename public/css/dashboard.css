@@ -140,6 +140,14 @@ div#profile-btn:hover{
   width:100%;
 }
 
+.details-table tr:nth-child(even) {
+   background-color: #E1E1E1;
+}
+
+.details-table tr:nth-child(odd) {
+   background-color: #F1F1F1;
+}
+
 
 .details-table th{
   text-align: left;
@@ -335,7 +343,7 @@ table.permission-table{
 }
 
 table.permission-table tr:hover{
-  background-color: #E1E1E1;
+  background-color: #D1D1D1;
 }
 
 

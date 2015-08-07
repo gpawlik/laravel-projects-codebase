@@ -19,7 +19,17 @@ abstract class Controller extends BaseController
       {
         if($permission == $userPermission->permission_name)
         {
-          return true;
+          //check user status to see if password needs to be changed
+          if(Auth::user()->status == 2)
+          {
+            //die();
+            //return true for now
+            return true;
+          }
+          else
+          {
+            return true;
+          }
         }
 
       }
