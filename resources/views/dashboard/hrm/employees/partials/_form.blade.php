@@ -64,7 +64,7 @@
 
   <tr>
     <td>{!! Form::label("mailing_address","Mailing Address") !!}</td>
-    <td>{!! Form::textarea("telephone_number", null , ['placeholder' => 'Mailing Address','class'=>'text-input']) !!}</td>
+    <td>{!! Form::textarea("mailing_address", null , ['placeholder' => 'Mailing Address','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
@@ -155,6 +155,27 @@
       @endif
     </tr>
     @endif
+
+    @if(isset($ids))
+    <tr>
+      <td>{!! Form::label("identification","Identification") !!}</td>
+
+      @if(isset($employees_id))
+      <td>
+        {!! Form::select("identification", array( $employees_id -> id => $employees_id -> identification_name ) +  $ids, $employees_id, array('class' => 'select-input') ) !!}
+      </td>
+      @else
+      <td>
+        {!! Form::select("identification", $ids ,null,array('class' => 'select-input') ) !!}
+      </td>
+      @endif
+    </tr>
+    @endif
+
+    <tr>
+      <td>{!! Form::label("identification_number","Identification Number") !!}</td>
+      <td>{!! Form::text("identification_number", null , ['placeholder' => "Identification Number",'class'=>'text-input']) !!}</td>
+    </tr>
 
     @if(isset($context))
       @if($context == 'add')

@@ -71,18 +71,23 @@ class CreateHrmRelevantTables extends Migration
         $table->string('alergies')->nullable();
         $table->string('fathers_name');
         $table->string('mothers_name');
+
+        $table->integer('bank_id')->unsigned();
+			  $table->foreign('bank_id')->references('id')->on('banks');
         $table->string('bank_account_number');
+
         $table->string('picture_name')->nullable();
         $table->string('qualifications');
         $table->date('date_of_hire');
         $table->string('basic_salary');
 
+        $table->integer('identification_id')->unsigned();
+			  $table->foreign('identification_id')->references('id')->on('identification');
+        $table->string('identification_number');
+
         //foreign keys
         $table->integer('job_id')->unsigned();
 			  $table->foreign('job_id')->references('id')->on('jobs');
-
-        $table->integer('bank_id')->unsigned();
-			  $table->foreign('bank_id')->references('id')->on('banks');
 
         $table->timestamps();
       });
@@ -117,7 +122,7 @@ class CreateHrmRelevantTables extends Migration
     {
         Schema::drop('dependants');
         Schema::drop('employees');
-        Schema::drop('paygrades');
+        Schema::drop('pay_grades');
         Schema::drop('jobs');
         Schema::drop('departments');
     }

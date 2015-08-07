@@ -297,6 +297,7 @@ div.error-box{
   width:94%;
   border-radius: 5px;
   padding:0px 10px;
+  margin-bottom: 10px;
 }
 
 div.error-box ul{
