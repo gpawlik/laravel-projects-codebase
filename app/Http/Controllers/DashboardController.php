@@ -4,6 +4,7 @@ use App\Job;
 use App\User;
 use App\Role;
 use App\Department;
+use App\Employee;
 use Auth;
 use Validator;
 use Input;
@@ -19,11 +20,23 @@ class DashboardController extends Controller {
 	{
 		$data['title'] = "Dashboard";
 
-		$departmentsCount = Department::all()->count();
-		$data['departmentsCount'] = $departmentsCount;
+		if(self::checkUserPermissions("dashboard_department_can_view"))
+		{
+			$departmentsCount = Department::all()->count();
+			$data['departmentsCount'] = $departmentsCount;
+		}
 
-		$jobCount = Job::all()->count();
-		$data['jobCount'] = $jobCount;
+		if(self::checkUserPermissions("dashboard_job_can_view"))
+		{
+			$jobCount = Job::all()->count();
+			$data['jobCount'] = $jobCount;
+		}
+
+		if(self::checkUserPermissions("dashboard_employee_can_view"))
+		{
+			$employeeCount = Employee::all()->count();
+			$data['employeeCount'] = $employeeCount;
+		}
 
 		return view('dashboard.index',$data);
 	}
