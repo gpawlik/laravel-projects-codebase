@@ -177,6 +177,16 @@
       <td>{!! Form::text("identification_number", null , ['placeholder' => "Identification Number",'class'=>'text-input']) !!}</td>
     </tr>
 
+    <tr>
+      <td>{!! Form::label("tax_identification_number","Tax Identification Number") !!}</td>
+      <td>{!! Form::text("tax_identification_number", null , ['placeholder' => "Tax Identification Number",'class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("number_of_dependants","Number of Dependants") !!}</td>
+      <td>{!! Form::text("number_of_dependants", null , ['placeholder' => "Number of Dependants",'class'=>'text-input']) !!}</td>
+    </tr>
+
     @if(isset($context))
       @if($context == 'add')
       <tr>

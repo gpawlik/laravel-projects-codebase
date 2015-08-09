@@ -80,6 +80,8 @@ class CreateHrmRelevantTables extends Migration
         $table->string('qualifications');
         $table->date('date_of_hire');
         $table->string('basic_salary');
+        $table->string('tax_identification_number')->nullable();
+        $table->string('number_of_dependants')->nullable();
 
         $table->integer('identification_id')->unsigned();
 			  $table->foreign('identification_id')->references('id')->on('identification');
@@ -88,24 +90,6 @@ class CreateHrmRelevantTables extends Migration
         //foreign keys
         $table->integer('job_id')->unsigned();
 			  $table->foreign('job_id')->references('id')->on('jobs');
-
-        $table->timestamps();
-      });
-
-      Schema::create('dependants', function(Blueprint $table)
-      {
-        $table->increments('id');
-
-        $table->string('first_name');
-        $table->string('last_name');
-        $table->string('other_names')->nullable();
-        $table->date('date_of_birth');
-        $table->string('telephone_number');
-        $table->string('gender');
-
-        //foreign keys
-        $table->integer('employee_id')->unsigned();
-			  $table->foreign('employee_id')->references('id')->on('employees');
 
         $table->timestamps();
       });
@@ -120,7 +104,6 @@ class CreateHrmRelevantTables extends Migration
      */
     public function down()
     {
-        Schema::drop('dependants');
         Schema::drop('employees');
         Schema::drop('pay_grades');
         Schema::drop('jobs');

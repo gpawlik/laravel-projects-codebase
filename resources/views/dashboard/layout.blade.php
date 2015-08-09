@@ -76,6 +76,13 @@
 
 				@if(isset($hrmPermission))
 						<a id = "hrm" class = "main-link"><i class="fa fa-database"></i> &nbsp; HRM	</a>
+
+						@if(isset($applicationPermission))
+							<a href = "/hrm/applications" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'application') { echo 'active-link'; } } ?>">
+								<i class="fa fa-book"></i> &nbsp; Job Applications
+							</a>
+						@endif
+
 						@if(isset($employeePermission))
 							<a href = "/hrm/employees" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'employee') { echo 'active-link'; } } ?>">
 								<i class="fa fa-users"></i> &nbsp; Employees

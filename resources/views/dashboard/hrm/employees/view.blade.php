@@ -106,6 +106,14 @@
           array(
             'name'=>'Identification Number',
             'property' => 'identification_number'
+          ),
+          array(
+            'name'=>'Tax Identification Number',
+            'property' => 'tax_identification_number'
+          ),
+          array(
+            'name'=>'Number of Dependants',
+            'property' => 'number_of_dependants'
           )
         ),
 

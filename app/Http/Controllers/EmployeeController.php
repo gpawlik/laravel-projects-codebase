@@ -203,6 +203,24 @@ class EmployeeController extends Controller {
 				$employee -> date_of_hire = Input::get("date_of_hire");
 				$employee -> basic_salary = Input::get("basic_salary");
 
+				if(Input::get("tax_identification_number"))
+				{
+					$employee -> tax_identification_number = Input::get("tax_identification_number");
+				}
+				else
+				{
+					$employee -> tax_identification_number = null;
+				}
+
+				if(Input::get("number_of_dependants"))
+				{
+					$employee -> number_of_dependants = Input::get("number_of_dependants");
+				}
+				else
+				{
+					$employee -> number_of_dependants = null;
+				}
+
 				$employee -> identification_id = Input::get("identification");
 				$employee -> identification_number = Input::get("identification_number");
 
@@ -397,6 +415,24 @@ class EmployeeController extends Controller {
 				$employee -> qualifications = Input::get("qualifications");
 				$employee -> date_of_hire = Input::get("date_of_hire");
 				$employee -> basic_salary = Input::get("basic_salary");
+
+				if(Input::get("tax_identification_number"))
+				{
+					$employee -> tax_identification_number = Input::get("tax_identification_number");
+				}
+				else
+				{
+					$employee -> tax_identification_number = null;
+				}
+
+				if(Input::get("number_of_dependants"))
+				{
+					$employee -> number_of_dependants = Input::get("number_of_dependants");
+				}
+				else
+				{
+					$employee -> number_of_dependants = null;
+				}
 
 				$employee -> identification_id = Input::get("identification");
 				$employee -> identification_number = Input::get("identification_number");

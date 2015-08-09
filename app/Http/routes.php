@@ -122,7 +122,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/jobs/delete/{id}','JobController@delete');
       Route::get('/jobs/view/{id}','JobController@view');
 
-      //jobs routes
+      //pay grades routes
       Route::get('/pay_grades','PayGradeController@index');
       Route::get('/pay_grades/add','PayGradeController@add');
       Route::post('/pay_grades/create','PayGradeController@create');
@@ -130,6 +130,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/pay_grades/update/{id}','PayGradeController@update');
       Route::get('/pay_grades/delete/{id}','PayGradeController@delete');
       Route::get('/pay_grades/view/{id}','PayGradeController@view');
+
+      //applications routes
+      Route::get('/applications','ApplicationController@index');
+      Route::get('/applications/add','ApplicationController@add');
+      Route::post('/applications/create','ApplicationController@create');
+      Route::get('/applications/edit/{id}','ApplicationController@edit');
+      Route::post('/applications/update/{id}','ApplicationController@update');
+      Route::get('/applications/delete/{id}','ApplicationController@delete');
+      Route::get('/applications/view/{id}','ApplicationController@view');
 
 });
 
