@@ -30,15 +30,46 @@
     <td>{!! Form::input("date", 'applicant_interview_date', null , ['class'=>'text-input']) !!}</td>
   </tr>
 
-  <tr>
-    <td>{!! Form::label("applicant_cv_file_name","Upload Applicant's CV") !!}</td>
-    <td>{!! Form::file("applicant_cv_file_name", array('class' => 'form_container_input')) !!}</td>
-  </tr>
+  @if(isset($context))
 
-  <tr>
-    <td>{!! Form::label("applicant_letter_file_name","Upload Applicant's Application Letter") !!}</td>
-    <td>{!! Form::file("applicant_letter_file_name", array('class' => 'form_container_input')) !!}</td>
-  </tr>
+    @if($context == 'add')
+      <tr>
+        <td>{!! Form::label("applicant_cv_file_name","Upload Applicant's CV") !!}</td>
+        <td>{!! Form::file("applicant_cv_file_name", array('class' => 'form_container_input')) !!}</td>
+      </tr>
+    @elseif($context == 'update')
+      <tr>
+        <td>{!! Form::label("applicant_cv_file_name","Upload Applicant's CV") !!}</td>
+        <td class = "grey-back">
+          @if(isset($application -> applicant_cv_file_name))
+            <div>File : {{ $application -> applicant_cv_file_name }} </div><br/>
+            <input type = "checkbox" name = "cv_delete_check" value = "yes" /> Delete File (<span class = "small-text">Check to delete file</span>)
+            <br/><br/>
+          @endif
+          {!! Form::file("applicant_cv_file_name", array('class' => 'form_container_input')) !!}
+        </td>
+      </tr>
+    @endif
+
+    @if($context == 'add')
+      <tr>
+        <td>{!! Form::label("applicant_letter_file_name","Upload Applicant's Application Letter") !!}</td>
+        <td>{!! Form::file("applicant_letter_file_name", array('class' => 'form_container_input')) !!}</td>
+      </tr>
+    @elseif($context == 'update')
+      <tr>
+        <td>{!! Form::label("applicant_letter_file_name","Upload Applicant's Application Letter") !!}</td>
+        <td class>
+          @if(isset($application -> applicant_letter_file_name))
+            <div>File : {{ $application -> applicant_letter_file_name }} </div><br/>
+            <input type = "checkbox" name = "letter_delete_check" value = "yes" /> Delete File (<span class = "small-text">Check to delete file</span>)
+            <br/><br/>
+          @endif
+          {!! Form::file("applicant_letter_file_name", array('class' => 'form_container_input')) !!}
+        </td>
+      </tr>
+    @endif
+  @endif
 
 
   <tr>

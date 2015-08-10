@@ -138,13 +138,245 @@ class ApplicationController extends Controller {
 					$application -> applicant_interview_date = null;
 				}
 
-
+				$application -> save();
+				Session::flash('message','Job Application Added');
+				return Redirect::to('/hrm/applications');
 			}
     }
     else
     {
         return "You are not authorized";die();
     }
+	}
+
+	public function edit($id)
+	{
+		if(self::checkUserPermissions("hrm_application_can_edit"))
+		{
+			$application = Application::find($id);
+
+			$data['title'] = "Edit Application";
+			$data['activeLink'] = "application";
+			$data['subLinks'] = array(
+        array
+        (
+          "title" => "Application List",
+          "route" => "/hrm/applications",
+          "icon" => "<i class='fa fa-th-list'></i>",
+          "permission" => "hrm_application_can_view"
+        )
+      );
+
+			$data['application'] = $application;
+
+			return view('dashboard.hrm.applications.edit',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function update($id)
+	{
+		if(self::checkUserPermissions("hrm_application_can_edit"))
+		{
+			$application = Application::find($id);
+
+			$rules = self::getRules();
+
+			$validator = Validator::make(Input::all(), $rules);
+
+			if ($validator->fails())
+			{
+				return Redirect::to('/hrm/applications/edit/'.$id)
+	        		->withErrors($validator)
+	        		->withInput();
+			}
+	    else
+	    {
+				$fileDestinationPath = public_path('uploads/');
+
+				//handle CV file upload
+				if(Input::file(('applicant_cv_file_name')))
+	      {
+	          if($application -> applicant_cv_file_name != null)
+	          {
+	            if (file_exists(public_path('uploads/'.$application -> applicant_cv_file_name)))
+	        		{
+	              unlink(public_path('uploads/'.$application -> applicant_cv_file_name));
+	        		}
+	          }
+
+						$cvFile = Input::file("applicant_cv_file_name");
+						$cvFileName = Input::get("applicant_first_name")."_".Input::get("applicant_last_name")."_CV_".$cvFile -> getClientOriginalName();
+
+						$cvFile -> move($fileDestinationPath, $cvFileName);
+
+						$application -> applicant_cv_file_name = $cvFileName;
+
+	      }
+	      else
+	      {
+					if(Input::get("cv_delete_check") == 'yes')
+	        {
+	          if(file_exists(public_path('uploads/'.$application -> applicant_cv_file_name)))
+	          {
+	            unlink(public_path('uploads/'.$application -> applicant_cv_file_name));
+	          }
+	          $application -> applicant_cv_file_name = null;
+	        }
+				}
+
+				//handle letter file upload
+				if(Input::file(('applicant_letter_file_name')))
+				{
+						if($application -> applicant_letter_file_name != null)
+						{
+							if (file_exists(public_path('uploads/'.$application -> applicant_letter_file_name)))
+							{
+								unlink(public_path('uploads/'.$application -> applicant_letter_file_name));
+							}
+						}
+
+						$letterFile = Input::file("applicant_letter_file_name");
+						$letterFileName = Input::get("applicant_first_name")."_".Input::get("applicant_last_name")."_CV_".$letterFile -> getClientOriginalName();
+
+						$letterFile -> move($fileDestinationPath, $letterFileName);
+
+						$application -> applicant_letter_file_name = $letterFileName;
+
+				}
+				else
+				{
+					if(Input::get("letter_delete_check") == 'yes')
+					{
+						if(file_exists(public_path('uploads/'.$application -> applicant_letter_file_name)))
+						{
+							unlink(public_path('uploads/'.$application -> applicant_letter_file_name));
+						}
+						$application -> applicant_letter_file_name = null;
+					}
+				}
+
+				$application -> applicant_first_name = Input::get("applicant_first_name");
+				$application -> applicant_last_name = Input::get("applicant_last_name");
+				$application -> applicant_email = Input::get("applicant_email");
+				$application -> applicant_contact_number = Input::get("applicant_contact_number");
+				$application -> application_date = Input::get("application_date");
+
+				if(Input::get("applicant_interview_date"))
+				{
+					$application -> applicant_interview_date = Input::get("applicant_interview_date");
+				}
+				else
+				{
+					$application -> applicant_interview_date = null;
+				}
+
+				$application -> push();
+				Session::flash('message','Job Application Updated');
+				return Redirect::to('/hrm/applications');
+
+			}
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function view($id)
+	{
+		if(self::checkUserPermissions("hrm_application_can_view"))
+		{
+			$application = Application::find($id);
+
+			$data['title'] = "View Application Details";
+			$data['activeLink'] = "application";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Application List",
+					"route" => "/hrm/applications",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_application_can_view"
+				),
+				array
+				(
+					"title" => "Add Application",
+					"route" => "/hrm/applications/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_application_can_add"
+				)
+			);
+			$data['application'] = $application;
+
+			return view('dashboard.hrm.applications.view',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function delete($id)
+	{
+		if(self::checkUserPermissions("hrm_application_can_delete"))
+		{
+			$application = Application::find($id);
+
+	    if($application -> applicant_cv_file_name != null)
+			{
+
+	      if (file_exists(public_path('uploads/'.$application -> applicant_cv_file_name)))
+	  		{
+	        unlink(public_path('uploads/'.$application -> applicant_cv_file_name));
+	  		}
+
+	    }
+
+			if($application -> applicant_letter_file_name != null)
+			{
+
+				if (file_exists(public_path('uploads/'.$application -> applicant_letter_file_name)))
+				{
+					unlink(public_path('uploads/'.$application -> applicant_letter_file_name));
+				}
+
+			}
+
+	    $application -> delete();
+
+	    Session::flash('message', 'Application deleted');
+			return Redirect::to("/hrm/applications");
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function acceptApplication($id)
+	{
+		$application = Application::find($id);
+
+		$application -> application_status = "ACCEPTED";
+
+		$application -> push();
+		Session::flash('message','Job Application Accepted');
+		return Redirect::to('/hrm/applications');
+	}
+
+	public function declineApplication($id)
+	{
+		$application = Application::find($id);
+
+		$application -> application_status = "PENDING";
+
+		$application -> push();
+		Session::flash('message','Job Application Declined');
+		return Redirect::to('/hrm/applications');
 	}
 
 	public function getRules()

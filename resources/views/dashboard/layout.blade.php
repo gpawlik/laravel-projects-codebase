@@ -79,7 +79,7 @@
 
 						@if(isset($applicationPermission))
 							<a href = "/hrm/applications" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'application') { echo 'active-link'; } } ?>">
-								<i class="fa fa-book"></i> &nbsp; Job Applications
+								<i class="fa fa-file-text"></i> &nbsp; Job Applications
 							</a>
 						@endif
 

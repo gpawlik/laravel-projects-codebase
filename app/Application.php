@@ -15,7 +15,9 @@ class Application extends Model{
       "hrm_application_can_edit",
       "hrm_application_can_delete",
       "hrm_application_can_view",
-      "hrm_application_can_search"
+      "hrm_application_can_search",
+			"hrm_application_can_accept",
+			"hrm_application_can_decline"
 		);
 	}
 

@@ -139,6 +139,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/applications/update/{id}','ApplicationController@update');
       Route::get('/applications/delete/{id}','ApplicationController@delete');
       Route::get('/applications/view/{id}','ApplicationController@view');
+      Route::get('/applications/accept_application/{id}','ApplicationController@acceptApplication');
+      Route::get('/applications/decline_application/{id}','ApplicationController@declineApplication');
 
 });
 

@@ -375,6 +375,14 @@ table.permission-table tr:hover{
   float:right;
 }
 
+.grey-back{
+  background-color: #E1E1E1;
+}
+
+.red-link{
+  color:#AA0000;
+}
+
 .box-padding{
   padding:0px 10px;
   float:right;
