@@ -6,6 +6,7 @@ $(document).ready(function(){
 	handleMainMenu(window.location.pathname.split("/")[1]);
 	handleSessionBox();
 	handlePermissions();
+	handleToUserField();
 });
 
 function setup()
@@ -62,4 +63,22 @@ function handlePermissions()
 	$(".permission-header").click(function(){
 		$(this).next(".permission-table").slideToggle("slow");
 	});
+}
+
+function handleToUserField()
+{
+	$("#to-user-field").keyup(function(){
+			queryData($("#to-user-field").val());
+	});
+}
+
+function queryData(data)
+{
+	$.ajax({
+		method: "GET",
+	  url: "/api/v1/users/"+data,
+		success: function(data){
+			//$("#to-user-field").nex
+		}
+	})
 }

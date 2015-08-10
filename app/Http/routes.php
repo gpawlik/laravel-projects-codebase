@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
   Route::get('/profile','DashboardController@profile');
   Route::post('/profile/save','DashboardController@saveProfile');
 
+  //reminders
   Route::get('/reminders','ReminderController@index');
   Route::get('/reminders/add','ReminderController@add');
   Route::post('/reminders/create','ReminderController@create');
@@ -42,6 +43,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
 
   Route::get('/reminders/complete/{id}','ReminderController@complete');
   Route::get('/reminders/undo/{id}','ReminderController@undoComplete');
+
+  //messages
+  Route::get('/messages','MessageController@index');
+  Route::get('/messages/add','MessageController@add');
+  Route::post('/messages/create','MessageController@create');
+  Route::get('/messages/view/{id}','MessageController@view');
+  Route::get('/messages/delete/{id}','MessageController@delete');
+
 
   Route::get('/change_password','DashboardController@changePassword');
 
@@ -157,5 +166,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
 //inner application API routes
 Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
 {
-  	Route::get('/users','UserController@apiGetUsers');
+  	Route::get('/users/{id}','UserController@apiGetUsers');
 });

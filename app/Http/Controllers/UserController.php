@@ -304,9 +304,10 @@ class UserController extends Controller {
 		}
 	}
 
-  public function apiGetUsers()
+  public function apiGetUsers($data)
   {
-    $users = User::all();
+		$data = ucfirst($data);
+    $users = \DB::table("users")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
     return Response::json(
         	$users
     	);

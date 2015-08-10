@@ -146,6 +146,11 @@
   <div id = "content-wrapper">
     <header>
 			<div class = "float-left">
+				<a href = "/dashboard/messages">
+					<div class = "box-padding" id = "messages-btn" title = "Messages">
+						<i class="fa fa-envelope-o"></i>
+					</div>
+				</a>
 				<a href = "/dashboard/reminders">
 					<div class = "box-padding" id = "reminders-btn" title = "Reminders">
 						<i class="fa fa-bell-o"></i>
