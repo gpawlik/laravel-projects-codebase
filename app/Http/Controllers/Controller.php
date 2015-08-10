@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Auth;
+use Redirect;
 
 abstract class Controller extends BaseController
 {
@@ -22,9 +23,7 @@ abstract class Controller extends BaseController
           //check user status to see if password needs to be changed
           if(Auth::user()->status == 2)
           {
-            //die();
-            //return true for now
-            return true;
+            return Redirect::to("/dashboard/change_password")->send();
           }
           else
           {
@@ -35,5 +34,19 @@ abstract class Controller extends BaseController
       }
       return false;
     }
+
+    public static function checkUserStatus()
+    {
+      //check user status to see if password needs to be changed
+      if(Auth::user()->status == 2)
+      {
+        return Redirect::to("/dashboard/change_password")->send();
+      }
+      else
+      {
+        return true;
+      }
+    }
+
 
 }

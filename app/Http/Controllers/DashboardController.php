@@ -18,27 +18,30 @@ class DashboardController extends Controller {
 
 	public function index()
 	{
-		$data['title'] = "Dashboard";
-
-		if(self::checkUserPermissions("dashboard_department_can_view"))
+		if(self::checkUserStatus())
 		{
-			$departmentsCount = Department::all()->count();
-			$data['departmentsCount'] = $departmentsCount;
-		}
+			$data['title'] = "Dashboard";
 
-		if(self::checkUserPermissions("dashboard_job_can_view"))
-		{
-			$jobCount = Job::all()->count();
-			$data['jobCount'] = $jobCount;
-		}
+			if(self::checkUserPermissions("dashboard_department_can_view"))
+			{
+				$departmentsCount = Department::all()->count();
+				$data['departmentsCount'] = $departmentsCount;
+			}
 
-		if(self::checkUserPermissions("dashboard_employee_can_view"))
-		{
-			$employeeCount = Employee::all()->count();
-			$data['employeeCount'] = $employeeCount;
-		}
+			if(self::checkUserPermissions("dashboard_job_can_view"))
+			{
+				$jobCount = Job::all()->count();
+				$data['jobCount'] = $jobCount;
+			}
 
-		return view('dashboard.index',$data);
+			if(self::checkUserPermissions("dashboard_employee_can_view"))
+			{
+				$employeeCount = Employee::all()->count();
+				$data['employeeCount'] = $employeeCount;
+			}
+
+			return view('dashboard.index',$data);
+		}
 	}
 
 	public function profile()
@@ -124,6 +127,44 @@ class DashboardController extends Controller {
 			$user -> push();
 			Session::flash('message', "Your Profile has been Updated");
 			return Redirect::to("/dashboard/profile");
+		}
+	}
+
+	public function changePassword()
+	{
+		$data['title'] = "Change Password";
+
+		return view('auth.change_password',$data);
+	}
+
+	public function passwordChange()
+	{
+		$password = Input::get("password");
+		$confirmPassword = Input::get("confirm_password");
+
+		if(Input::get("password"))
+		{
+			if($password != $confirmPassword)
+			{
+				return Redirect::to('/dashboard/change_password')
+							->withErrors("Passwords do not match");
+			}
+			else
+			{
+				$user = User::find(Auth::user()->id);
+				$user -> password = Hash::make($password);
+				$user -> status = 1;
+
+				$user->push();
+
+				Session::flash('message', "Your Password has been Changed");
+				return Redirect::to("/dashboard");
+			}
+		}
+		else
+		{
+			return Redirect::to('/dashboard/change_password')
+						->withErrors("Passwords field required");
 		}
 	}
 
