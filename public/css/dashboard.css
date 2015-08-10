@@ -109,6 +109,16 @@ div#profile-btn:hover{
   color:#FFF;
 }
 
+div#reminders-btn{
+  cursor: pointer;
+  background-color: #D1D1D1;
+}
+
+div#reminders-btn:hover{
+  background-color: #27ae60;
+  color:#FFF;
+}
+
 #profile-pic{
   width:40px;
   height:40px;

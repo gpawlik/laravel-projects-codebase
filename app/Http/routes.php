@@ -32,6 +32,17 @@ Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
   Route::get('/profile','DashboardController@profile');
   Route::post('/profile/save','DashboardController@saveProfile');
 
+  Route::get('/reminders','ReminderController@index');
+  Route::get('/reminders/add','ReminderController@add');
+  Route::post('/reminders/create','ReminderController@create');
+  Route::get('/reminders/view/{id}','ReminderController@view');
+  Route::get('/reminders/edit/{id}','ReminderController@edit');
+  Route::post('/reminders/update/{id}','ReminderController@update');
+  Route::get('/reminders/delete/{id}','ReminderController@delete');
+
+  Route::get('/reminders/complete/{id}','ReminderController@complete');
+  Route::get('/reminders/undo/{id}','ReminderController@undoComplete');
+
   Route::get('/change_password','DashboardController@changePassword');
 
   Route::post('/password_change','DashboardController@passwordChange');
