@@ -20,4 +20,26 @@
 		</div>
 	@endif
 
+	@if(isset($applications))
+		<div class = "card quarter">
+			<h3>Job Applications</h3>
+			<p>Total Number of Applications : {{ $applicationCount }}</p>
+
+			<p><b>Scheduled Interviews</b></p>
+
+			@if(isset($interviewsCount))
+				@foreach($applications as $application)
+
+					@if(isset($application -> applicant_interview_date))
+						<div>{{ $application -> applicant_first_name }} {{ $application -> applicant_last_name }} - {{ date('F jS, Y',strtotime($application -> applicant_interview_date)) }}</div>
+					@endif
+
+				@endforeach
+			@else
+				<div>No interviews scheduled</div>
+			@endif
+
+		</div>
+	@endif
+
 @endsection

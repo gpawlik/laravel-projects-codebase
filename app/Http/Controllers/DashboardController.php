@@ -5,6 +5,7 @@ use App\User;
 use App\Role;
 use App\Department;
 use App\Employee;
+use App\Application;
 use Auth;
 use Validator;
 use Input;
@@ -38,6 +39,23 @@ class DashboardController extends Controller {
 			{
 				$employeeCount = Employee::all()->count();
 				$data['employeeCount'] = $employeeCount;
+			}
+
+			if(self::checkUserPermissions("dashboard_application_can_view"))
+			{
+				$applicationCount = Application::all()->count();
+				$data['applicationCount'] = $applicationCount;
+
+				//check if there are interviews
+				$interviewsCount = \DB::table("applications")->whereRaw("applicant_interview_date IS NOT NULL")->count();
+
+				if($interviewsCount > 0)
+				{
+					$data['interviewsCount'] = $interviewsCount;
+				}
+
+				$applications = Application::all();
+				$data['applications'] = $applications;
 			}
 
 			return view('dashboard.index',$data);
