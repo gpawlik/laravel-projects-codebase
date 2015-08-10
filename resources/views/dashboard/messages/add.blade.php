@@ -29,7 +29,12 @@
 
     <tr>
       <td>{!! Form::label("to_user","To User*") !!}</td>
-      <td>{!! Form::text('to_user', null , ['class'=>'text-input','id'=>'to-user-field']) !!}</td>
+      <td>
+        {!! Form::text('to_user', null , ['class'=>'text-input','id'=>'to-user-field']) !!}
+        <div id = "users-list">
+
+        </div>
+      </td>
     </tr>
 
 

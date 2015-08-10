@@ -78,7 +78,11 @@ function queryData(data)
 		method: "GET",
 	  url: "/api/v1/users/"+data,
 		success: function(data){
-			//$("#to-user-field").nex
+			$("#users-list").html(
+				"<ul>"
+
+				"</ul>"
+			);
 		}
 	})
 }
