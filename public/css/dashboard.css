@@ -348,7 +348,9 @@ table.permission-table tr:hover{
 
 
 .details-image{
-  width:100px;
+  width:200px;
+  margin:-50px auto;
+  margin-bottom: 20px;
 }
 
 .details-image img{
