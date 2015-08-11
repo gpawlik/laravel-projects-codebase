@@ -169,6 +169,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/ranks/delete/{id}','RankController@delete');
       Route::get('/ranks/view/{id}','RankController@view');
 
+      //ranks routes
+      Route::get('/leaves','LeaveController@index');
+      Route::get('/leaves/add','LeaveController@add');
+      Route::post('/leaves/create','LeaveController@create');
+      Route::get('/leaves/edit/{id}','LeaveController@edit');
+      Route::post('/leaves/update/{id}','LeaveController@update');
+      Route::get('/leaves/delete/{id}','LeaveController@delete');
+      Route::get('/leaves/view/{id}','LeaveController@view');
+
 });
 
 //inner application API routes
