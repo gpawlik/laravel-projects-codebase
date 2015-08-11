@@ -15,6 +15,10 @@
           array(
             'name'=>'Rank Name',
             'property' => 'rank_name'
+          ),
+          array(
+            'name'=>'Allowed No. of Leave Days',
+            'property' => 'allowed_number_of_leave_days'
           )
         )
         )
