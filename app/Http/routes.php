@@ -49,7 +49,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
   Route::get('/messages/add','MessageController@add');
   Route::post('/messages/create','MessageController@create');
   Route::get('/messages/view/{id}','MessageController@view');
-  Route::get('/messages/delete/{id}','MessageController@delete');
 
 
   Route::get('/change_password','DashboardController@changePassword');

@@ -103,11 +103,6 @@ class MessageController extends Controller {
     return view('dashboard.messages.view',$data);
 	}
 
-	public function delete($id)
-	{
-		$message = Message::find();
-	}
-
 
   public function getRules()
   {
