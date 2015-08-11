@@ -187,6 +187,22 @@
       <td>{!! Form::text("number_of_dependants", null , ['placeholder' => "Number of Dependants",'class'=>'text-input']) !!}</td>
     </tr>
 
+    @if(isset($ranks))
+    <tr>
+      <td>{!! Form::label("rank","Rank") !!}</td>
+
+      @if(isset($employees_rank))
+      <td>
+        {!! Form::select("rank", array( $employees_rank -> id => $employees_rank -> rank_name ) +  $ranks, $employees_rank, array('class' => 'select-input') ) !!}
+      </td>
+      @else
+      <td>
+        {!! Form::select("rank", $ranks ,null,array('class' => 'select-input') ) !!}
+      </td>
+      @endif
+    </tr>
+    @endif
+
     @if(isset($context))
       @if($context == 'add')
       <tr>

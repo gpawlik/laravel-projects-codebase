@@ -136,6 +136,12 @@
           'model'=> 'App\Identification',
           'key'=> 'identification_id',
           'property' => 'identification_name'
+          ),
+          array(
+          'name'=>'Rank',
+          'model'=> 'App\Rank',
+          'key'=> 'rank_id',
+          'property' => 'rank_name'
           )
         )
     )

@@ -2,6 +2,7 @@
 
 use App\Role;
 use App\Employee;
+use App\Rank;
 use App\Bank;
 use App\Identification;
 use App\Job;
@@ -96,6 +97,17 @@ class EmployeeController extends Controller {
       }
 
 			$data['ids'] = $ids_array;
+
+			//get ranks
+			$ranks = \DB::table("ranks")->orderBy("rank_name","ASC")->get();
+
+			$ranks_array = array();
+
+      foreach ($ranks as $rank) {
+        $ranks_array[$rank->id] = $rank->rank_name;
+      }
+
+			$data['ranks'] = $ranks_array;
 
       return view('dashboard.hrm.employees.add',$data);
     }
@@ -226,6 +238,7 @@ class EmployeeController extends Controller {
 
 				$employee -> job_id = Input::get("job");
 				$employee -> bank_id = Input::get("bank");
+				$employee -> rank_id = Input::get("rank");
 
 				$employee -> save();
 				Session::flash('message','Employee Added');
@@ -294,6 +307,18 @@ class EmployeeController extends Controller {
 
 			$data['ids'] = $ids_array;
 			$data['employees_id'] = Identification::where('id','=',$employee -> identification_id)->first();
+
+			//get ranks
+			$ranks = \DB::table("ranks")->orderBy("rank_name","ASC")->get();
+
+			$ranks_array = array();
+
+      foreach ($ranks as $rank) {
+        $ranks_array[$rank->id] = $rank->rank_name;
+      }
+
+			$data['ranks'] = $ranks_array;
+			$data['employees_rank'] = Rank::where('id','=',$employee -> rank_id)->first();
 
 			return view('dashboard.hrm.employees.edit',$data);
 		}
@@ -439,6 +464,7 @@ class EmployeeController extends Controller {
 
 				$employee -> job_id = Input::get("job");
 				$employee -> bank_id = Input::get("bank");
+				$employee -> rank_id = Input::get("rank");
 
 				$employee -> push();
 				Session::flash('message', "Employee Details Updated");
