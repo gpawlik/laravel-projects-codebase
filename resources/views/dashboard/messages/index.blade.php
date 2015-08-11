@@ -11,7 +11,7 @@
   <table class = "view-table">
 
     <tr>
-      <th>Subject</th><th>From</th><th>To</th><th></th><th></th>
+      <th>Subject</th><th>From</th><th>To</th><th></th>
     </tr>
 
     @foreach($messages as $message)
@@ -46,5 +46,5 @@
     @endforeach
 
   </table>
-
+  <div class = "page_links">	{!! $messages -> render() !!} </div>
 @endsection

@@ -362,6 +362,7 @@ class ApplicationController extends Controller {
 		$application = Application::find($id);
 
 		$application -> application_status = "ACCEPTED";
+		$application -> applicant_interview_date = null;
 
 		$application -> push();
 		Session::flash('message','Job Application Accepted');

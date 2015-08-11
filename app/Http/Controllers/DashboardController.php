@@ -6,6 +6,7 @@ use App\Role;
 use App\Department;
 use App\Employee;
 use App\Application;
+use App\Reminder;
 use Auth;
 use Validator;
 use Input;
@@ -56,6 +57,14 @@ class DashboardController extends Controller {
 
 				$applications = Application::all();
 				$data['applications'] = $applications;
+			}
+
+			$pendingReminders = \DB::table("reminders")->where("user_id",Auth::user()->id)->where("status","PENDING")->get();
+
+			$data['reminders'] = Reminder::where("user_id",Auth::user()->id);
+			if(count($pendingReminders) > 0)
+			{
+				$data['pendingReminders'] = $pendingReminders;
 			}
 
 			return view('dashboard.index',$data);

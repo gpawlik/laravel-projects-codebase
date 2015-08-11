@@ -17,7 +17,7 @@ class MessageController extends Controller {
 	public function index()
 	{
     $data['title'] = "My Messages";
-		$data['messages'] = \DB::table("messages")->where("to_user_id",Auth::user()->id)->orWhere("from_user_id",Auth::user()->id)->orderBy("created_at","DESC")->get();
+		$data['messages'] = \DB::table("messages")->where("to_user_id",Auth::user()->id)->orWhere("from_user_id",Auth::user()->id)->orderBy("created_at","DESC")->paginate(20);
     //var_dump(\DB::table("messages")->where("to_user_id",Auth::user()->id)->orWhere("from_user_id",Auth::user()->id)->orderBy("updated_at","DESC")->get());die();
 
 		return view('dashboard.messages.index',$data);

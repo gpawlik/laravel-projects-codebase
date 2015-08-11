@@ -50,5 +50,5 @@
     @endforeach
 
   </table>
-
+  <div class = "page_links">	{!! $reminders -> render() !!} </div>
 @endsection

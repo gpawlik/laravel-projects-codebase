@@ -4,25 +4,55 @@
 
 	@if(isset($employeeCount))
 		<div class = "card quarter inline">
-			<b>Total Number of Employees : </b>{{ $employeeCount }}
+			<b> <i class="fa fa-users"></i> Total Number of Employees : </b>{{ $employeeCount }}
 		</div>
 	@endif
 
 	@if(isset($departmentsCount))
 		<div class = "card quarter inline">
-			<b>Total Number of Departments : </b>{{ $departmentsCount }}
+			<b> <i class="fa fa-building"></i> Total Number of Departments : </b>{{ $departmentsCount }}
 		</div>
 	@endif
 
 	@if(isset($jobCount))
 		<div class = "card quarter inline">
-			<b>Job Categories : </b>{{ $jobCount }}
+			<b> <i class="fa fa-briefcase"></i> Job Categories : </b>{{ $jobCount }}
+		</div>
+	@endif
+
+	<br/>
+
+	@if(isset($reminders))
+		<div id = "reminders" class = "card quarter inline">
+			<h3><i class="fa fa-bell-o"></i> Reminders</h3>
+			<p>All Reminders : {{ $reminders->count() }}</p>
+
+			<b>Pending Reminders</b>
+
+			@if(isset($pendingReminders))
+			<div id = "pending-reminders">
+				@foreach($pendingReminders as $reminder)
+
+					@if(isset($reminder))
+
+					<p>
+						{{ $reminder -> note }} @if(isset($reminder -> due_date))<span class = "red-note">( {{ date('F jS, Y',strtotime($reminder -> due_date)) }} )</span>@endif
+					</p>
+
+					@endif
+
+				@endforeach
+			</div>
+			@else
+				<div>No Pending Reminders </div>
+			@endif
+
 		</div>
 	@endif
 
 	@if(isset($applications))
-		<div class = "card quarter">
-			<h3>Job Applications</h3>
+		<div class = "card quarter inline">
+			<h3><i class="fa fa-file-text"></i> Job Applications</h3>
 			<p>Total Number of Applications : {{ $applicationCount }}</p>
 
 			<p><b>Scheduled Interviews</b></p>

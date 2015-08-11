@@ -20,7 +20,7 @@ class ReminderController extends Controller {
 	public function index()
 	{
 		$data['title'] = "My Reminders";
-		$data['reminders'] = \DB::table("reminders")->where("user_id",Auth::user()->id)->orderBy("updated_at","DESC")->get();
+		$data['reminders'] = \DB::table("reminders")->where("user_id",Auth::user()->id)->orderBy("updated_at","DESC")->paginate(20);
     //var_dump(\DB::table("reminders")->where("user_id",Auth::user()->id)->orderBy("updated_at","DESC")->get());die();
 
 		return view('dashboard.reminders.index',$data);

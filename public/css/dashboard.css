@@ -435,6 +435,11 @@ table.permission-table tr:hover{
 
 /******************************************/
 
+#pending-reminders{
+  overflow-y: scroll;
+  max-height: 200px;
+}
+
 .box{
   float:right;
 }
