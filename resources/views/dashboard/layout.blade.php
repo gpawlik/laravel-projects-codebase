@@ -146,9 +146,20 @@
   <div id = "content-wrapper">
     <header>
 			<div class = "float-left">
+				<!-- Messages logic -->
+
+				<?php
+
+					$numberUnreadMessages = \DB::table("messages")->where("to_user_id",Auth::user()->id)->where("status","UNREAD")->count();
+
+				?>
+
 				<a href = "/dashboard/messages">
 					<div class = "box-padding" id = "messages-btn" title = "Messages">
 						<i class="fa fa-envelope-o"></i>
+						@if($numberUnreadMessages > 0)
+							<div id = "unread-msg-badge">{{$numberUnreadMessages}}</div>
+						@endif
 					</div>
 				</a>
 				<a href = "/dashboard/reminders">

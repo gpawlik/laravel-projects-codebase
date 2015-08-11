@@ -16,26 +16,30 @@
 
     @foreach($messages as $message)
 
-      <tr>
+      <tr @if($message->to_user_id == Auth::user()->id && $message->status == "UNREAD") class="bold-text" @endif>
 
         <td> {{ $message->subject }} </td>
 
-        <td> @if($message->from_user_id == Auth::user()->id) You @else {{ App\User::find($message->from_user_id)->first_name }} {{ App\User::find($message->from_user_id)->last_name }} @endif </td>
+        <td>
+          @if($message->from_user_id == Auth::user()->id) You @else {{ App\User::find($message->from_user_id)->first_name }} {{ App\User::find($message->from_user_id)->last_name }} @endif
+          </td>
 
-        <td> @if($message->to_user_id == Auth::user()->id) You @else {{ App\User::find($message->to_user_id)->first_name }} {{ App\User::find($message->to_user_id)->last_name }} @endif</td>
+        <td>
+          @if($message->to_user_id == Auth::user()->id) You @else {{ App\User::find($message->to_user_id)->first_name }} {{ App\User::find($message->to_user_id)->last_name }} @endif
+        </td>
 
         <td  class = "table-actions">
           <a href = '/dashboard/messages/view/{{$message->id}}' title = "View Message" ><i class='fa fa-eye'></i></a>
         </td>
 
-        <td  class = "table-actions">
+        {{-- <td  class = "table-actions">
           <a href = '#' title = 'delete' ><i class='fa fa-trash delete_btn'></i></a>
           <div class = 'hidden_question'> Are You sure you want to delete?
             <a href = '/dashboard/messages/delete/{{ $message->id }}'><button class = 'mini_btn confirm_delete'>yes</button></a>
             <button class = 'mini_btn cancel_delete'>no</button>
           </div>
           </a>
-        </td>
+        </td> --}}
 
       </tr>
 

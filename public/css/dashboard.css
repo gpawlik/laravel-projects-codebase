@@ -122,11 +122,27 @@ div#reminders-btn:hover{
 div#messages-btn{
   cursor: pointer;
   background-color: #D1D1D1;
+  position: relative;
 }
 
 div#messages-btn:hover{
   background-color: #27ae60;
   color:#FFF;
+}
+
+div#unread-msg-badge{
+  background-color: #AA0000;
+  color:#FFF;
+  width: 20px;
+  height:20px;
+  line-height: 20px;
+  text-align: center;
+  font-family: monospace;
+  display: block;
+  position: absolute;
+  top:30px;
+  right:-10px;
+  border-radius: 50%;
 }
 
 #profile-pic{
@@ -393,6 +409,32 @@ table.permission-table tr:hover{
   vertical-align: top;
 }
 
+/************** users list *****************/
+
+#users-list{
+  padding: 5px;
+  background-color: #F1F1F1;
+  position: absolute;
+  display: none;
+}
+
+#users-list-ul{
+  padding:0;
+  margin:0;
+}
+
+#users-list-ul li{
+  display: block;
+  padding:5px;
+  cursor: pointer;
+}
+
+#users-list-ul li:hover{
+  background-color: #E1E1E1;
+}
+
+/******************************************/
+
 .box{
   float:right;
 }
@@ -403,6 +445,10 @@ table.permission-table tr:hover{
 
 .red-link{
   color:#AA0000;
+}
+
+.bold-text{
+  font-weight: bold;
 }
 
 .box-padding{

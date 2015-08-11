@@ -68,21 +68,45 @@ function handlePermissions()
 function handleToUserField()
 {
 	$("#to-user-field").keyup(function(){
-			queryData($("#to-user-field").val());
+			queryUserData($("#to-user-field").val());
 	});
+
 }
 
-function queryData(data)
+function queryUserData(data)
 {
 	$.ajax({
 		method: "GET",
 	  url: "/api/v1/users/"+data,
 		success: function(data){
-			$("#users-list").html(
-				"<ul>"
+			console.log(data);
+			if(data.length > 0)
+			{
+					$("#users-list").show("fast");
+					$("#users-list").html(
+						"<ul id = 'users-list-ul'>" +
 
-				"</ul>"
-			);
+						"</ul>"
+					);
+
+					for(i = 0; i < data.length; i++)
+					{
+						$("#users-list-ul").append("<li>"+data[i]['first_name']+" "+data[i]['last_name']+" "+"("+data[i]['email']+")</li>");
+					}
+			}
+			else
+			{
+				$("#users-list").hide("fast");
+			}
+
+			$("#users-list-ul li").click(function(){
+				$("#to-user-field").val($(this).html());
+				$("#users-list").hide("fast");
+			});
+
+		},
+		error: function(data){
+			$("#users-list").hide("fast");
 		}
-	})
+	});
 }
