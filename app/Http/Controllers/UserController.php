@@ -319,7 +319,7 @@ class UserController extends Controller {
 			'first_name' => 'required',
 			'last_name' => 'required',
 			'username' => 'required',
-			'email' => 'required | unique:users',
+			'email' => 'required',
 		);
 
 	}

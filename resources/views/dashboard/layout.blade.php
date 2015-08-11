@@ -77,15 +77,15 @@
 				@if(isset($hrmPermission))
 						<a id = "hrm" class = "main-link"><i class="fa fa-database"></i> &nbsp; HRM	</a>
 
-						@if(isset($applicationPermission))
-							<a href = "/hrm/applications" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'application') { echo 'active-link'; } } ?>">
-								<i class="fa fa-file-text"></i> &nbsp; Job Applications
-							</a>
-						@endif
-
 						@if(isset($employeePermission))
 							<a href = "/hrm/employees" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'employee') { echo 'active-link'; } } ?>">
 								<i class="fa fa-users"></i> &nbsp; Employees
+							</a>
+						@endif
+
+						@if(isset($applicationPermission))
+							<a href = "/hrm/applications" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'application') { echo 'active-link'; } } ?>">
+								<i class="fa fa-file-text"></i> &nbsp; Job Applications
 							</a>
 						@endif
 
@@ -94,6 +94,7 @@
 								<i class="fa fa-briefcase"></i> &nbsp; Jobs
 							</a>
 						@endif
+
 
 						@if(isset($paygradePermission))
 							<a href = "/hrm/pay_grades" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'paygrade') { echo 'active-link'; } } ?>">
@@ -106,6 +107,13 @@
 								<i class="fa fa-building"></i> &nbsp; Departments
 							</a>
 						@endif
+
+						@if(isset($rankPermission))
+							<a href = "/hrm/ranks" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'rank') { echo 'active-link'; } } ?>">
+								<i class="fa fa-star"></i></i> &nbsp; Ranks
+							</a>
+						@endif
+
 				@endif
 
 				@if(isset($systemPermission))

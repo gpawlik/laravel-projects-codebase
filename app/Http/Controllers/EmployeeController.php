@@ -524,7 +524,7 @@ class EmployeeController extends Controller {
 			'marital_status' => 'required',
 			'next_of_kin' => 'required',
 			'gender' => 'required',
-			'email' => 'required | unique:employees',
+			'email' => 'required',
 			'telephone_number' => 'required',
 			'mailing_address' => 'required',
 			'residential_address' => 'required',

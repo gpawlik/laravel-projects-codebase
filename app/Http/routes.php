@@ -160,6 +160,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/applications/accept_application/{id}','ApplicationController@acceptApplication');
       Route::get('/applications/decline_application/{id}','ApplicationController@declineApplication');
 
+      //ranks routes
+      Route::get('/ranks','RankController@index');
+      Route::get('/ranks/add','RankController@add');
+      Route::post('/ranks/create','RankController@create');
+      Route::get('/ranks/edit/{id}','RankController@edit');
+      Route::post('/ranks/update/{id}','RankController@update');
+      Route::get('/ranks/delete/{id}','RankController@delete');
+      Route::get('/ranks/view/{id}','RankController@view');
+
 });
 
 //inner application API routes
