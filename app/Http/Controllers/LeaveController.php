@@ -120,7 +120,7 @@ class LeaveController extends Controller {
 						$totalEmployeeLeaveDays += self::getNumLeaveDays($leaveDay->leave_start_date, $leaveDay->leave_end_date, $leaveDay->saturday_inclusive, $leaveDay->sunday_inclusive);
 					}
 
-					//$totalEmployeeLeaveDays+=$numLeaveDays;
+					$totalEmployeeLeaveDays+=$numLeaveDays;
 
 					//get user's allowed leave days for the year
 					$employeesAllowedLeaveDays = \DB::table("ranks")->where("id",$employeeDetails->rank_id)->get()[0]->allowed_number_of_leave_days;
