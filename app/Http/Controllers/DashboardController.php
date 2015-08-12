@@ -59,6 +59,15 @@ class DashboardController extends Controller {
 				$data['applications'] = $applications;
 			}
 
+			if(self::checkUserPermissions("dashboard_leave_can_view"))
+			{
+				$leaves = \DB::table("leaves")
+					->where("leave_start_date","<=",new \DateTime(date('F jS Y h:i:s A')))
+					->where("leave_end_date",">",new \DateTime(date('F jS Y h:i:s A')))
+					->get();
+				$data['leaves'] = $leaves;
+			}
+
 			$pendingReminders = \DB::table("reminders")->where("user_id",Auth::user()->id)->where("status","PENDING")->get();
 
 			$data['reminders'] = Reminder::where("user_id",Auth::user()->id);

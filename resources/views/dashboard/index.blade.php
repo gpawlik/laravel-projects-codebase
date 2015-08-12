@@ -72,4 +72,30 @@
 		</div>
 	@endif
 
+	@if(isset($leaves))
+		<div id = "leaves" class = "card quarter inline">
+			<h3><i class="fa fa-plane"></i> Employees on Leave</h3>
+			<p>Number of Employees on Leave : {{ count($leaves) }}</p>
+
+			<b>Employees Currently on Leave</b>
+
+			@if(count($leaves) > 0)
+			<div id = "pending-reminders">
+				@foreach($leaves as $leave)
+
+					<p>
+						{{ App\Employee::find($leave->employee_id)->first_name }} {{ App\Employee::find($leave->employee_id)->last_name }}<br/>
+						<span class = "red-note">{{ date('F jS, Y',strtotime($leave -> leave_start_date)) }} - {{ date('F jS, Y',strtotime($leave -> leave_end_date)) }}</span>
+					</p>
+
+				@endforeach
+			</div>
+			@else
+				<div>No Employee on Leave</div>
+			@endif
+
+		</div>
+	@endif
+
+
 @endsection

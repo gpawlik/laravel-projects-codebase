@@ -12,7 +12,7 @@ class Leave extends Model {
 	{
 		return array(
       "hrm_leave_can_add",
-			"hrm_leave_can_edit",
+			//"hrm_leave_can_edit",
       "hrm_leave_can_view",
       "hrm_leave_can_delete",
       "hrm_leave_can_search"

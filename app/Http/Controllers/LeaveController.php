@@ -65,6 +65,9 @@ class LeaveController extends Controller {
         )
       );
 
+			//to avoid undefined employee_name error
+			$data['employee_name'] = "";
+
       return view('dashboard.hrm.leaves.add',$data);
     }
     else
@@ -124,7 +127,7 @@ class LeaveController extends Controller {
 
 					//get user's allowed leave days for the year
 					$employeesAllowedLeaveDays = \DB::table("ranks")->where("id",$employeeDetails->rank_id)->get()[0]->allowed_number_of_leave_days;
-					var_dump($totalEmployeeLeaveDays);die();
+
 					if($totalEmployeeLeaveDays > $employeesAllowedLeaveDays)
 					{
 						return Redirect::to('/hrm/leaves/add')
@@ -154,6 +157,100 @@ class LeaveController extends Controller {
         return "You are not authorized";die();
     }
 	}
+
+	public function view($id)
+	{
+		if(self::checkUserPermissions("hrm_leave_can_view"))
+		{
+			$leave = Leave::find($id);
+
+			$data['title'] = "View Leave";
+			$data['activeLink'] = "leave";
+			$data['leave'] = $leave;
+
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Leave List",
+					"route" => "/hrm/leaves",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_leave_can_view"
+				),
+				array
+				(
+					"title" => "Add Leave",
+					"route" => "/hrm/leaves/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_leave_can_add"
+				)
+			);
+
+
+			return view('dashboard.hrm.leaves.view',$data);
+		}
+		else
+		{
+				return "You are not authorized";die();
+		}
+	}
+
+	public function delete($id)
+	{
+		if(self::checkUserPermissions("hrm_leave_can_delete"))
+		{
+			$leave = Leave::find($id);
+
+			$leave -> delete();
+
+			Session::flash('message', 'Leave deleted');
+			return Redirect::to("/hrm/leaves");
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	// public function edit($id)
+	// {
+	// 	if(self::checkUserPermissions("hrm_leave_can_edit"))
+	// 	{
+	// 		$leave= Leave::find($id);
+	//
+	// 		$data['title'] = "Edit Leave";
+	// 		$data['activeLink'] = "leave";
+	// 		$data['subLinks'] = array(
+	// 			array
+	// 			(
+	// 				"title" => "Leave List",
+	// 				"route" => "/hrm/leaves",
+	// 				"icon" => "<i class='fa fa-th-list'></i>",
+	// 				"permission" => "hrm_leave_can_view"
+	// 			)
+	// 		);
+	// 		$data['leave'] = $leave;
+	//
+	// 		if($leave -> saturday_inclusive == "YES")
+	// 		{
+	// 			$data['saturday_checked'] = "YES";
+	// 		}
+	//
+	// 		if($leave -> sunday_inclusive == "YES")
+	// 		{
+	// 			$data['sunday_checked'] = "YES";
+	// 		}
+	//
+	// 		$employee = \DB::table("employees")->where("id",$leave->employee_id)->get();
+	//
+	// 		$data['employee_name'] = $employee[0]->first_name . " " . $employee[0]->last_name . " " . "(".$employee[0]->email.")";
+	//
+	// 		return view('dashboard.hrm.leaves.edit',$data);
+	// 	}
+	// 	else
+	// 	{
+	// 			return "You are not authorized";die();
+	// 	}
+	// }
 
 	private static function insertValues($employeeId)
 	{

@@ -28,7 +28,7 @@
           )
         ),
 
-      'actions' => ['view','edit','delete']
+      'actions' => ['view','delete']
 
     )
   )

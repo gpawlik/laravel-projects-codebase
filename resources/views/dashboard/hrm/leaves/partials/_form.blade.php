@@ -18,30 +18,26 @@
   <tr>
     <td>{!! Form::label("employee","Employee*") !!}</td>
     <td>
-      {!! Form::text('employee', null , ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name']) !!}
+      {!! Form::text('employee', $employee_name,
+
+        ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name'])
+
+      !!}
       <div id = "employee-list">
 
       </div>
     </td>
   </tr>
 
-  @if(isset($context))
-    @if($context == "add")
-
     <tr>
       <td>Include Saturdays</td>
-      <td><input type = "checkbox" name = "saturday_check" value = "YES" /></td>
+      <td><input type = "checkbox" name = "saturday_check" value = "YES" @if(isset($saturday_checked)) checked @endif/></td>
     </tr>
 
     <tr>
       <td>Include Sundays</td>
-      <td><input type = "checkbox" name = "sunday_check" value = "YES" /></td>
+      <td><input type = "checkbox" name = "sunday_check" value = "YES" @if(isset($sunday_checked)) checked @endif/></td>
     </tr>
-
-    @endif
-  @endif
-
-
 
   <tr>
     <td colspan="2" align="right">{!! Form::submit($submitButtonText, array('class' => 'submit-button')) !!}</td>

@@ -11,6 +11,7 @@ class Dashboard extends Model {
       "dashboard_job_can_view",
       "dashboard_department_can_view",
 			"dashboard_application_can_view",
+			"dashboard_leave_can_view"
 		);
 	}
 
