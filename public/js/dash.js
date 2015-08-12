@@ -7,6 +7,7 @@ $(document).ready(function(){
 	handleSessionBox();
 	handlePermissions();
 	handleToUserField();
+	handleEmployeeField();
 });
 
 function setup()
@@ -107,6 +108,52 @@ function queryUserData(data)
 		},
 		error: function(data){
 			$("#users-list").hide("fast");
+		}
+	});
+}
+
+function handleEmployeeField()
+{
+	$("#employee-field").keyup(function(){
+			queryEmployeeData($("#employee-field").val());
+	});
+
+}
+
+function queryEmployeeData(data)
+{
+	$.ajax({
+		method: "GET",
+	  url: "/api/v1/employees/"+data,
+		success: function(data){
+			console.log(data);
+			if(data.length > 0)
+			{
+					$("#employee-list").show("fast");
+					$("#employee-list").html(
+						"<ul id = 'employee-list-ul'>" +
+
+						"</ul>"
+					);
+
+					for(i = 0; i < data.length; i++)
+					{
+						$("#employee-list-ul").append("<li>"+data[i]['first_name']+" "+data[i]['last_name']+" "+"("+data[i]['email']+")</li>");
+					}
+			}
+			else
+			{
+				$("#employee-list").hide("fast");
+			}
+
+			$("#employee-list-ul li").click(function(){
+				$("#employee-field").val($(this).html());
+				$("#employee-list").hide("fast");
+			});
+
+		},
+		error: function(data){
+			$("#employee-list").hide("fast");
 		}
 	});
 }

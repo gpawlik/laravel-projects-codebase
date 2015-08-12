@@ -6,7 +6,7 @@ class Leave extends Model {
 
 	protected $table = 'leaves';
 
-	protected $fillable = ['leave_from_date','leave_to_date','reason_for_leave','employee_id'];
+	protected $fillable = ['leave_start_date','leave_end_date','reason_for_leave','employee_id'];
 
 	public static function getPermissions()
 	{

@@ -4,7 +4,7 @@
 
   @include('dashboard.partials._view_all', array
     (
-      'cols' => array('Leave From Date','Leave To Date'),
+      'cols' => array('Leave Start Date','Leave End Date'),
 
       'data' => $leaves,
 
@@ -28,7 +28,7 @@
           )
         ),
 
-      'actions' => ['edit','delete']
+      'actions' => ['view','edit','delete']
 
     )
   )

@@ -30,7 +30,7 @@
     <tr>
       <td>{!! Form::label("to_user","To User*") !!}</td>
       <td>
-        {!! Form::text('to_user', null , ['class'=>'text-input','id'=>'to-user-field','autocomplete'=>'off']) !!}
+        {!! Form::text('to_user', null , ['class'=>'text-input','id'=>'to-user-field','autocomplete'=>'off','placeholder'=>'Search User First / Last Name']) !!}
         <div id = "users-list">
 
         </div>

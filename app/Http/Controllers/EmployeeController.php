@@ -540,6 +540,15 @@ class EmployeeController extends Controller {
 		}
 	}
 
+	public function apiGetEmployees($data)
+	{
+		$data = ucfirst($data);
+		$employees = \DB::table("employees")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
+		return Response::json(
+					$employees
+			);
+	}
+
 	public function getRules()
 	{
 		return array(

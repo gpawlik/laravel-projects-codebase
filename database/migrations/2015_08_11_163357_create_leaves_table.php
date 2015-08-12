@@ -15,10 +15,13 @@ class CreateLeavesTable extends Migration
         Schema::create('leaves', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->date("leave_from_date");
-            $table->date("leave_to_date");
+            $table->date("leave_start_date");
+            $table->date("leave_end_date");
 
             $table->text("reason_for_leave")->nullable();
+
+            $table->string("saturday_inclusive");
+            $table->string("sunday_inclusive");
 
             $table->integer('employee_id')->unsigned();
     			  $table->foreign('employee_id')->references('id')->on('employees');

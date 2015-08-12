@@ -184,4 +184,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
 Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
 {
   	Route::get('/users/{id}','UserController@apiGetUsers');
+    Route::get('/employees/{id}','EmployeeController@apiGetEmployees');
 });
