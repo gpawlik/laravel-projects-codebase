@@ -102,8 +102,17 @@ class LeaveController extends Controller {
 				$numLeaveDays = self::getNumLeaveDays(Input::get("leave_start_date"), Input::get("leave_end_date"), Input::get("saturday_check"),  Input::get("sunday_check"));
 
 				//get user's leave days
-				$employeeDetails = \DB::table("employees")->where("email",$employeeEmail)->get()[0];
-				$employeeId = $employeeDetails->id;
+				if($employeeEmail != null)
+				{
+					$employeeDetails = \DB::table("employees")->where("email",$employeeEmail)->get()[0];
+					$employeeId = $employeeDetails->id;
+				}
+				else
+				{
+					return Redirect::to('/hrm/leaves/add')
+								->withErrors("Recipient not found")
+								->withInput();
+				}
 
 				$currentYear = date('Y');
 				$nextYear = date('Y', strtotime('+1 year'));
