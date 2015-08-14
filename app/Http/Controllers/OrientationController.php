@@ -215,6 +215,43 @@ class OrientationController extends Controller {
     }
   }
 
+	public function view($id)
+	{
+		if(self::checkUserPermissions("hrm_orientation_can_view"))
+		{
+			$orientation = Orientation::find($id);
+
+			$data['title'] = "View Orientation";
+			$data['activeLink'] = "orientation";
+			$data['orientation'] = $orientation;
+
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Orientation List",
+					"route" => "/hrm/orientations",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_orientation_can_view"
+				),
+				array
+				(
+					"title" => "Add Orientation",
+					"route" => "/hrm/orientations/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_orientation_can_add"
+				)
+			);
+
+
+			return view('dashboard.hrm.orientations.view',$data);
+		}
+		else
+		{
+				return "You are not authorized";die();
+		}
+	}
+
+
   public function delete($id)
   {
     if(self::checkUserPermissions("hrm_orientation_can_delete"))
