@@ -109,6 +109,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/identification/update/{id}','IdentificationController@update');
       Route::get('/identification/delete/{id}','IdentificationController@delete');
       Route::get('/identification/view/{id}','IdentificationController@view');
+
+      //branches routes
+      Route::get('/branches','BranchController@index');
+      Route::get('/branches/add','BranchController@add');
+      Route::post('/branches/create','BranchController@create');
+      Route::get('/branches/edit/{id}','BranchController@edit');
+      Route::post('/branches/update/{id}','BranchController@update');
+      Route::get('/branches/delete/{id}','BranchController@delete');
+      Route::get('/branches/view/{id}','BranchController@view');
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()

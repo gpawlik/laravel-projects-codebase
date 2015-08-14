@@ -8,6 +8,7 @@ $(document).ready(function(){
 	handlePermissions();
 	handleToUserField();
 	handleEmployeeField();
+	handleCheckAll();
 });
 
 function setup()
@@ -65,6 +66,15 @@ function handlePermissions()
 		$(this).next(".permission-table").slideToggle("slow");
 	});
 }
+
+	function handleCheckAll()
+	{
+		$("#check-all").click(function(){
+
+				$('input:checkbox').prop('checked', this.checked);
+
+		});
+	}
 
 function handleToUserField()
 {

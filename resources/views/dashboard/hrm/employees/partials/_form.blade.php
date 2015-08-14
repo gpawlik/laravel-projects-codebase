@@ -156,6 +156,22 @@
     </tr>
     @endif
 
+    @if(isset($branches))
+    <tr>
+      <td>{!! Form::label("branch","Branch") !!}</td>
+
+      @if(isset($employees_branch))
+      <td>
+        {!! Form::select("branch", array( $employees_branch -> id => $employees_branch -> branch_name ) +  $branches, $employees_branch, array('class' => 'select-input') ) !!}
+      </td>
+      @else
+      <td>
+        {!! Form::select("branch", $branches ,null,array('class' => 'select-input') ) !!}
+      </td>
+      @endif
+    </tr>
+    @endif
+
     @if(isset($ids))
     <tr>
       <td>{!! Form::label("identification","Identification") !!}</td>

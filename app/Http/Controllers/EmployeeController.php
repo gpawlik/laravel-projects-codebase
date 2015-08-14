@@ -6,6 +6,7 @@ use App\Rank;
 use App\Bank;
 use App\Identification;
 use App\Job;
+use App\Branch;
 use Validator;
 use Image;
 use Hash;
@@ -108,6 +109,17 @@ class EmployeeController extends Controller {
       }
 
 			$data['ranks'] = $ranks_array;
+
+			//get branches
+			$branches = \DB::table("branches")->orderBy("branch_name","ASC")->get();
+
+			$branches_array = array();
+
+      foreach ($branches as $branch) {
+        $branches_array[$branch->id] = $branch->branch_name;
+      }
+
+			$data['branches'] = $branches_array;
 
       return view('dashboard.hrm.employees.add',$data);
     }
@@ -214,6 +226,7 @@ class EmployeeController extends Controller {
 				$employee -> qualifications = Input::get("qualifications");
 				$employee -> date_of_hire = Input::get("date_of_hire");
 				$employee -> basic_salary = Input::get("basic_salary");
+				$employee -> branch_id = Input::get("branch");
 
 				if(Input::get("tax_identification_number"))
 				{
@@ -319,6 +332,18 @@ class EmployeeController extends Controller {
 
 			$data['ranks'] = $ranks_array;
 			$data['employees_rank'] = Rank::where('id','=',$employee -> rank_id)->first();
+
+			//get branches
+			$branches = \DB::table("branches")->orderBy("branch_name","ASC")->get();
+
+			$branches_array = array();
+
+      foreach ($branches as $branch) {
+        $branches_array[$branch->id] = $branch->branch_name;
+      }
+
+			$data['branches'] = $branches_array;
+			$data['employees_branch'] = Branch::where('id','=',$employee -> branch_id)->first();
 
 			return view('dashboard.hrm.employees.edit',$data);
 		}
@@ -440,6 +465,7 @@ class EmployeeController extends Controller {
 				$employee -> qualifications = Input::get("qualifications");
 				$employee -> date_of_hire = Input::get("date_of_hire");
 				$employee -> basic_salary = Input::get("basic_salary");
+				$employee -> branch_id = Input::get("branch");
 
 				if(Input::get("tax_identification_number"))
 				{

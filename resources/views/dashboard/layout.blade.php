@@ -128,6 +128,10 @@
 								<a href = "/system/banks" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'bank') { echo 'active-link'; } } ?>"><i class="fa fa-university"></i> &nbsp; Banks</a>
 							@endif
 
+							@if(isset($branchPermission))
+								<a href = "/system/branches" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'branch') { echo 'active-link'; } } ?>"><i class="fa fa-code-fork"></i></i> &nbsp; Branches</a>
+							@endif
+
 							@if(isset($companyPermission))
 								<a href = "/system/company" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'company') { echo 'active-link'; } } ?>"><i class="fa fa-user"></i> &nbsp; Company Details</a>
 							@endif

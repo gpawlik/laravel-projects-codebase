@@ -48,6 +48,15 @@ class CreateHrmRelevantTables extends Migration
         $table->timestamps();
       });
 
+      Schema::create('branches', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->string("branch_name");
+            $table->string("branch_location")->nullable();
+
+            $table->timestamps();
+        });
+
       Schema::create('employees', function(Blueprint $table)
       {
         $table->increments('id');
@@ -90,6 +99,9 @@ class CreateHrmRelevantTables extends Migration
         //foreign keys
         $table->integer('job_id')->unsigned();
 			  $table->foreign('job_id')->references('id')->on('jobs');
+
+        $table->integer('branch_id')->unsigned();
+			  $table->foreign('branch_id')->references('id')->on('branches');
 
         $table->timestamps();
       });

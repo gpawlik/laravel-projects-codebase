@@ -8,6 +8,10 @@
 
   <h3>Permissions for role : {{ $role->role_name }}</h3>
 
+  <table class = "details-table">
+    <tr><td>Select All</td><td> <input type = "checkbox" id = "check-all" /></td></tr>
+  </table>
+
   @foreach($permissions_parents as $parent)
 
     <div>
