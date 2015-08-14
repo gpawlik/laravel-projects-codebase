@@ -101,6 +101,12 @@
 							</a>
 						@endif
 
+						@if(isset($orientationPermission))
+							<a href = "/hrm/orientations" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'orientation') { echo 'active-link'; } } ?>">
+								<i class="fa fa-pencil-square-o"></i> &nbsp; Orientations
+							</a>
+						@endif
+
 
 						@if(isset($paygradePermission))
 							<a href = "/hrm/pay_grades" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'paygrade') { echo 'active-link'; } } ?>">

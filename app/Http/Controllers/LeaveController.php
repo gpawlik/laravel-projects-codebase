@@ -110,7 +110,7 @@ class LeaveController extends Controller {
 				else
 				{
 					return Redirect::to('/hrm/leaves/add')
-								->withErrors("Recipient not found")
+								->withErrors("Employee not found")
 								->withInput();
 				}
 

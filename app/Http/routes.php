@@ -187,6 +187,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/leaves/delete/{id}','LeaveController@delete');
       Route::get('/leaves/view/{id}','LeaveController@view');
 
+      //ranks routes
+      Route::get('/orientations','OrientationController@index');
+      Route::get('/orientations/add','OrientationController@add');
+      Route::post('/orientations/create','OrientationController@create');
+      Route::get('/orientations/edit/{id}','OrientationController@edit');
+      Route::post('/orientations/update/{id}','OrientationController@update');
+      Route::get('/orientations/delete/{id}','OrientationController@delete');
+      Route::get('/orientations/view/{id}','OrientationController@view');
+
 });
 
 //inner application API routes
