@@ -7,7 +7,7 @@
 
   <tr>
     <td>{!! Form::label("reason_for_termination","Reason for Termination*") !!}</td>
-    <td>{!! Form::select("reason_for_termination", ['TERMINATION'=>'Job Termination','CONTRACT_ENDED'=>'Contract Ended','RESIGNATION'=>'Resignation'], null, array('class' => 'select-input') ) !!}</td>
+    <td>{!! Form::select("reason_for_termination", ['TERMINATION'=>'Job Termination','CONTRACT ENDED'=>'Contract Ended','RESIGNATION'=>'Resignation'], null, array('class' => 'select-input') ) !!}</td>
   </tr>
 
 

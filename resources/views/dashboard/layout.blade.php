@@ -97,7 +97,7 @@
 
 						@if(isset($terminationPermission))
 							<a href = "/hrm/job_terminations" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'termination') { echo 'active-link'; } } ?>">
-								<i class="fa fa-cancel"></i> &nbsp; Job Terminations
+								<i class="fa fa-fire"></i> &nbsp; Job Terminations
 							</a>
 						@endif
 
