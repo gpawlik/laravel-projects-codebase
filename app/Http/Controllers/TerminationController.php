@@ -216,6 +216,30 @@ class TerminationController extends Controller {
 		}
 	}
 
+	public function revertTermination($id)
+	{
+		if(self::checkUserPermissions("hrm_termination_can_revert"))
+		{
+			$termination = Termination::find($id);
+
+
+			//revert employee employment status
+			$employee = Employee::find($termination->employee_id);
+			$employee -> employment_status = "ACTIVE";
+			$employee -> push();
+
+			$termination -> delete();
+
+			Session::flash('message','Job Termination Reverted Successfully');
+			return Redirect::to('/hrm/job_terminations');
+
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
 	public function getRules()
 	{
 		return array(

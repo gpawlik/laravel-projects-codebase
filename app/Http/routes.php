@@ -205,6 +205,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/job_terminations/delete/{id}','TerminationController@delete');
       Route::get('/job_terminations/view/{id}','TerminationController@view');
       Route::get('/job_terminations/terminated_employee/{id}','TerminationController@terminatedEmployeeDetails');
+      Route::get('/job_terminations/revert_termination/{id}','TerminationController@revertTermination');
 
 });
 

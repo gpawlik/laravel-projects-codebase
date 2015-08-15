@@ -12,7 +12,16 @@
 
       'permission_prefix' => 'hrm_termination',
 
-      'actions' => ['view','edit','delete'],
+      'actions' => ['view'],
+
+      'extraActions' => array(
+        array(
+          "route" => "hrm/job_terminations/revert_termination",
+          "title" => "Revert Job Termination",
+          "icon" => "<i class='fa fa-undo'></i>",
+          "permission" => "hrm_termination_can_revert"
+        )
+      ),
 
       'foreign' => array
         (

@@ -14,7 +14,8 @@ class Termination extends Model{
       "hrm_termination_can_add",
       "hrm_termination_can_view",
       "hrm_termination_can_delete",
-      "hrm_termination_can_search"
+      "hrm_termination_can_search",
+			"hrm_termination_can_revert"
 		);
 	}
 
