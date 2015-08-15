@@ -4,7 +4,7 @@
 
   @include('dashboard.partials._view_all', array
     (
-      'cols' => array('Job Title'),
+      'cols' => array('Job Title',"Job Capacity"),
 
       'data' => $jobs,
 

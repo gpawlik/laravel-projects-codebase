@@ -27,6 +27,7 @@ class CreateHrmRelevantTables extends Migration
         $table->increments('id');
 
         $table->string('job_title');
+        $table->integer('job_capacity')->nullable();
 
         $table->integer('department_id')->unsigned();
 			  $table->foreign('department_id')->references('id')->on('departments');
@@ -117,6 +118,7 @@ class CreateHrmRelevantTables extends Migration
     public function down()
     {
         Schema::drop('employees');
+        Schema::drop('branches');
         Schema::drop('pay_grades');
         Schema::drop('jobs');
         Schema::drop('departments');

@@ -68,6 +68,25 @@ class DashboardController extends Controller {
 				$data['leaves'] = $leaves;
 			}
 
+			if(self::checkUserPermissions("dashboard_vacancy_can_view"))
+			{
+				$jobs = Job::all();
+				$vacantJobs = array();
+
+				foreach($jobs as $job)
+				{
+					$employeeCount = \DB::table("employees")->where("job_id",$job->id)->count();
+
+					if($employeeCount < $job -> job_capacity)
+					{
+						array_push($vacantJobs,$job);
+					}
+				}
+
+				$data['vacant_jobs'] = $vacantJobs;
+
+			}
+
 			$pendingReminders = \DB::table("reminders")->where("user_id",Auth::user()->id)->where("status","PENDING")->get();
 
 			$data['reminders'] = Reminder::where("user_id",Auth::user()->id);

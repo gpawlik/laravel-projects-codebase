@@ -101,6 +101,7 @@ class JobController extends Controller {
         $job = new Job;
 
         $job -> job_title = Input::get("job_title");
+				$job -> job_capacity = Input::get("job_capacity");
         $job -> department_id = Input::get("department");
 
         $job -> save();
@@ -171,6 +172,7 @@ class JobController extends Controller {
 			else
 			{
         $job -> job_title = Input::get("job_title");
+				$job -> job_capacity = Input::get("job_capacity");
         $job -> department_id = Input::get("department");
 
         $job -> push();
@@ -205,6 +207,7 @@ class JobController extends Controller {
 	{
 		return array(
 			'job_title' => 'required',
+			'job_capacity' => 'required | numeric',
 			'department' => 'required'
 		);
 

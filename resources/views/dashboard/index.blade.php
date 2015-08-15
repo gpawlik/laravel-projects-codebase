@@ -22,31 +22,23 @@
 
 	<br/>
 
-	@if(isset($reminders))
-		<div id = "reminders" class = "card quarter inline">
-			<h3><i class="fa fa-bell-o"></i> Reminders</h3>
-			<p>All Reminders : {{ $reminders->count() }}</p>
+	@if(isset($vacant_jobs))
+		<div id = "leaves" class = "card quarter inline">
+			<h3><i class="fa fa-plus-circle"></i> Vacancies</h3>
+			<p>Vacant Job Positions : {{ count($vacant_jobs) }}</p>
 
-			<b>Pending Reminders</b>
+			<b>Job Positions Vacant</b>
 
-			@if(isset($pendingReminders))
 			<div id = "pending-reminders">
-				@foreach($pendingReminders as $reminder)
-
-					@if(isset($reminder))
+				@foreach($vacant_jobs as $vacant_job)
 
 					<p>
-						{{ $reminder -> note }} @if(isset($reminder -> due_date))<span class = "red-note">( {{ date('F jS, Y',strtotime($reminder -> due_date)) }} )</span>@endif
+						{{ $vacant_job -> job_title }} <span class = "red-note" >( {{ App\Department::find($vacant_job->department_id)->department_name }} )</span><br/>
+						<span class = "red-note" >Employees Needed : {{ ($vacant_job -> job_capacity - \DB::table("employees")->where("job_id",$vacant_job->id)->count()) }}</span>
 					</p>
-
-					@endif
 
 				@endforeach
 			</div>
-			@else
-				<div>No Pending Reminders </div>
-			@endif
-
 		</div>
 	@endif
 
@@ -96,6 +88,37 @@
 
 		</div>
 	@endif
+
+	@if(isset($reminders))
+		<div id = "reminders" class = "card quarter inline">
+			<h3><i class="fa fa-bell-o"></i> Reminders</h3>
+			<p>All Reminders : {{ $reminders->count() }}</p>
+
+			<b>Pending Reminders</b>
+
+			@if(isset($pendingReminders))
+			<div id = "pending-reminders">
+				@foreach($pendingReminders as $reminder)
+
+					@if(isset($reminder))
+
+					<p>
+						{{ $reminder -> note }} @if(isset($reminder -> due_date))<span class = "red-note">( {{ date('F jS, Y',strtotime($reminder -> due_date)) }} )</span>@endif
+					</p>
+
+					@endif
+
+				@endforeach
+			</div>
+			@else
+				<div>No Pending Reminders </div>
+			@endif
+
+		</div>
+	@endif
+
+
+
 
 
 @endsection
