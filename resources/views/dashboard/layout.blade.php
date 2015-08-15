@@ -95,6 +95,12 @@
 							</a>
 						@endif
 
+						@if(isset($terminationPermission))
+							<a href = "/hrm/job_terminations" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'termination') { echo 'active-link'; } } ?>">
+								<i class="fa fa-cancel"></i> &nbsp; Job Terminations
+							</a>
+						@endif
+
 						@if(isset($leavePermission))
 							<a href = "/hrm/leaves" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'leave') { echo 'active-link'; } } ?>">
 								<i class="fa fa-plane"></i></i> &nbsp; Leave Days

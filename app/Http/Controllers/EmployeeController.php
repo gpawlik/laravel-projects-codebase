@@ -24,7 +24,7 @@ class EmployeeController extends Controller {
     if(self::checkUserPermissions("hrm_employee_can_view"))
 		{
       $data['title'] = "Employees Data";
-	    $data['employees'] = Employee::orderBy("updated_at","DESC")->paginate(20);
+	    $data['employees'] =	\DB::table("employees")->where("employment_status","ACTIVE")->orderBy("updated_at","DESC")->paginate(20);
       $data['activeLink'] = "employee";
 			$data['subLinks'] = array(
 				array
@@ -252,6 +252,7 @@ class EmployeeController extends Controller {
 				$employee -> job_id = Input::get("job");
 				$employee -> bank_id = Input::get("bank");
 				$employee -> rank_id = Input::get("rank");
+				$employee -> employment_status = "ACTIVE";
 
 				$employee -> save();
 				Session::flash('message','Employee Added');

@@ -8,7 +8,7 @@ class Employee extends Model{
 
 	protected $fillable = ['staff_number','first_name','last_name','other_names','date_of_birth','marital_status','spouse_name','gender','social_security_number','email','telephone_number','mailing_address',
 												'residential_address','emergency_contact_name','emergency_contact_number','next_of_kin','alergies','fathers_name','mothers_name','bank_id','bank_account_number','picture_name',
-												'qualifications','date_of_hire','basic_salary','job_id'];
+												'qualifications','date_of_hire','basic_salary','job_id','employee_status'];
 
 	public static function getPermissions()
 	{

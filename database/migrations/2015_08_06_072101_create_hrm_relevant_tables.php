@@ -93,6 +93,8 @@ class CreateHrmRelevantTables extends Migration
         $table->string('tax_identification_number')->nullable();
         $table->string('number_of_dependants')->nullable();
 
+        $table->string('employment_status'); // ACTIVE | TERMINATED
+
         $table->integer('identification_id')->unsigned();
 			  $table->foreign('identification_id')->references('id')->on('identification');
         $table->string('identification_number');

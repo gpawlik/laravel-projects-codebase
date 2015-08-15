@@ -187,7 +187,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/leaves/delete/{id}','LeaveController@delete');
       Route::get('/leaves/view/{id}','LeaveController@view');
 
-      //ranks routes
+      //orientations routes
       Route::get('/orientations','OrientationController@index');
       Route::get('/orientations/add','OrientationController@add');
       Route::post('/orientations/create','OrientationController@create');
@@ -195,6 +195,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/orientations/update/{id}','OrientationController@update');
       Route::get('/orientations/delete/{id}','OrientationController@delete');
       Route::get('/orientations/view/{id}','OrientationController@view');
+
+      //terminations routes
+      Route::get('/job_terminations','TerminationController@index');
+      Route::get('/job_terminations/add','TerminationController@add');
+      Route::post('/job_terminations/create','TerminationController@create');
+      Route::get('/job_terminations/edit/{id}','TerminationController@edit');
+      Route::post('/job_terminations/update/{id}','TerminationController@update');
+      Route::get('/job_terminations/delete/{id}','TerminationController@delete');
+      Route::get('/job_terminations/view/{id}','TerminationController@view');
+      Route::get('/job_terminations/terminated_employee/{id}','TerminationController@terminatedEmployeeDetails');
 
 });
 
