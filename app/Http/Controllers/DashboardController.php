@@ -38,7 +38,7 @@ class DashboardController extends Controller {
 
 			if(self::checkUserPermissions("dashboard_employee_can_view"))
 			{
-				$employeeCount = Employee::all()->count();
+				$employeeCount = Employee::where("employment_status","ACTIVE")->count();
 				$data['employeeCount'] = $employeeCount;
 			}
 
@@ -75,8 +75,8 @@ class DashboardController extends Controller {
 
 				foreach($jobs as $job)
 				{
-					$employeeCount = \DB::table("employees")->where("job_id",$job->id)->count();
-
+					$employeeCount = \DB::table("employees")->where("employment_status","ACTIVE")->where("job_id",$job->id)->count();
+					var_dump($employeeCount);
 					if($employeeCount < $job -> job_capacity)
 					{
 						array_push($vacantJobs,$job);

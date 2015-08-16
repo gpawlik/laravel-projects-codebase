@@ -238,6 +238,7 @@ class PayGradeController extends Controller
         $payGrade = PayGrade::find($id);
 
         $rules = self::getRules();
+        $rules['description'] = "unique:pay_grades";
 
   			$validator = Validator::make(Input::all(), $rules);
 

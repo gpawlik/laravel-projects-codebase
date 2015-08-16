@@ -76,6 +76,7 @@ class IdentificationController extends Controller {
 		if(self::checkUserPermissions("system_identification_can_add"))
 		{
 			$rules = self::getRules();
+			$rules["identification_name"] = "unique:identification";
 
 			$validator = Validator::make(Input::all(), $rules);
 

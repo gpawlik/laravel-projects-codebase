@@ -84,6 +84,7 @@ class UserController extends Controller {
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
 			$rules = self::getRules();
+			$rules["username"] = "unique:users";
 
 			$validator = Validator::make(Input::all(), $rules);
 

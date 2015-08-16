@@ -75,6 +75,7 @@ class RoleController extends Controller {
 		if(self::checkUserPermissions("system_role_can_add"))
 		{
 			$rules = self::getRules();
+			$rules["role_name"] = "unique:roles";
 
 			$validator = Validator::make(Input::all(), $rules);
 

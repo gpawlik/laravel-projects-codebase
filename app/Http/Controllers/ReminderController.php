@@ -38,6 +38,7 @@ class ReminderController extends Controller {
     $reminder = new Reminder;
 
     $rules = self::getRules();
+		$rules['note'] = "unique:reminders";
 
 		$validator = Validator::make(Input::all(), $rules);
 

@@ -134,6 +134,7 @@ class EmployeeController extends Controller {
 		if(self::checkUserPermissions("hrm_employee_can_add"))
 		{
 			$rules = self::getRules();
+			$rules["staff_number"] = "unique:employees";
 
 			$validator = Validator::make(Input::all(), $rules);
 
@@ -570,7 +571,7 @@ class EmployeeController extends Controller {
 	public function apiGetEmployees($data)
 	{
 		$data = ucfirst($data);
-		$employees = \DB::table("employees")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
+		$employees = \DB::table("employees")->where("employment_status","ACTIVE")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->where("employment_status","ACTIVE")->get();
 		return Response::json(
 					$employees
 			);

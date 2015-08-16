@@ -78,6 +78,7 @@ class DepartmentController extends Controller {
     if(self::checkUserPermissions("hrm_department_can_add"))
 		{
 			$rules = self::getRules();
+			$rules["department_name"] = "unique:departments";
 
 			$validator = Validator::make(Input::all(), $rules);
 

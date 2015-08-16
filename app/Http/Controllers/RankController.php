@@ -74,6 +74,7 @@ class RankController extends Controller {
     if(self::checkUserPermissions("hrm_rank_can_add"))
 		{
       $rules = self::getRules();
+			$rules['rank_code'] = "unique:ranks";
 
 			$validator = Validator::make(Input::all(), $rules);
 
