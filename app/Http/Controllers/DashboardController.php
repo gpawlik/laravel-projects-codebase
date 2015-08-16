@@ -76,7 +76,7 @@ class DashboardController extends Controller {
 				foreach($jobs as $job)
 				{
 					$employeeCount = \DB::table("employees")->where("employment_status","ACTIVE")->where("job_id",$job->id)->count();
-					var_dump($employeeCount);
+
 					if($employeeCount < $job -> job_capacity)
 					{
 						array_push($vacantJobs,$job);

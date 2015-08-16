@@ -105,6 +105,14 @@ class LeaveController extends Controller {
 				if($employeeEmail != null)
 				{
 					$employeeDetails = \DB::table("employees")->where("email",$employeeEmail)->get()[0];
+
+					if($employeeDetails -> employment_status == "TERMINATED")
+					{
+						return Redirect::to('/hrm/leaves/add')
+									->withErrors("Employee not active")
+									->withInput();
+					}
+
 					$employeeId = $employeeDetails->id;
 				}
 				else

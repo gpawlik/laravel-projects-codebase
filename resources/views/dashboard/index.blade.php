@@ -34,7 +34,7 @@
 
 					<p>
 						{{ $vacant_job -> job_title }} <span class = "red-note" >( {{ App\Department::find($vacant_job->department_id)->department_name }} )</span><br/>
-						<span class = "red-note" >Employees Needed : {{ ($vacant_job -> job_capacity - \DB::table("employees")->where("job_id",$vacant_job->id)->count()) }}</span>
+						<span class = "red-note" >Employees Needed : {{ ($vacant_job -> job_capacity - \DB::table("employees")->where("employment_status","ACTIVE")->where("job_id",$vacant_job->id)->count()) }}</span>
 					</p>
 
 				@endforeach

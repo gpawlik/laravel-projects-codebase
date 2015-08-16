@@ -100,6 +100,14 @@ class OrientationController extends Controller {
 				if($employeeEmail != null)
 				{
 					$employeeDetails = \DB::table("employees")->where("email",$employeeEmail)->get()[0];
+
+					if($employeeDetails -> employment_status == "TERMINATED")
+					{
+						return Redirect::to('/hrm/orientations/add')
+									->withErrors("Employee not active")
+									->withInput();
+					}
+
 					$employeeId = $employeeDetails->id;
 
           $orientation = new Orientation;

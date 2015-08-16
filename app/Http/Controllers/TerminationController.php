@@ -101,6 +101,14 @@ class TerminationController extends Controller {
 				if($employeeEmail != null)
 				{
 					$employeeDetails = \DB::table("employees")->where("email",$employeeEmail)->get()[0];
+
+					if($employeeDetails -> employment_status == "TERMINATED")
+					{
+						return Redirect::to('/hrm/job_terminations/add')
+									->withErrors("Employee not active")
+									->withInput();
+					}
+
 					$employeeId = $employeeDetails->id;
 
 					$termination = new Termination;
