@@ -207,6 +207,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/job_terminations/terminated_employee/{id}','TerminationController@terminatedEmployeeDetails');
       Route::get('/job_terminations/revert_termination/{id}','TerminationController@revertTermination');
 
+      //training routes
+      Route::get('/training','TrainingController@index');
+      Route::get('/training/add','TrainingController@add');
+      Route::post('/training/create','TrainingController@create');
+      Route::get('/training/edit/{id}','TrainingController@edit');
+      Route::post('/training/update/{id}','TrainingController@update');
+      Route::get('/training/delete/{id}','TrainingController@delete');
+      Route::get('/training/view/{id}','TrainingController@view');
+
 });
 
 //inner application API routes

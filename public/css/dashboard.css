@@ -72,6 +72,16 @@ nav#main-nav ul li a.sub-link{
   padding:5px 10px;
 }
 
+nav#main-nav ul li a .nav-selection-icon{
+  width:5%;
+  display: inline-block;
+}
+
+nav#main-nav ul li a .nav-selection{
+  width:90%;
+  display: inline-block;
+}
+
 div#content-wrapper{
   float:right;
   width:85%;

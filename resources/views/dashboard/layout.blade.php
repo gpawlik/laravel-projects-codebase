@@ -103,7 +103,7 @@
 
 						@if(isset($leavePermission))
 							<a href = "/hrm/leaves" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'leave') { echo 'active-link'; } } ?>">
-								<i class="fa fa-plane"></i></i> &nbsp; Leave Days
+							<i class="fa fa-plane"></i> &nbsp; Leave Days
 							</a>
 						@endif
 
@@ -128,7 +128,13 @@
 
 						@if(isset($rankPermission))
 							<a href = "/hrm/ranks" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'rank') { echo 'active-link'; } } ?>">
-								<i class="fa fa-star"></i></i> &nbsp; Ranks
+								<i class="fa fa-star"></i> &nbsp; Ranks
+							</a>
+						@endif
+
+						@if(isset($trainingPermission))
+							<a href = "/hrm/training" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'training') { echo 'active-link'; } } ?>">
+							<i class="fa fa-graduation-cap"></i> &nbsp; Training
 							</a>
 						@endif
 
