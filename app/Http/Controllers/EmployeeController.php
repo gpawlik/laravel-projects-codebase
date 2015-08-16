@@ -226,7 +226,7 @@ class EmployeeController extends Controller {
 				$employee -> bank_account_number = Input::get("bank_account_number");
 				$employee -> qualifications = Input::get("qualifications");
 				$employee -> date_of_hire = Input::get("date_of_hire");
-				$employee -> basic_salary = Input::get("basic_salary");
+				$employee -> gross_salary = Input::get("gross_salary");
 				$employee -> branch_id = Input::get("branch");
 
 				if(Input::get("tax_identification_number"))
@@ -466,7 +466,7 @@ class EmployeeController extends Controller {
 				$employee -> bank_account_number = Input::get("bank_account_number");
 				$employee -> qualifications = Input::get("qualifications");
 				$employee -> date_of_hire = Input::get("date_of_hire");
-				$employee -> basic_salary = Input::get("basic_salary");
+				$employee -> gross_salary = Input::get("gross_salary");
 				$employee -> branch_id = Input::get("branch");
 
 				if(Input::get("tax_identification_number"))
@@ -601,9 +601,9 @@ class EmployeeController extends Controller {
 			'identification_number' => 'required',
 			'qualifications' => 'required',
 			'date_of_hire' => 'required',
-			'basic_salary' => 'required',
+			'gross_salary' => 'required',
 			'job' => 'required',
-			'basic_salary' => 'required',
+			'rank' => 'required',
 		);
 
 	}

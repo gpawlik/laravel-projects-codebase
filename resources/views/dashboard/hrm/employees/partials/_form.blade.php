@@ -136,8 +136,8 @@
     </tr>
 
     <tr>
-      <td>{!! Form::label("basic_salary","Basic Salary") !!}</td>
-      <td>{!! Form::text("basic_salary", null , ['placeholder' => "Basic Salary",'class'=>'text-input']) !!}</td>
+      <td>{!! Form::label("gross_salary","Basic Salary") !!}</td>
+      <td>{!! Form::text("gross_salary", null , ['placeholder' => "Gross Salary",'class'=>'text-input']) !!}</td>
     </tr>
 
     @if(isset($jobs))

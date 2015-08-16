@@ -89,7 +89,8 @@ class CreateHrmRelevantTables extends Migration
         $table->string('picture_name')->nullable();
         $table->string('qualifications');
         $table->date('date_of_hire');
-        $table->string('basic_salary');
+        $table->integer('gross_salary')->nullable();
+        $table->integer('net_salary')->nullable();
         $table->string('tax_identification_number')->nullable();
         $table->string('number_of_dependants')->nullable();
 
