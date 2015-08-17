@@ -17,8 +17,8 @@
     </tr>
 
     <tr>
-      <td>{!! Form::label("training_cost","Training Cost") !!}</td>
-      <td>{!! Form::text("training_cost", null , ['placeholder' => 'Training Cost','class'=>'text-input']) !!}</td>
+      <td>{!! Form::label("training_total_cost","Training Cost") !!}</td>
+      <td>{!! Form::text("training_total_cost", null , ['placeholder' => 'Training Cost','class'=>'text-input']) !!}</td>
     </tr>
 
     <tr>

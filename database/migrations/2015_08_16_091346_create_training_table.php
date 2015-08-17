@@ -16,8 +16,8 @@ class CreateTrainingTable extends Migration
           $table->increments('id');
 
           $table->string("training_type"); //INTERNAL / EXTERNAL
-          $table->integer("training_total_cost");
-          $table->text("traning_cost_components");
+          $table->integer("training_total_cost")->nullable();
+          $table->text("training_cost_components")->nullable();
           $table->string("training_start_date");
           $table->string("training_end_date");
 

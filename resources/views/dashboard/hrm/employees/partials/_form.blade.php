@@ -136,7 +136,7 @@
     </tr>
 
     <tr>
-      <td>{!! Form::label("gross_salary","Basic Salary") !!}</td>
+      <td>{!! Form::label("gross_salary","Gross Salary") !!}</td>
       <td>{!! Form::text("gross_salary", null , ['placeholder' => "Gross Salary",'class'=>'text-input']) !!}</td>
     </tr>
 

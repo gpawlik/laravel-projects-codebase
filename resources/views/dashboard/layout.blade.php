@@ -134,7 +134,7 @@
 
 						@if(isset($trainingPermission))
 							<a href = "/hrm/training" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'training') { echo 'active-link'; } } ?>">
-							<i class="fa fa-graduation-cap"></i> &nbsp; Training
+								<i class="fa fa-puzzle-piece"></i> &nbsp; Training
 							</a>
 						@endif
 

@@ -4,25 +4,29 @@
 
   @include('dashboard.partials._details', array
     (
-      "data" => $termination,
+      "data" => $training,
 
       "properties" => array
         (
           array(
-            'name'=>'Date of Termination',
-            'property' => 'date_of_termination'
+            'name'=>'Training Start Date',
+            'property' => 'training_start_date'
           ),
           array(
-            'name'=>'Reason for Termination',
-            'property' => 'reason_for_termination'
+            'name'=>'Training End Date',
+            'property' => 'training_end_date'
           ),
           array(
-            'name'=>'Details of Termination',
-            'property' => 'details_of_termination'
+            'name'=>'Training Total Cost',
+            'property' => 'training_total_cost'
           ),
           array(
-            'name'=>'Resignation List',
-            'property' => 'resignation_list'
+            'name'=>'Training Type',
+            'property' => 'training_type'
+          ),
+          array(
+            'name'=>'Training Cost Components',
+            'property' => 'training_cost_components'
           )
         ),
         'foreign' => array
@@ -44,7 +48,7 @@
     )
 
     <p>
-      &nbsp; &nbsp; <b><a class = "red-note" href = "/hrm/job_terminations/terminated_employee/{{ $termination->employee_id }}" >Employee Details</a></b>
+      &nbsp; &nbsp; <b><a class = "red-note" href = "/hrm/training/trained_employee/{{ $training->employee_id }}" >Employee Details</a></b>
     </p>
 
 @endsection

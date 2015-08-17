@@ -13,6 +13,7 @@ class Training extends Model{
 		return array(
       "hrm_training_can_add",
       "hrm_training_can_view",
+			"hrm_training_can_edit",
       "hrm_training_can_delete",
       "hrm_training_can_search",
 		);

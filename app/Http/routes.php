@@ -215,6 +215,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/training/update/{id}','TrainingController@update');
       Route::get('/training/delete/{id}','TrainingController@delete');
       Route::get('/training/view/{id}','TrainingController@view');
+      Route::get('/training/trained_employee/{id}','TrainingController@trainedEmployee');
 
 });
 
