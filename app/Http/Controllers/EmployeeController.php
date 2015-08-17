@@ -37,6 +37,7 @@ class EmployeeController extends Controller {
 				array
 				(
 					"title" => "Search for employee",
+					"route" => "/hrm/employees/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "hrm_employee_can_search"
 				)
@@ -575,6 +576,37 @@ class EmployeeController extends Controller {
 		return Response::json(
 					$employees
 			);
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_employee_can_search"))
+		{
+			$data['title'] = "Search For an Employee";
+			$data['activeLink'] = "employee";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Employee List",
+					"route" => "/hrm/employees",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_employee_can_view"
+				),
+				array
+				(
+					"title" => "Add Employee",
+					"route" => "/hrm/employees/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_employee_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.employees.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
 	}
 
 	public function getRules()

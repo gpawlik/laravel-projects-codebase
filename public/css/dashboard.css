@@ -419,6 +419,37 @@ table.permission-table tr:hover{
   vertical-align: top;
 }
 
+/************** search styles *****************/
+
+.search-wrapper{
+  width:100%;
+}
+
+.search-wrapper .search-input{
+  width:70%;
+  padding:10px;
+  border:1px solid #B0BEC5;
+  border:none;
+  border-bottom:2px solid #E1E1E1;
+  outline: none;
+
+}
+
+.search-wrapper .search-select{
+  width:15%;
+  padding:9px;
+  border:none;
+  border-bottom:2px solid #E1E1E1;
+  outline: none;
+}
+
+.result-wrapper{
+  width:100%;
+  margin-top: 20px;
+}
+
+/******************************************/
+
 /************** users list *****************/
 
 #users-list{

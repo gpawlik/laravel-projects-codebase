@@ -67,14 +67,21 @@ function handlePermissions()
 	});
 }
 
-	function handleCheckAll()
-	{
-		$("#check-all").click(function(){
+function handleCheckAll()
+{
+	$("#check-all").click(function(){
 
-				$('input:checkbox').prop('checked', this.checked);
+			$('input:checkbox').prop('checked', this.checked);
 
-		});
-	}
+	});
+}
+
+function handleSearch()
+{
+	$(".search-input").keyup(function(){
+		
+	});
+}
 
 function handleToUserField()
 {
