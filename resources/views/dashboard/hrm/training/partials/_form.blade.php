@@ -13,7 +13,7 @@
 
     <tr>
       <td>{!! Form::label("training_type","Type of Training*") !!}</td>
-      <td>{!! Form::select("training_type", ['INTERNAL'=>'Internal','EXTERNAL'=>'External'], null, array('class' => 'select-input') ) !!}</td>
+      <td>{!! Form::select("training_type", ['INTERNAL'=>'Internal','EXTERNAL'=>'External'], $training_type , array('class' => 'select-input') ) !!}</td>
     </tr>
 
     <tr>
@@ -29,7 +29,7 @@
     <tr>
       <td>{!! Form::label("employee","Employee*") !!}</td>
       <td>
-        {!! Form::text('employee', null,
+        {!! Form::text('employee', $employee_name,
 
           ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name'])
 

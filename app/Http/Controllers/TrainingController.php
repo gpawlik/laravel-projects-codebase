@@ -68,6 +68,10 @@ class TrainingController extends Controller {
 	      )
 	    );
 
+			//to avoid undefined employee_name error
+      $data['employee_name'] = "";
+			$data['training_type'] = null;
+
       return view('dashboard.hrm.training.add',$data);
     }
 		else
@@ -178,6 +182,92 @@ class TrainingController extends Controller {
 
 	}
 
+	public function edit($id)
+	{
+		if(self::checkUserPermissions("hrm_training_can_edit"))
+		{
+					$training = Training::find($id);
+
+					$data['title'] = "Edit Training";
+					$data['activeLink'] = "training";
+					$data['subLinks'] = array(
+						array
+						(
+							"title" => "Training List",
+							"route" => "/hrm/training",
+							"icon" => "<i class='fa fa-th-list'></i>",
+							"permission" => "hrm_training_can_view"
+						)
+					);
+					$data['training'] = $training;
+
+					$employee = \DB::table("employees")->where("id",$training->employee_id)->get();
+
+					$data['training_type'] = $training -> training_type;
+
+					$data['employee_name'] = $employee[0]->first_name . " " . $employee[0]->last_name . " " . "(".$employee[0]->email.")";
+
+					return view('dashboard.hrm.training.edit',$data);
+		}
+		else
+		{
+				return "You are not authorized";die();
+		}
+
+	}
+
+
+	public function update($id)
+	{
+		if(self::checkUserPermissions("hrm_training_can_edit"))
+		{
+      $rules = self::getRules();
+
+			$validator = Validator::make(Input::all(), $rules);
+
+			if ($validator->fails())
+			{
+				return Redirect::to('/hrm/training/edit/'.$id)
+							->withErrors($validator)
+							->withInput();
+			}
+			else
+			{
+        $employee = Input::get("employee");
+
+				$employeeFirstName = array_pad(explode(" ", $employee,3),3,null)[0];
+				$employeeLastName = array_pad(explode(" ", $employee,3),3,null)[1];
+				$employeeEmail = str_replace(")","",str_replace("(", "", array_pad(explode(" ", $employee,3),3,null)[2]));
+
+				//get user's leave days
+				if($employeeEmail != null)
+				{
+					$employeeDetails = \DB::table("employees")->where("email",$employeeEmail)->get()[0];
+					$employeeId = $employeeDetails->id;
+
+          $training = Training::find($id);
+
+					$training -> training_type = Input::get("training_type");
+					$training -> training_start_date = Input::get("training_start_date");
+					$training -> training_end_date = Input::get("training_end_date");
+					$training -> training_total_cost = Input::get("training_total_cost");
+					$training -> training_cost_components = Input::get("training_cost_components");
+					$training -> employee_id = $employeeId;
+
+          $training -> push();
+          Session::flash('message','training Updated');
+          return Redirect::to('/hrm/training');
+				}
+				else
+				{
+					return Redirect::to('/hrm/training/edit/'.$id)
+								->withErrors("Employee not found")
+								->withInput();
+				}
+    	}
+		}
+	}
+
 	public function trainedEmployee($id)
 	{
 		if(self::checkUserPermissions("hrm_training_can_view"))
@@ -204,6 +294,23 @@ class TrainingController extends Controller {
 		{
 			return "You are not authorized";die();
 		}
+	}
+
+	public function delete($id)
+	{
+		if(self::checkUserPermissions("hrm_training_can_delete"))
+		{
+			$training = Training::find($id);
+
+      $training -> delete();
+
+      Session::flash('message', 'Training deleted');
+      return Redirect::to("/hrm/training");
+    }
+    else
+    {
+      return "You are not authorized";die();
+    }
 	}
 
 	public function getRules()
