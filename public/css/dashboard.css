@@ -426,7 +426,7 @@ table.permission-table tr:hover{
 }
 
 .search-wrapper .search-input{
-  width:70%;
+  width:98%;
   padding:10px;
   border:1px solid #B0BEC5;
   border:none;
@@ -446,6 +446,14 @@ table.permission-table tr:hover{
 .result-wrapper{
   width:100%;
   margin-top: 20px;
+}
+
+.clickable-row{
+  cursor: pointer;
+}
+
+.clickable-row:hover{
+  background-color: #E1E1E1;
 }
 
 /******************************************/

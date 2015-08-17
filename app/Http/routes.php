@@ -140,6 +140,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/departments/update/{id}','DepartmentController@update');
       Route::get('/departments/delete/{id}','DepartmentController@delete');
       Route::get('/departments/view/{id}','DepartmentController@view');
+      Route::get('/departments/search','DepartmentController@search');
 
       //jobs routes
       Route::get('/jobs','JobController@index');
@@ -225,4 +226,6 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
 {
   	Route::get('/users/{id}','UserController@apiGetUsers');
     Route::get('/employees/{id}','EmployeeController@apiGetEmployees');
+    Route::get('/employee_search/{id}','EmployeeController@apiSearch');
+    Route::get('/department_search/{id}','DepartmentController@apiSearch');
 });

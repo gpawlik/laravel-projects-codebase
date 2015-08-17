@@ -76,10 +76,54 @@ function handleCheckAll()
 	});
 }
 
-function handleSearch()
+function handleSearch(route,parentModel,model)
 {
-	$(".search-input").keyup(function(){
-		
+		$.ajax({
+		method: "GET",
+	  	url: "/api/v1/"+ route +"/"+ $(".search-input").val(),
+		success: function(data){
+			console.log(data);
+			if(data.length > 0)
+			{
+				$(".result-wrapper").html(
+
+					"<table class = 'view-table'>" +
+						"<tr id = 'table-header-tr'></tr>" +
+					"</table>"
+
+					);
+
+					for(property in data[0])
+					{
+						if(property == "id")
+						{
+							continue;
+						}
+
+						$("#table-header-tr").append("<th>"+property.replace("_", " ")+"</th>");
+
+						for(i=0;i<data.length;i++)	
+						{
+							$(".view-table").append("<tr class='clickable-row' data-href='/"+parentModel+"/"+model+"/view/"+data[i]['id']+"' id = 'data-tr-"+i+"'></tr>");
+
+							$("#data-tr-"+i).append("<td>"+data[i][property]+"</td>");
+						}							
+					}
+
+					
+			}
+			else
+			{
+				$(".view-table").hide();
+			}
+
+			$(".clickable-row").click(function() {
+		        window.document.location = $(this).data("href");
+		    });
+		},
+		error: function(data){
+			$(".view-table").hide();
+		}
 	});
 }
 
@@ -95,9 +139,9 @@ function queryUserData(data)
 {
 	$.ajax({
 		method: "GET",
-	  url: "/api/v1/users/"+data,
+	 	url: "/api/v1/users/"+data,
 		success: function(data){
-			console.log(data);
+
 			if(data.length > 0)
 			{
 					$("#users-list").show("fast");

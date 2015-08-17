@@ -34,6 +34,7 @@ class DepartmentController extends Controller {
 				array
 				(
 					"title" => "Search for department",
+					"route" => "/hrm/departments/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "hrm_department_can_search"
 				)
@@ -173,6 +174,54 @@ class DepartmentController extends Controller {
 		}
   }
 
+  public function view($id)
+  {
+		if(self::checkUserPermissions("hrm_department_can_view"))
+		{
+			$department = Department::find($id);
+
+			$data['title'] = "View Department Details";
+			$data['activeLink'] = "department";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Department List",
+					"route" => "/hrm/departments",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_department_can_view"
+				),
+				array
+				(
+					"title" => "Add Department",
+					"route" => "/hrm/departments/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_department_can_add"
+				),
+				array
+				(
+					"title" => "Edit Department",
+					"route" => "/hrm/departments/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "hrm_department_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Employee",
+					"route" => "/hrm/departments/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "hrm_department_can_delete"
+				)
+			);
+			$data['department'] = $department;
+
+			return view('dashboard.hrm.departments.view',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+  }
+
   public function delete($id)
   {
 		if(self::checkUserPermissions("hrm_department_can_delete"))
@@ -189,6 +238,48 @@ class DepartmentController extends Controller {
 			return "You are not authorized";die();
 		}
   }
+
+  public function search()
+	{
+		if(self::checkUserPermissions("hrm_department_can_search"))
+		{
+			$data['title'] = "Search For a Department";
+			$data['activeLink'] = "department";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Department List",
+					"route" => "/hrm/departments",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_department_can_view"
+				),
+				array
+				(
+					"title" => "Add Department",
+					"route" => "/hrm/departments/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_department_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.departments.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		//$data = ucfirst($data);
+		$employees = \DB::table("departments")->select('id', 'department_name')
+			->where("department_name","ilike","%$data%")
+			->get();
+		return Response::json(
+					$employees
+			);
+	}
 
   public function getRules()
   {

@@ -12,7 +12,7 @@
 
       'permission_prefix' => 'hrm_department',
 
-      'actions' => ['edit','delete']
+      'actions' => ['view','edit','delete']
 
     )
   )

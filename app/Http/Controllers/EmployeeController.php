@@ -530,6 +530,20 @@ class EmployeeController extends Controller {
 					"route" => "/hrm/employees/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "hrm_employee_can_add"
+				),
+				array
+				(
+					"title" => "Edit Employee",
+					"route" => "/hrm/employees/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "hrm_employee_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Employee",
+					"route" => "/hrm/employees/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "hrm_employee_can_delete"
 				)
 			);
 			$data['employee'] = $employee;
@@ -572,7 +586,9 @@ class EmployeeController extends Controller {
 	public function apiGetEmployees($data)
 	{
 		$data = ucfirst($data);
-		$employees = \DB::table("employees")->where("employment_status","ACTIVE")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->where("employment_status","ACTIVE")->get();
+		$employees = \DB::table("employees")->where("employment_status","ACTIVE")->where("first_name","like","%$data%")
+			->orWhere("last_name","like","%$data%")
+			->where("employment_status","ACTIVE")->get();
 		return Response::json(
 					$employees
 			);
@@ -607,6 +623,19 @@ class EmployeeController extends Controller {
 		{
 			return "You are not authorized";die();
 		}
+	}
+
+	public function apiSearch($data)
+	{
+		$data = ucfirst($data);
+		$employees = \DB::table("employees")->select('id', 'staff_number', 'first_name', 'last_name', 'email')
+			->where("employment_status","ACTIVE")->where("first_name","like","%$data%")
+			->orWhere("last_name","like","%$data%")->where("employment_status","ACTIVE")
+			->orWhere("email","like","%$data%")->where("employment_status","ACTIVE")
+			->get();
+		return Response::json(
+					$employees
+			);
 	}
 
 	public function getRules()
