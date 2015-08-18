@@ -401,6 +401,7 @@ class LeaveController extends Controller {
 		->where("leave_start_date","<=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
 		->orWhere("first_name","ilike","%$data%")
 		->orWhere("last_name","ilike","%$data%")
+		
 		->get();
 	return Response::json(
 				$leaves
