@@ -35,6 +35,7 @@ class LeaveController extends Controller {
         array
         (
           "title" => "Search for Leave",
+					"route" => "/hrm/leaves/search",
           "icon" => "<i class='fa fa-search'></i>",
           "permission" => "hrm_leave_can_search"
         )
@@ -359,6 +360,51 @@ class LeaveController extends Controller {
 		}
 
 		return $leaveDaysCount;
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_leave_can_search"))
+		{
+			$data['title'] = "Search for Employee Leaves";
+			$data['activeLink'] = "leave";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Rank List",
+					"route" => "/hrm/leaves",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_leave_can_view"
+				),
+				array
+				(
+					"title" => "Add Leave",
+					"route" => "/hrm/leaves/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_leave_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.leaves.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$leaves = \DB::table("leaves")->select("leaves.id","leave_start_date","leave_end_date","saturday_inclusive","sunday_inclusive","first_name","last_name")
+		->join("employees","employees.id","=","leaves.employee_id")
+		->where("leave_end_date",">=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->where("leave_start_date","<=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->orWhere("first_name","ilike","%$data%")
+		->orWhere("last_name","ilike","%$data%")
+		->get();
+	return Response::json(
+				$leaves
+		);
 	}
 
 

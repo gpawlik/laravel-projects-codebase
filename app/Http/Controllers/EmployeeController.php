@@ -627,11 +627,10 @@ class EmployeeController extends Controller {
 
 	public function apiSearch($data)
 	{
-		$data = ucfirst($data);
 		$employees = \DB::table("employees")->select('id', 'staff_number', 'first_name', 'last_name', 'email')
-			->where("employment_status","ACTIVE")->where("first_name","like","%$data%")
-			->orWhere("last_name","like","%$data%")->where("employment_status","ACTIVE")
-			->orWhere("email","like","%$data%")->where("employment_status","ACTIVE")
+			->where("employment_status","ACTIVE")->where("first_name","ilike","%$data%")
+			->orWhere("last_name","ilike","%$data%")->where("employment_status","ACTIVE")
+			->orWhere("email","ilike","%$data%")->where("employment_status","ACTIVE")
 			->get();
 		return Response::json(
 					$employees

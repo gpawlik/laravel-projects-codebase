@@ -191,6 +191,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/leaves/update/{id}','LeaveController@update');
       Route::get('/leaves/delete/{id}','LeaveController@delete');
       Route::get('/leaves/view/{id}','LeaveController@view');
+      Route::get('/leaves/search','LeaveController@search');
 
       //orientations routes
       Route::get('/orientations','OrientationController@index');
@@ -234,4 +235,5 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
     Route::get('/rank_search/{id}','RankController@apiSearch');
     Route::get('/application_search/{id}','ApplicationController@apiSearch');
     Route::get('/job_search/{id}','JobController@apiSearch');
+    Route::get('/leave_search/{id}','LeaveController@apiSearch');
 });
