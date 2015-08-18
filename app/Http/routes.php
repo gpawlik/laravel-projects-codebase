@@ -150,6 +150,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/jobs/update/{id}','JobController@update');
       Route::get('/jobs/delete/{id}','JobController@delete');
       Route::get('/jobs/view/{id}','JobController@view');
+      Route::get('/jobs/search','JobController@search');
 
       //pay grades routes
       Route::get('/pay_grades','PayGradeController@index');
@@ -170,6 +171,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/applications/view/{id}','ApplicationController@view');
       Route::get('/applications/accept_application/{id}','ApplicationController@acceptApplication');
       Route::get('/applications/decline_application/{id}','ApplicationController@declineApplication');
+      Route::get('/applications/search','ApplicationController@search');
 
       //ranks routes
       Route::get('/ranks','RankController@index');
@@ -179,6 +181,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/ranks/update/{id}','RankController@update');
       Route::get('/ranks/delete/{id}','RankController@delete');
       Route::get('/ranks/view/{id}','RankController@view');
+      Route::get('/ranks/search','RankController@search');
 
       //ranks routes
       Route::get('/leaves','LeaveController@index');
@@ -228,4 +231,7 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
     Route::get('/employees/{id}','EmployeeController@apiGetEmployees');
     Route::get('/employee_search/{id}','EmployeeController@apiSearch');
     Route::get('/department_search/{id}','DepartmentController@apiSearch');
+    Route::get('/rank_search/{id}','RankController@apiSearch');
+    Route::get('/application_search/{id}','ApplicationController@apiSearch');
+    Route::get('/job_search/{id}','JobController@apiSearch');
 });

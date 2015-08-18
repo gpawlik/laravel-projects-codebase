@@ -6,7 +6,8 @@ class Application extends Model{
 
 	protected $table = 'applications';
 
-	protected $fillable = ['applicant_first_name','applicant_last_name','applicant_email','applicant_contact_number','applicant_application_status','applicantion_date'.'applicant_interview_date','applicant_cv_file_name','applicant_letter_file_name'];
+	protected $fillable = ['applicant_first_name','applicant_last_name','applicant_email','applicant_contact_number','applicant_application_status','applicantion_date'.'applicant_interview_date',
+		'applicant_cv_file_name','applicant_letter_file_name'];
 
 	public static function getPermissions()
 	{

@@ -34,6 +34,7 @@ class JobController extends Controller {
         array
         (
           "title" => "Search for job",
+					"route" => "/hrm/jobs/search",
           "icon" => "<i class='fa fa-search'></i>",
           "permission" => "hrm_job_can_search"
         )
@@ -187,6 +188,55 @@ class JobController extends Controller {
     }
   }
 
+	public function view($id)
+  {
+    if(self::checkUserPermissions("hrm_job_can_view"))
+		{
+			$job = Job::find($id);
+
+			$data['title'] = "View Job Details";
+			$data['activeLink'] = "job";
+			$data['subLinks'] = array(
+					array
+					(
+						"title" => "Job List",
+						"route" => "/hrm/jobs",
+						"icon" => "<i class='fa fa-th-list'></i>",
+						"permission" => "hrm_job_can_view"
+					),
+					array
+					(
+						"title" => "Add Job",
+						"route" => "/hrm/jobs/add",
+						"icon" => "<i class='fa fa-plus'></i>",
+						"permission" => "hrm_job_can_add"
+					),
+					array
+					(
+						"title" => "Edit Job",
+						"route" => "/hrm/jobs/edit/".$id,
+						"icon" => "<i class='fa fa-pencil'></i>",
+						"permission" => "hrm_job_can_edit"
+					),
+					array
+					(
+						"title" => "Delete Job",
+						"route" => "/hrm/jobs/delete/".$id,
+						"icon" => "<i class = 'fa fa-trash'></i>",
+						"permission" => "hrm_job_can_delete"
+					)
+				);
+
+				$data['job'] = $job;
+
+				return view('dashboard.hrm.jobs.view',$data);
+			}
+			else
+			{
+				return "You are not authorized";die();
+			}
+  }
+
   public function delete($id)
 	{
 		if(self::checkUserPermissions("hrm_job_can_delete"))
@@ -202,6 +252,47 @@ class JobController extends Controller {
 		{
 			return "You are not authorized";die();
 		}
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_job_can_search"))
+		{
+			$data['title'] = "Search for a job position";
+			$data['activeLink'] = "job";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Job List",
+					"route" => "/hrm/jobs",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_job_can_view"
+				),
+				array
+				(
+					"title" => "Add Job",
+					"route" => "/hrm/jobs/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_job_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.jobs.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$jobs = \DB::table("jobs")->select('id', 'job_title','job_capacity')
+			->where("job_title","ilike","%$data%")
+			->get();
+		return Response::json(
+					$jobs
+			);
 	}
 
   public function getRules()

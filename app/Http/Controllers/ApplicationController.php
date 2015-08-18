@@ -35,6 +35,7 @@ class ApplicationController extends Controller {
 				array
 				(
 					"title" => "Search for application",
+					"route" => "/hrm/applications/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "hrm_application_can_search"
 				)
@@ -308,7 +309,33 @@ class ApplicationController extends Controller {
 					"route" => "/hrm/applications/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "hrm_application_can_add"
-				)
+				),
+				array
+				(
+					"title" => "Edit Application",
+					"route" => "/hrm/applications/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "hrm_application_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Application",
+					"route" => "/hrm/application/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "hrm_application_can_delete"
+				),
+				array(
+          "title" => "Accept Application",
+					"route" => "/hrm/applications/accept_application/".$id,
+          "icon" => "<i class='fa fa-check-circle'></i>",
+          "permission" => "hrm_application_can_accept"
+        ),
+        array(
+          "title" => "Decline Application",
+					"route" => "/hrm/applications/decline_application/".$id,
+          "icon" => "<i class='fa fa-undo'></i>",
+          "permission" => "hrm_application_can_decline"
+        )
 			);
 			$data['application'] = $application;
 
@@ -378,6 +405,50 @@ class ApplicationController extends Controller {
 		$application -> push();
 		Session::flash('message','Job Application Declined');
 		return Redirect::to('/hrm/applications');
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_application_can_search"))
+		{
+			$data['title'] = "Search for an Application";
+			$data['activeLink'] = "application";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Application List",
+					"route" => "/hrm/applications",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_application_can_view"
+				),
+				array
+				(
+					"title" => "Add Application",
+					"route" => "/hrm/applications/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_application_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.applications.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$application = \DB::table("applications")->select('id', 'applicant_first_name', 'applicant_last_name','applicant_email','application_status')
+			->where("applicant_first_name","ilike","%$data%")
+			->orWhere("applicant_last_name","ilike","%$data%")
+			->orWhere("applicant_email","ilike","%$data%")
+			->orWhere("application_status","ilike","%$data%")
+			->get();
+		return Response::json(
+					$application
+			);
 	}
 
 	public function getRules()

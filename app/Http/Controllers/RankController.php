@@ -32,6 +32,7 @@ class RankController extends Controller {
 				array
 				(
 					"title" => "Search for rank",
+					"route" => "/hrm/ranks/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "hrm_rank_can_search"
 				)
@@ -188,6 +189,20 @@ class RankController extends Controller {
 						"route" => "/hrm/ranks/add",
 						"icon" => "<i class='fa fa-plus'></i>",
 						"permission" => "hrm_rank_can_add"
+					),
+					array
+					(
+						"title" => "Edit Rank",
+						"route" => "/hrm/ranks/edit/".$id,
+						"icon" => "<i class='fa fa-pencil'></i>",
+						"permission" => "hrm_rank_can_edit"
+					),
+					array
+					(
+						"title" => "Delete Rank",
+						"route" => "/hrm/ranks/delete/".$id,
+						"icon" => "<i class = 'fa fa-trash'></i>",
+						"permission" => "hrm_rank_can_delete"
 					)
 				);
 
@@ -218,6 +233,48 @@ class RankController extends Controller {
 		}
 
   }
+
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_rank_can_search"))
+		{
+			$data['title'] = "Search for a rank";
+			$data['activeLink'] = "rank";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Rank List",
+					"route" => "/hrm/ranks",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_rank_can_view"
+				),
+				array
+				(
+					"title" => "Add Rank",
+					"route" => "/hrm/ranks/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_rank_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.ranks.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$ranks = \DB::table("ranks")->select('id', 'rank_code', 'rank_name')
+			->where("rank_code","ilike","%$data%")
+			->orWhere("rank_name","ilike","%$data%")
+			->get();
+		return Response::json(
+					$ranks
+			);
+	}
 
 
   public function getRules()

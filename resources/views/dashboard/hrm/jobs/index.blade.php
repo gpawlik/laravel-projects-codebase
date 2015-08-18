@@ -22,7 +22,7 @@
           )
         ),
 
-      'actions' => ['edit','delete']
+      'actions' => ['view','edit','delete']
 
     )
   )
