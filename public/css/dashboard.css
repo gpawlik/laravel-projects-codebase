@@ -250,6 +250,57 @@ div.card{
   box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1)
 }
 
+/**************************************************       DASHBOARD CARD STYLES    ************************************/
+
+div.dashboard-card{
+  background-color: #FFF;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1)
+}
+
+div.dashboard-card .title{
+  padding:10px;
+  margin: 0;
+  color:#FFF;
+}
+
+div.dashboard-card .content{
+  padding: 10px;
+}
+
+div.dashboard-card .green{
+  background-color: #21a560;
+}
+
+div.dashboard-card .blue{
+  background-color: #2980b9;
+}
+
+div.dashboard-card .pumpkin{
+  background-color: #d35400;
+}
+
+div.dashboard-card .amber{
+  background-color: #FFC107;
+}
+
+div.dashboard-card .turquise{
+  background-color: #1abc9c;
+}
+
+div.dashboard-card .alizarin{
+  background-color: #e74c3c;
+}
+
+div.dashboard-card .brown{
+  background-color: #795548;
+}
+
+.white-text{
+  color:#FFF;
+}
+
+/****************************************************************************************8****************************/
+
 div#session-box{
 	width:100%;
 	background: #FFFF99;

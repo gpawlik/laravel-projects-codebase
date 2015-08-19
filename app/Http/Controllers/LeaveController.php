@@ -200,6 +200,13 @@ class LeaveController extends Controller {
 					"route" => "/hrm/leaves/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "hrm_leave_can_add"
+				),
+				array
+				(
+					"title" => "Delete Leave",
+					"route" => "/hrm/leaves/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "hrm_leave_can_delete"
 				)
 			);
 
@@ -401,7 +408,7 @@ class LeaveController extends Controller {
 		->where("leave_start_date","<=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
 		->orWhere("first_name","ilike","%$data%")
 		->orWhere("last_name","ilike","%$data%")
-		
+
 		->get();
 	return Response::json(
 				$leaves

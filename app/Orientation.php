@@ -8,7 +8,7 @@ class Orientation extends Model
 {
     protected $table = 'orientations';
 
-    protected $fillable = ['description','minimum_salary','maximum_salary','job_id'];
+    protected $fillable = ['orientation_start_date','orientation_end_date','orientation_outcome','employee_id'];
 
     public static function getPermissions()
     {

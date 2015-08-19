@@ -160,6 +160,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/pay_grades/update/{id}','PayGradeController@update');
       Route::get('/pay_grades/delete/{id}','PayGradeController@delete');
       Route::get('/pay_grades/view/{id}','PayGradeController@view');
+      Route::get('/pay_grades/search','PayGradeController@search');
 
       //applications routes
       Route::get('/applications','ApplicationController@index');
@@ -201,6 +202,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/orientations/update/{id}','OrientationController@update');
       Route::get('/orientations/delete/{id}','OrientationController@delete');
       Route::get('/orientations/view/{id}','OrientationController@view');
+      Route::get('/orientations/search','OrientationController@search');
 
       //terminations routes
       Route::get('/job_terminations','TerminationController@index');
@@ -236,4 +238,6 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
     Route::get('/application_search/{id}','ApplicationController@apiSearch');
     Route::get('/job_search/{id}','JobController@apiSearch');
     Route::get('/leave_search/{id}','LeaveController@apiSearch');
+    Route::get('/orientation_search/{id}','OrientationController@apiSearch');
+    Route::get('/pay_grade_search/{id}','PayGradeController@apiSearch');
 });

@@ -44,6 +44,7 @@ class PayGradeController extends Controller
           array
           (
             "title" => "Search for Pay Grade",
+            "route" => "/hrm/pay_grades/search",
             "icon" => "<i class='fa fa-search'></i>",
             "permission" => "hrm_paygrade_can_search"
           )
@@ -288,6 +289,52 @@ class PayGradeController extends Controller
         return "You are not authorized";die();
       }
     }
+
+    public function search()
+  	{
+  		if(self::checkUserPermissions("hrm_paygrade_can_search"))
+  		{
+  			$data['title'] = "Search for Pay Grades";
+  			$data['activeLink'] = "paygrade";
+  			$data['subLinks'] = array(
+  				array
+  				(
+  					"title" => "Pay Grade List",
+  					"route" => "/hrm/pay_grades",
+  					"icon" => "<i class='fa fa-th-list'></i>",
+  					"permission" => "hrm_paygrade_can_view"
+  				),
+  				array
+  				(
+  					"title" => "Add Pay Grade",
+  					"route" => "/hrm/pay_grades/add",
+  					"icon" => "<i class='fa fa-plus'></i>",
+  					"permission" => "hrm_paygrade_can_add"
+  				)
+  			);
+
+  			return view('dashboard.hrm.paygrades.search',$data);
+  		}
+  		else
+  		{
+  			return "You are not authorized";die();
+  		}
+  	}
+
+  	public function apiSearch($data)
+  	{
+  		$paygrades = \DB::table("pay_grades")->select("pay_grades.id","description","minimum_salary","maximum_salary","job_title")
+  		->join("jobs","jobs.id","=","pay_grades.job_id")
+  		->where("description","ilike","%$data%")
+  		->orWhere("minimum_salary","ilike","%$data%")
+  		->orWhere("maximum_salary","ilike","%$data%")
+      ->orWhere("job_title","ilike","%$data%")
+
+  		->get();
+  	return Response::json(
+  				$paygrades
+  		);
+  	}
 
     public function getRules()
     {

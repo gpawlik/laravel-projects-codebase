@@ -91,7 +91,7 @@
 
 						@if(isset($jobPermission))
 							<a href = "/hrm/jobs" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'job') { echo 'active-link'; } } ?>">
-								<i class="fa fa-briefcase"></i> &nbsp; Jobs
+								<i class="fa fa-briefcase"></i> &nbsp; Jobs Positions
 							</a>
 						@endif
 

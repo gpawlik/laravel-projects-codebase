@@ -7,6 +7,7 @@ use Auth;
 use Validator;
 use Input;
 use Redirect;
+use Response;
 use Session;
 use Hash;
 use Image;
@@ -33,6 +34,7 @@ class OrientationController extends Controller {
         array
         (
           "title" => "Search for Orientation",
+					"route" => "/hrm/orientations/search",
           "icon" => "<i class='fa fa-search'></i>",
           "permission" => "hrm_orientation_can_search"
         )
@@ -247,6 +249,20 @@ class OrientationController extends Controller {
 					"route" => "/hrm/orientations/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "hrm_orientation_can_add"
+				),
+				array
+				(
+					"title" => "Edit Orientation",
+					"route" => "/hrm/orientations/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "hrm_orientation_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Orientation",
+					"route" => "/hrm/orientations/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "hrm_orientation_can_delete"
 				)
 			);
 
@@ -276,6 +292,53 @@ class OrientationController extends Controller {
       return "You are not authorized";die();
     }
   }
+
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_orientation_can_search"))
+		{
+			$data['title'] = "Search for Orientation";
+			$data['activeLink'] = "orientation";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Orientation List",
+					"route" => "/hrm/orientations",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_orientation_can_view"
+				),
+				array
+				(
+					"title" => "Add Orientation",
+					"route" => "/hrm/orientations/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_orientation_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.orientations.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$orientations = \DB::table("orientations")->select("orientations.id","orientation_start_date","orientation_end_date","orientation_outcome","first_name","last_name")
+		->join("employees","employees.id","=","orientations.employee_id")
+		->where("orientation_end_date",">=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->where("orientation_start_date","<=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->orWhere("first_name","ilike","%$data%")
+		->orWhere("last_name","ilike","%$data%")
+		->orWhere("orientation_outcome","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$orientations
+		);
+	}
 
   public function getRules()
   {
