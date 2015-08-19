@@ -6,7 +6,7 @@
 
     @include('errors.error_list')
 
-    {!! Form::model($job, ['method' => 'POST','url' => ['hrm/jobs/update',$job->id]] ) !!}
+    {!! Form::model($job, ['method' => 'POST','url' => ['hrm/jobs/update',$job->id],'files'=>true] ) !!}
 
       @include('dashboard.hrm.jobs.partials._form',['submitButtonText'=>'Update','departments'=>$departments,'context'=>'update'])
 

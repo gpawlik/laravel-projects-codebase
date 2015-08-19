@@ -194,6 +194,7 @@ class JobController extends Controller {
 			{
 				$fileDestinationPath = public_path('uploads/');
 
+
 				//handle CV file upload
 				if(Input::file(('job_specifications_file_name')))
 	      {
@@ -210,7 +211,7 @@ class JobController extends Controller {
 
 						$specsFile -> move($fileDestinationPath, $specsFileName);
 
-						$jobs -> job_specifications_file_name = $specsFileName;
+						$job -> job_specifications_file_name = $specsFileName;
 
 	      }
 	      else
@@ -227,6 +228,7 @@ class JobController extends Controller {
 
         $job -> job_title = Input::get("job_title");
 				$job -> job_capacity = Input::get("job_capacity");
+				$job -> job_description = Input::get("job_description");
         $job -> department_id = Input::get("department");
 
         $job -> push();
