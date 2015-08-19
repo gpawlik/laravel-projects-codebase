@@ -102,8 +102,27 @@ class JobController extends Controller {
 			{
         $job = new Job;
 
+				$fileDestinationPath = public_path('uploads/');
+
+				if(Input::file("job_specifications_file_name"))
+				{
+					$specsFile = Input::file("job_specifications_file_name");
+					$specsFileName = Input::get("job_title")."_specifications_".$specsFile -> getClientOriginalName();
+
+					$specsFile -> move($fileDestinationPath, $specsFileName);
+
+					$job -> job_specifications_file_name = $specsFileName;
+
+				}
+				else
+				{
+					$job -> job_specifications_file_name = null;
+				}
+
+
         $job -> job_title = Input::get("job_title");
 				$job -> job_capacity = Input::get("job_capacity");
+				$job -> job_description = Input::get("job_description");
         $job -> department_id = Input::get("department");
 
         $job -> save();
@@ -173,6 +192,39 @@ class JobController extends Controller {
 			}
 			else
 			{
+				$fileDestinationPath = public_path('uploads/');
+
+				//handle CV file upload
+				if(Input::file(('job_specifications_file_name')))
+	      {
+	          if($job -> job_specifications_file_name != null)
+	          {
+	            if (file_exists(public_path('uploads/'.$job -> job_specifications_file_name)))
+	        		{
+	              unlink(public_path('uploads/'.$job -> job_specifications_file_name));
+	        		}
+	          }
+
+						$specsFile = Input::file("job_specifications_file_name");
+						$specsFileName = Input::get("job_title")."_CV_".$specsFile -> getClientOriginalName();
+
+						$specsFile -> move($fileDestinationPath, $specsFileName);
+
+						$jobs -> job_specifications_file_name = $specsFileName;
+
+	      }
+	      else
+	      {
+					if(Input::get("job_specs_delete_check") == 'yes')
+	        {
+	          if(file_exists(public_path('uploads/'.$job -> job_specifications_file_name)))
+	          {
+	            unlink(public_path('uploads/'.$job -> job_specifications_file_name));
+	          }
+	          $job -> job_specifications_file_name = null;
+	        }
+				}
+
         $job -> job_title = Input::get("job_title");
 				$job -> job_capacity = Input::get("job_capacity");
         $job -> department_id = Input::get("department");
