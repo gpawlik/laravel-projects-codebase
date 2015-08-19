@@ -88,7 +88,7 @@ class JobController extends Controller {
     if(self::checkUserPermissions("hrm_job_can_add"))
 		{
       $rules = self::getRules();
-			$rules["job_title"] = "unique:jobs";
+			$rules["job_title"] = "required | unique:jobs";
 
 			$validator = Validator::make(Input::all(), $rules);
 

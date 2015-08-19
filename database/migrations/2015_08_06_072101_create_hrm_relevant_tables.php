@@ -89,10 +89,19 @@ class CreateHrmRelevantTables extends Migration
         $table->string('picture_name')->nullable();
         $table->string('qualifications');
         $table->date('date_of_hire');
+
         $table->integer('gross_salary')->nullable();
+        $table->integer("income_tax")->nullable();
+        $table->integer("ssnit")->nullable();
+        $table->integer("employer_welfare_contribution")->nullable();
+        $table->integer("employee_welfare_contribution")->nullable();
+        $table->integer("allowances")->nullable();
+
         $table->integer('net_salary')->nullable();
         $table->string('tax_identification_number')->nullable();
         $table->string('number_of_dependants')->nullable();
+
+        $table->integer("leave_entitlement_days")->nullable();
 
         $table->string('employment_status'); // ACTIVE | TERMINATED
 

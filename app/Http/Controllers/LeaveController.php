@@ -144,7 +144,7 @@ class LeaveController extends Controller {
 					$totalEmployeeLeaveDays+=$numLeaveDays;
 
 					//get user's allowed leave days for the year
-					$employeesAllowedLeaveDays = \DB::table("ranks")->where("id",$employeeDetails->rank_id)->get()[0]->allowed_number_of_leave_days;
+					$employeesAllowedLeaveDays = \DB::table("employees")->where("id",$employeeDetails->id)->get()[0]->leave_entitlement_days;
 
 					if($totalEmployeeLeaveDays > $employeesAllowedLeaveDays)
 					{

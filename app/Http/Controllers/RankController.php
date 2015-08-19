@@ -91,7 +91,6 @@ class RankController extends Controller {
 
         $rank -> rank_code = Input::get("rank_code");
         $rank -> rank_name = Input::get("rank_name");
-				$rank -> allowed_number_of_leave_days = Input::get("allowed_number_of_leave_days");
 
         $rank -> save();
         Session::flash('message','Rank Added');
@@ -153,7 +152,6 @@ class RankController extends Controller {
 			{
         $rank -> rank_code = Input::get("rank_code");
         $rank -> rank_name = Input::get("rank_name");
-				$rank -> allowed_number_of_leave_days = Input::get("allowed_number_of_leave_days");
 
         $rank -> push();
         Session::flash('message','Rank Details Updated');

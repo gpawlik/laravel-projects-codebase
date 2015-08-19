@@ -100,17 +100,17 @@ function handleSearch(route,parentModel,model)
 							continue;
 						}
 
-						$("#table-header-tr").append("<th>"+property.replace("_", " ")+"</th>");
+						$("#table-header-tr").append("<th>"+property.split('_').join(' ')+"</th>");
 
-						for(i=0;i<data.length;i++)	
+						for(i=0;i<data.length;i++)
 						{
 							$(".view-table").append("<tr class='clickable-row' data-href='/"+parentModel+"/"+model+"/view/"+data[i]['id']+"' id = 'data-tr-"+i+"'></tr>");
 
 							$("#data-tr-"+i).append("<td>"+data[i][property]+"</td>");
-						}							
+						}
 					}
 
-					
+
 			}
 			else
 			{

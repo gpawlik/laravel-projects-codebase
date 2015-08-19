@@ -14,7 +14,7 @@ class AddRanksToEmployeesTable extends Migration
     {
         Schema::table('employees', function (Blueprint $table) {
           //foreign keys
-          $table->integer('rank_id')->unsigned();
+          $table->integer('rank_id')->unsigned()->nullable();
           $table->foreign('rank_id')->references('id')->on('ranks');
         });
     }

@@ -72,37 +72,37 @@
     <td>{!! Form::textarea("residential_address", null , ['placeholder' => 'Residential Address','class'=>'text-input']) !!}</td>
   </tr>
 
+  <tr>
+    <td>{!! Form::label("emergency_contact_name","Emergency Contact") !!}</td>
+    <td>{!! Form::text("emergency_contact_name", null , ['placeholder' => 'Emergency Contact','class'=>'text-input']) !!}</td>
+  </tr>
+
+  <tr>
+    <td>{!! Form::label("emergency_contact_number","Emergency Contact Number") !!}</td>
+    <td>{!! Form::text("emergency_contact_number", null , ['placeholder' => 'Emergency Contact Number','class'=>'text-input']) !!}</td>
+  </tr>
+
+  <tr>
+    <td>{!! Form::label("alergies","Alergies") !!}</td>
+    <td>{!! Form::text("alergies", null , ['placeholder' => 'Alergies','class'=>'text-input']) !!}</td>
+  </tr>
+
+  <tr>
+    <td>{!! Form::label("fathers_name","Father's Name") !!}</td>
+    <td>{!! Form::text("fathers_name", null , ['placeholder' => "Father's Name",'class'=>'text-input']) !!}</td>
+  </tr>
+
+  <tr>
+    <td>{!! Form::label("mothers_name","Mother's Name") !!}</td>
+    <td>{!! Form::text("mothers_name", null , ['placeholder' => "Mother's Name",'class'=>'text-input']) !!}</td>
+  </tr>
+
 </table>
 </div>
 
 <div class = "card half inline">
 
   <table class = "form-element full">
-
-    <tr>
-      <td>{!! Form::label("emergency_contact_name","Emergency Contact") !!}</td>
-      <td>{!! Form::text("emergency_contact_name", null , ['placeholder' => 'Emergency Contact','class'=>'text-input']) !!}</td>
-    </tr>
-
-    <tr>
-      <td>{!! Form::label("emergency_contact_number","Emergency Contact Number") !!}</td>
-      <td>{!! Form::text("emergency_contact_number", null , ['placeholder' => 'Emergency Contact Number','class'=>'text-input']) !!}</td>
-    </tr>
-
-    <tr>
-      <td>{!! Form::label("alergies","Alergies") !!}</td>
-      <td>{!! Form::text("alergies", null , ['placeholder' => 'Alergies','class'=>'text-input']) !!}</td>
-    </tr>
-
-    <tr>
-      <td>{!! Form::label("fathers_name","Father's Name") !!}</td>
-      <td>{!! Form::text("fathers_name", null , ['placeholder' => "Father's Name",'class'=>'text-input']) !!}</td>
-    </tr>
-
-    <tr>
-      <td>{!! Form::label("mothers_name","Mother's Name") !!}</td>
-      <td>{!! Form::text("mothers_name", null , ['placeholder' => "Mother's Name",'class'=>'text-input']) !!}</td>
-    </tr>
 
     @if(isset($banks))
     <tr>
@@ -138,6 +138,31 @@
     <tr>
       <td>{!! Form::label("gross_salary","Gross Salary") !!}</td>
       <td>{!! Form::text("gross_salary", null , ['placeholder' => "Gross Salary",'class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("income_tax","Income Tax(Amount)") !!}</td>
+      <td>{!! Form::text("income_tax", null , ['placeholder' => "Income Tax(Amount)",'class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("ssnit","SSNIT Contribution (Amount)") !!}</td>
+      <td>{!! Form::text("ssnit", null , ['placeholder' => "SSNIT Contribution (Amount)",'class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("employer_welfare_contribution","Welfare Contribution (Employer)") !!}</td>
+      <td>{!! Form::text("employer_welfare_contribution", null , ['placeholder' => "Welfare Contribution (Employer)",'class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("employee_welfare_contribution","Welfare Contribution (Employee)") !!}</td>
+      <td>{!! Form::text("employee_welfare_contribution", null , ['placeholder' => "Welfare Contribution (Employee)",'class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("allowances","Allowances (Total Amount)") !!}</td>
+      <td>{!! Form::text("allowances", null , ['placeholder' => "Allowances (Total Amount)",'class'=>'text-input']) !!}</td>
     </tr>
 
     @if(isset($jobs))
@@ -201,6 +226,11 @@
     <tr>
       <td>{!! Form::label("number_of_dependants","Number of Dependants") !!}</td>
       <td>{!! Form::text("number_of_dependants", null , ['placeholder' => "Number of Dependants",'class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("leave_entitlement_days","Leave Days Entitlement") !!}</td>
+      <td>{!! Form::text("leave_entitlement_days", null , ['placeholder' => "Leave Days Entitlement",'class'=>'text-input']) !!}</td>
     </tr>
 
     @if(isset($ranks))
