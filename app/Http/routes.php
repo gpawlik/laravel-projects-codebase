@@ -249,6 +249,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/disciplinaries/view/{id}','DisciplinaryController@view');
       Route::get('/disciplinaries/search','DisciplinaryController@search');
 
+      //loan routes
+      Route::get('/loans','LoanController@index');
+      Route::get('/loans/add','LoanController@add');
+      Route::post('/loans/create','LoanController@create');
+      Route::get('/loans/edit/{id}','LoanController@edit');
+      Route::post('/loans/update/{id}','LoanController@update');
+      Route::get('/loans/delete/{id}','LoanController@delete');
+      Route::get('/loans/view/{id}','LoanController@view');
+      Route::get('/loans/search','LoanController@search');
+
 });
 
 //inner application API routes

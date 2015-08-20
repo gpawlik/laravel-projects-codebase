@@ -89,6 +89,12 @@
 							</a>
 						@endif
 
+						@if(isset($departmentPermission))
+							<a href = "/hrm/departments" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'department') { echo 'active-link'; } } ?>">
+								<i class="fa fa-building"></i> &nbsp; Departments
+							</a>
+						@endif
+
 						@if(isset($disciplinaryPermission))
 							<a href = "/hrm/disciplinaries" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'discipline') { echo 'active-link'; } } ?>">
 								<i class="fa fa-exclamation-triangle"></i> &nbsp; Disciplinary Records
@@ -138,17 +144,17 @@
 							</a>
 						@endif
 
-						@if(isset($departmentPermission))
-							<a href = "/hrm/departments" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'department') { echo 'active-link'; } } ?>">
-								<i class="fa fa-building"></i> &nbsp; Departments
-							</a>
-						@endif
-
 						<!-- @if(isset($rankPermission))
 							<a href = "/hrm/ranks" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'rank') { echo 'active-link'; } } ?>">
 								<i class="fa fa-star"></i> &nbsp; Ranks
 							</a>
 						@endif -->
+
+						@if(isset($loanPermission))
+							<a href = "/hrm/loans" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'loan') { echo 'active-link'; } } ?>">
+								<i class="fa fa-usd"></i> &nbsp; Staff Loans
+							</a>
+						@endif
 
 						@if(isset($trainingPermission))
 							<a href = "/hrm/training" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'training') { echo 'active-link'; } } ?>">

@@ -190,7 +190,7 @@ class DisciplinaryController extends Controller {
 		{
       if(Input::get("action_taken") == "SUSPENSION" && !Input::get("suspension_number_of_days"))
       {
-        return Redirect::to('/hrm/disciplinaries/add')
+        return Redirect::to('/hrm/disciplinaries/edit/'.$id)
               ->withErrors("Number of days on Suspension Required")
               ->withInput();
       }

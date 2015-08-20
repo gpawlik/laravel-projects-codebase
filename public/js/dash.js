@@ -9,7 +9,7 @@ $(document).ready(function(){
 	handleToUserField();
 	handleEmployeeField();
 	handleCheckAll();
-	handleSuspensionSelect();
+	handleHideableSelect();
 });
 
 function setup()
@@ -220,9 +220,10 @@ function queryEmployeeData(data)
 	});
 }
 
-function handleSuspensionSelect()
+function handleHideableSelect()
 {
 
+	//discipline type
 	if($("#discipline-select").val() != "SUSPENSION")
 	{
 		$("#suspension-row").hide();
@@ -238,4 +239,24 @@ function handleSuspensionSelect()
 			$("#suspension-row").hide("medium");
 		}
 	});
+
+	//banks
+	if($("#loan-type-select").val() != "BANK LOAN")
+	{
+		$("#loan-type-row").hide();
+	}
+
+	$("#loan-type-select").on('change',function(){
+		if(this.value == "BANK LOAN")
+		{
+			$("#loan-type-row").show("medium");
+		}
+		else
+		{
+			$("#loan-type-row").hide("medium");
+		}
+	});
+
+
+
 }
