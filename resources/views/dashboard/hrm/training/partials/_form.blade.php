@@ -1,6 +1,21 @@
 <table class = "form-element full">
 
   <tr>
+    <td>{!! Form::label("employee","Employee*") !!}</td>
+    <td>
+      {!! Form::text('employee', $employee_name,
+
+        ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name'])
+
+      !!}
+      <div id = "employee-list">
+
+      </div>
+    </td>
+  </tr>
+
+
+  <tr>
     <td>{!! Form::label("training_start_date","Training_start_date*") !!}</td>
     <td>{!! Form::input("date", 'training_start_date', null , ['class'=>'text-input']) !!}</td>
   </tr>
@@ -27,17 +42,18 @@
     </tr>
 
     <tr>
-      <td>{!! Form::label("employee","Employee*") !!}</td>
-      <td>
-        {!! Form::text('employee', $employee_name,
+      <td>{!! Form::label("training_facilitator","Training Facilitator") !!}</td>
+      <td>{!! Form::text("training_facilitator", null , ['placeholder' => 'Training Facilitator','class'=>'text-input']) !!}</td>
+    </tr>
 
-          ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name'])
+    <tr>
+      <td>{!! Form::label("training_topic","Training Topic") !!}</td>
+      <td>{!! Form::text("training_topic", null , ['placeholder' => 'Training Topic','class'=>'text-input']) !!}</td>
+    </tr>
 
-        !!}
-        <div id = "employee-list">
-
-        </div>
-      </td>
+    <tr>
+      <td>{!! Form::label("training_location","Training Location") !!}</td>
+      <td>{!! Form::text("training_location", null , ['placeholder' => 'Training Location','class'=>'text-input']) !!}</td>
     </tr>
 
   <tr>

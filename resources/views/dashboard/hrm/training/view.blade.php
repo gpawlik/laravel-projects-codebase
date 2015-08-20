@@ -21,12 +21,24 @@
             'property' => 'training_total_cost'
           ),
           array(
+            'name'=>'Training Cost Components',
+            'property' => 'training_cost_components'
+          ),
+          array(
             'name'=>'Training Type',
             'property' => 'training_type'
           ),
           array(
-            'name'=>'Training Cost Components',
-            'property' => 'training_cost_components'
+            'name'=>'Training Facilitator',
+            'property' => 'training_facilitator'
+          ),
+          array(
+            'name'=>'Training Topic',
+            'property' => 'training_topic'
+          ),
+          array(
+            'name'=>'Training Location',
+            'property' => 'training_location'
           )
         ),
         'foreign' => array

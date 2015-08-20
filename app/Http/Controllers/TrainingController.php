@@ -122,8 +122,13 @@ class TrainingController extends Controller {
 					$training -> training_type = Input::get("training_type");
 					$training -> training_start_date = Input::get("training_start_date");
 					$training -> training_end_date = Input::get("training_end_date");
-					$training -> training_total_cost = Input::get("training_total_cost");
-					$training -> training_cost_components = Input::get("training_cost_components");
+					$training -> training_total_cost = (Input::get("training_total_cost")==""? null : Input::get("training_total_cost"));
+					$training -> training_cost_components = (Input::get("training_cost_components") == ""? null : Input::get("training_cost_components"));
+
+					$training -> training_facilitator = (Input::get("training_facilitator") == ""? null : Input::get("training_facilitator"));
+					$training -> training_topic = (Input::get("training_topic") == ""? null : Input::get("training_topic"));
+					$training -> training_location = (Input::get("training_location") == ""? null : Input::get("training_location"));
+
 					$training -> employee_id = $employeeId;
 
 					$training -> save();
@@ -250,9 +255,13 @@ class TrainingController extends Controller {
 					$training -> training_type = Input::get("training_type");
 					$training -> training_start_date = Input::get("training_start_date");
 					$training -> training_end_date = Input::get("training_end_date");
-					$training -> training_total_cost = Input::get("training_total_cost");
-					$training -> training_cost_components = Input::get("training_cost_components");
+					$training -> training_total_cost = (Input::get("training_total_cost")==""? null : Input::get("training_total_cost"));
+					$training -> training_cost_components = (Input::get("training_cost_components") == ""? null : Input::get("training_cost_components"));
 					$training -> employee_id = $employeeId;
+
+					$training -> training_facilitator = (Input::get("training_facilitator") == ""? null : Input::get("training_facilitator"));
+					$training -> training_topic = (Input::get("training_topic") == ""? null : Input::get("training_topic"));
+					$training -> training_location = (Input::get("training_location") == ""? null : Input::get("training_location"));
 
           $training -> push();
           Session::flash('message','training Updated');
