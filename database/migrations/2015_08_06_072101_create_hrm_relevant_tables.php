@@ -90,10 +90,7 @@ class CreateHrmRelevantTables extends Migration
         $table->string('qualifications');
         $table->date('date_of_hire');
 
-        $table->integer('gross_salary')->nullable();
-        $table->integer("income_tax")->nullable();
-        $table->integer("ssnit")->nullable();
-        $table->integer("employer_welfare_contribution")->nullable();
+        $table->integer('basic_salary')->nullable();
         $table->integer("employee_welfare_contribution")->nullable();
         $table->integer("allowances")->nullable();
 

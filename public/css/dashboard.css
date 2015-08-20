@@ -16,6 +16,10 @@ body{
   font-size: 14px;
 }
 
+hr{
+  border:1px solid #D1D1D1;
+}
+
 a{
   text-decoration: none;
   color:inherit;
@@ -592,6 +596,10 @@ table.permission-table tr:hover{
   font-weight: bold;
 }
 
+.align-left{
+  text-align: left;
+}
+
 .box-padding{
   padding:0px 10px;
   float:right;
@@ -608,3 +616,45 @@ table.permission-table tr:hover{
 .clear-floats{
   clear:both;
 }
+
+/******************************************** tax model styles ************************************************/
+
+#add-new-row-btn{
+  border:none;
+  background-color:#21a560;
+  padding:5px;
+  border-radius: 5px;
+  color:#FFF;
+}
+
+.remove-row{
+    cursor: pointer;
+}
+
+.remove-row i{
+  color:#AA0000;
+}
+
+#existing-tax-table{
+  background-color: #F1F1F1;
+  margin-bottom: 50px;
+  width:100%;
+}
+
+#existing-tax-table tr{
+
+}
+
+#existing-tax-table td{
+  padding:10px;
+  border-bottom:1px solid #C1C1C1;
+}
+
+#existing-tax-table th{
+    padding:10px;
+    background-color: #21a560;
+    color:#FFF;
+}
+
+
+/******************************************** **************** ************************************************/

@@ -100,20 +100,8 @@
             'property' => 'date_of_hire'
           ),
           array(
-            'name'=>'Gross Salary',
-            'property' => 'gross_salary'
-          ),
-          array(
-            'name'=>'Income Tax',
-            'property' => 'income_tax'
-          ),
-          array(
-            'name'=>'SSNIT Contribution',
-            'property' => 'ssnit'
-          ),
-          array(
-            'name'=>'Welfare Contribution (Employer)',
-            'property' => 'employer_welfare_contribution'
+            'name'=>'Basic Salary',
+            'property' => 'basic_salary'
           ),
           array(
             'name'=>'Welfare Contribution (Employee)',

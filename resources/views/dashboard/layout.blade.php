@@ -156,6 +156,12 @@
 							</a>
 						@endif
 
+						@if(isset($taxPermission))
+							<a href = "/hrm/tax_model" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'tax_model') { echo 'active-link'; } } ?>">
+								<i class="fa fa-puzzle-piece"></i> &nbsp; Tax Model
+							</a>
+						@endif
+
 						@if(isset($trainingPermission))
 							<a href = "/hrm/training" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'training') { echo 'active-link'; } } ?>">
 								<i class="fa fa-puzzle-piece"></i> &nbsp; Training

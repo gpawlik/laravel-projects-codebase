@@ -136,23 +136,8 @@
     </tr>
 
     <tr>
-      <td>{!! Form::label("gross_salary","Gross Salary") !!}</td>
-      <td>{!! Form::text("gross_salary", null , ['placeholder' => "Gross Salary",'class'=>'text-input']) !!}</td>
-    </tr>
-
-    <tr>
-      <td>{!! Form::label("income_tax","Income Tax(Amount)") !!}</td>
-      <td>{!! Form::text("income_tax", null , ['placeholder' => "Income Tax(Amount)",'class'=>'text-input']) !!}</td>
-    </tr>
-
-    <tr>
-      <td>{!! Form::label("ssnit","SSNIT Contribution (Amount)") !!}</td>
-      <td>{!! Form::text("ssnit", null , ['placeholder' => "SSNIT Contribution (Amount)",'class'=>'text-input']) !!}</td>
-    </tr>
-
-    <tr>
-      <td>{!! Form::label("employer_welfare_contribution","Welfare Contribution (Employer)") !!}</td>
-      <td>{!! Form::text("employer_welfare_contribution", null , ['placeholder' => "Welfare Contribution (Employer)",'class'=>'text-input']) !!}</td>
+      <td>{!! Form::label("basic_salary","Basic Salary") !!}</td>
+      <td>{!! Form::text("basic_salary", null , ['placeholder' => "Basic Salary",'class'=>'text-input']) !!}</td>
     </tr>
 
     <tr>

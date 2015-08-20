@@ -226,10 +226,7 @@ class EmployeeController extends Controller {
 				$employee -> bank_account_number = Input::get("bank_account_number");
 				$employee -> qualifications = Input::get("qualifications");
 				$employee -> date_of_hire = Input::get("date_of_hire");
-				$employee -> gross_salary = (Input::get("gross_salary") == ""? 0 : Input::get("gross_salary"));
-				$employee -> income_tax = (Input::get("income_tax") == ""? 0 : Input::get("income_tax"));
-				$employee -> ssnit = (Input::get("ssnit") == ""? 0 : Input::get("ssnit"));
-				$employee -> employer_welfare_contribution = (Input::get("employer_welfare_contribution") == ""? 0: Input::get("employer_welfare_contribution"));
+				$employee -> basic_salary = (Input::get("basic_salary") == ""? 0 : Input::get("basic_salary"));
 				$employee -> employee_welfare_contribution = (Input::get("employee_welfare_contribution") == ""? 0: Input::get("employee_welfare_contribution"));
 				$employee -> allowances = (Input::get("allowances") == ""? 0 : Input::get("allowances"));
 				$employee -> branch_id = Input::get("branch");
@@ -261,17 +258,17 @@ class EmployeeController extends Controller {
 				//$employee -> rank_id = Input::get("rank");
 				$employee -> employment_status = "ACTIVE";
 
-				//calculate net salary
-				$grossSalary = (Input::get("gross_salary") == ""? 0 : Input::get("gross_salary"));
-				$incomeTax = (Input::get("income_tax") == ""? 0 : Input::get("income_tax"));
-				$ssnit = (Input::get("ssnit") == ""? 0 : Input::get("ssnit"));
-				$employerWelfare = (Input::get("employer_welfare_contribution") == ""? 0: Input::get("employer_welfare_contribution"));
-				$employeeWelfare = (Input::get("employee_welfare_contribution") == ""? 0: Input::get("employee_welfare_contribution"));
-				$allowances = (Input::get("allowances") == ""? 0 : Input::get("allowances"));
-
-				$netSalary = $grossSalary - ($incomeTax + $ssnit + $employerWelfare + $employeeWelfare) + $allowances;
-
-				$employee -> net_salary = $netSalary;
+				// //calculate net salary
+				// $grossSalary = (Input::get("gross_salary") == ""? 0 : Input::get("gross_salary"));
+				// $incomeTax = (Input::get("income_tax") == ""? 0 : Input::get("income_tax"));
+				// $ssnit = (Input::get("ssnit") == ""? 0 : Input::get("ssnit"));
+				// $employerWelfare = (Input::get("employer_welfare_contribution") == ""? 0: Input::get("employer_welfare_contribution"));
+				// $employeeWelfare = (Input::get("employee_welfare_contribution") == ""? 0: Input::get("employee_welfare_contribution"));
+				// $allowances = (Input::get("allowances") == ""? 0 : Input::get("allowances"));
+				//
+				// $netSalary = $grossSalary - ($incomeTax + $ssnit + $employerWelfare + $employeeWelfare) + $allowances;
+				//
+				// $employee -> net_salary = $netSalary;
 
 				$employee -> save();
 				Session::flash('message','Employee Added');
@@ -484,10 +481,7 @@ class EmployeeController extends Controller {
 				$employee -> bank_account_number = Input::get("bank_account_number");
 				$employee -> qualifications = Input::get("qualifications");
 				$employee -> date_of_hire = Input::get("date_of_hire");
-				$employee -> gross_salary = (Input::get("gross_salary") == ""? 0 : Input::get("gross_salary"));
-				$employee -> income_tax = (Input::get("income_tax") == ""? 0 : Input::get("income_tax"));
-				$employee -> ssnit = (Input::get("ssnit") == ""? 0 : Input::get("ssnit"));
-				$employee -> employer_welfare_contribution = (Input::get("employer_welfare_contribution") == ""? 0: Input::get("employer_welfare_contribution"));
+				$employee -> basic_salary = (Input::get("basic_salary") == ""? 0 : Input::get("basic_salary"));
 				$employee -> employee_welfare_contribution = (Input::get("employee_welfare_contribution") == ""? 0: Input::get("employee_welfare_contribution"));
 				$employee -> allowances = (Input::get("allowances") == ""? 0 : Input::get("allowances"));
 				$employee -> branch_id = Input::get("branch");
@@ -518,17 +512,17 @@ class EmployeeController extends Controller {
 				$employee -> bank_id = Input::get("bank");
 				//$employee -> rank_id = Input::get("rank");
 
-				//calculate net salary
-				$grossSalary = (Input::get("gross_salary") == ""? 0 : Input::get("gross_salary"));
-				$incomeTax = (Input::get("income_tax") == ""? 0 : Input::get("income_tax"));
-				$ssnit = (Input::get("ssnit") == ""? 0 : Input::get("ssnit"));
-				$employerWelfare = (Input::get("employer_welfare_contribution") == ""? 0: Input::get("employer_welfare_contribution"));
-				$employeeWelfare = (Input::get("employee_welfare_contribution") == ""? 0: Input::get("employee_welfare_contribution"));
-				$allowances = (Input::get("allowances") == ""? 0 : Input::get("allowances"));
-
-				$netSalary = $grossSalary - ($incomeTax + $ssnit + $employerWelfare + $employeeWelfare) + $allowances;
-
-				$employee -> net_salary = $netSalary;
+				// //calculate net salary
+				// $grossSalary = (Input::get("gross_salary") == ""? 0 : Input::get("gross_salary"));
+				// $incomeTax = (Input::get("income_tax") == ""? 0 : Input::get("income_tax"));
+				// $ssnit = (Input::get("ssnit") == ""? 0 : Input::get("ssnit"));
+				// $employerWelfare = (Input::get("employer_welfare_contribution") == ""? 0: Input::get("employer_welfare_contribution"));
+				// $employeeWelfare = (Input::get("employee_welfare_contribution") == ""? 0: Input::get("employee_welfare_contribution"));
+				// $allowances = (Input::get("allowances") == ""? 0 : Input::get("allowances"));
+				//
+				// $netSalary = $grossSalary - ($incomeTax + $ssnit + $employerWelfare + $employeeWelfare) + $allowances;
+				//
+				// $employee -> net_salary = $netSalary;
 
 				$employee -> push();
 				Session::flash('message', "Employee Details Updated");
@@ -696,7 +690,7 @@ class EmployeeController extends Controller {
 			'identification_number' => 'required',
 			'qualifications' => 'required',
 			'date_of_hire' => 'required',
-			'gross_salary' => 'required',
+			'basic_salary' => 'required',
 			'job' => 'required'
 			//'rank' => 'required',
 		);

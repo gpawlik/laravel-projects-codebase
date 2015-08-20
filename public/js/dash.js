@@ -10,6 +10,7 @@ $(document).ready(function(){
 	handleEmployeeField();
 	handleCheckAll();
 	handleHideableSelect();
+	handleTaxModel();
 });
 
 function setup()
@@ -256,7 +257,38 @@ function handleHideableSelect()
 			$("#loan-type-row").hide("medium");
 		}
 	});
+}
 
+function handleTaxModel()
+{
+	var identityCount = 2;
+
+	$("#add-new-row-btn").click(function(){
+
+		$("#tax-model-table").append(
+			"<tr class = 'tax-model-row'>" +
+	      "<td><input type = 'text' placeholder='Step Name' class = 'text-input' name = 'step_"+identityCount+"'></td>" +
+	      "<td><input type = 'text' placeholder='Amount Limit' class = 'text-input' name = 'limit_"+identityCount+"'></td>" +
+	      "<td><input type = 'text' placeholder='Rate %' class = 'text-input' name = 'rate_"+identityCount+"'></td>" +
+	      "<td><div class = 'remove-row'><i class = 'fa fa-close' ></i></div></td>" +
+	    "</tr>"
+		)
+
+		identityCount++;
+
+		//handle close button click
+		$(".remove-row").click(function(){
+
+			$(this).closest("tr").remove();
+		});
+
+	});
+
+	//handle close button click
+	$(".remove-row").click(function(){
+
+		$(this).closest("tr").remove();
+	});
 
 
 }

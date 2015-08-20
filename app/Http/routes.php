@@ -261,6 +261,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/loans/revert_payment/{id}','LoanController@revertPayment');
       Route::get('/loans/search','LoanController@search');
 
+      //tax route
+      Route::get('/tax_model','TaxController@index');
+      Route::post('/tax_model/save','TaxController@saveTaxModel');
+
 });
 
 //inner application API routes
