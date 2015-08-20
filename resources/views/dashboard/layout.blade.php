@@ -132,11 +132,11 @@
 							</a>
 						@endif
 
-						@if(isset($rankPermission))
+						<!-- @if(isset($rankPermission))
 							<a href = "/hrm/ranks" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'rank') { echo 'active-link'; } } ?>">
 								<i class="fa fa-star"></i> &nbsp; Ranks
 							</a>
-						@endif
+						@endif -->
 
 						@if(isset($trainingPermission))
 							<a href = "/hrm/training" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'training') { echo 'active-link'; } } ?>">

@@ -162,12 +162,6 @@
           'property' => 'identification_name'
           ),
           array(
-          'name'=>'Rank',
-          'model'=> 'App\Rank',
-          'key'=> 'rank_id',
-          'property' => 'rank_name'
-          ),
-          array(
           'name'=>'Branch',
           'model'=> 'App\Branch',
           'key'=> 'branch_id',

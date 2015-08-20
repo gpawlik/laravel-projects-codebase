@@ -11,11 +11,11 @@ class Rank extends Model {
 	public static function getPermissions()
 	{
 		return array(
-      "hrm_rank_can_add",
-			"hrm_rank_can_edit",
-      "hrm_rank_can_view",
-      "hrm_rank_can_delete",
-      "hrm_rank_can_search"
+      // "hrm_rank_can_add",
+			// "hrm_rank_can_edit",
+      // "hrm_rank_can_view",
+      // "hrm_rank_can_delete",
+      // "hrm_rank_can_search"
 		);
 	}
 

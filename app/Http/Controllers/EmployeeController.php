@@ -2,7 +2,6 @@
 
 use App\Role;
 use App\Employee;
-use App\Rank;
 use App\Bank;
 use App\Identification;
 use App\Job;
@@ -101,15 +100,15 @@ class EmployeeController extends Controller {
 			$data['ids'] = $ids_array;
 
 			//get ranks
-			$ranks = \DB::table("ranks")->orderBy("rank_name","ASC")->get();
-
-			$ranks_array = array();
-
-      foreach ($ranks as $rank) {
-        $ranks_array[$rank->id] = $rank->rank_name;
-      }
-
-			$data['ranks'] = $ranks_array;
+			// $ranks = \DB::table("ranks")->orderBy("rank_name","ASC")->get();
+			//
+			// $ranks_array = array();
+			//
+      // foreach ($ranks as $rank) {
+      //   $ranks_array[$rank->id] = $rank->rank_name;
+      // }
+			//
+			// $data['ranks'] = $ranks_array;
 
 			//get branches
 			$branches = \DB::table("branches")->orderBy("branch_name","ASC")->get();
@@ -259,7 +258,7 @@ class EmployeeController extends Controller {
 
 				$employee -> job_id = Input::get("job");
 				$employee -> bank_id = Input::get("bank");
-				$employee -> rank_id = Input::get("rank");
+				//$employee -> rank_id = Input::get("rank");
 				$employee -> employment_status = "ACTIVE";
 
 				//calculate net salary
@@ -343,16 +342,16 @@ class EmployeeController extends Controller {
 			$data['employees_id'] = Identification::where('id','=',$employee -> identification_id)->first();
 
 			//get ranks
-			$ranks = \DB::table("ranks")->orderBy("rank_name","ASC")->get();
-
-			$ranks_array = array();
-
-      foreach ($ranks as $rank) {
-        $ranks_array[$rank->id] = $rank->rank_name;
-      }
-
-			$data['ranks'] = $ranks_array;
-			$data['employees_rank'] = Rank::where('id','=',$employee -> rank_id)->first();
+			// $ranks = \DB::table("ranks")->orderBy("rank_name","ASC")->get();
+			//
+			// $ranks_array = array();
+			//
+      // foreach ($ranks as $rank) {
+      //   $ranks_array[$rank->id] = $rank->rank_name;
+      // }
+			//
+			// $data['ranks'] = $ranks_array;
+			//$data['employees_rank'] = Rank::where('id','=',$employee -> rank_id)->first();
 
 			//get branches
 			$branches = \DB::table("branches")->orderBy("branch_name","ASC")->get();
@@ -517,7 +516,7 @@ class EmployeeController extends Controller {
 
 				$employee -> job_id = Input::get("job");
 				$employee -> bank_id = Input::get("bank");
-				$employee -> rank_id = Input::get("rank");
+				//$employee -> rank_id = Input::get("rank");
 
 				//calculate net salary
 				$grossSalary = (Input::get("gross_salary") == ""? 0 : Input::get("gross_salary"));
@@ -698,8 +697,8 @@ class EmployeeController extends Controller {
 			'qualifications' => 'required',
 			'date_of_hire' => 'required',
 			'gross_salary' => 'required',
-			'job' => 'required',
-			'rank' => 'required',
+			'job' => 'required'
+			//'rank' => 'required',
 		);
 
 	}

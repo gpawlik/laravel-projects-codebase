@@ -233,7 +233,7 @@
       <td>{!! Form::text("leave_entitlement_days", null , ['placeholder' => "Leave Days Entitlement",'class'=>'text-input']) !!}</td>
     </tr>
 
-    @if(isset($ranks))
+    {{-- @if(isset($ranks))
     <tr>
       <td>{!! Form::label("rank","Rank") !!}</td>
 
@@ -247,7 +247,7 @@
       </td>
       @endif
     </tr>
-    @endif
+    @endif --}}
 
     @if(isset($context))
       @if($context == 'add')
