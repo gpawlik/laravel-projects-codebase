@@ -233,6 +233,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/accidents/update/{id}','AccidentController@update');
       Route::get('/accidents/delete/{id}','AccidentController@delete');
       Route::get('/accidents/view/{id}','AccidentController@view');
+      Route::get('/accidents/search','AccidentController@search');
 
 });
 
@@ -249,4 +250,5 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
     Route::get('/leave_search/{id}','LeaveController@apiSearch');
     Route::get('/orientation_search/{id}','OrientationController@apiSearch');
     Route::get('/pay_grade_search/{id}','PayGradeController@apiSearch');
+    Route::get('/accident_search/{id}','AccidentController@apiSearch');
 });

@@ -16,11 +16,11 @@ class CreateAccidentsTable extends Migration
             $table->increments('id');
 
             $table->date("accident_date");
-            $table->string("accident_time");
+            $table->string("accident_time")->nullable();
             $table->date("accident_report_date");
-            $table->string("accident_report_time");
-            $table->text("accident_description");
-            $table->text("accident_location");
+            $table->string("accident_report_time")->nullable();
+            $table->text("accident_description")->nullable();
+            $table->text("accident_location")->nullable();
 
             $table->string("witness_1_name")->nullable();
             $table->string("witness_2_name")->nullable();
@@ -29,8 +29,7 @@ class CreateAccidentsTable extends Migration
 
             $table->text("management_decision")->nullable();
 
-            $table->integer('employee_supervisor_id')->unsigned();
-    			  $table->foreign('employee_supervisor_id')->references('id')->on('employees');
+            $table->string('supervisor')->nullable();
 
             $table->integer('employee_id')->unsigned();
     			  $table->foreign('employee_id')->references('id')->on('employees');

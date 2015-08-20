@@ -20,17 +20,17 @@
   </tr>
 
   <tr>
-    <td>{!! Form::label("accident_time","Time of Accident*") !!}</td>
+    <td>{!! Form::label("accident_time","Time of Accident") !!}</td>
     <td>{!! Form::text("accident_time", null , ['placeholder' => 'Time of Accident','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("accident_report_date","Accident Report Date") !!}</td>
+    <td>{!! Form::label("accident_report_date","Accident Report Date*") !!}</td>
     <td>{!! Form::input("date", 'accident_report_date', null , ['class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("accident_report_time","Accident Report Time*") !!}</td>
+    <td>{!! Form::label("accident_report_time","Accident Report Time") !!}</td>
     <td>{!! Form::text("accident_report_time", null , ['placeholder' => 'Accident Report Time','class'=>'text-input']) !!}</td>
   </tr>
 
@@ -66,15 +66,13 @@
   <tr>
     <td>{!! Form::label("supervisor","Supervisor / HOD / Manager*") !!}</td>
     <td>
-      {!! Form::text('supervisor', $supervisor_name,
-
-        ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Supervisor First / Last Name'])
-
-      !!}
-      <div id = "employee-list">
-
-      </div>
+      {!! Form::text('supervisor', null, ['class'=>'text-input','placeholder'=>'Supervisor\'s Name']) !!}
     </td>
+  </tr>
+
+  <tr>
+    <td>{!! Form::label("management_decision","Management Decision") !!}</td>
+    <td>{!! Form::textarea("management_decision", null , ['placeholder' => 'Management Decision','class'=>'text-input']) !!}</td>
   </tr>
 
 
