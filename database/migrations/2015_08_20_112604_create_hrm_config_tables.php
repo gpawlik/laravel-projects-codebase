@@ -15,7 +15,7 @@ class CreateHrmConfigTables extends Migration
         Schema::create('hrm_config', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer("ssnit_percentage");
+            $table->double("ssnit_percentage");
             $table->integer("employer_welfare_contribution");
             $table->integer("employee_leave_entitlement");
 

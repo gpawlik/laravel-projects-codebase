@@ -24,10 +24,12 @@
 
       @if(isset($foreign))
         @foreach($foreign as $f)
+        @if(isset($f['model']::find($data->$f['key'])->$f['property']))
           <tr>
             <th> {{ $f['name'] }} </th><td> {{ $f['model']::find($data->$f['key'])->$f['property'] }}</td>
           </tr>
-        @endforeach
+        @endif
+      @endforeach
 
       @endif
 

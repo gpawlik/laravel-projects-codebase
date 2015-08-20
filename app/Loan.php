@@ -17,7 +17,9 @@ class Loan extends Model
         "hrm_loan_can_edit",
         "hrm_loan_can_view",
         "hrm_loan_can_delete",
-        "hrm_loan_can_search"
+        "hrm_loan_can_search",
+        "hrm_loan_can_complete",
+        "hrm_loan_can_revert"
       );
     }
 }

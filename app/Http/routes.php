@@ -257,6 +257,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::post('/loans/update/{id}','LoanController@update');
       Route::get('/loans/delete/{id}','LoanController@delete');
       Route::get('/loans/view/{id}','LoanController@view');
+      Route::get('/loans/payment_finished/{id}','LoanController@paymentFinished');
+      Route::get('/loans/revert_payment/{id}','LoanController@revertPayment');
       Route::get('/loans/search','LoanController@search');
 
 });

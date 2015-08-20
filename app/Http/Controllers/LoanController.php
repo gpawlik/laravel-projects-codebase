@@ -3,6 +3,7 @@
 use App\User;
 use App\Employee;
 use App\Loan;
+use App\Bank;
 use Auth;
 use Validator;
 use Input;
@@ -47,7 +48,6 @@ class LoanController extends Controller {
     {
         return "You are not authorized";die();
     }
-
   }
 
   public function add()
@@ -172,30 +172,43 @@ class LoanController extends Controller {
 
   public function edit($id)
   {
-    if(self::checkUserPermissions("hrm_loans_can_edit"))
+    if(self::checkUserPermissions("hrm_loan_can_edit"))
 		{
-      		$orientation = Orientation::find($id);
+  		$loan = Loan::find($id);
 
-    			$data['title'] = "Edit Orientation";
-    			$data['activeLink'] = "orientation";
-    			$data['subLinks'] = array(
-    				array
-    				(
-    					"title" => "Orientation List",
-    					"route" => "/hrm/orientations",
-    					"icon" => "<i class='fa fa-th-list'></i>",
-    					"permission" => "hrm_orientation_can_view"
-    				)
-    			);
-    			$data['orientation'] = $orientation;
+			$data['title'] = "Edit Loan";
+			$data['activeLink'] = "loan";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Loan List",
+					"route" => "/hrm/loans",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_loan_can_view"
+				)
+			);
+			$data['loan'] = $loan;
 
-          $data['orientation_outcome'] = $orientation -> orientation_outcome;
+      $data['loan_type'] = $loan -> loan_type;
 
-    			$employee = \DB::table("employees")->where("id",$orientation->employee_id)->get();
+			$employee = \DB::table("employees")->where("id",$loan->employee_id)->get();
 
-    			$data['employee_name'] = $employee[0]->first_name . " " . $employee[0]->last_name . " " . "(".$employee[0]->email.")";
+			$data['employee_name'] = $employee[0]->first_name . " " . $employee[0]->last_name . " " . "(".$employee[0]->email.")";
 
-    			return view('dashboard.hrm.orientations.edit',$data);
+			//get jobs
+			$banks = \DB::table("banks")->orderBy("bank_name","ASC")->get();
+
+			$banks_array = array();
+
+			foreach ($banks as $bank) {
+        $banks_array[$bank->id] = $bank->bank_name;
+      }
+
+			$data['banks'] = $banks_array;
+
+			$data['loans_bank'] = Bank::where('id','=',$loan -> bank_id)->first();
+
+			return view('dashboard.hrm.loans.edit',$data);
     }
     else
     {
@@ -205,18 +218,183 @@ class LoanController extends Controller {
 
   public function update($id)
   {
+		if(self::checkUserPermissions("hrm_loan_can_edit"))
+		{
+			$rules = self::getRules();
 
+			$validator = Validator::make(Input::all(), $rules);
+
+			if ($validator->fails())
+			{
+				return Redirect::to('/hrm/loans/edit/'.$id)
+							->withErrors($validator)
+							->withInput();
+			}
+			else
+			{
+				$employee = Input::get("employee");
+
+				$employeeFirstName = array_pad(explode(" ", $employee,3),3,null)[0];
+				$employeeLastName = array_pad(explode(" ", $employee,3),3,null)[1];
+				$employeeEmail = str_replace(")","",str_replace("(", "", array_pad(explode(" ", $employee,3),3,null)[2]));
+
+				if($employeeEmail != null)
+				{
+					$employeeDetails = \DB::table("employees")->where("email",$employeeEmail)->get()[0];
+
+					if($employeeDetails -> employment_status == "TERMINATED")
+					{
+						return Redirect::to('/hrm/loans/edit/'.$id)
+									->withErrors("Employee not active")
+									->withInput();
+					}
+
+					$employeeId = $employeeDetails->id;
+
+          $loan = Loan::find($id);
+
+          if(Input::get("loan_type") == "BANK LOAN" && !Input::get("bank"))
+          {
+            return Redirect::to('/hrm/loans/edit/'.$id)
+                  ->withErrors("Bank Required")
+                  ->withInput();
+          }
+
+          $loan -> loan_type = Input::get("loan_type");
+          $loan -> payment_frequency = Input::get("payment_frequency");
+          $loan -> amount = Input::get("amount");
+          $loan -> start_date = Input::get("start_date");
+          $loan -> end_date = Input::get("end_date");
+          $loan -> payment_status = "PAYING";
+
+          if(Input::get("loan_type") == "BANK LOAN")
+          {
+            $loan -> bank_id = (Input::get("bank") == "" ? null : Input::get("bank"));
+          }
+          else
+          {
+            $loan -> bank_id = null;
+          }
+
+          $loan -> employee_id = $employeeId;
+
+          $loan -> push();
+          Session::flash('message','Loan Details Updated');
+          return Redirect::to('/hrm/loans');
+				}
+				else
+				{
+					return Redirect::to('/hrm/loans/edit/'.$id)
+								->withErrors("Employee not found")
+								->withInput();
+				}
+			}
+		}
+		else
+		{
+				return "You are not authorized";die();
+		}
   }
 
   public function view($id)
   {
+		if(self::checkUserPermissions("hrm_loan_can_view"))
+		{
+			$loan = Loan::find($id);
 
+			$data['title'] = "View Staff Loan Details";
+			$data['activeLink'] = "loan";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Employee Loan List",
+					"route" => "/hrm/loans",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_loan_can_view"
+				),
+				array
+        (
+          "title" => "Add Loan",
+          "route" => "/hrm/loans/add",
+          "icon" => "<i class='fa fa-plus'></i>",
+          "permission" => "hrm_loan_can_add"
+        ),
+				array
+				(
+					"title" => "Edit Loan details",
+					"route" => "/hrm/loans/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "hrm_loan_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Loan",
+					"route" => "/hrm/loan/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "hrm_loan_can_delete"
+				),
+				array(
+					"title" => "Mark as Paid",
+					"route" => "/hrm/loans/payment_finished/".$id,
+					"icon" => "<i class='fa fa-check-circle'></i>",
+					"permission" => "hrm_loan_can_complete"
+				),
+				array(
+					"title" => "Revert Payment",
+					"route" => "/hrm/loans/revert_payment/".$id,
+					"icon" => "<i class='fa fa-undo'></i>",
+					"permission" => "hrm_loan_can_revert"
+				)
+			);
+
+			$data['loan'] = $loan;
+
+			return view('dashboard.hrm.loans.view',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
   }
 
   public function delete($id)
   {
+		if(self::checkUserPermissions("hrm_loan_can_delete"))
+    {
+      $loan = Loan::find($id);
 
+      $loan -> delete();
+
+      Session::flash('message', 'Loan deleted');
+      return Redirect::to("/hrm/loans");
+    }
+    else
+    {
+      return "You are not authorized";die();
+    }
   }
+
+	public function paymentFinished($id)
+	{
+		$loan = Loan::find($id);
+
+		$loan -> payment_status = "PAID";
+
+		$loan -> push();
+		Session::flash('message','Loan Payment Done');
+		return Redirect::to('/hrm/loans');
+	}
+
+	public function revertPayment($id)
+	{
+		$loan = Loan::find($id);
+
+		$loan -> payment_status = "PAYING";
+
+		$loan -> push();
+		Session::flash('message','Loan Payment Reverted');
+		return Redirect::to('/hrm/loans');
+	}
 
 
   public function getRules()
