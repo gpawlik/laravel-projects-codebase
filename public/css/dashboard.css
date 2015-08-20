@@ -310,6 +310,16 @@ div#session-box{
 	line-height: 25px;
 }
 
+div#warning-box{
+	width:100%;
+	background: #ef9a9a;
+	height:25px;
+	text-align: center;
+	color:#FFF;
+  font-weight:bold;
+	line-height: 25px;
+}
+
 #small-image{
   width:50px;
   margin-top:10px;

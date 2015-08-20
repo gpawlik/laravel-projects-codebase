@@ -244,6 +244,22 @@
 				</div>
 			</div>
     </header>
+		<?php
+			//warning message to enforce configurations are set
+			$configValuesCount = \DB::table("hrm_config")->count();
+
+			if($configValuesCount == 0)
+			{
+				$warningMessage = "Please set values in the configuration for the HRM, failure to do so will cause unexpected behaviour";
+			}
+		?>
+
+		@if(isset($warningMessage))
+      <div id = "warning-box">
+        {{ $warningMessage }}
+      </div>
+    @endif
+
 		@if(Session::has('message'))
       <div id = "session-box">
         {{ Session::get('message') }}
