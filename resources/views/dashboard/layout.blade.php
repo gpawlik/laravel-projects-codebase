@@ -89,6 +89,12 @@
 							</a>
 						@endif
 
+						@if(isset($disciplinaryPermission))
+							<a href = "/hrm/disciplinaries" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'discipline') { echo 'active-link'; } } ?>">
+								<i class="fa fa-exclamation-triangle"></i> &nbsp; Disciplinary Records
+							</a>
+						@endif
+
 						@if(isset($employeePermission))
 							<a href = "/hrm/employees" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'employee') { echo 'active-link'; } } ?>">
 								<i class="fa fa-users"></i> &nbsp; Employees

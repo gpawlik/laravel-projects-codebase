@@ -239,6 +239,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/configurations','ConfigController@index');
       Route::post('/configurations/save','ConfigController@save');
 
+      //accident routes
+      Route::get('/disciplinaries','DisciplinaryController@index');
+      Route::get('/disciplinaries/add','DisciplinaryController@add');
+      Route::post('/disciplinaries/create','DisciplinaryController@create');
+      Route::get('/disciplinaries/edit/{id}','DisciplinaryController@edit');
+      Route::post('/disciplinaries/update/{id}','DisciplinaryController@update');
+      Route::get('/disciplinaries/delete/{id}','DisciplinaryController@delete');
+      Route::get('/disciplinaries/view/{id}','DisciplinaryController@view');
+      Route::get('/disciplinaries/search','DisciplinaryController@search');
+
 });
 
 //inner application API routes

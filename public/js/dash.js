@@ -9,6 +9,7 @@ $(document).ready(function(){
 	handleToUserField();
 	handleEmployeeField();
 	handleCheckAll();
+	handleSuspensionSelect();
 });
 
 function setup()
@@ -215,6 +216,26 @@ function queryEmployeeData(data)
 		},
 		error: function(data){
 			$("#employee-list").hide("fast");
+		}
+	});
+}
+
+function handleSuspensionSelect()
+{
+
+	if($("#discipline-select").val() != "SUSPENSION")
+	{
+		$("#suspension-row").hide();
+	}
+
+	$("#discipline-select").on('change',function(){
+		if(this.value == "SUSPENSION")
+		{
+			$("#suspension-row").show("medium");
+		}
+		else
+		{
+			$("#suspension-row").hide("medium");
 		}
 	});
 }
