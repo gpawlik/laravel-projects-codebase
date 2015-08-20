@@ -38,14 +38,18 @@
 				<b>Job Positions Vacant</b>
 
 				<div id = "pending-reminders">
-					@foreach($vacant_jobs as $vacant_job)
+					@if(count($vacant_jobs) > 0)
+						@foreach($vacant_jobs as $vacant_job)
 
-						<p>
-							{{ $vacant_job -> job_title }} <span class = "red-note" >( {{ App\Department::find($vacant_job->department_id)->department_name }} )</span><br/>
-							<span class = "red-note" >Employees Needed : {{ ($vacant_job -> job_capacity - \DB::table("employees")->where("employment_status","ACTIVE")->where("job_id",$vacant_job->id)->count()) }}</span>
-						</p>
+							<p>
+								{{ $vacant_job -> job_title }} <span class = "red-note" >( {{ App\Department::find($vacant_job->department_id)->department_name }} )</span><br/>
+								<span class = "red-note" >Employees Needed : {{ ($vacant_job -> job_capacity - \DB::table("employees")->where("employment_status","ACTIVE")->where("job_id",$vacant_job->id)->count()) }}</span>
+							</p>
 
-					@endforeach
+						@endforeach
+					@else
+						<div>No Job Vacancies</div>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -59,7 +63,7 @@
 
 				<p>Total Number of Applications : {{ $applicationCount }}</p>
 
-				<p><b>Scheduled Interviews</b></p>
+				<b>Scheduled Interviews</b>
 
 					@if(isset($interviewsCount))
 						@foreach($applications as $application)

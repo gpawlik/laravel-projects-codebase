@@ -235,6 +235,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/accidents/view/{id}','AccidentController@view');
       Route::get('/accidents/search','AccidentController@search');
 
+      //config  routes
+      Route::get('/configurations','ConfigController@index');
+      Route::post('/configurations/save','ConfigController@save');
+
 });
 
 //inner application API routes

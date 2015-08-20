@@ -144,7 +144,7 @@ class LeaveController extends Controller {
 					$totalEmployeeLeaveDays+=$numLeaveDays;
 
 					//get user's allowed leave days for the year
-					$employeesAllowedLeaveDays = \DB::table("employees")->where("id",$employeeDetails->id)->get()[0]->leave_entitlement_days;
+					$employeesAllowedLeaveDays = \DB::table("hrm_config")->get()[0]->employee_leave_entitlement;
 
 					if($totalEmployeeLeaveDays > $employeesAllowedLeaveDays)
 					{
@@ -162,6 +162,16 @@ class LeaveController extends Controller {
 				}
 				else
 				{
+					$LeaveDaysSelected = self::getNumLeaveDays(Input::get("leave_start_date"), Input::get("leave_end_date"), Input::get("saturday_check"), Input::get("saturday_check"));
+					$employeesAllowedLeaveDays = \DB::table("hrm_config")->get()[0]->employee_leave_entitlement;
+
+					if($LeaveDaysSelected > $employeesAllowedLeaveDays)
+					{
+						return Redirect::to('/hrm/leaves/add')
+									->withErrors("Leave Days exceeds employee's allowed leave days")
+									->withInput();
+					}
+
 					self::insertValues($employeeId);
 					Session::flash('message','Leave Saved');
 					return Redirect::to('/hrm/leaves');

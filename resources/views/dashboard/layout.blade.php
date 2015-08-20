@@ -83,6 +83,12 @@
 							</a>
 						@endif
 
+						@if(isset($configurationPermission))
+							<a href = "/hrm/configurations" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'config') { echo 'active-link'; } } ?>">
+								<i class="fa fa-cog"></i> &nbsp; Configurations
+							</a>
+						@endif
+
 						@if(isset($employeePermission))
 							<a href = "/hrm/employees" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'employee') { echo 'active-link'; } } ?>">
 								<i class="fa fa-users"></i> &nbsp; Employees

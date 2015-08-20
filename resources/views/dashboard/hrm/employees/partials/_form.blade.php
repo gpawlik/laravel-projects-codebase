@@ -228,10 +228,10 @@
       <td>{!! Form::text("number_of_dependants", null , ['placeholder' => "Number of Dependants",'class'=>'text-input']) !!}</td>
     </tr>
 
-    <tr>
+    {{-- <tr>
       <td>{!! Form::label("leave_entitlement_days","Leave Days Entitlement") !!}</td>
       <td>{!! Form::text("leave_entitlement_days", null , ['placeholder' => "Leave Days Entitlement",'class'=>'text-input']) !!}</td>
-    </tr>
+    </tr> --}}
 
     {{-- @if(isset($ranks))
     <tr>

@@ -254,7 +254,7 @@ class EmployeeController extends Controller {
 
 				$employee -> identification_id = Input::get("identification");
 				$employee -> identification_number = Input::get("identification_number");
-				$employee -> leave_entitlement_days = (Input::get("leave_entitlement_days") == ""?0:Input::get("leave_entitlement_days"));
+				//$employee -> leave_entitlement_days = (Input::get("leave_entitlement_days") == ""?0:Input::get("leave_entitlement_days"));
 
 				$employee -> job_id = Input::get("job");
 				$employee -> bank_id = Input::get("bank");
@@ -512,7 +512,7 @@ class EmployeeController extends Controller {
 
 				$employee -> identification_id = Input::get("identification");
 				$employee -> identification_number = Input::get("identification_number");
-				$employee -> leave_entitlement_days = (Input::get("leave_entitlement_days") == ""?0:Input::get("leave_entitlement_days"));
+				//$employee -> leave_entitlement_days = (Input::get("leave_entitlement_days") == ""?0:Input::get("leave_entitlement_days"));
 
 				$employee -> job_id = Input::get("job");
 				$employee -> bank_id = Input::get("bank");
