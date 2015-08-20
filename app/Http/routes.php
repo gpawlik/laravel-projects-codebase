@@ -277,4 +277,5 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
     Route::get('/orientation_search/{id}','OrientationController@apiSearch');
     Route::get('/pay_grade_search/{id}','PayGradeController@apiSearch');
     Route::get('/accident_search/{id}','AccidentController@apiSearch');
+    Route::get('/loan_search/{id}','LoanController@apiSearch');
 });

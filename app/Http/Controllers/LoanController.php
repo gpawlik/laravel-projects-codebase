@@ -396,6 +396,54 @@ class LoanController extends Controller {
 		return Redirect::to('/hrm/loans');
 	}
 
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_loan_can_search"))
+		{
+			$data['title'] = "Search for Loan";
+			$data['activeLink'] = "loan";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Loan List",
+					"route" => "/hrm/loans",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_loan_can_view"
+				),
+				array
+				(
+					"title" => "Add Loan",
+					"route" => "/hrm/loans/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_loan_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.loans.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$loans = \DB::table("staff_loans")->select("staff_loans.id","start_date","end_date","payment_status","loan_type","first_name","last_name")
+		->join("employees","employees.id","=","staff_loans.employee_id")
+		->where("end_date",">=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->where("start_date","<=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->orWhere("first_name","ilike","%$data%")
+		->orWhere("last_name","ilike","%$data%")
+		->orWhere("payment_status","ilike","%$data%")
+		->orWhere("loan_type","ilike","%$data%")
+		->get();
+	return Response::json(
+				$loans
+		);
+	}
+
+
 
   public function getRules()
   {
