@@ -680,8 +680,6 @@ class EmployeeController extends Controller {
 		$taxModel = Tax::all();
 		$ssnit = \DB::table("hrm_config")->get()[0]->ssnit_percentage;
 
-		// if($ssnit == null)
-
 		$employerWelfareContribution = \DB::table("hrm_config")->get()[0]->employer_welfare_contribution;
 
 		foreach($employees as $employee)
@@ -722,21 +720,21 @@ class EmployeeController extends Controller {
 						$taxAmount += (($tax -> rate) / 100) * ($salaryTracker);
 						break;
 					}
+
+
 				}
 
 				if($tax -> step == "exceeding")
 				{
-					if($salaryTracker > $tax -> amount_limit)
-					{
-						$taxAmount += (($tax -> rate) / 100) * ($salaryTracker);
-					}
+					$taxAmount += (($tax -> rate) / 100) * ($salaryTracker);
+					break;
 				}
 
 			}
 
 			$employeeTakeHome = $employeeTaxable  - $taxAmount;
 
-			var_dump($employeeTakeHome);
+			var_dump($taxAmount);die();
 
 			$employeeNetSalary = $employeeTakeHome + ($employee -> allowances)  - ( $employee -> employee_welfare_contribution +  $employerWelfareContribution);
 
