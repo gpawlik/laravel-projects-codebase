@@ -65,6 +65,9 @@ class ConfigController extends Controller {
           $configDetails -> employee_leave_entitlement = Input::get("employee_leave_entitlement");
 
           $configDetails -> push();
+
+					EmployeeController::calculateEmployeesNetSalary();
+
 					Session::flash('message','Configuration Details Saved');
 					return Redirect::to('/hrm/configurations');
         }
@@ -77,6 +80,9 @@ class ConfigController extends Controller {
           $configuration -> employee_leave_entitlement = Input::get("employee_leave_entitlement");
 
           $configuration -> save();
+
+					EmployeeController::calculateEmployeesNetSalary();
+
 					Session::flash('message','Configuration Details Saved');
 					return Redirect::to('/hrm/configurations');
 

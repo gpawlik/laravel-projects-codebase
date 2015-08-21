@@ -5,6 +5,7 @@ use App\Employee;
 use App\Bank;
 use App\Identification;
 use App\Job;
+use App\Tax;
 use App\Branch;
 use Validator;
 use Image;
@@ -54,6 +55,7 @@ class EmployeeController extends Controller {
 	{
 		if(self::checkUserPermissions("hrm_employee_can_add"))
 		{
+
 			$data['title'] = "Add Employee";
 			$data['activeLink'] = "employee";
 			$data['subLinks'] = array(
@@ -271,6 +273,9 @@ class EmployeeController extends Controller {
 				// $employee -> net_salary = $netSalary;
 
 				$employee -> save();
+
+				self::calculateEmployeesNetSalary();
+
 				Session::flash('message','Employee Added');
 				return Redirect::to('/hrm/employees');
 
@@ -525,6 +530,9 @@ class EmployeeController extends Controller {
 				// $employee -> net_salary = $netSalary;
 
 				$employee -> push();
+
+				self::calculateEmployeesNetSalary();
+
 				Session::flash('message', "Employee Details Updated");
 				return Redirect::to("/hrm/employees");
 
@@ -664,6 +672,78 @@ class EmployeeController extends Controller {
 		return Response::json(
 					$employees
 			);
+	}
+
+	public static function calculateEmployeesNetSalary()
+	{
+		$employees = Employee::all();
+		$taxModel = Tax::all();
+		$ssnit = \DB::table("hrm_config")->get()[0]->ssnit_percentage;
+
+		// if($ssnit == null)
+
+		$employerWelfareContribution = \DB::table("hrm_config")->get()[0]->employer_welfare_contribution;
+
+		foreach($employees as $employee)
+		{
+			$taxAmount = 0;
+			$employeeBasicSalary = $employee -> basic_salary;
+
+			//taxable after ssnit deduction
+			$employeeTaxable = $employeeBasicSalary - (($ssnit / 100) * $employeeBasicSalary);
+
+			$salaryTracker = $employeeTaxable;
+
+			foreach($taxModel as $tax)
+			{
+				if($tax -> step == "first")
+				{
+					if($salaryTracker > $tax -> amount_limit)
+					{
+						$salaryTracker -= $tax -> amount_limit;
+						$taxAmount += (($tax -> rate) / 100) * ($tax -> amount_limit);
+					}
+					else
+					{
+						$taxAmount += (($tax -> rate) / 100) * ($salaryTracker);
+						break;
+					}
+				}
+
+				if($tax -> step == "next")
+				{
+					if($salaryTracker > $tax -> amount_limit)
+					{
+						$salaryTracker -= $tax -> amount_limit;
+						$taxAmount += (($tax -> rate) / 100) * ($tax -> amount_limit);
+					}
+					else
+					{
+						$taxAmount += (($tax -> rate) / 100) * ($salaryTracker);
+						break;
+					}
+				}
+
+				if($tax -> step == "exceeding")
+				{
+					if($salaryTracker > $tax -> amount_limit)
+					{
+						$taxAmount += (($tax -> rate) / 100) * ($salaryTracker);
+					}
+				}
+
+			}
+
+			$employeeTakeHome = $employeeTaxable  - $taxAmount;
+
+			var_dump($employeeTakeHome);
+
+			$employeeNetSalary = $employeeTakeHome + ($employee -> allowances)  - ( $employee -> employee_welfare_contribution +  $employerWelfareContribution);
+
+			$employee -> net_salary = $employeeNetSalary;
+
+			$employee -> save();
+		}
 	}
 
 	public function getRules()

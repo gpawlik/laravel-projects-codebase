@@ -81,6 +81,8 @@ class TaxController extends Controller {
 
       }
 
+			EmployeeController::calculateEmployeesNetSalary();
+
       Session::flash('message', 'Tax Model Saved');
       return Redirect::to("/hrm/tax_model");
 

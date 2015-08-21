@@ -158,7 +158,7 @@
 
 						@if(isset($taxPermission))
 							<a href = "/hrm/tax_model" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'tax_model') { echo 'active-link'; } } ?>">
-								<i class="fa fa-puzzle-piece"></i> &nbsp; Tax Model
+								<i class="fa fa-cube"></i> &nbsp; Tax Model
 							</a>
 						@endif
 

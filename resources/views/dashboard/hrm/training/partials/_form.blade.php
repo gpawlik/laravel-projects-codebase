@@ -16,13 +16,13 @@
 
 
   <tr>
-    <td>{!! Form::label("training_start_date","Training_start_date*") !!}</td>
+    <td>{!! Form::label("training_start_date","Training Start Date*") !!}</td>
     <td>{!! Form::input("date", 'training_start_date', null , ['class'=>'text-input']) !!}</td>
   </tr>
 
 
     <tr>
-      <td>{!! Form::label("training_end_date","Training_end_date*") !!}</td>
+      <td>{!! Form::label("training_end_date","Training End Date*") !!}</td>
       <td>{!! Form::input("date", 'training_end_date', null , ['class'=>'text-input']) !!}</td>
     </tr>
 
