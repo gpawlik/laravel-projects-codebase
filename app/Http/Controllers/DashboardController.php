@@ -30,18 +30,21 @@ class DashboardController extends Controller {
 				$data['departmentsCount'] = $departmentsCount;
 			}
 
+			//get jobs
 			if(self::checkUserPermissions("dashboard_job_can_view"))
 			{
 				$jobCount = Job::all()->count();
 				$data['jobCount'] = $jobCount;
 			}
 
+			//get employees
 			if(self::checkUserPermissions("dashboard_employee_can_view"))
 			{
 				$employeeCount = Employee::where("employment_status","ACTIVE")->count();
 				$data['employeeCount'] = $employeeCount;
 			}
 
+			//get applications
 			if(self::checkUserPermissions("dashboard_application_can_view"))
 			{
 				$applicationCount = Application::all()->count();
@@ -59,6 +62,7 @@ class DashboardController extends Controller {
 				$data['applications'] = $applications;
 			}
 
+			//get leaves
 			if(self::checkUserPermissions("dashboard_leave_can_view"))
 			{
 				$leaves = \DB::table("leaves")
@@ -68,6 +72,7 @@ class DashboardController extends Controller {
 				$data['leaves'] = $leaves;
 			}
 
+			//get job vacancies
 			if(self::checkUserPermissions("dashboard_vacancy_can_view"))
 			{
 				$jobs = Job::all();
@@ -87,12 +92,58 @@ class DashboardController extends Controller {
 
 			}
 
+			//Get reminders
 			$pendingReminders = \DB::table("reminders")->where("user_id",Auth::user()->id)->where("status","PENDING")->get();
 
 			$data['reminders'] = Reminder::where("user_id",Auth::user()->id);
 			if(count($pendingReminders) > 0)
 			{
 				$data['pendingReminders'] = $pendingReminders;
+			}
+
+			//Get employees take home salaries
+			if(self::checkUserPermissions("dashboard_salaries_can_view"))
+			{
+				$totalEmployeesSalaries = 0;
+
+				$employees = \DB::table("employees")->get();
+
+				foreach($employees as $employee)
+				{
+					$totalEmployeesSalaries += $employee -> net_salary;
+				}
+
+				$data['totalSalaries'] = number_format($totalEmployeesSalaries, 2);
+			}
+
+			//Get employees take home salaries
+			if(self::checkUserPermissions("dashboard_ssnit_can_view"))
+			{
+				$totalSSNIT = 0;
+
+				$employees = \DB::table("employees")->get();
+
+				foreach($employees as $employee)
+				{
+					$totalSSNIT += $employee -> ssnit_amount;
+				}
+
+				$data['totalSSNIT'] = number_format($totalSSNIT, 2);
+			}
+
+			//Get employees take home salaries
+			if(self::checkUserPermissions("dashboard_tax_can_view"))
+			{
+				$totalTax = 0;
+
+				$employees = \DB::table("employees")->get();
+
+				foreach($employees as $employee)
+				{
+					$totalTax += $employee -> tax_amount;
+				}
+
+				$data['totalTax'] = number_format($totalTax, 2);
 			}
 
 			return view('dashboard.index',$data);

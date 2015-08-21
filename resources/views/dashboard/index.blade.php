@@ -26,6 +26,30 @@
 		</div>
 	@endif
 
+	@if(isset($totalSalaries))
+		<div class = "dashboard-card quarter inline">
+			<div class = "content white-text turquise">
+				<b> <i class="fa fa-dollar"></i> Total Salaries : GHC {{ $totalSalaries }}</b>
+			</div>
+		</div>
+	@endif
+
+	@if(isset($totalSSNIT))
+		<div class = "dashboard-card quarter inline">
+			<div class = "content white-text alizarin">
+				<b> <i class="fa fa-dollar"></i> Total SSNIT Contribitions : GHC {{ $totalSSNIT }}</b>
+			</div>
+		</div>
+	@endif
+
+	@if(isset($totalTax))
+		<div class = "dashboard-card quarter inline">
+			<div class = "content white-text pumpkin">
+				<b> <i class="fa fa-dollar"></i> Total Employee Tax : GHC {{ $totalTax }}</b>
+			</div>
+		</div>
+	@endif
+
 	<br/>
 
 	@if(isset($vacant_jobs))

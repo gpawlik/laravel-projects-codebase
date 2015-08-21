@@ -12,7 +12,10 @@ class Dashboard extends Model {
       "dashboard_department_can_view",
 			"dashboard_application_can_view",
 			"dashboard_leave_can_view",
-			"dashboard_vacancy_can_view"
+			"dashboard_vacancy_can_view",
+			"dashboard_salaries_can_view",
+			"dashboard_ssnit_can_view",
+			"dashboard_tax_can_view"
 		);
 	}
 

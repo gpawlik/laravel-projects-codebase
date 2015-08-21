@@ -4,16 +4,16 @@
 }
 
 @font-face {
-    font-family: Monoid Regular;
-    src: url('/fonts/Monoid-Regular.ttf');
+    font-family: Open Sans Light;
+    src: url('/fonts/OpenSans-Light.ttf');
 }
 
 body{
   margin:0;
   padding:0;
   background-color: #F5F5F5;
-  font-family: Regencie Light;
-  font-size: 14px;
+  font-family: Open Sans Light;
+  font-size: 12px;
 }
 
 hr{
