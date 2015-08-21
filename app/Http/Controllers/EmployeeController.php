@@ -734,9 +734,14 @@ class EmployeeController extends Controller {
 
 			$employeeTakeHome = $employeeTaxable  - $taxAmount;
 
-			var_dump($taxAmount);die();
-
 			$employeeNetSalary = $employeeTakeHome + ($employee -> allowances)  - ( $employee -> employee_welfare_contribution +  $employerWelfareContribution);
+
+
+			$employee -> taxable_salary = $employeeTaxable;
+
+			$employee -> tax_amount = $taxAmount;
+
+			$employee -> ssnit_amount = (($ssnit / 100) * $employeeBasicSalary);
 
 			$employee -> net_salary = $employeeNetSalary;
 

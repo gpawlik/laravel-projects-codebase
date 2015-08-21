@@ -93,6 +93,10 @@ class CreateHrmRelevantTables extends Migration
         $table->double('basic_salary')->nullable();
         $table->double("employee_welfare_contribution")->nullable();
         $table->double("allowances")->nullable();
+        $table->double("ssnit_amount")->nullable();
+
+        $table->double("taxable_salary")->nullable();
+        $table->double("tax_amount")->nullable();
 
         $table->double('net_salary')->nullable();
         $table->string('tax_identification_number')->nullable();

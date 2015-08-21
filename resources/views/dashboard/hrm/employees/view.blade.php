@@ -112,6 +112,18 @@
             'property' => 'allowances'
           ),
           array(
+            'name'=>'SSNIT Contribution',
+            'property' => 'ssnit_amount'
+          ),
+          array(
+            'name'=>'Taxable Salary',
+            'property' => 'taxable_salary'
+          ),
+          array(
+            'name'=>'Tax Amount',
+            'property' => 'tax_amount'
+          ),
+          array(
             'name'=>'Net Salary',
             'property' => 'net_salary'
           ),
