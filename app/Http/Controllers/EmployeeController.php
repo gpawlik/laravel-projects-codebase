@@ -5,6 +5,7 @@ use App\Employee;
 use App\Bank;
 use App\Identification;
 use App\Job;
+use Excel;
 use App\Tax;
 use App\Branch;
 use Validator;
@@ -40,6 +41,13 @@ class EmployeeController extends Controller {
 					"route" => "/hrm/employees/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "hrm_employee_can_search"
+				),
+				array
+				(
+					'title' => 'Export To XLS',
+					'route' => '/hrm/employees/exportXLS',
+					'icon' => '<i class="fa fa-file-excel-o"></i>',
+					"permission" => "hrm_employee_can_export"
 				)
 			);
 
@@ -748,6 +756,17 @@ class EmployeeController extends Controller {
 			$employee -> save();
 		}
 	}
+
+	public function exportXLS()
+  {
+    Excel::create('Employees Report', function($excel) {
+
+      $excel->sheet('Employees Report', function($sheet) {
+        $employees = \DB::table("employees")->where("employment_status","ACTIVE")->orderBy('last_name','ASC')->get();
+        $sheet->loadView('dashboard.hrm.employees.reports.xls_report', ['employees' => $employees]);
+      });
+    })->download('xls');
+  }
 
 	public function getRules()
 	{

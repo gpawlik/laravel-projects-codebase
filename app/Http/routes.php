@@ -131,6 +131,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/employees/delete/{id}','EmployeeController@delete');
       Route::get('/employees/view/{id}','EmployeeController@view');
       Route::get('/employees/search','EmployeeController@search');
+      Route::get('/employees/exportXLS','EmployeeController@exportXLS');
 
       //departments routes
       Route::get('/departments','DepartmentController@index');

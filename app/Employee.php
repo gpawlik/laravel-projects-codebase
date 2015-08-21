@@ -17,7 +17,8 @@ class Employee extends Model{
 			"hrm_employee_can_edit",
       "hrm_employee_can_view",
       "hrm_employee_can_delete",
-      "hrm_employee_can_search"
+      "hrm_employee_can_search",
+			"hrm_employee_can_export"
 		);
 	}
 
