@@ -11,7 +11,7 @@
     <table class = "form-element full">
 
       <tr>
-        <td>{!! Form::label("ssnit_percentage","Percentage of SSNIT") !!}</td>
+        <td>{!! Form::label("ssnit_percentage","Percentage of SSNIT*") !!}</td>
         @if(isset($configDetails))
           <td>{!! Form::text("ssnit_percentage", $configDetails -> ssnit_percentage , ['placeholder' => '%','class'=>'text-input']) !!}</td>
         @else
@@ -20,7 +20,7 @@
       </tr>
 
       <tr>
-        <td>{!! Form::label("employer_welfare_contribution","Company's Welfare Contribution (Amount)") !!}</td>
+        <td>{!! Form::label("employer_welfare_contribution","Company's Welfare Contribution (Amount)*") !!}</td>
         @if(isset($configDetails))
           <td>{!! Form::text("employer_welfare_contribution", $configDetails -> employer_welfare_contribution , ['placeholder' => 'GHC','class'=>'text-input']) !!}</td>
         @else
@@ -30,7 +30,7 @@
 
 
       <tr>
-        <td>{!! Form::label("employee_leave_entitlement","Leave Days Entitlement (Number of Days)") !!}</td>
+        <td>{!! Form::label("employee_leave_entitlement","Leave Days Entitlement (Number of Days)*") !!}</td>
         @if(isset($configDetails))
           <td>{!! Form::text("employee_leave_entitlement", $configDetails -> employee_leave_entitlement , ['placeholder' => 'Days','class'=>'text-input']) !!}</td>
         @else

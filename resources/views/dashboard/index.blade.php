@@ -4,7 +4,7 @@
 
 	@if(isset($employeeCount))
 		<div class = "dashboard-card quarter inline">
-			<div class = "content white-text turquise">
+			<div class = "content white-text alizarin">
 				<b> <i class="fa fa-users"></i> Number of Employees : {{ $employeeCount }}</b>
 			</div>
 		</div>
@@ -12,7 +12,7 @@
 
 	@if(isset($departmentsCount))
 		<div class = "dashboard-card quarter inline">
-			<div class = "content white-text alizarin">
+			<div class = "content white-text turquise">
 				<b> <i class="fa fa-building"></i> Number of Departments : </b>{{ $departmentsCount }}
 			</div>
 		</div>
@@ -30,6 +30,14 @@
 		<div class = "dashboard-card quarter inline">
 			<div class = "content white-text turquise">
 				<b> <i class="fa fa-dollar"></i> Total Salaries : GHC {{ $totalSalaries }}</b>
+			</div>
+		</div>
+	@endif
+
+	@if(isset($totalAllowance))
+		<div class = "dashboard-card quarter inline">
+			<div class = "content white-text amber">
+				<b> <i class="fa fa-dollar"></i> Total Allowances : GHC {{ $totalAllowance }}</b>
 			</div>
 		</div>
 	@endif

@@ -314,7 +314,12 @@
 			@endif
 
       @yield("content")
+
+			<div id = "signature">
+				<span><i class="fa fa-power-off"></i> &nbsp; Powered By : <b>DB Technologies</b></span>
+			</div>
     </div>
+
   </div>
 
   <div class = "clear-floats"></div>

@@ -106,7 +106,7 @@ class DashboardController extends Controller {
 			{
 				$totalEmployeesSalaries = 0;
 
-				$employees = \DB::table("employees")->get();
+				$employees = \DB::table("employees")->where("employment_status","ACTIVE")->get();
 
 				foreach($employees as $employee)
 				{
@@ -116,12 +116,12 @@ class DashboardController extends Controller {
 				$data['totalSalaries'] = number_format($totalEmployeesSalaries, 2);
 			}
 
-			//Get employees take home salaries
+			//Get employees ssnit total
 			if(self::checkUserPermissions("dashboard_ssnit_can_view"))
 			{
 				$totalSSNIT = 0;
 
-				$employees = \DB::table("employees")->get();
+				$employees = \DB::table("employees")->where("employment_status","ACTIVE")->get();
 
 				foreach($employees as $employee)
 				{
@@ -131,12 +131,12 @@ class DashboardController extends Controller {
 				$data['totalSSNIT'] = number_format($totalSSNIT, 2);
 			}
 
-			//Get employees take home salaries
+			//Get employees tax total
 			if(self::checkUserPermissions("dashboard_tax_can_view"))
 			{
 				$totalTax = 0;
 
-				$employees = \DB::table("employees")->get();
+				$employees = \DB::table("employees")->where("employment_status","ACTIVE")->get();
 
 				foreach($employees as $employee)
 				{
@@ -144,6 +144,21 @@ class DashboardController extends Controller {
 				}
 
 				$data['totalTax'] = number_format($totalTax, 2);
+			}
+
+			//Get employees allowance total
+			if(self::checkUserPermissions("dashboard_allowances_can_view"))
+			{
+				$totalAllowance = 0;
+
+				$employees = \DB::table("employees")->where("employment_status","ACTIVE")->get();
+
+				foreach($employees as $employee)
+				{
+					$totalAllowance += $employee -> allowances;
+				}
+
+				$data['totalAllowance'] = number_format($totalAllowance, 2);
 			}
 
 			return view('dashboard.index',$data);

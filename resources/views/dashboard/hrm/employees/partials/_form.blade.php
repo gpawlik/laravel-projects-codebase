@@ -3,17 +3,17 @@
 <table class = "form-element full">
 
   <tr>
-    <td>{!! Form::label("staff_number","Staff Number") !!}</td>
+    <td>{!! Form::label("staff_number","Staff Number*") !!}</td>
     <td>{!! Form::text("staff_number", null , ['placeholder' => 'Staff Number','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("first_name","First Name") !!}</td>
+    <td>{!! Form::label("first_name","First Name*") !!}</td>
     <td>{!! Form::text("first_name", null , ['placeholder' => 'First Name','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("last_name","Last Name") !!}</td>
+    <td>{!! Form::label("last_name","Last Name*") !!}</td>
     <td>{!! Form::text("last_name", null , ['placeholder' => 'Last Name','class'=>'text-input']) !!}</td>
   </tr>
 
@@ -23,12 +23,12 @@
   </tr>
 
   <tr>
-    <td>{!! Form::label("date_of_birth","Date of Birth") !!}</td>
+    <td>{!! Form::label("date_of_birth","Date of Birth*") !!}</td>
     <td>{!! Form::input("date", 'date_of_birth', null , ['class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("marital_status","Marital Status") !!}</td>
+    <td>{!! Form::label("marital_status","Marital Status*") !!}</td>
     <td>{!! Form::select("marital_status", ['single'=>'Single','married'=>'Married'], null, array('class' => 'select-input') ) !!}</td>
   </tr>
 
@@ -38,12 +38,12 @@
   </tr>
 
   <tr>
-    <td>{!! Form::label("next_of_kin","Next of Kin") !!}</td>
+    <td>{!! Form::label("next_of_kin","Next of Kin*") !!}</td>
     <td>{!! Form::text("next_of_kin", null , ['placeholder' => 'Next of Kin','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("gender","Gender") !!}</td>
+    <td>{!! Form::label("gender","Gender*") !!}</td>
     <td>{!! Form::select("gender", ['male'=>'Male','female'=>'Female'], null, array('class' => 'select-input') ) !!}</td>
   </tr>
 
@@ -53,48 +53,23 @@
   </tr>
 
   <tr>
-    <td>{!! Form::label("email","Email") !!}</td>
+    <td>{!! Form::label("email","Email*") !!}</td>
     <td>{!! Form::text("email", null , ['placeholder' => 'Email','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("telephone_number","Telephone Number") !!}</td>
+    <td>{!! Form::label("telephone_number","Telephone Number*") !!}</td>
     <td>{!! Form::text("telephone_number", null , ['placeholder' => 'Telephone Number','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("mailing_address","Mailing Address") !!}</td>
+    <td>{!! Form::label("mailing_address","Mailing Address*") !!}</td>
     <td>{!! Form::textarea("mailing_address", null , ['placeholder' => 'Mailing Address','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("residential_address","Residential Address") !!}</td>
+    <td>{!! Form::label("residential_address","Residential Address*") !!}</td>
     <td>{!! Form::textarea("residential_address", null , ['placeholder' => 'Residential Address','class'=>'text-input']) !!}</td>
-  </tr>
-
-  <tr>
-    <td>{!! Form::label("emergency_contact_name","Emergency Contact") !!}</td>
-    <td>{!! Form::text("emergency_contact_name", null , ['placeholder' => 'Emergency Contact','class'=>'text-input']) !!}</td>
-  </tr>
-
-  <tr>
-    <td>{!! Form::label("emergency_contact_number","Emergency Contact Number") !!}</td>
-    <td>{!! Form::text("emergency_contact_number", null , ['placeholder' => 'Emergency Contact Number','class'=>'text-input']) !!}</td>
-  </tr>
-
-  <tr>
-    <td>{!! Form::label("alergies","Alergies") !!}</td>
-    <td>{!! Form::text("alergies", null , ['placeholder' => 'Alergies','class'=>'text-input']) !!}</td>
-  </tr>
-
-  <tr>
-    <td>{!! Form::label("fathers_name","Father's Name") !!}</td>
-    <td>{!! Form::text("fathers_name", null , ['placeholder' => "Father's Name",'class'=>'text-input']) !!}</td>
-  </tr>
-
-  <tr>
-    <td>{!! Form::label("mothers_name","Mother's Name") !!}</td>
-    <td>{!! Form::text("mothers_name", null , ['placeholder' => "Mother's Name",'class'=>'text-input']) !!}</td>
   </tr>
 
 </table>
@@ -104,9 +79,34 @@
 
   <table class = "form-element full">
 
+    <tr>
+      <td>{!! Form::label("emergency_contact_name","Emergency Contact Name*") !!}</td>
+      <td>{!! Form::text("emergency_contact_name", null , ['placeholder' => 'Emergency Contact Name','class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("emergency_contact_number","Emergency Contact Number*") !!}</td>
+      <td>{!! Form::text("emergency_contact_number", null , ['placeholder' => 'Emergency Contact Number','class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("alergies","Alergies") !!}</td>
+      <td>{!! Form::text("alergies", null , ['placeholder' => 'Alergies','class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("fathers_name","Father's Name*") !!}</td>
+      <td>{!! Form::text("fathers_name", null , ['placeholder' => "Father's Name",'class'=>'text-input']) !!}</td>
+    </tr>
+
+    <tr>
+      <td>{!! Form::label("mothers_name","Mother's Name*") !!}</td>
+      <td>{!! Form::text("mothers_name", null , ['placeholder' => "Mother's Name",'class'=>'text-input']) !!}</td>
+    </tr>
+
     @if(isset($banks))
     <tr>
-      <td>{!! Form::label("bank","Bank") !!}</td>
+      <td>{!! Form::label("bank","Bank*") !!}</td>
 
       @if(isset($employees_bank))
       <td>
@@ -121,22 +121,22 @@
     @endif
 
     <tr>
-      <td>{!! Form::label("bank_account_number","Bank Account number") !!}</td>
+      <td>{!! Form::label("bank_account_number","Bank Account number*") !!}</td>
       <td>{!! Form::text("bank_account_number", null , ['placeholder' => "Bank Account number",'class'=>'text-input']) !!}</td>
     </tr>
 
     <tr>
-      <td>{!! Form::label("qualifications","Qualifications") !!}</td>
+      <td>{!! Form::label("qualifications","Qualifications*") !!}</td>
       <td>{!! Form::text("qualifications", null , ['placeholder' => "Qualifications",'class'=>'text-input']) !!}</td>
     </tr>
 
     <tr>
-      <td>{!! Form::label("date_of_hire","Date of hire") !!}</td>
+      <td>{!! Form::label("date_of_hire","Date of hire*") !!}</td>
       <td>{!! Form::input("date", 'date_of_hire', null , ['class'=>'text-input']) !!}</td>
     </tr>
 
     <tr>
-      <td>{!! Form::label("basic_salary","Basic Salary") !!}</td>
+      <td>{!! Form::label("basic_salary","Basic Salary*") !!}</td>
       <td>{!! Form::text("basic_salary", null , ['placeholder' => "Basic Salary",'class'=>'text-input']) !!}</td>
     </tr>
 
@@ -152,7 +152,7 @@
 
     @if(isset($jobs))
     <tr>
-      <td>{!! Form::label("job","Job") !!}</td>
+      <td>{!! Form::label("job","Job*") !!}</td>
 
       @if(isset($employees_job))
       <td>
@@ -168,7 +168,7 @@
 
     @if(isset($branches))
     <tr>
-      <td>{!! Form::label("branch","Branch") !!}</td>
+      <td>{!! Form::label("branch","Branch*") !!}</td>
 
       @if(isset($employees_branch))
       <td>
@@ -184,7 +184,7 @@
 
     @if(isset($ids))
     <tr>
-      <td>{!! Form::label("identification","Identification") !!}</td>
+      <td>{!! Form::label("identification","Identification*") !!}</td>
 
       @if(isset($employees_id))
       <td>
@@ -199,7 +199,7 @@
     @endif
 
     <tr>
-      <td>{!! Form::label("identification_number","Identification Number") !!}</td>
+      <td>{!! Form::label("identification_number","Identification Number*") !!}</td>
       <td>{!! Form::text("identification_number", null , ['placeholder' => "Identification Number",'class'=>'text-input']) !!}</td>
     </tr>
 

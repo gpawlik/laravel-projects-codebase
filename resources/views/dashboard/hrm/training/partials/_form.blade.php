@@ -32,12 +32,12 @@
     </tr>
 
     <tr>
-      <td>{!! Form::label("training_total_cost","Training Cost") !!}</td>
+      <td>{!! Form::label("training_total_cost","Training Cost*") !!}</td>
       <td>{!! Form::text("training_total_cost", null , ['placeholder' => 'Training Cost','class'=>'text-input']) !!}</td>
     </tr>
 
     <tr>
-      <td>{!! Form::label("training_cost_components","Training Cost Components") !!}</td>
+      <td>{!! Form::label("training_cost_components","Training Cost Components*") !!}</td>
       <td>{!! Form::textarea("training_cost_components", null , ['placeholder' => 'Training Cost Components','class'=>'text-input']) !!}</td>
     </tr>
 

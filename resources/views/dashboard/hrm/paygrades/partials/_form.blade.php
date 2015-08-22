@@ -1,23 +1,23 @@
 <table class = "form-element full">
 
   <tr>
-    <td>{!! Form::label("description","Description") !!}</td>
+    <td>{!! Form::label("description","Description*") !!}</td>
     <td>{!! Form::text("description", null , ['placeholder' => 'Description','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("minimum_salary","Minimum Salary") !!}</td>
+    <td>{!! Form::label("minimum_salary","Minimum Salary*") !!}</td>
     <td>{!! Form::text("minimum_salary", null , ['placeholder' => 'Minimum Salary','class'=>'text-input']) !!}</td>
   </tr>
 
   <tr>
-    <td>{!! Form::label("maximum_salary","Maximum Salary") !!}</td>
+    <td>{!! Form::label("maximum_salary","Maximum Salary*") !!}</td>
     <td>{!! Form::text("maximum_salary", null , ['placeholder' => 'Maximum Salary','class'=>'text-input']) !!}</td>
   </tr>
 
   @if(isset($jobs))
   <tr>
-    <td>{!! Form::label("job","Job") !!}</td>
+    <td>{!! Form::label("job","Job*") !!}</td>
 
     @if(isset($paygrades_job))
     <td>

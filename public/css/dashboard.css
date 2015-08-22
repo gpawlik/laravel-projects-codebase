@@ -658,3 +658,13 @@ table.permission-table tr:hover{
 
 
 /******************************************** **************** ************************************************/
+
+#signature{
+  margin-top: 20px;
+  background-color: #EFEFEF;
+  padding:10px;
+}
+
+#signature span{
+  color:#919191;
+}

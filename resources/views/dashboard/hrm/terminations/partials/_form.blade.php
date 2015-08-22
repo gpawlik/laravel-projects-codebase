@@ -1,6 +1,20 @@
 <table class = "form-element full">
 
   <tr>
+    <td>{!! Form::label("employee","Employee*") !!}</td>
+    <td>
+      {!! Form::text('employee', null,
+
+        ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name'])
+
+      !!}
+      <div id = "employee-list">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
     <td>{!! Form::label("date_of_termination","Date of Termination*") !!}</td>
     <td>{!! Form::input("date", 'date_of_termination', null , ['class'=>'text-input']) !!}</td>
   </tr>
@@ -19,20 +33,6 @@
     <tr>
       <td>{!! Form::label("resignation_list","Resignation List") !!}</td>
       <td>{!! Form::textarea("resignation_list", null , ['placeholder' => 'Resignation List','class'=>'text-input']) !!}</td>
-    </tr>
-
-    <tr>
-      <td>{!! Form::label("employee","Employee*") !!}</td>
-      <td>
-        {!! Form::text('employee', null,
-
-          ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name'])
-
-        !!}
-        <div id = "employee-list">
-
-        </div>
-      </td>
     </tr>
 
   <tr>

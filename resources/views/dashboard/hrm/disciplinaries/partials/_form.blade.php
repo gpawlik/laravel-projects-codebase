@@ -1,6 +1,20 @@
 <table class = "form-element full">
 
   <tr>
+    <td>{!! Form::label("employee","Employee*") !!}</td>
+    <td>
+      {!! Form::text('employee', $employee_name,
+
+        ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name'])
+
+      !!}
+      <div id = "employee-list">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
     <td>{!! Form::label("type_of_warning","Type of Warning*") !!}</td>
     @if(isset($type_of_warning))
       <td>{!! Form::select("type_of_warning", ['VERBAL WARNING'=>'Verbal Warning','FIRST WARNING LETTER'=>'First Warning Letter','SECOND WARNING LETTER'=>'Second Warning Letter'],
@@ -30,20 +44,6 @@
   <tr id = "suspension-row">
     <td>{!! Form::label("suspension_number_of_days","Number of Days on Suspension") !!}</td>
     <td>{!! Form::text("suspension_number_of_days", null , ['placeholder' => 'Number of Days on Suspension','class'=>'text-input']) !!}</td>
-  </tr>
-
-  <tr>
-    <td>{!! Form::label("employee","Employee*") !!}</td>
-    <td>
-      {!! Form::text('employee', $employee_name,
-
-        ['class'=>'text-input','id'=>'employee-field','autocomplete'=>'off','placeholder'=>'Search Employee First / Last Name'])
-
-      !!}
-      <div id = "employee-list">
-
-      </div>
-    </td>
   </tr>
 
 
