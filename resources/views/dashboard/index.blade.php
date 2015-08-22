@@ -26,6 +26,8 @@
 		</div>
 	@endif
 
+	<br/>
+
 	@if(isset($totalSalaries))
 		<div class = "dashboard-card quarter inline">
 			<div class = "content white-text turquise">
@@ -45,7 +47,7 @@
 	@if(isset($totalSSNIT))
 		<div class = "dashboard-card quarter inline">
 			<div class = "content white-text alizarin">
-				<b> <i class="fa fa-dollar"></i> Total SSNIT Contribitions : GHC {{ $totalSSNIT }}</b>
+				<b> <i class="fa fa-dollar"></i> SSNIT Contribitions : GHC {{ $totalSSNIT }}</b>
 			</div>
 		</div>
 	@endif

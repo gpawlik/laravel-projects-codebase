@@ -589,6 +589,13 @@ class EmployeeController extends Controller {
 					"route" => "/hrm/employees/delete/".$id,
 					"icon" => "<i class = 'fa fa-trash'></i>",
 					"permission" => "hrm_employee_can_delete"
+				),
+				array
+				(
+					'title' => 'Export To XLS',
+					'route' => '/hrm/employees/exportIndividualXLS/'.$id,
+					'icon' => '<i class="fa fa-file-excel-o"></i>',
+					"permission" => "hrm_employee_can_export"
 				)
 			);
 			$data['employee'] = $employee;
@@ -742,7 +749,7 @@ class EmployeeController extends Controller {
 
 			$employeeTakeHome = $employeeTaxable  - $taxAmount;
 
-			$employeeNetSalary = $employeeTakeHome + ($employee -> allowances)  - ( $employee -> employee_welfare_contribution +  $employerWelfareContribution);
+			$employeeNetSalary = $employeeTakeHome + ($employee -> allowances)  - ( $employee -> employee_welfare_contribution);
 
 
 			$employee -> taxable_salary = $employeeTaxable;
@@ -764,6 +771,18 @@ class EmployeeController extends Controller {
       $excel->sheet('Employees Report', function($sheet) {
         $employees = \DB::table("employees")->where("employment_status","ACTIVE")->orderBy('last_name','ASC')->get();
         $sheet->loadView('dashboard.hrm.employees.reports.xls_report', ['employees' => $employees]);
+      });
+    })->download('xls');
+  }
+
+	public function exportIndividualXLS($id)
+  {
+		$employee = Employee::find($id);
+		// var_dump($employee);die();
+    Excel::create($employee->first_name."_".$employee->last_name."_report", function($excel) {
+				$employee = Employee::find($id);
+      	$excel->sheet($employee->first_name."_".$employee->last_name."_report", function($sheet) {
+        $sheet->loadView('dashboard.hrm.employees.reports.xls_individual_report', ['employee' => $employee]);
       });
     })->download('xls');
   }

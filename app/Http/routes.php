@@ -132,6 +132,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/employees/view/{id}','EmployeeController@view');
       Route::get('/employees/search','EmployeeController@search');
       Route::get('/employees/exportXLS','EmployeeController@exportXLS');
+      Route::get('/employees/exportIndividualXLS/{id}','EmployeeController@exportIndividualXLS');
 
       //departments routes
       Route::get('/departments','DepartmentController@index');
