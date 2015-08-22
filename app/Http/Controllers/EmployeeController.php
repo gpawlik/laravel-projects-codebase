@@ -779,9 +779,9 @@ class EmployeeController extends Controller {
   {
 		$employee = Employee::find($id);
 		// var_dump($employee);die();
-    Excel::create($employee->first_name."_".$employee->last_name."_report", function($excel) {
+    Excel::create($employee->first_name."_".$employee->last_name."_report", function($excel) use($id) {
 				$employee = Employee::find($id);
-      	$excel->sheet($employee->first_name."_".$employee->last_name."_report", function($sheet) {
+      	$excel->sheet($employee->first_name."_".$employee->last_name."_report", function($sheet) use($employee){
         $sheet->loadView('dashboard.hrm.employees.reports.xls_individual_report', ['employee' => $employee]);
       });
     })->download('xls');
