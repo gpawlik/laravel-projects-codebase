@@ -49,7 +49,7 @@ function hideSubLinks()
 function handleMainMenu(id)
 {
 	setTimeout(function(){
-		$("#"+id).nextUntil(".main-link").slideDown();
+		$("#"+id).nextUntil(".main-link").fadeIn();
 	},100);
 }
 
