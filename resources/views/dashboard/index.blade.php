@@ -2,6 +2,8 @@
 
 @section('content')
 
+<h3 class = "dashboard-heading">General Information</h3>
+
 <div class="grid">
 
 	@if(isset($employeeCount))
@@ -61,6 +63,13 @@
 			</div>
 		</div>
 	@endif
+
+</div>
+
+
+<h3 class = "dashboard-heading">Notices & Reminders</h3>
+
+<div class="grid">
 
 	@if(isset($vacant_jobs))
 		<div id = "leaves" class = "dashboard-card quarter inline grid-item">
@@ -176,6 +185,13 @@
 		</div>
 	@endif
 
+</div>
+
+
+<h3 class = "dashboard-heading">Statistics</h3>
+
+<div class="grid">
+
 	@if(isset($genderDistro))
 		<div id = "gender-chart-wrapper" class = "dashboard-card quarter inline grid-item">
 			<h3 class = "title green-sea"><i class="fa fa-male"></i><i class="fa fa-female"></i> Gender Distribution</h3>
@@ -191,7 +207,7 @@
 
 	@if(isset($jobDistro))
 		<div id = "job-chart-wrapper" class = "dashboard-card quarter inline grid-item">
-			<h3 class = "title brown"><i class="fa fa-pie-chart"></i> Job Distribution</h3>
+			<h3 class = "title amber"><i class="fa fa-pie-chart"></i> Job : Employee Distribution</h3>
 
 			<div class = "content">
 

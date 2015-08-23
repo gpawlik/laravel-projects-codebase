@@ -100,7 +100,7 @@
 			scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
 			// Number - Scale label font size in pixels
-			scaleFontSize: 6,
+			scaleFontSize: 12,
 
 			// String - Scale label font weight style
 			scaleFontStyle: "normal",
@@ -130,7 +130,8 @@
 			tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
 			// Number - Tooltip label font size in pixels
-			tooltipFontSize: 14,
+			//THIS TOOLTIP
+			tooltipFontSize: 9,
 
 			// String - Tooltip font weight style
 			tooltipFontStyle: "normal",

@@ -29,6 +29,7 @@ nav#main-nav{
   float:left;
   width:15%;
   background-color: #607D8B;
+  overflow-y: scroll;
 }
 
 nav#main-nav header{
@@ -315,6 +316,13 @@ div.dashboard-card .green-sea{
 
 .white-text{
   color:#FFF;
+}
+
+.dashboard-heading{
+  color:#d35400;
+  font-size: 14px;
+  border-bottom: 1px solid #E1E1E1;
+  padding-bottom: 10px;
 }
 
 /****************************************************************************************8****************************/
