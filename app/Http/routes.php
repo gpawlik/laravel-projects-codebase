@@ -275,6 +275,8 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
 {
   	Route::get('/users/{id}','UserController@apiGetUsers');
     Route::get('/employees/{id}','EmployeeController@apiGetEmployees');
+
+    //search api routes
     Route::get('/employee_search/{id}','EmployeeController@apiSearch');
     Route::get('/department_search/{id}','DepartmentController@apiSearch');
     Route::get('/rank_search/{id}','RankController@apiSearch');
@@ -285,4 +287,19 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
     Route::get('/pay_grade_search/{id}','PayGradeController@apiSearch');
     Route::get('/accident_search/{id}','AccidentController@apiSearch');
     Route::get('/loan_search/{id}','LoanController@apiSearch');
+
+    //chart api routes
+    Route::get('/gender_distro',function(){
+      $distroArray = array();
+      $employeesMaleNumber = \DB::table("employees")->where("employment_status","ACTIVE")->where("gender","male")->count();
+      $employeesFemaleNumber = \DB::table("employees")->where("employment_status","ACTIVE")->where("gender","female")->count();
+      $distroArray['male_number'] = $employeesMaleNumber;
+      $distroArray['female_number'] = $employeesFemaleNumber;
+
+      return Response::json(
+          	$distroArray
+      	);
+
+    });
+
 });

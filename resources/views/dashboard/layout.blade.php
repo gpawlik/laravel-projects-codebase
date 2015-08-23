@@ -15,6 +15,8 @@
 	<link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
 
   <script src="{{ asset('/js/jquery.js') }}" rel="stylesheet"></script>
+	<script src="{{ asset('/js/chart.js') }}" rel="stylesheet"></script>
+	<script src="{{ asset('/js/masonry.pkgd.min.js') }}" rel="stylesheet"></script>
 	<script src="{{ asset('/js/dash.js') }}" rel="stylesheet"></script>
 
 

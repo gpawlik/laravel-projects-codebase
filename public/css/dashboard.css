@@ -309,6 +309,10 @@ div.dashboard-card .brown{
   background-color: #795548;
 }
 
+div.dashboard-card .green-sea{
+  background-color: #16a085;
+}
+
 .white-text{
   color:#FFF;
 }
@@ -369,6 +373,10 @@ div#warning-box{
 }
 
 .quarter{
+  width:23%;
+}
+
+.grid-item{
   width:23%;
 }
 
@@ -666,6 +674,16 @@ table.permission-table tr:hover{
     color:#FFF;
 }
 
+
+/******************************************** CHART STYLES ************************************************/
+
+#gender-chart{
+
+}
+
+#gender-chart-wrapper .content{
+  text-align: center;
+}
 
 /******************************************** **************** ************************************************/
 

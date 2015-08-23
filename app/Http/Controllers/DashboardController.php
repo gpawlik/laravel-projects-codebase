@@ -162,6 +162,12 @@ class DashboardController extends Controller {
 				$data['totalAllowance'] = number_format($totalAllowance, 2);
 			}
 
+			//Get gender distro
+			if(self::checkUserPermissions("dashboard_gender-distribution_can_view"))
+			{
+				$data['genderDistro'] = "";
+			}
+
 			return view('dashboard.index',$data);
 		}
 	}

@@ -11,6 +11,12 @@ $(document).ready(function(){
 	handleCheckAll();
 	handleHideableSelect();
 	handleTaxModel();
+
+	if(window.location.pathname.split("/")[1] == "dashboard")
+	{
+		handleGenderChart();
+	}
+
 });
 
 function setup()
@@ -31,6 +37,12 @@ function setup()
 	$('.cancel_delete').click(function(){
 		$(this).parent().hide();
 		$(this).parent().prevAll('a').children().fadeIn(1000);
+	});
+
+	$('.grid').masonry({
+	  // options
+	  itemSelector: '.grid-item',
+	  columnWidth: 20
 	});
 }
 
@@ -289,6 +301,45 @@ function handleTaxModel()
 
 		$(this).closest("tr").remove();
 	});
+
+
+}
+
+function handleGenderChart()
+{
+
+	$.ajax({
+		method: "GET",
+	  url: "/api/v1/gender_distro",
+		success: function(values){
+			console.log(values);
+
+			var data = [
+				{
+	        value: values['male_number'],
+	        color:"#2980b9",
+	        highlight: "#21a560",
+	        label: "Male"
+		    },
+		    {
+	        value: values['female_number'],
+	        color: "#e74c3c",
+	        highlight: "#21a560",
+	        label: "Female"
+		    },
+			]
+
+			var ctx = $("#gender-chart").get(0).getContext("2d");
+			// This will get the first returned node in the jQuery collection.
+			var myDoughnutChart = new Chart(ctx).Doughnut(data);
+
+		},
+		error: function(data){
+
+		}
+	});
+
+
 
 
 }
