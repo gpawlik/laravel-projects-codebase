@@ -182,7 +182,20 @@
 
 			<div class = "content">
 
-					<canvas id="gender-chart" width="150" height="150"></canvas>
+					<canvas id="gender-chart" width="400" height="200"></canvas>
+
+			</div>
+
+		</div>
+	@endif
+
+	@if(isset($jobDistro))
+		<div id = "job-chart-wrapper" class = "dashboard-card quarter inline grid-item">
+			<h3 class = "title brown"><i class="fa fa-pie-chart"></i> Job Distribution</h3>
+
+			<div class = "content">
+
+					<canvas id="job-chart" width="400" height="200"></canvas>
 
 			</div>
 

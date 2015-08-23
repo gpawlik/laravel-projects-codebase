@@ -15,6 +15,7 @@ $(document).ready(function(){
 	if(window.location.pathname.split("/")[1] == "dashboard")
 	{
 		handleGenderChart();
+		handleJobChart();
 	}
 
 });
@@ -312,7 +313,6 @@ function handleGenderChart()
 		method: "GET",
 	  url: "/api/v1/gender_distro",
 		success: function(values){
-			console.log(values);
 
 			var data = [
 				{
@@ -339,7 +339,52 @@ function handleGenderChart()
 		}
 	});
 
+}
+
+function handleJobChart()
+{
+
+	$.ajax({
+		method: "GET",
+	  url: "/api/v1/jobs_distro",
+		success: function(values){
+
+			var data = [];
 
 
+			for(var key in values) {
 
+				vals = {}
+
+				if(values.hasOwnProperty(key)) {
+
+					vals.value = values[key];
+					vals.color = getRandomColor();
+					vals.highlight = "#21a560";
+					vals.label = key;
+
+					data.push(vals)
+				}
+
+			}
+
+			var ctx = $("#job-chart").get(0).getContext("2d");
+			// This will get the first returned node in the jQuery collection.
+			var myPieChart = new Chart(ctx).Pie(data);
+
+		},
+		error: function(data){
+
+		}
+	});
+
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }

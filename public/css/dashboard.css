@@ -378,6 +378,12 @@ div#warning-box{
 
 .grid-item{
   width:23%;
+  margin-top:5px;
+}
+
+.grid-item--width2{
+  width:48%;
+  margin-top:5px;
 }
 
 .mini_btn{
@@ -678,13 +684,20 @@ table.permission-table tr:hover{
 /******************************************** CHART STYLES ************************************************/
 
 #gender-chart{
-
+  width:100%;
 }
 
 #gender-chart-wrapper .content{
   text-align: center;
 }
 
+#job-chart-wrapper .content{
+  text-align: center;
+}
+
+#job-chart{
+  width:100%;
+}
 /******************************************** **************** ************************************************/
 
 #signature{

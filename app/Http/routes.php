@@ -302,4 +302,21 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
 
     });
 
+    Route::get('/jobs_distro',function(){
+      $distroArray = array();
+
+      $jobs = \DB::table("jobs")->get();
+
+      foreach($jobs as $job)
+      {
+        $employeeCount = \DB::table("employees")->where("job_id",$job->id)->count();
+        $distroArray[$job -> job_title] =  $employeeCount;
+      }
+
+      return Response::json(
+            $distroArray
+        );
+
+    });
+
 });

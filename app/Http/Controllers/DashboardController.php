@@ -168,6 +168,12 @@ class DashboardController extends Controller {
 				$data['genderDistro'] = "";
 			}
 
+			//Get job distro
+			if(self::checkUserPermissions("dashboard_job-distribution_can_view"))
+			{
+				$data['jobDistro'] = "";
+			}
+
 			return view('dashboard.index',$data);
 		}
 	}

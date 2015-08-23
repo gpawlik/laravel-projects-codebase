@@ -17,7 +17,8 @@ class Dashboard extends Model {
 			"dashboard_ssnit_can_view",
 			"dashboard_tax_can_view",
 			"dashboard_allowances_can_view",
-			"dashboard_gender-distribution_can_view"
+			"dashboard_gender-distribution_can_view",
+			"dashboard_job-distribution_can_view"
 		);
 	}
 

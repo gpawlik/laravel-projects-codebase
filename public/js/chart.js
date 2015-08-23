@@ -68,7 +68,7 @@
 			showScale: true,
 
 			// Boolean - If we want to override with a hard coded scale
-			scaleOverride: false,
+			scaleOverride: true,
 
 			// ** Required if scaleOverride is true **
 			// Number - The number of steps in a hard coded scale
@@ -100,7 +100,7 @@
 			scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 
 			// Number - Scale label font size in pixels
-			scaleFontSize: 12,
+			scaleFontSize: 6,
 
 			// String - Scale label font weight style
 			scaleFontStyle: "normal",
@@ -3079,7 +3079,7 @@
 			helpers.each(this.segments,function(segment){
 				segment.save();
 			});
-			
+
 			this.reflow();
 			this.render();
 		},
