@@ -21,6 +21,7 @@ class DisciplinaryController extends Controller {
 		{
       $data['title'] = "Disciplinary Records";
       $data['activeLink'] = "discipline";
+			$data['subTitle'] = "Disciplinary / Grievance Records";
       $data['disciplinaries'] = Disciplinary::orderBy("updated_at","DESC")->paginate(20);
 
       $data['subLinks'] = array(
@@ -56,6 +57,7 @@ class DisciplinaryController extends Controller {
 		{
       $data['title'] = "Add Disciplinary Record";
       $data['activeLink'] = "discipline";
+			$data['subTitle'] = "Add Disciplinary / Grievance Record";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -149,6 +151,7 @@ class DisciplinaryController extends Controller {
 
 			$data['title'] = "Edit Disciplinary Record";
 			$data['activeLink'] = "discipline";
+			$data['subTitle'] = "Edit Disciplinary / Grievance Record";
 			$data['disciplinary'] = $disciplinary;
 	    $data['subLinks'] = array(
         array
@@ -259,6 +262,7 @@ class DisciplinaryController extends Controller {
 
 			$data['title'] = "View Disciplinary Record";
 			$data['activeLink'] = "discipline";
+			$data['subTitle'] = "View Disciplinary / Grievance Record Details";
 			$data['disciplinary'] = $disciplinary;
 
 			$data['subLinks'] = array(

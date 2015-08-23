@@ -36,16 +36,15 @@
     @endif
   </tr>
 
+  <tr id = "suspension-row">
+    <td>{!! Form::label("suspension_number_of_days","Number of Days on Suspension*") !!}</td>
+    <td>{!! Form::text("suspension_number_of_days", null , ['placeholder' => 'Number of Days on Suspension','class'=>'text-input']) !!}</td>
+  </tr>
+
   <tr>
     <td>{!! Form::label("offense","Offense") !!}</td>
     <td>{!! Form::textarea("offense", null , ['placeholder' => 'Offense','class'=>'text-input']) !!}</td>
   </tr>
-
-  <tr id = "suspension-row">
-    <td>{!! Form::label("suspension_number_of_days","Number of Days on Suspension") !!}</td>
-    <td>{!! Form::text("suspension_number_of_days", null , ['placeholder' => 'Number of Days on Suspension','class'=>'text-input']) !!}</td>
-  </tr>
-
 
     <tr>
       <td colspan="2" align="right">{!! Form::submit($submitButtonText, array('class' => 'submit-button')) !!}</td>

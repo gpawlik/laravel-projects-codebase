@@ -20,6 +20,7 @@ class PermissionController extends Controller {
 		{
 	    $data['title'] = "Permissions";
 			$data['activeLink'] = "permission";
+			$data['subTitle'] = "Permissions";
 	    $data['permissions'] = Permission::orderBy("permission_name","ASC")->paginate(20);
 			$data['subLinks'] = array(
 				array
@@ -51,6 +52,7 @@ class PermissionController extends Controller {
 		{
 	    $data['title'] = "Add Permission";
 			$data['activeLink'] = "permission";
+			$data['subTitle'] = "Add Permission";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -119,6 +121,7 @@ class PermissionController extends Controller {
 
 	    $data['title'] = "Edit Permission";
 			$data['activeLink'] = "permission";
+			$data['subTitle'] = "Edit Permission";
 	    $data['subLinks'] = array(
 	      array
 	      (

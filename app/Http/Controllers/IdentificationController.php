@@ -23,6 +23,7 @@ class IdentificationController extends Controller {
       $data['title'] = "Identification Types";
 	    $data['banks'] = Identification::orderBy("updated_at","DESC")->paginate(20);
       $data['activeLink'] = "identification";
+			$data['subTitle'] = "Identification Types";
 			$data['subLinks'] = array(
 				array
 				(
@@ -53,6 +54,7 @@ class IdentificationController extends Controller {
 		{
       $data['title'] = "Add Identification";
       $data['activeLink'] = "identification";
+			$data['subTitle'] = "Add Identification Type";
       $data['subLinks'] = array(
         array
         (
@@ -111,6 +113,7 @@ class IdentificationController extends Controller {
 
 	    $data['title'] = "Edit Identification";
 			$data['activeLink'] = "identification";
+			$data['subTitle'] = "Edit Identification Type";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -170,6 +173,7 @@ class IdentificationController extends Controller {
 
 			$data['title'] = "View Identification Details";
 			$data['activeLink'] = "identification";
+			$data['subTitle'] = "View Identification Type Details";
 			$data['subLinks'] = array(
 				array
 				(

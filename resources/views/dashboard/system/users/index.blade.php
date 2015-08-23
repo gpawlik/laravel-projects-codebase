@@ -22,7 +22,16 @@
           )
         ),
 
-        'actions' => ['view','edit','delete']
+        'actions' => ['view','edit','delete'],
+
+        'extraActions' => array(
+          array(
+            "route" => "system/users/reset_password",
+            "title" => "Reset-Password",
+            "icon" => "<i class='fa fa-refresh'></i>",
+            "permission" => "system_user_can_reset-password"
+          )
+        )
 
     )
   )

@@ -16,7 +16,7 @@ class CreateIncomeTaxModelTable extends Migration
             $table->increments('id');
 
             $table -> string("step");
-            $table -> integer("amount_limit");
+            $table -> double("amount_limit");
             $table -> double("rate");
 
             $table->timestamps();

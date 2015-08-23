@@ -22,6 +22,7 @@ class LeaveController extends Controller {
 		{
       $data['title'] = "Leave Days";
       $data['activeLink'] = "leave";
+			$data['subTitle'] = "Employee Leave Day Records";
       $data['leaves'] = Leave::orderBy("updated_at","DESC")->paginate(20);
 
       $data['subLinks'] = array(
@@ -56,6 +57,7 @@ class LeaveController extends Controller {
 		{
       $data['title'] = "Add Leave";
       $data['activeLink'] = "leave";
+			$data['subTitle'] = "Add Employee Leave Days";
       $data['subLinks'] = array(
         array
         (
@@ -194,6 +196,7 @@ class LeaveController extends Controller {
 
 			$data['title'] = "View Leave";
 			$data['activeLink'] = "leave";
+			$data['subTitle'] = "View Details of Employee's Leave Days";
 			$data['leave'] = $leave;
 
 			$data['subLinks'] = array(
@@ -385,6 +388,7 @@ class LeaveController extends Controller {
 		{
 			$data['title'] = "Search for Employee Leaves";
 			$data['activeLink'] = "leave";
+			$data['subTitle'] = "Search For Leave Day Record";
 			$data['subLinks'] = array(
 				array
 				(

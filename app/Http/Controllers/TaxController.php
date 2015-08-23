@@ -21,6 +21,7 @@ class TaxController extends Controller {
 		{
       $data['title'] = "Tax Model";
 			$data['activeLink'] = "tax_model";
+			$data['subTitle'] = "Income Tax Model";
 
       $taxModelDataCount = Tax::all()->count();
 

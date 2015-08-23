@@ -20,6 +20,7 @@ class UserController extends Controller {
 		{
 			$data['title'] = "Users";
 			$data['activeLink'] = "user";
+			$data['subTitle'] = "All System Users";
 	    $data['users'] = User::orderBy("updated_at","DESC")->paginate(20);
 			$data['subLinks'] = array(
 				array
@@ -51,6 +52,7 @@ class UserController extends Controller {
 		{
 	    	$data['title'] = "Add User";
 				$data['activeLink'] = "user";
+				$data['subTitle'] = "Add a System User";
 				$data['subLinks'] = array(
 					array
 					(
@@ -144,6 +146,7 @@ class UserController extends Controller {
 
 			$data['title'] = "Edit User";
 			$data['activeLink'] = "user";
+			$data['subTitle'] = "Edit System User Details";
 			$data['subLinks'] = array(
 				array
 				(
@@ -252,6 +255,7 @@ class UserController extends Controller {
 
 			$data['title'] = "View User Details";
 			$data['activeLink'] = "user";
+			$data['subTitle'] = "View System User Details";
 			$data['subLinks'] = array(
 				array
 				(
@@ -303,6 +307,19 @@ class UserController extends Controller {
 		{
 			return "You are not authorized";die();
 		}
+	}
+
+	public function resetUserPassword($id)
+	{
+			$user = User::find($id);
+
+			$user -> status = 2;
+			$user -> password = Hash::make("password");
+
+			$user -> push();
+
+			Session::flash('message', 'User\'s password reset');
+			return Redirect::to("/system/users");
 	}
 
   public function apiGetUsers($data)

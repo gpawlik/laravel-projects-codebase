@@ -22,6 +22,7 @@ class BranchController extends Controller {
       $data['title'] = "Branches";
 	    $data['branches'] = Branch::orderBy("updated_at","DESC")->paginate(20);
       $data['activeLink'] = "branch";
+			$data['subTitle'] = "Company's Branches";
 			$data['subLinks'] = array(
 				array
 				(
@@ -53,11 +54,12 @@ class BranchController extends Controller {
 		{
       $data['title'] = "Add Branch";
       $data['activeLink'] = "branch";
+			$data['subTitle'] = "Add a Company Branch";
       $data['subLinks'] = array(
         array
         (
           "title" => "Branch List",
-          "route" => "/system/branch",
+          "route" => "/system/branches",
           "icon" => "<i class='fa fa-th-list'></i>",
           "permission" => "system_branch_can_view"
         )
@@ -121,11 +123,12 @@ class BranchController extends Controller {
 
 	    $data['title'] = "Edit Branch";
 			$data['activeLink'] = "branch";
+			$data['subTitle'] = "Edit Company's Branch";
 	    $data['subLinks'] = array(
 	      array
 	      (
 	        "title" => "Branch List",
-	        "route" => "/system/branch",
+	        "route" => "/system/branches",
 	        "icon" => "<i class='fa fa-th-list'></i>",
 					"permission" => "system_branch_can_view"
 	      )
@@ -189,6 +192,7 @@ class BranchController extends Controller {
 
 			$data['title'] = "View Branch Details";
 			$data['activeLink'] = "branch";
+			$data['subTitle'] = "View Company Branch Details";
 			$data['subLinks'] = array(
 				array
 				(

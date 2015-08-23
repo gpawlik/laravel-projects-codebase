@@ -24,6 +24,7 @@ class ApplicationController extends Controller {
       $data['title'] = "Job applications";
 	    $data['applications'] = Application::orderBy("updated_at","DESC")->paginate(20);
       $data['activeLink'] = "application";
+			$data['subTitle'] = "Job Application Records";
 			$data['subLinks'] = array(
 				array
 				(
@@ -55,6 +56,7 @@ class ApplicationController extends Controller {
 		{
       $data['title'] = "Add Job Application";
       $data['activeLink'] = "application";
+			$data['subTitle'] = "Add Job Application";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -158,6 +160,7 @@ class ApplicationController extends Controller {
 
 			$data['title'] = "Edit Application";
 			$data['activeLink'] = "application";
+			$data['subTitle'] = "Edit Job Application";
 			$data['subLinks'] = array(
         array
         (
@@ -295,6 +298,7 @@ class ApplicationController extends Controller {
 
 			$data['title'] = "View Application Details";
 			$data['activeLink'] = "application";
+			$data['subTitle'] = "View Job Application Record";
 			$data['subLinks'] = array(
 				array
 				(

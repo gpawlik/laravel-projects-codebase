@@ -21,6 +21,7 @@ class JobController extends Controller {
 		{
       $data['title'] = "Jobs";
       $data['activeLink'] = "job";
+			$data['subTitle'] = "Job Positions";
       $data['jobs'] = Job::orderBy("updated_at","DESC")->paginate(20);
 
       $data['subLinks'] = array(
@@ -55,6 +56,7 @@ class JobController extends Controller {
 		{
       $data['title'] = "Add Job";
       $data['activeLink'] = "job";
+			$data['subTitle'] = "Add Job Position";
       $data['subLinks'] = array(
         array
         (
@@ -144,6 +146,7 @@ class JobController extends Controller {
 
 			$data['title'] = "Edit Job";
 			$data['activeLink'] = "job";
+			$data['subTitle'] = "Edit job Position";
 			$data['subLinks'] = array(
 				array
 				(
@@ -250,6 +253,7 @@ class JobController extends Controller {
 
 			$data['title'] = "View Job Details";
 			$data['activeLink'] = "job";
+			$data['subTitle'] = "View Job Position Details";
 			$data['subLinks'] = array(
 					array
 					(
@@ -314,6 +318,7 @@ class JobController extends Controller {
 		{
 			$data['title'] = "Search for a job position";
 			$data['activeLink'] = "job";
+			$data['subTitle'] = "Search for Job Position";
 			$data['subLinks'] = array(
 				array
 				(

@@ -20,8 +20,9 @@ class LoanController extends Controller {
 	{
     if(self::checkUserPermissions("hrm_loan_can_view"))
 		{
-      $data['title'] = "loans";
+      $data['title'] = "Loans";
       $data['activeLink'] = "loan";
+			$data['subTitle'] = "Staff Loans";
       $data['loans'] = Loan::orderBy("updated_at","DESC")->paginate(20);
 
       $data['subLinks'] = array(
@@ -56,6 +57,7 @@ class LoanController extends Controller {
 		{
       $data['title'] = "Add Loan";
       $data['activeLink'] = "loan";
+			$data['subTitle'] = "Add Staff Loan";
       $data['subLinks'] = array(
         array
         (
@@ -178,6 +180,7 @@ class LoanController extends Controller {
 
 			$data['title'] = "Edit Loan";
 			$data['activeLink'] = "loan";
+			$data['subTitle'] = "Edit Staff Loan Details";
 			$data['subLinks'] = array(
 				array
 				(
@@ -304,6 +307,7 @@ class LoanController extends Controller {
 
 			$data['title'] = "View Staff Loan Details";
 			$data['activeLink'] = "loan";
+			$data['subTitle'] = "View Staff Loan Details";
 			$data['subLinks'] = array(
 				array
 				(
@@ -402,6 +406,7 @@ class LoanController extends Controller {
 		{
 			$data['title'] = "Search for Loan";
 			$data['activeLink'] = "loan";
+			$data['subTitle'] = "Search for Staff Loan";
 			$data['subLinks'] = array(
 				array
 				(

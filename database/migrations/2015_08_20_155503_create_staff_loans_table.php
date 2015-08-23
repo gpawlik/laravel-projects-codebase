@@ -17,7 +17,7 @@ class CreateStaffLoansTable extends Migration
 
             $table -> string("loan_type"); //COMPANY LOAN | BANK LOAN
             $table -> string("payment_frequency");
-            $table -> integer("amount");
+            $table -> double("amount");
             $table -> date("start_date");
             $table -> date("end_date");
 

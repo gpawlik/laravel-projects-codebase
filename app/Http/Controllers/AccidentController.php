@@ -24,6 +24,7 @@ class AccidentController extends Controller {
       $data['title'] = "Accidents";
 	    $data['accidents'] = Accident::orderBy("updated_at","DESC")->paginate(20);
       $data['activeLink'] = "accident";
+			$data['subTitle'] = "Employee Accident Records";
 			$data['subLinks'] = array(
 				array
 				(
@@ -56,6 +57,7 @@ class AccidentController extends Controller {
 		{
       $data['title'] = "Add Accident";
       $data['activeLink'] = "accident";
+			$data['subTitle'] = "Add Employee Accident";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -154,6 +156,7 @@ class AccidentController extends Controller {
 
 			$data['title'] = "Edit Accident Details";
 			$data['activeLink'] = "accident";
+			$data['subTitle'] = "Edit Employee Accident";
 			$data['subLinks'] = array(
         array
         (
@@ -258,7 +261,7 @@ class AccidentController extends Controller {
 			$data['title'] = "View Accident";
 			$data['activeLink'] = "accident";
 			$data['accident'] = $accident;
-
+			$data['subTitle'] = "View Employee Accident Details";
 			$data['subLinks'] = array(
 				array
 				(

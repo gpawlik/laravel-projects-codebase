@@ -20,6 +20,7 @@ class ReminderController extends Controller {
 	public function index()
 	{
 		$data['title'] = "My Reminders";
+		$data['subTitle'] = "Your Reminders";
 		$data['reminders'] = \DB::table("reminders")->where("user_id",Auth::user()->id)->orderBy("updated_at","DESC")->paginate(20);
     //var_dump(\DB::table("reminders")->where("user_id",Auth::user()->id)->orderBy("updated_at","DESC")->get());die();
 
@@ -29,6 +30,7 @@ class ReminderController extends Controller {
   public function add()
   {
     $data['title'] = "Add Reminder";
+		$data['subTitle'] = "Add Reminder";
 
     return view('dashboard.reminders.add',$data);
   }
@@ -87,6 +89,7 @@ class ReminderController extends Controller {
   {
     $data['title'] = "Edit Reminder";
     $data['reminder'] = Reminder::find($id);
+		$data['subTitle'] = "Edit Reminder";
 
     return view('dashboard.reminders.edit',$data);
   }
@@ -141,6 +144,7 @@ class ReminderController extends Controller {
   public function view($id)
   {
     $data['title'] = "View Reminder";
+		$data['subTitle'] = "View Reminder";
     $data['reminder'] = Reminder::find($id);
 
     return view('dashboard.reminders.view',$data);

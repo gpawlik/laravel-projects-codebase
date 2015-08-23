@@ -27,6 +27,7 @@ class TerminationController extends Controller {
 		{
       $data['title'] = "Job Terminations / Resignations";
       $data['activeLink'] = "termination";
+			$data['subTitle'] = "Job Termination Records";
       $data['terminations'] = Termination::orderBy("updated_at","DESC")->paginate(20);
 
       $data['subLinks'] = array(
@@ -56,6 +57,7 @@ class TerminationController extends Controller {
 		{
       $data['title'] = "Add Job Termination";
       $data['activeLink'] = "termination";
+			$data['subTitle'] = "Add Job Termination";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -170,6 +172,7 @@ class TerminationController extends Controller {
 
 			$data['title'] = "View Termination Details";
 			$data['activeLink'] = "termination";
+			$data['subTitle'] = "View Job Termination Details";
 			$data['subLinks'] = array(
 				array
 	      (

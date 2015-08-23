@@ -21,6 +21,7 @@ class RoleController extends Controller {
 		{
 	    $data['title'] = "Roles";
 			$data['activeLink'] = "role";
+			$data['subTitle'] = "Roles";
 	    $data['roles'] = Role::orderBy("updated_at","DESC")->paginate(20);
 	    $data['subLinks'] = array(
 	      array
@@ -52,6 +53,7 @@ class RoleController extends Controller {
 		{
 			$data['title'] = "Add Role";
 			$data['activeLink'] = "role";
+			$data['subTitle'] = "Add Role";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -111,6 +113,7 @@ class RoleController extends Controller {
 
 			$data['title'] = "Edit Role";
 			$data['activeLink'] = "role";
+			$data['subTitle'] = "Edit Role";
 			$data['role'] = $role;
 	    $data['subLinks'] = array(
 	      array
@@ -177,6 +180,7 @@ class RoleController extends Controller {
 
 			$data['title'] = "View Role Details";
 			$data['activeLink'] = "role";
+			$data['subTitle'] = "View Role Details";
 			$data['subLinks'] = array(
 					array
 					(
@@ -241,6 +245,7 @@ class RoleController extends Controller {
 
 			$data['title'] = "Role Permissions";
 			$data['activeLink'] = "role";
+			$data['subTitle'] = "Role Permissions";
 			$data['subLinks'] = array(
 					array
 					(

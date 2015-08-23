@@ -21,6 +21,7 @@ class OrientationController extends Controller {
 		{
       $data['title'] = "Orientations";
       $data['activeLink'] = "orientation";
+			$data['subTitle'] = "Staff Orientation Records";
       $data['orientations'] = Orientation::orderBy("updated_at","DESC")->paginate(20);
 
       $data['subLinks'] = array(
@@ -55,6 +56,7 @@ class OrientationController extends Controller {
 		{
       $data['title'] = "Add Orientation";
       $data['activeLink'] = "orientation";
+			$data['subTitle'] = "Add Staff Orientation";
       $data['subLinks'] = array(
         array
         (
@@ -146,6 +148,7 @@ class OrientationController extends Controller {
 
     			$data['title'] = "Edit Orientation";
     			$data['activeLink'] = "orientation";
+					$data['subTitle'] = "Edit Staff Orientation Details";
     			$data['subLinks'] = array(
     				array
     				(
@@ -233,6 +236,7 @@ class OrientationController extends Controller {
 
 			$data['title'] = "View Orientation";
 			$data['activeLink'] = "orientation";
+			$data['subTitle'] = "View Staff Orientation Details";
 			$data['orientation'] = $orientation;
 
 			$data['subLinks'] = array(
@@ -299,6 +303,7 @@ class OrientationController extends Controller {
 		{
 			$data['title'] = "Search for Orientation";
 			$data['activeLink'] = "orientation";
+			$data['subTitle'] = "Search for Staff Orientation Record";
 			$data['subLinks'] = array(
 				array
 				(

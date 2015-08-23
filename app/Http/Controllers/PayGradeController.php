@@ -31,6 +31,7 @@ class PayGradeController extends Controller
       {
         $data['title'] = "Pay Grades";
         $data['activeLink'] = "paygrade";
+        $data['subTitle'] = "Pay Grades";
         $data['paygrades'] = PayGrade::orderBy("updated_at","DESC")->paginate(20);
 
         $data['subLinks'] = array(
@@ -70,6 +71,7 @@ class PayGradeController extends Controller
   		{
         $data['title'] = "Add Pay Grade";
         $data['activeLink'] = "paygrade";
+        $data['subTitle'] = "Add Pay Grade";
         $data['subLinks'] = array(
           array
           (
@@ -152,6 +154,7 @@ class PayGradeController extends Controller
 
         $data['title'] = "View Pay Grade";
         $data['activeLink'] = "paygrade";
+        $data['subTitle'] = "View Pay Grade Details";
         $data['payGrade'] = $payGrade;
 
         $data['subLinks'] = array(
@@ -194,6 +197,7 @@ class PayGradeController extends Controller
 
         $data['title'] = "Edit Pay Grade";
         $data['activeLink'] = "paygrade";
+        $data['subTitle'] = "Edit Pay Grade Details";
         $data['subLinks'] = array(
           array
           (
@@ -296,6 +300,7 @@ class PayGradeController extends Controller
   		{
   			$data['title'] = "Search for Pay Grades";
   			$data['activeLink'] = "paygrade";
+        $data['subTitle'] = "Search for Pay Grade";
   			$data['subLinks'] = array(
   				array
   				(

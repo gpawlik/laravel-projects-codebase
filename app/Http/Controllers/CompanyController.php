@@ -21,7 +21,8 @@ class CompanyController extends Controller {
 		{
 	    $data['title'] = "Company Details";
 			$data['activeLink'] = "company";
-			
+			$data['subTitle'] = "Company Details";
+
 			$companyDetailsContent = Company::all()->count();
 
 			if($companyDetailsContent > 0)

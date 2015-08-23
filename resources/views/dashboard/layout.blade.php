@@ -115,7 +115,7 @@
 
 						@if(isset($jobPermission))
 							<a href = "/hrm/jobs" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'job') { echo 'active-link'; } } ?>">
-								<i class="fa fa-briefcase"></i> &nbsp; Jobs Positions
+								<i class="fa fa-briefcase"></i> &nbsp; Job Positions
 							</a>
 						@endif
 
@@ -284,6 +284,12 @@
       </div>
     @endif
 
+		@if(isset($subTitle))
+			<h3 class = "sub-title">
+				{{ $subTitle }}
+			</h3>
+		@endif
+
     <div id = "content">
 
 			@if(isset($subLinks))
@@ -303,6 +309,7 @@
 					}
 
 				?>
+
 					@if(isset($subLinkAccess))
 						<a @if(isset($subLink['route'])) href = "{{$subLink['route']}}" @endif>
 							<div class = "mini-link" title = "{{$subLink['title']}}">
@@ -318,6 +325,7 @@
 			<div id = "signature">
 				<span><i class="fa fa-power-off"></i> &nbsp; Powered By : <b>DB Technologies</b></span>
 			</div>
+
     </div>
 
   </div>

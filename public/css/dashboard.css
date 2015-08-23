@@ -93,7 +93,7 @@ div#content-wrapper{
 }
 
 div#content{
-  padding:20px;
+  padding:0px 20px;
 }
 
 div#content-wrapper header{
@@ -244,6 +244,15 @@ div#unread-msg-badge{
 .page_links ul li a{
 	text-decoration: none;
 	color:#616161;
+}
+
+.sub-title{
+  color:#4183D7;
+  font-weight: normal;
+  margin:0px;
+  margin-bottom: 10px;
+  padding:10px 20px;
+  background-color: #F1F1F1;
 }
 
 /**************************************************/

@@ -23,6 +23,7 @@ class DashboardController extends Controller {
 		if(self::checkUserStatus())
 		{
 			$data['title'] = "Dashboard";
+			$data['subTitle'] = "Dashboard";
 
 			if(self::checkUserPermissions("dashboard_department_can_view"))
 			{

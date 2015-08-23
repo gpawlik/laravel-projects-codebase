@@ -22,6 +22,7 @@ class BankController extends Controller {
       $data['title'] = "Banks";
 	    $data['banks'] = Bank::orderBy("updated_at","DESC")->paginate(20);
       $data['activeLink'] = "bank";
+			$data['subTitle'] = "Banks";
 			$data['subLinks'] = array(
 				array
 				(
@@ -52,6 +53,7 @@ class BankController extends Controller {
 		{
       $data['title'] = "Add Bank";
       $data['activeLink'] = "bank";
+			$data['subTitle'] = "Add a Bank";
       $data['subLinks'] = array(
         array
         (
@@ -111,6 +113,7 @@ class BankController extends Controller {
 
 	    $data['title'] = "Edit Bank";
 			$data['activeLink'] = "bank";
+			$data['subTitle'] = "Edit a Bank";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -171,6 +174,7 @@ class BankController extends Controller {
 
 			$data['title'] = "View Bank Details";
 			$data['activeLink'] = "bank";
+			$data['subTitle'] = "View Bank Details";
 			$data['subLinks'] = array(
 				array
 				(

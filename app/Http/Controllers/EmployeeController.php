@@ -27,6 +27,7 @@ class EmployeeController extends Controller {
       $data['title'] = "Employees Data";
 	    $data['employees'] =	\DB::table("employees")->where("employment_status","ACTIVE")->orderBy("updated_at","DESC")->paginate(20);
       $data['activeLink'] = "employee";
+			$data['subTitle'] = "Employees";
 			$data['subLinks'] = array(
 				array
 				(
@@ -66,6 +67,7 @@ class EmployeeController extends Controller {
 
 			$data['title'] = "Add Employee";
 			$data['activeLink'] = "employee";
+			$data['subTitle'] = "Add Employee";
 			$data['subLinks'] = array(
         array
         (
@@ -303,6 +305,7 @@ class EmployeeController extends Controller {
 
 			$data['title'] = "Edit Employee";
 			$data['activeLink'] = "employee";
+			$data['subTitle'] = "Edit Employee Details";
 			$data['subLinks'] = array(
         array
         (
@@ -561,6 +564,7 @@ class EmployeeController extends Controller {
 
 			$data['title'] = "View Employee Details";
 			$data['activeLink'] = "employee";
+			$data['subTitle'] = "View Employee Details";
 			$data['subLinks'] = array(
 				array
 				(

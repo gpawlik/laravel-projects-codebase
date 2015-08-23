@@ -25,6 +25,7 @@ class TrainingController extends Controller {
 		{
       $data['title'] = "Employee Training";
       $data['activeLink'] = "training";
+			$data['subTitle'] = "Employee Training Records";
       $data['training'] = Training::orderBy("updated_at","DESC")->paginate(20);
 
       $data['subLinks'] = array(
@@ -58,6 +59,7 @@ class TrainingController extends Controller {
 		{
 			$data['title'] = "Add Training";
       $data['activeLink'] = "training";
+			$data['subTitle'] = "Add Employee Training Record";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -160,6 +162,7 @@ class TrainingController extends Controller {
 
 			$data['title'] = "View Training Details";
 			$data['activeLink'] = "training";
+			$data['subTitle'] = "View Employee Training Record Details";
 			$data['subLinks'] = array(
 				array
 	      (
@@ -195,6 +198,7 @@ class TrainingController extends Controller {
 
 					$data['title'] = "Edit Training";
 					$data['activeLink'] = "training";
+					$data['subTitle'] = "Edit Employee Training Record";
 					$data['subLinks'] = array(
 						array
 						(

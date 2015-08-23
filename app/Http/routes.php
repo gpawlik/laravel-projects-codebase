@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/users/update/{id}','UserController@update');
       Route::get('/users/delete/{id}','UserController@delete');
       Route::get('/users/view/{id}','UserController@view');
+      Route::get('/users/reset_password/{id}','UserController@resetUserPassword');
 
       //Role routes
       Route::get('/roles','RoleController@index');

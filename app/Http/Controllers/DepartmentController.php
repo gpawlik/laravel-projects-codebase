@@ -21,6 +21,7 @@ class DepartmentController extends Controller {
 		{
       $data['title'] = "Departments";
       $data['activeLink'] = "department";
+			$data['subTitle'] = "Company Departments";
       $data['departments'] = Department::orderBy("updated_at","DESC")->paginate(20);
 
       $data['subLinks'] = array(
@@ -56,6 +57,7 @@ class DepartmentController extends Controller {
 		{
       $data['title'] = "Add department";
       $data['activeLink'] = "department";
+			$data['subTitle'] = "Add Department";
 	    $data['subLinks'] = array(
 	      array
 	      (
@@ -115,6 +117,7 @@ class DepartmentController extends Controller {
 
 			$data['title'] = "Edit Department";
 			$data['activeLink'] = "department";
+			$data['subTitle'] = "Edit Department";
 			$data['department'] = $dept;
 	    $data['subLinks'] = array(
         array
@@ -182,6 +185,7 @@ class DepartmentController extends Controller {
 
 			$data['title'] = "View Department Details";
 			$data['activeLink'] = "department";
+			$data['subTitle'] = "View Department Details";
 			$data['subLinks'] = array(
 				array
 				(

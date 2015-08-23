@@ -21,6 +21,7 @@ class ConfigController extends Controller {
 		{
       $data['title'] = "HRM Configurations";
 			$data['activeLink'] = "config";
+			$data['subTitle'] = "HRM Configurations";
 
 			$configDetails = Configuration::all()->count();
 

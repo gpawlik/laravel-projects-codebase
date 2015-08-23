@@ -17,6 +17,7 @@ class MessageController extends Controller {
 	public function index()
 	{
     $data['title'] = "My Messages";
+		$data['subTitle'] = "All Messages";
 		$data['messages'] = \DB::table("messages")->where("to_user_id",Auth::user()->id)->orWhere("from_user_id",Auth::user()->id)->orderBy("created_at","DESC")->paginate(20);
     //var_dump(\DB::table("messages")->where("to_user_id",Auth::user()->id)->orWhere("from_user_id",Auth::user()->id)->orderBy("updated_at","DESC")->get());die();
 
@@ -26,6 +27,7 @@ class MessageController extends Controller {
   public function add()
   {
     $data['title'] = "Send Message";
+		$data['subTitle'] = "Send message";
 
     return view('dashboard.messages.add',$data);
   }
@@ -92,6 +94,7 @@ class MessageController extends Controller {
 		$message = Message::find($id);
 
 		$data['title'] = "Read Message";
+		$data['subTitle'] = "View Message";
 		$data['message'] = $message;
 
 		if($message->status == "UNREAD")
