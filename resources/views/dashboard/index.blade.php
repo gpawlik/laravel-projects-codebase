@@ -65,6 +65,7 @@
 	@endif
 
 </div>
+<br/>
 
 
 <h3 class = "dashboard-heading">Notices & Reminders</h3>
@@ -186,7 +187,7 @@
 	@endif
 
 </div>
-
+<br/>
 
 <h3 class = "dashboard-heading">Statistics</h3>
 

@@ -710,10 +710,18 @@ table.permission-table tr:hover{
 
 #signature{
   margin-top: 20px;
+  margin-bottom: 20px;
   background-color: #EFEFEF;
   padding:10px;
 }
 
 #signature span{
   color:#919191;
+}
+
+#no-data{
+  padding: 10px;
+  background-color: #FFF;
+  text-align: center;
+  color:#AA0000;
 }
