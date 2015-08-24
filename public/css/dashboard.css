@@ -282,7 +282,7 @@ div.short-cards{
 }
 
 div.short-cards .big-text{
-  font-size: 30px;
+  font-size: 25px;
   display: block;
   margin-bottom: 10px;
 }
@@ -368,7 +368,7 @@ div.red-border{
 div.dashboard-card .title{
   padding:10px;
   margin: 0;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: normal;
 }
 
@@ -448,7 +448,7 @@ div#warning-box{
 }
 
 .grid-item{
-  width:23%;
+  width:22%;
   margin-top:5px;
 }
 
