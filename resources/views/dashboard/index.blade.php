@@ -7,59 +7,65 @@
 <div class="grid">
 
 	@if(isset($employeeCount))
-		<div class = "dashboard-card quarter inline grid-item">
-			<div class = "content white-text alizarin">
-				<b> <i class="fa fa-users"></i> Number of Employees : {{ $employeeCount }}</b>
+		<div class = "dashboard-card short-cards green-border quarter inline grid-item">
+			<div>
+				<span class = "big-text green-color">{{ $employeeCount }}  &nbsp;&nbsp; <i class="fa fa-users"></i></span>
+				Employees
 			</div>
 		</div>
 	@endif
 
 	@if(isset($departmentsCount))
-		<div class = "dashboard-card quarter inline grid-item">
-			<div class = "content white-text turquise">
-				<b> <i class="fa fa-building"></i> Number of Departments : </b>{{ $departmentsCount }}
+		<div class = "dashboard-card short-cards blue-border quarter inline grid-item">
+			<div>
+				<span class = "big-text blue-color">{{ $departmentsCount }} &nbsp;&nbsp; <i class="fa fa-building"></i> </span>
+				Departments
 			</div>
 		</div>
 	@endif
 
 	@if(isset($jobCount))
-		<div class = "dashboard-card quarter inline grid-item">
-			<div class = "content white-text brown">
-				<b> <i class="fa fa-briefcase"></i> Job Categories : </b>{{ $jobCount }}
+		<div class = "dashboard-card short-cards amber-border quarter inline grid-item">
+			<div>
+				<span class = "big-text amber-color">{{ $jobCount }} &nbsp;&nbsp; <i class="fa fa-briefcase"></i></span>
+				Job Positions
 			</div>
 		</div>
 	@endif
 
-	<br/>
 
 	@if(isset($totalSalaries))
-		<div class = "dashboard-card quarter inline grid-item">
-			<div class = "content white-text turquise">
-				<b> <i class="fa fa-dollar"></i> Total Salaries : GHC {{ $totalSalaries }}</b>
+		<div class = "dashboard-card short-cards turquise-border quarter inline grid-item">
+			<div>
+				<span class = "big-text turquise-color"> GHC {{ $totalSalaries }} </span>
+				Total Salaries
 			</div>
 		</div>
 	@endif
 
 	@if(isset($totalAllowance))
-		<div class = "dashboard-card quarter inline grid-item">
-			<div class = "content white-text amber">
-				<b> <i class="fa fa-dollar"></i> Total Allowances : GHC {{ $totalAllowance }}</b>
+		<div class = "dashboard-card short-cards alizarin-border quarter inline grid-item">
+			<div>
+				 <span class = "big-text alizarin-color">GHC {{ $totalAllowance }} </span>
+				Total Allowances
 			</div>
 		</div>
 	@endif
 
 	@if(isset($totalSSNIT))
-		<div class = "dashboard-card quarter inline grid-item">
-			<div class = "content white-text alizarin">
-				<b> <i class="fa fa-dollar"></i> SSNIT Contribitions : GHC {{ $totalSSNIT }}</b>
+		<div class = "dashboard-card short-cards brown-border quarter inline grid-item">
+			<div>
+				<span class = "big-text brown-color">GHC {{ $totalSSNIT }}</span>
+				SSNIT Contribitions
 			</div>
 		</div>
 	@endif
 
 	@if(isset($totalTax))
-		<div class = "dashboard-card quarter inline grid-item">
-			<div class = "content white-text pumpkin">
-				<b> <i class="fa fa-dollar"></i> Total Employee Tax : GHC {{ $totalTax }}</b>
+		<div class = "dashboard-card short-cards green-sea-border quarter inline grid-item">
+			<div>
+				<span class = "big-text green-sea-color">GHC {{ $totalTax }}</span>
+				Total Employee Tax
 			</div>
 		</div>
 	@endif
@@ -73,8 +79,8 @@
 <div class="grid">
 
 	@if(isset($vacant_jobs))
-		<div id = "leaves" class = "dashboard-card quarter inline grid-item">
-			<h3 class = "title green"><i class="fa fa-plus-circle"></i> Vacancies</h3>
+		<div id = "leaves" class = "dashboard-card quarter green-border inline grid-item">
+			<h3 class = "title green-color"><i class="fa fa-plus-circle"></i> &nbsp;&nbsp; Vacancies</h3>
 
 			<div class = "content">
 				<p>Vacant Job Positions : {{ count($vacant_jobs) }}</p>
@@ -100,8 +106,8 @@
 	@endif
 
 	@if(isset($applications))
-		<div class = "dashboard-card quarter inline grid-item">
-			<h3 class = "title blue"><i class="fa fa-file-text"></i> Job Applications</h3>
+		<div class = "dashboard-card quarter blue-border inline grid-item">
+			<h3 class = "title blue-color"><i class="fa fa-file-text"></i> &nbsp;&nbsp; Job Applications</h3>
 
 			<div class = "content">
 
@@ -126,8 +132,8 @@
 	@endif
 
 	@if(isset($leaves))
-		<div id = "leaves" class = "dashboard-card quarter inline grid-item">
-			<h3 class = "title pumpkin"><i class="fa fa-plane"></i> Employees on Leave</h3>
+		<div id = "leaves" class = "dashboard-card pumpkin-border quarter inline grid-item">
+			<h3 class = "title pumpkin-color"><i class="fa fa-plane"></i> &nbsp;&nbsp; Employees on Leave</h3>
 
 				<div class = "content">
 
@@ -155,8 +161,8 @@
 	@endif
 
 	@if(isset($reminders))
-		<div id = "reminders" class = "dashboard-card quarter inline grid-item">
-			<h3 class = "title amber"><i class="fa fa-bell-o"></i> Reminders</h3>
+		<div id = "reminders" class = "dashboard-card red-border quarter inline grid-item">
+			<h3 class = "title red-color"><i class="fa fa-bell-o"></i> &nbsp;&nbsp; Reminders</h3>
 
 			<div class = "content">
 
@@ -194,8 +200,8 @@
 <div class="grid">
 
 	@if(isset($genderDistro))
-		<div id = "gender-chart-wrapper" class = "dashboard-card quarter inline grid-item">
-			<h3 class = "title green-sea"><i class="fa fa-male"></i><i class="fa fa-female"></i> Gender Distribution</h3>
+		<div id = "gender-chart-wrapper" class = "dashboard-card green-sea-border quarter inline grid-item">
+			<h3 class = "title green-sea-color"><i class="fa fa-male"></i><i class="fa fa-female"></i> &nbsp;&nbsp; Gender Distribution</h3>
 
 			<div class = "content">
 
@@ -207,8 +213,8 @@
 	@endif
 
 	@if(isset($jobDistro))
-		<div id = "job-chart-wrapper" class = "dashboard-card quarter inline grid-item">
-			<h3 class = "title amber"><i class="fa fa-pie-chart"></i> Job : Employee Distribution</h3>
+		<div id = "job-chart-wrapper" class = "dashboard-card green-border quarter inline grid-item">
+			<h3 class = "title green-color"><i class="fa fa-pie-chart"></i> &nbsp;&nbsp; Job : Employee Distribution</h3>
 
 			<div class = "content">
 

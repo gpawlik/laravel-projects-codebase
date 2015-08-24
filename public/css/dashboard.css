@@ -102,6 +102,8 @@ div#content-wrapper header{
   box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
   height: 40px;
   line-height: 40px;
+  position: relative;
+  z-index: 99999;
 }
 
 div#logout-btn{
@@ -254,6 +256,8 @@ div#unread-msg-badge{
   margin-bottom: 10px;
   padding:10px 20px;
   background-color: #F1F1F1;
+  position: relative;
+  z-index: 99;
 }
 
 /**************************************************/
@@ -268,13 +272,104 @@ div.card{
 
 div.dashboard-card{
   background-color: #FFF;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1)
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1);
 }
+
+div.short-cards{
+  padding:10px;
+  font-size: 15px;
+  color:#717171;
+}
+
+div.short-cards .big-text{
+  font-size: 30px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/****************************************************************************************8****************************/
+
+.green-color{
+  color:#21a560;
+}
+
+.blue-color{
+  color:#2980b9;
+}
+
+.pumpkin-color{
+  color:#d35400;
+}
+
+.amber-color{
+  color:#d35400;
+}
+
+.turquise-color{
+  color:#1abc9c;
+}
+
+.alizarin-color{
+  color:#e74c3c;
+}
+
+.brown-color{
+  color:#795548;
+}
+
+.green-sea-color{
+  color:#16a085;
+}
+
+.red-color{
+  color:#f44336;
+}
+
+/****************************************************************************************8****************************/
+
+div.green-border{
+  border-bottom:2px solid #21a560;
+}
+
+div.blue-border{
+  border-bottom:2px solid #2980b9;
+}
+
+div.pumpkin-border{
+  border-bottom:2px solid #d35400;
+}
+
+div.amber-border{
+  border-bottom:2px solid #d35400;
+}
+
+div.turquise-border{
+  border-bottom:2px solid #1abc9c;
+}
+
+div.alizarin-border{
+  border-bottom:2px solid #e74c3c;
+}
+
+div.brown-border{
+  border-bottom:2px solid #795548;
+}
+
+div.green-sea-border{
+  border-bottom:2px solid #16a085;
+}
+
+div.red-border{
+  border-bottom: 2px solid #f44336;
+}
+
+/****************************************************************************************8****************************/
 
 div.dashboard-card .title{
   padding:10px;
   margin: 0;
-  color:#FFF;
+  font-size: 20px;
+  font-weight: normal;
 }
 
 div.dashboard-card .content{
@@ -282,37 +377,41 @@ div.dashboard-card .content{
   font-size: 11px;
 }
 
-div.dashboard-card .green{
-  background-color: #21a560;
+/*div.dashboard-card .green{
+  color: #21a560;
 }
 
 div.dashboard-card .blue{
-  background-color: #2980b9;
+  color: #2980b9;
 }
 
 div.dashboard-card .pumpkin{
-  background-color: #d35400;
+  color: #d35400;
 }
 
 div.dashboard-card .amber{
-  background-color: #FFC107;
+  color: #FFC107;
 }
 
 div.dashboard-card .turquise{
-  background-color: #1abc9c;
+  color: #1abc9c;
 }
 
 div.dashboard-card .alizarin{
-  background-color: #e74c3c;
+  color: #e74c3c;
 }
 
 div.dashboard-card .brown{
-  background-color: #795548;
+  color: #795548;
 }
 
 div.dashboard-card .green-sea{
-  background-color: #16a085;
+  color: #16a085;
 }
+
+div.dashboard-card .green-sea{
+  color: #16a085;
+}*/
 
 .white-text{
   color:#FFF;
