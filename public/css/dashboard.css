@@ -273,10 +273,10 @@ div.card{
 div.dashboard-card{
   background-color: #FFF;
   box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1);
+  padding:10px;
 }
 
 div.short-cards{
-  padding:10px;
   font-size: 15px;
   color:#717171;
 }
@@ -376,42 +376,6 @@ div.dashboard-card .content{
   padding: 10px;
   font-size: 11px;
 }
-
-/*div.dashboard-card .green{
-  color: #21a560;
-}
-
-div.dashboard-card .blue{
-  color: #2980b9;
-}
-
-div.dashboard-card .pumpkin{
-  color: #d35400;
-}
-
-div.dashboard-card .amber{
-  color: #FFC107;
-}
-
-div.dashboard-card .turquise{
-  color: #1abc9c;
-}
-
-div.dashboard-card .alizarin{
-  color: #e74c3c;
-}
-
-div.dashboard-card .brown{
-  color: #795548;
-}
-
-div.dashboard-card .green-sea{
-  color: #16a085;
-}
-
-div.dashboard-card .green-sea{
-  color: #16a085;
-}*/
 
 .white-text{
   color:#FFF;
