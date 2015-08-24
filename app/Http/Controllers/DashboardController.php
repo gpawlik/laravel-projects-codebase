@@ -183,6 +183,7 @@ class DashboardController extends Controller {
 		$user = User::find(Auth::user()->id);
 
 		$data['title'] = "My Profile";
+		$data['subTitle'] = "Edit Your Profile";
 		$data['user'] = $user;
 
 
