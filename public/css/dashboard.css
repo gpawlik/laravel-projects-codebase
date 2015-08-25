@@ -201,6 +201,10 @@ div#unread-msg-badge{
    background-color: #F1F1F1;
 }
 
+.details-table tr:hover{
+  background-color: #4183D7;
+  color:#FFF;
+}
 
 .details-table th{
   text-align: left;
