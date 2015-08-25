@@ -6,7 +6,7 @@ class Identification extends Model{
 
 	protected $table = 'identification';
 
-	protected $fillable = ['permission_name'];
+	protected $fillable = ['identification_name'];
 
 	public static function getPermissions()
 	{

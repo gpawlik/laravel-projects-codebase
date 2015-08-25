@@ -42,6 +42,7 @@ class TerminationController extends Controller {
 				(
 					"title" => "Search for job Termination",
 					"icon" => "<i class='fa fa-search'></i>",
+					"route" => "/hrm/job_terminations/search",
 					"permission" => "hrm_termination_can_search"
 				)
 			);
@@ -187,6 +188,13 @@ class TerminationController extends Controller {
 					"route" => "/hrm/job_terminations/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "hrm_termination_can_add"
+				),
+				array
+				(
+					"title" => "Revert Termination",
+					"route" => "/hrm/job_terminations/revert_termination/".$id,
+					"icon" => "<i class='fa fa-undo'></i>",
+					"permission" => "hrm_termination_can_revert"
 				)
 			);
 			$data['termination'] = $termination;
@@ -201,12 +209,13 @@ class TerminationController extends Controller {
 
 	public function terminatedEmployeeDetails($id)
 	{
-		if(self::checkUserPermissions("hrm_termination_can_view"))
+		if(self::checkUserPermissions("hrm_termination_can_view")  && self::checkUserPermissions("hrm_employee_can_view"))
 		{
 			$employee = Employee::find($id);
 
 			$data['title'] = "View Terminated Employee Details";
 			$data['activeLink'] = "termination";
+			$data['subTitle'] = "Terminated Employee Details";
 			$data['subLinks'] = array(
 				array
 	      (
@@ -249,6 +258,53 @@ class TerminationController extends Controller {
 		{
 			return "You are not authorized";die();
 		}
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_termination_can_search"))
+		{
+			$data['title'] = "Search for Job Termination Record";
+			$data['activeLink'] = "termination";
+			$data['subTitle'] = "Search for Job Termination";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Job Termination List",
+					"route" => "/hrm/job_terminations",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_termination_can_view"
+				),
+				array
+				(
+					"title" => "Add Job termination",
+					"route" => "/hrm/job_terminations/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_termination_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.terminations.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$terminations = \DB::table("terminations")->select("terminations.id","date_of_termination","reason_for_termination","first_name","last_name")
+		->join("employees","employees.id","=","terminations.employee_id")
+		->where("date_of_termination","=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->orWhere("reason_for_termination","ilike","%$data%")
+		->orWhere("first_name","ilike","%$data%")
+		->orWhere("last_name","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$terminations
+		);
 	}
 
 	public function getRules()

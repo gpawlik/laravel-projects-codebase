@@ -6,7 +6,7 @@ class Termination extends Model{
 
 	protected $table = 'terminations';
 
-	protected $fillable = ['date_of_exit','reason_of_exit','details_of_exit','resignation_list','employee_archives_id'];
+	protected $fillable = ['date_of_termination','reason_for_termination','details_of_termination','resignation_list','employee_archives_id'];
 
 	public static function getPermissions()
 	{

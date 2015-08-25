@@ -249,6 +249,7 @@ class DepartmentController extends Controller {
 		{
 			$data['title'] = "Search For a Department";
 			$data['activeLink'] = "department";
+			$data['subTitle'] = "Search For Department";
 			$data['subLinks'] = array(
 				array
 				(

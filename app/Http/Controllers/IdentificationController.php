@@ -35,6 +35,7 @@ class IdentificationController extends Controller {
 				array
 				(
 					"title" => "Search for bank",
+					"route" => "/system/identification/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "system_identification_can_search"
 				)
@@ -169,7 +170,7 @@ class IdentificationController extends Controller {
 	{
 		if(self::checkUserPermissions("system_identification_can_view"))
 		{
-			$id = Identification::find($id);
+			$identification = Identification::find($id);
 
 			$data['title'] = "View Identification Details";
 			$data['activeLink'] = "identification";
@@ -188,9 +189,23 @@ class IdentificationController extends Controller {
 					"route" => "/system/identification/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_identification_can_add"
+				),
+				array
+				(
+					"title" => "Edit Identification",
+					"route" => "/system/identification/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "system_identification_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Identification",
+					"route" => "/system/identification/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "system_identification_can_delete"
 				)
 			);
-			$data['identification'] = $id;
+			$data['identification'] = $identification;
 
 			return view('dashboard.system.identification.view',$data);
 		}
@@ -215,6 +230,49 @@ class IdentificationController extends Controller {
 		{
 			return "You are not authorized";die();
 		}
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("system_identification_can_search"))
+		{
+			$data['title'] = "Search for Identification";
+			$data['activeLink'] = "identification";
+			$data['subTitle'] = "Search For Identification";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Identification List",
+					"route" => "/system/identification",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_identification_can_view"
+				),
+				array
+				(
+					"title" => "Add Identification",
+					"route" => "/system/identification/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_identification_can_add"
+				)
+			);
+
+			return view('dashboard.system.identification.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$identification = \DB::table("identification")->select("id","identification_name")
+		->where("identification_name","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$identification
+		);
 	}
 
 	public function getRules()

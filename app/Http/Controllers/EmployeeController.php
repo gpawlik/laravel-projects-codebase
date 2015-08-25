@@ -656,6 +656,7 @@ class EmployeeController extends Controller {
 		{
 			$data['title'] = "Search For an Employee";
 			$data['activeLink'] = "employee";
+			$data['subTitle'] = "Search for Employee";
 			$data['subLinks'] = array(
 				array
 				(

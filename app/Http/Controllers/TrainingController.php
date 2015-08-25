@@ -39,6 +39,7 @@ class TrainingController extends Controller {
         array
         (
           "title" => "Search for employee training",
+					"route" => "/hrm/training/search",
           "icon" => "<i class='fa fa-search'></i>",
           "permission" => "hrm_training_can_search"
         )
@@ -177,6 +178,20 @@ class TrainingController extends Controller {
 					"route" => "/hrm/training/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "hrm_training_can_add"
+				),
+				array
+				(
+					"title" => "Edit Training Record",
+					"route" => "/hrm/training/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "hrm_training_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Training Record",
+					"route" => "/hrm/training/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "hrm_training_can_delete"
 				)
 			);
 			$data['training'] = $training;
@@ -283,12 +298,13 @@ class TrainingController extends Controller {
 
 	public function trainedEmployee($id)
 	{
-		if(self::checkUserPermissions("hrm_training_can_view"))
+		if(self::checkUserPermissions("hrm_training_can_view") && self::checkUserPermissions("hrm_employee_can_view"))
 		{
 			$employee = Employee::find($id);
 
 			$data['title'] = "View Employee Training Details";
 			$data['activeLink'] = "training";
+			$data['subTitle'] = "Trained Employee's Details";
 			$data['subLinks'] = array(
 				array
 	      (
@@ -324,6 +340,54 @@ class TrainingController extends Controller {
     {
       return "You are not authorized";die();
     }
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_training_can_search"))
+		{
+			$data['title'] = "Search for Training Record";
+			$data['activeLink'] = "training";
+			$data['subTitle'] = "Search For Training Record";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Training List",
+					"route" => "/hrm/training",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_training_can_view"
+				),
+				array
+				(
+					"title" => "Add Training",
+					"route" => "/hrm/training/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_training_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.training.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$leaves = \DB::table("training")->select("training.id","training_start_date","training_end_date","training_type","first_name","last_name")
+		->join("employees","employees.id","=","training.employee_id")
+		->where("training_end_date",">=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->where("training_start_date","<=",new \DateTime(date('F jS Y h:i:s A', strtotime($data))))
+		->orWhere("training_type","ilike","%$data%")
+		->orWhere("first_name","ilike","%$data%")
+		->orWhere("last_name","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$leaves
+		);
 	}
 
 	public function getRules()

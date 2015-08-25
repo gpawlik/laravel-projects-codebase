@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::get('/users/delete/{id}','UserController@delete');
       Route::get('/users/view/{id}','UserController@view');
       Route::get('/users/reset_password/{id}','UserController@resetUserPassword');
+      Route::get('/users/search','UserController@search');
 
       //Role routes
       Route::get('/roles','RoleController@index');
@@ -79,6 +80,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::get('/roles/view/{id}','RoleController@view');
       Route::get('/roles/permissions/{id}','RoleController@permissions');
       Route::post('/roles/save_permissions/{id}','RoleController@savePermissions');
+      Route::get('/roles/search','RoleController@search');
 
       //permission routes
       Route::get('/permissions','PermissionController@index');
@@ -88,6 +90,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/permissions/update/{id}','PermissionController@update');
       Route::get('/permissions/delete/{id}','PermissionController@delete');
       Route::get('/permissions/view/{id}','PermissionController@view');
+      Route::get('/permissions/search','PermissionController@search');
 
       //company info routes
       Route::get('/company','CompanyController@index');
@@ -101,6 +104,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/banks/update/{id}','BankController@update');
       Route::get('/banks/delete/{id}','BankController@delete');
       Route::get('/banks/view/{id}','BankController@view');
+      Route::get('/banks/search','BankController@search');
 
       //identification routes
       Route::get('/identification','IdentificationController@index');
@@ -110,6 +114,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/identification/update/{id}','IdentificationController@update');
       Route::get('/identification/delete/{id}','IdentificationController@delete');
       Route::get('/identification/view/{id}','IdentificationController@view');
+      Route::get('/identification/search','IdentificationController@search');
 
       //branches routes
       Route::get('/branches','BranchController@index');
@@ -119,6 +124,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/branches/update/{id}','BranchController@update');
       Route::get('/branches/delete/{id}','BranchController@delete');
       Route::get('/branches/view/{id}','BranchController@view');
+      Route::get('/branches/search','BranchController@search');
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
@@ -217,6 +223,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/job_terminations/view/{id}','TerminationController@view');
       Route::get('/job_terminations/terminated_employee/{id}','TerminationController@terminatedEmployeeDetails');
       Route::get('/job_terminations/revert_termination/{id}','TerminationController@revertTermination');
+      Route::get('/job_terminations/search','TerminationController@search');
 
       //training routes
       Route::get('/training','TrainingController@index');
@@ -227,6 +234,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
       Route::get('/training/delete/{id}','TrainingController@delete');
       Route::get('/training/view/{id}','TrainingController@view');
       Route::get('/training/trained_employee/{id}','TrainingController@trainedEmployee');
+      Route::get('/training/search','TrainingController@search');
 
       //accident routes
       Route::get('/accidents','AccidentController@index');
@@ -287,6 +295,15 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
     Route::get('/pay_grade_search/{id}','PayGradeController@apiSearch');
     Route::get('/accident_search/{id}','AccidentController@apiSearch');
     Route::get('/loan_search/{id}','LoanController@apiSearch');
+    Route::get('/termination_search/{id}','TerminationController@apiSearch');
+    Route::get('/training_search/{id}','TrainingController@apiSearch');
+    Route::get('/bank_search/{id}','BankController@apiSearch');
+    Route::get('/branch_search/{id}','BranchController@apiSearch');
+    Route::get('/identification_search/{id}','IdentificationController@apiSearch');
+    Route::get('/permission_search/{id}','PermissionController@apiSearch');
+    Route::get('/role_search/{id}','RoleController@apiSearch');
+    Route::get('/user_search/{id}','UserController@apiSearch');
+    Route::get('/disciplinary_search/{id}','DisciplinaryController@apiSearch');
 
     //chart api routes
     Route::get('/gender_distro',function(){
@@ -309,7 +326,7 @@ Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
 
       foreach($jobs as $job)
       {
-        $employeeCount = \DB::table("employees")->where("job_id",$job->id)->count();
+        $employeeCount = \DB::table("employees")->where("job_id",$job->id)->where("employment_status","ACTIVE")->count();
         $distroArray[$job -> job_title] =  $employeeCount;
       }
 

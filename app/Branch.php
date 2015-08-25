@@ -6,7 +6,7 @@ class Branch extends Model{
 
 	protected $table = 'branches';
 
-	protected $fillable = ['branch_name','branch_address'];
+	protected $fillable = ['branch_name','branch_location'];
 
 	public static function getPermissions()
 	{

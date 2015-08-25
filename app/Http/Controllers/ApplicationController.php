@@ -417,6 +417,7 @@ class ApplicationController extends Controller {
 		{
 			$data['title'] = "Search for an Application";
 			$data['activeLink'] = "application";
+			$data['subTitle'] = "Search for Job Application";
 			$data['subLinks'] = array(
 				array
 				(

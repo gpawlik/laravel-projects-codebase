@@ -325,6 +325,7 @@ class AccidentController extends Controller {
 		{
 			$data['title'] = "Search for Accident";
 			$data['activeLink'] = "accident";
+			$data['subTitle'] = "Search Employee Accident Records";
 			$data['subLinks'] = array(
 				array
 				(

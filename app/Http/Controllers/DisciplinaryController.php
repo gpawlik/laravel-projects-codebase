@@ -322,4 +322,52 @@ class DisciplinaryController extends Controller {
     }
   }
 
+	public function search()
+	{
+		if(self::checkUserPermissions("hrm_disciplinary_can_search"))
+		{
+			$data['title'] = "Search For a Disciplinary / Grievance Record";
+			$data['activeLink'] = "discipline";
+			$data['subTitle'] = "Search For Department";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Department List",
+					"route" => "/hrm/disciplinaries",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_disciplinary_can_view"
+				),
+				array
+				(
+					"title" => "Add Disciplinary / Grievance Record",
+					"route" => "/hrm/disciplinaries/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_disciplinary_can_add"
+				)
+			);
+
+			return view('dashboard.hrm.disciplinaries.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$leaves = \DB::table("disciplinary_records")->select("disciplinary_records.id","type_of_warning","action_taken","first_name","last_name")
+		->join("employees","employees.id","=","disciplinary_records.employee_id")
+		->where("type_of_warning","ilike","%$data%")
+		->orWhere("action_taken","ilike","%$data%")
+		->orWhere("first_name","ilike","%$data%")
+		->orWhere("last_name","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$leaves
+		);
+	}
+
+
 }

@@ -33,6 +33,7 @@ class PermissionController extends Controller {
 				array
 				(
 					"title" => "Search for permission",
+					"route" => "/system/permissions/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "system_permission_can_search"
 				)
@@ -186,6 +187,55 @@ class PermissionController extends Controller {
 
   }
 
+	public function view($id)
+	{
+		if(self::checkUserPermissions("system_permission_can_view"))
+		{
+			$permission = Permission::find($id);
+
+			$data['title'] = "View Permission Details";
+			$data['activeLink'] = "permission";
+			$data['subTitle'] = "View Permission Details";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Permission List",
+					"route" => "/system/permissions",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_permission_can_view"
+				),
+				array
+				(
+					"title" => "Add Permission",
+					"route" => "/system/permissions/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_permission_can_add"
+				),
+				array
+				(
+					"title" => "Edit Permission",
+					"route" => "/system/permissions/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "system_permission_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Permission",
+					"route" => "/system/permissions/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "system_permission_can_delete"
+				)
+			);
+			$data['permission'] = $permission;
+
+			return view('dashboard.system.permissions.view',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
   public function delete($id)
   {
 		if(self::checkUserPermissions("system_permission_can_edit"))
@@ -202,6 +252,51 @@ class PermissionController extends Controller {
 			return "You are not authorized";die();
 		}
   }
+
+	public function search()
+	{
+		if(self::checkUserPermissions("system_permission_can_search"))
+		{
+			$data['title'] = "Search for Permission";
+			$data['activeLink'] = "permission";
+			$data['subTitle'] = "Search For Permission";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Permission List",
+					"route" => "/system/permissions",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_permission_can_view"
+				),
+				array
+				(
+					"title" => "Add Permission",
+					"route" => "/system/permissions/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_permission_can_add"
+				)
+			);
+
+			return view('dashboard.system.permissions.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$permissions = \DB::table("permissions")->select("permissions.id","permission_name","role_name")
+		->join("roles","roles.id","=","permissions.role_id")
+		->where("permission_name","ilike","%$data%")
+		->orWhere("role_name","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$permissions
+		);
+	}
 
   public function getRules()
   {

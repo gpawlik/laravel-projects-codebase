@@ -34,6 +34,7 @@ class BranchController extends Controller {
 				array
 				(
 					"title" => "Search for Branch",
+					"route" => "/system/branches/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "system_branch_can_search"
 				)
@@ -206,7 +207,21 @@ class BranchController extends Controller {
 					"title" => "Add Branch",
 					"route" => "/system/branches/add",
 					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "system_branches_can_add"
+					"permission" => "system_branch_can_add"
+				),
+				array
+				(
+					"title" => "Edit Branch",
+					"route" => "/system/branches/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "system_branch_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Branch",
+					"route" => "/system/branch/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "system_branch_can_delete"
 				)
 			);
 			$data['branch'] = $branch;
@@ -235,6 +250,51 @@ class BranchController extends Controller {
 			return "You are not authorized";die();
 		}
 	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("system_branch_can_search"))
+		{
+			$data['title'] = "Search for Branch";
+			$data['activeLink'] = "branch";
+			$data['subTitle'] = "Search For Branch";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Branch List",
+					"route" => "/hrm/branches",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "hrm_branch_can_view"
+				),
+				array
+				(
+					"title" => "Add Branch",
+					"route" => "/hrm/branches/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "hrm_branch_can_add"
+				)
+			);
+
+			return view('dashboard.system.branches.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$branches = \DB::table("branches")->select("id","branch_name","branch_location")
+		->where("branch_name","ilike","%$data%")
+		->orWhere("branch_location","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$branches
+		);
+	}
+
 
   public function getRules()
   {

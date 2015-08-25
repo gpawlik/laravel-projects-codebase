@@ -35,6 +35,7 @@ class BankController extends Controller {
 				(
 					"title" => "Search for bank",
 					"icon" => "<i class='fa fa-search'></i>",
+					"route" => "/system/banks/search",
 					"permission" => "system_bank_can_search"
 				)
 			);
@@ -189,6 +190,20 @@ class BankController extends Controller {
 					"route" => "/system/banks/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_bank_can_add"
+				),
+				array
+				(
+					"title" => "Edit Bank",
+					"route" => "/system/banks/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "system_bank_can_edit"
+				),
+				array
+				(
+					"title" => "Delete Bank",
+					"route" => "/system/banks/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "system_bank_can_delete"
 				)
 			);
 			$data['bank'] = $bank;
@@ -216,6 +231,50 @@ class BankController extends Controller {
 		{
 			return "You are not authorized";die();
 		}
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("system_bank_can_search"))
+		{
+			$data['title'] = "Search for Bank";
+			$data['activeLink'] = "bank";
+			$data['subTitle'] = "Search For Bank";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Bank List",
+					"route" => "/system/banks",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_bank_can_view"
+				),
+				array
+				(
+					"title" => "Add Bank",
+					"route" => "/system/banks/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_bank_can_add"
+				)
+			);
+
+			return view('dashboard.system.banks.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$banks = \DB::table("banks")->select("id","bank_name","bank_swift_code")
+		->where("bank_name","ilike","%$data%")
+		->orWhere("bank_swift_code","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$banks
+		);
 	}
 
   public function getRules()

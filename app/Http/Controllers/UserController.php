@@ -33,6 +33,7 @@ class UserController extends Controller {
 				array
 				(
 					"title" => "Search for User",
+					"route" => "/system/users/search",
 					"icon" => "<i class='fa fa-search'></i>",
 					"permission" => "system_user_can_search"
 				)
@@ -270,6 +271,20 @@ class UserController extends Controller {
 					"route" => "/system/users/add",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_user_can_add"
+				),
+				array
+				(
+					"title" => "Edit User",
+					"route" => "/system/users/edit/".$id,
+					"icon" => "<i class='fa fa-pencil'></i>",
+					"permission" => "system_user_can_edit"
+				),
+				array
+				(
+					"title" => "Delete User",
+					"route" => "/system/users/delete/".$id,
+					"icon" => "<i class = 'fa fa-trash'></i>",
+					"permission" => "system_user_can_delete"
 				)
 			);
 			$data['user'] = $user;
@@ -330,6 +345,54 @@ class UserController extends Controller {
         	$users
     	);
   }
+
+	public function search()
+	{
+		if(self::checkUserPermissions("system_user_can_search"))
+		{
+			$data['title'] = "Search for User";
+			$data['activeLink'] = "user";
+			$data['subTitle'] = "Search For User";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Role List",
+					"route" => "/system/users",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_user_can_view"
+				),
+				array
+				(
+					"title" => "Add Role",
+					"route" => "/system/users/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_user_can_add"
+				)
+			);
+
+			return view('dashboard.system.users.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$users = \DB::table("users")->select("users.id","first_name","last_name","email","username","role_name")
+		->join("roles","roles.id","=","users.role_id")
+		->where("first_name","ilike","%$data%")
+		->orWhere("last_name","ilike","%$data%")
+		->orWhere("email","ilike","%$data%")
+		->orWhere("username","ilike","%$data%")
+		->orWhere("role_name","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$users
+		);
+	}
 
 	public function getRules()
 	{

@@ -133,7 +133,7 @@
 
 	@if(isset($leaves))
 		<div id = "leaves" class = "dashboard-card pumpkin-border quarter inline grid-item">
-			<h3 class = "title pumpkin-color"><i class="fa fa-plane"></i> &nbsp;&nbsp; Employees on Leave</h3>
+			<h3 class = "title pumpkin-color"><i class="fa fa-plane"></i> &nbsp;&nbsp; Leave Days</h3>
 
 				<div class = "content">
 
@@ -214,7 +214,7 @@
 
 	@if(isset($jobDistro))
 		<div id = "job-chart-wrapper" class = "dashboard-card green-border quarter inline grid-item">
-			<h3 class = "title green-color"><i class="fa fa-pie-chart"></i> &nbsp;&nbsp; Job : Employee Distribution</h3>
+			<h3 class = "title green-color"><i class="fa fa-pie-chart"></i> &nbsp;&nbsp; Employee Distribution</h3>
 
 			<div class = "content">
 

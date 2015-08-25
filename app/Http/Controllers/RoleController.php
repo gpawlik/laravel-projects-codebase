@@ -34,6 +34,7 @@ class RoleController extends Controller {
 	      array
 	      (
 	        "title" => "Search for Role",
+					"route" => "/system/roles/search",
 	        "icon" => "<i class='fa fa-search'></i>",
 					"permission" => "system_role_can_search"
 	      )
@@ -195,6 +196,20 @@ class RoleController extends Controller {
 						"route" => "/system/roles/add",
 						"icon" => "<i class='fa fa-plus'></i>",
 						"permission" => "system_role_can_add"
+					),
+					array
+					(
+						"title" => "Edit Role",
+						"route" => "/system/roles/edit/".$id,
+						"icon" => "<i class='fa fa-pencil'></i>",
+						"permission" => "system_role_can_edit"
+					),
+					array
+					(
+						"title" => "Delete Role",
+						"route" => "/system/roles/delete/".$id,
+						"icon" => "<i class = 'fa fa-trash'></i>",
+						"permission" => "system_role_can_delete"
 					)
 				);
 
@@ -319,6 +334,49 @@ class RoleController extends Controller {
 			return "You are not authorized";die();
 		}
 
+	}
+
+	public function search()
+	{
+		if(self::checkUserPermissions("system_role_can_search"))
+		{
+			$data['title'] = "Search for Role";
+			$data['activeLink'] = "role";
+			$data['subTitle'] = "Search For Role";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Role List",
+					"route" => "/system/roles",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_role_can_view"
+				),
+				array
+				(
+					"title" => "Add Role",
+					"route" => "/system/roles/add",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_role_can_add"
+				)
+			);
+
+			return view('dashboard.system.roles.search',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
+	}
+
+	public function apiSearch($data)
+	{
+		$roles = \DB::table("roles")->select("id","role_name")
+		->where("role_name","ilike","%$data%")
+
+		->get();
+	return Response::json(
+				$roles
+		);
 	}
 
 	public static function getModels()

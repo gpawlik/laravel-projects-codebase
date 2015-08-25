@@ -171,6 +171,20 @@ class PayGradeController extends Controller
   					"route" => "/hrm/pay_grades/add",
   					"icon" => "<i class='fa fa-plus'></i>",
   					"permission" => "hrm_paygrade_can_add"
+  				),
+          array
+  				(
+  					"title" => "Edit Pay Grade",
+  					"route" => "/hrm/pay_grades/edit/".$id,
+  					"icon" => "<i class='fa fa-pencil'></i>",
+  					"permission" => "hrm_paygrade_can_edit"
+  				),
+  				array
+  				(
+  					"title" => "Delete Pay Grade",
+  					"route" => "/hrm/pay_grades/delete/".$id,
+  					"icon" => "<i class = 'fa fa-trash'></i>",
+  					"permission" => "hrm_paygrade_can_delete"
   				)
         );
 
