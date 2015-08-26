@@ -48,7 +48,7 @@ class DashboardController extends Controller {
 			//get applications
 			if(self::checkUserPermissions("dashboard_application_can_view"))
 			{
-				$applicationCount = Application::all()->count();
+				$applicationCount = Application::where("application_status","PENDING")->count();
 				$data['applicationCount'] = $applicationCount;
 
 				//check if there are interviews

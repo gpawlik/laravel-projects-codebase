@@ -38,7 +38,7 @@
 		<div class = "dashboard-card short-cards turquise-border quarter inline grid-item">
 			<div>
 				<span class = "big-text turquise-color"> GHC {{ $totalSalaries }} </span>
-				Total Salaries
+				Total Net Salaries
 			</div>
 		</div>
 	@endif
@@ -111,7 +111,7 @@
 
 			<div class = "content">
 
-				<p>No. of Applications : {{ $applicationCount }}</p>
+				<p>No. of Pending Applications : {{ $applicationCount }}</p>
 
 				<b>Scheduled Interviews</b>
 
