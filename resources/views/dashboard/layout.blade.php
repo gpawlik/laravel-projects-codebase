@@ -76,102 +76,6 @@
     <ul>
       <li>
 
-				@if(isset($hrmPermission))
-						<a id = "hrm" class = "main-link"><i class="fa fa-database"></i> &nbsp; HRM	</a>
-
-						@if(isset($accidentPermission))
-							<a href = "/hrm/accidents" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'accident') { echo 'active-link'; } } ?>">
-								<i class="fa fa-medkit"></i> &nbsp; Accidents
-							</a>
-						@endif
-
-						@if(isset($configurationPermission))
-							<a href = "/hrm/configurations" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'config') { echo 'active-link'; } } ?>">
-								<i class="fa fa-cog"></i> &nbsp; Configurations
-							</a>
-						@endif
-
-						@if(isset($departmentPermission))
-							<a href = "/hrm/departments" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'department') { echo 'active-link'; } } ?>">
-								<i class="fa fa-building"></i> &nbsp; Departments
-							</a>
-						@endif
-
-						@if(isset($disciplinaryPermission))
-							<a href = "/hrm/disciplinaries" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'discipline') { echo 'active-link'; } } ?>">
-								<i class="fa fa-exclamation-triangle"></i> &nbsp; Disciplinary Records
-							</a>
-						@endif
-
-						@if(isset($employeePermission))
-							<a href = "/hrm/employees" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'employee') { echo 'active-link'; } } ?>">
-								<i class="fa fa-users"></i> &nbsp; Employees
-							</a>
-						@endif
-
-						@if(isset($applicationPermission))
-							<a href = "/hrm/applications" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'application') { echo 'active-link'; } } ?>">
-								<i class="fa fa-file-text"></i> &nbsp; Job Applications
-							</a>
-						@endif
-
-						@if(isset($jobPermission))
-							<a href = "/hrm/jobs" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'job') { echo 'active-link'; } } ?>">
-								<i class="fa fa-briefcase"></i> &nbsp; Job Positions
-							</a>
-						@endif
-
-						@if(isset($terminationPermission))
-							<a href = "/hrm/job_terminations" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'termination') { echo 'active-link'; } } ?>">
-								<i class="fa fa-fire"></i> &nbsp; Job Terminations
-							</a>
-						@endif
-
-						@if(isset($leavePermission))
-							<a href = "/hrm/leaves" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'leave') { echo 'active-link'; } } ?>">
-							<i class="fa fa-plane"></i> &nbsp; Leave Days
-							</a>
-						@endif
-
-						@if(isset($orientationPermission))
-							<a href = "/hrm/orientations" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'orientation') { echo 'active-link'; } } ?>">
-								<i class="fa fa-pencil-square-o"></i> &nbsp; Orientations
-							</a>
-						@endif
-
-
-						@if(isset($paygradePermission))
-							<a href = "/hrm/pay_grades" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'paygrade') { echo 'active-link'; } } ?>">
-							<i class="fa fa-money"></i> &nbsp; Pay Grades
-							</a>
-						@endif
-
-						<!-- @if(isset($rankPermission))
-							<a href = "/hrm/ranks" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'rank') { echo 'active-link'; } } ?>">
-								<i class="fa fa-star"></i> &nbsp; Ranks
-							</a>
-						@endif -->
-
-						@if(isset($loanPermission))
-							<a href = "/hrm/loans" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'loan') { echo 'active-link'; } } ?>">
-								<i class="fa fa-usd"></i> &nbsp; Staff Loans
-							</a>
-						@endif
-
-						@if(isset($taxPermission))
-							<a href = "/hrm/tax_model" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'tax_model') { echo 'active-link'; } } ?>">
-								<i class="fa fa-cube"></i> &nbsp; Tax Model
-							</a>
-						@endif
-
-						@if(isset($trainingPermission))
-							<a href = "/hrm/training" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'training') { echo 'active-link'; } } ?>">
-								<i class="fa fa-puzzle-piece"></i> &nbsp; Training
-							</a>
-						@endif
-
-				@endif
-
 				@if(isset($systemPermission))
 					<a id = "system" class = "main-link"> <i class="fa fa-cogs"></i> &nbsp; System	</a>
 							@if(isset($bankPermission))
@@ -214,27 +118,6 @@
   <div id = "content-wrapper">
     <header>
 			<div class = "float-left">
-				<!-- Messages logic -->
-
-				<?php
-
-					$numberUnreadMessages = \DB::table("messages")->where("to_user_id",Auth::user()->id)->where("status","UNREAD")->count();
-
-				?>
-
-				<a href = "/dashboard/messages">
-					<div class = "box-padding" id = "messages-btn" title = "Messages">
-						<i class="fa fa-envelope-o"></i>
-						@if($numberUnreadMessages > 0)
-							<div id = "unread-msg-badge">{{$numberUnreadMessages}}</div>
-						@endif
-					</div>
-				</a>
-				<a href = "/dashboard/reminders">
-					<div class = "box-padding" id = "reminders-btn" title = "Reminders">
-						<i class="fa fa-bell-o"></i>
-					</div>
-				</a>
 				<a href = "/dashboard/profile">
 					<div class = "box-padding" id = "profile-btn" title = "Profile Settings">
 						<i class="fa fa-cog"></i>
@@ -264,15 +147,6 @@
 				</div>
 			</div>
     </header>
-		<?php
-			//warning message to enforce configurations are set
-			$configValuesCount = \DB::table("hrm_config")->count();
-
-			if($configValuesCount == 0)
-			{
-				$warningMessage = "Please set values in the configuration for the HRM, failure to do so will cause unexpected behaviour";
-			}
-		?>
 
 		@if(isset($warningMessage))
       <div id = "warning-box">
