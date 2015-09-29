@@ -134,11 +134,11 @@ class IdentificationController extends Controller {
 		}
 	}
 
-	public function update($id)
+    public function update($id)
 	{
 		if(self::checkUserPermissions("system_identification_can_edit"))
 		{
-			$id = Identification::find($id);
+			$identification = Identification::find($id);
 
 			$rules = self::getRules();
 
@@ -152,9 +152,9 @@ class IdentificationController extends Controller {
 			}
 			else
 			{
-				$id -> identification_name = Input::get("identification_name");
+				$identification -> identification_name = Input::get("identification_name");
 
-				$id -> push();
+				$identification -> push();
 				Session::flash('message', "Identification Details Updated");
 				return Redirect::to("/system/identification");
 			}
