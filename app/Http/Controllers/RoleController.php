@@ -48,7 +48,7 @@ class RoleController extends Controller {
 		}
   }
 
-  public function add()
+  public function create()
   {
 		if(self::checkUserPermissions("system_role_can_add"))
 		{
@@ -73,18 +73,18 @@ class RoleController extends Controller {
 		}
   }
 
-  public function create()
+  public function store()
   {
 		if(self::checkUserPermissions("system_role_can_add"))
 		{
 			$rules = self::getRules();
-			$rules["role_name"] = "unique:roles";
+			$rules["role_name"] = "required | unique:roles";
 
 			$validator = Validator::make(Input::all(), $rules);
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/roles/add')
+				return Redirect::to('/system/roles/create')
 							->withErrors($validator)
 							->withInput();
 			}
@@ -127,7 +127,7 @@ class RoleController extends Controller {
 				array
 	      (
 	        "title" => "Add Role",
-	        "route" => "/system/roles/add",
+	        "route" => "/system/roles/create",
 	        "icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_role_can_add"
 	      ),
@@ -153,7 +153,7 @@ class RoleController extends Controller {
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/roles/edit/'.$id)
+				return Redirect::to('/system/roles/'.$id.'/edit')
 	        		->withErrors($validator)
 	        		->withInput();
 			}
@@ -173,7 +173,7 @@ class RoleController extends Controller {
 
   }
 
-  public function view($id)
+  public function show($id)
   {
 		if(self::checkUserPermissions("system_role_can_view"))
 		{
@@ -193,14 +193,14 @@ class RoleController extends Controller {
 					array
 					(
 						"title" => "Add Role",
-						"route" => "/system/roles/add",
+						"route" => "/system/roles/create",
 						"icon" => "<i class='fa fa-plus'></i>",
 						"permission" => "system_role_can_add"
 					),
 					array
 					(
 						"title" => "Edit Role",
-						"route" => "/system/roles/edit/".$id,
+						"route" => "/system/roles/".$id.'/edit',
 						"icon" => "<i class='fa fa-pencil'></i>",
 						"permission" => "system_role_can_edit"
 					),
@@ -272,7 +272,7 @@ class RoleController extends Controller {
 					array
 					(
 						"title" => "Add Role",
-						"route" => "/system/roles/add",
+						"route" => "/system/roles/create",
 						"icon" => "<i class='fa fa-plus'></i>",
 						"permission" => "system_role_can_add"
 					)
@@ -354,7 +354,7 @@ class RoleController extends Controller {
 				array
 				(
 					"title" => "Add Role",
-					"route" => "/system/roles/add",
+					"route" => "/system/roles/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_role_can_add"
 				)

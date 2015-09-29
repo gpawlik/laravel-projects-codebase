@@ -41,19 +41,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
 Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
 {
       //users routes
-      Route::get('/users','UserController@index');
-      Route::get('/users/add','UserController@add');
-      Route::post('/users/create','UserController@create');
-      Route::get('/users/edit/{id}','UserController@edit');
-      Route::post('/users/update/{id}','UserController@update');
-      Route::get('/users/delete/{id}','UserController@delete');
-      Route::get('/users/view/{id}','UserController@view');
-      Route::get('/users/reset_password/{id}','UserController@resetUserPassword');
       Route::get('/users/search','UserController@search');
+      Route::get('/users/delete/{id}','UserController@delete');
+      Route::get('/users/reset_password/{id}','UserController@resetUserPassword');
+      Route::resource('users','UserController');
 
       //Role routes
       Route::get('/roles/search','RoleController@search');
       Route::get('/roles/delete/{id}','RoleController@delete');
+      Route::get('/roles/permissions/{id}','RoleController@permissions');
+      Route::post('/roles/save_permissions/{id}','RoleController@savePermissions');
       Route::resource('roles','RoleController');
 
       //permission routes

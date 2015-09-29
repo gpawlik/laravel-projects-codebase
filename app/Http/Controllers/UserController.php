@@ -26,7 +26,7 @@ class UserController extends Controller {
 				array
 				(
 					"title" => "Add User",
-					"route" => "/system/users/add",
+					"route" => "/system/users/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_user_can_add"
 				),
@@ -47,7 +47,7 @@ class UserController extends Controller {
 		}
 	}
 
-  public function add()
+  public function create()
   {
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
@@ -82,18 +82,18 @@ class UserController extends Controller {
 			}
   }
 
-  public function create()
+  public function store()
   {
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
 			$rules = self::getRules();
-			$rules["username"] = "unique:users";
+			$rules["username"] = "required | unique:users";
 
 			$validator = Validator::make(Input::all(), $rules);
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/users/add')
+				return Redirect::to('/system/users/create')
 							->withErrors($validator)
 							->withInput();
 			}
@@ -190,7 +190,7 @@ class UserController extends Controller {
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/users/edit/'.$id)
+				return Redirect::to('/system/users/'.$id.'/edit')
 	        		->withErrors($validator)
 	        		->withInput();
 			}
@@ -248,7 +248,7 @@ class UserController extends Controller {
 
 	}
 
-	public function view($id)
+	public function show($id)
 	{
 		if(self::checkUserPermissions("system_user_can_view"))
 		{
@@ -268,14 +268,14 @@ class UserController extends Controller {
 				array
 				(
 					"title" => "Add User",
-					"route" => "/system/users/add",
+					"route" => "/system/users/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_user_can_add"
 				),
 				array
 				(
 					"title" => "Edit User",
-					"route" => "/system/users/edit/".$id,
+					"route" => "/system/users/".$id."/edit",
 					"icon" => "<i class='fa fa-pencil'></i>",
 					"permission" => "system_user_can_edit"
 				),
@@ -364,7 +364,7 @@ class UserController extends Controller {
 				array
 				(
 					"title" => "Add Role",
-					"route" => "/system/users/add",
+					"route" => "/system/users/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_user_can_add"
 				)

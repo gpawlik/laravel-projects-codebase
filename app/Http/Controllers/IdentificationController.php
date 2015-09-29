@@ -250,7 +250,7 @@ class IdentificationController extends Controller {
 				array
 				(
 					"title" => "Add Identification",
-					"route" => "/system/identification/add",
+					"route" => "/system/identification/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_identification_can_add"
 				)
