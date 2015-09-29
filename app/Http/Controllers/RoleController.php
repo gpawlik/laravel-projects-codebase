@@ -27,7 +27,7 @@ class RoleController extends Controller {
 	      array
 	      (
 	        "title" => "Add Role",
-	        "route" => "/system/roles/add",
+	        "route" => "/system/roles/create",
 	        "icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_role_can_add"
 	      ),

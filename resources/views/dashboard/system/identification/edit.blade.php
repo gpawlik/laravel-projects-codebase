@@ -6,7 +6,7 @@
 
     @include('errors.error_list')
 
-    {!! Form::model($identification, ['method' => 'POST','url' => ['system/identification/update',$identification->id]] ) !!}
+    {!! Form::model($identification, ['method' => 'PATCH','url' => ['system/identification',$identification->id]] ) !!}
 
       @include('dashboard.system.identification.partials._form',['submitButtonText'=>'Update','roles'=>$identification,'context'=>'update'])
 

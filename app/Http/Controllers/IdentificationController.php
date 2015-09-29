@@ -28,7 +28,7 @@ class IdentificationController extends Controller {
 				array
 				(
 					"title" => "Add Identification Type",
-					"route" => "/system/identification/add",
+					"route" => "/system/identification/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_identification_can_add"
 				),
@@ -49,7 +49,7 @@ class IdentificationController extends Controller {
     }
   }
 
-	public function add()
+	public function create()
 	{
 		if(self::checkUserPermissions("system_identification_can_add"))
 		{
@@ -74,18 +74,18 @@ class IdentificationController extends Controller {
     }
 	}
 
-	public function create()
+	public function store()
 	{
 		if(self::checkUserPermissions("system_identification_can_add"))
 		{
 			$rules = self::getRules();
-			$rules["identification_name"] = "unique:identification";
+			$rules["identification_name"] = "required | unique:identification";
 
 			$validator = Validator::make(Input::all(), $rules);
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/identification/add')
+				return Redirect::to('/system/identification/create')
 							->withErrors($validator)
 							->withInput();
 			}
@@ -146,7 +146,7 @@ class IdentificationController extends Controller {
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/identification/edit/'.$id)
+				return Redirect::to('/system/identification/'.$id.'/edit')
 							->withErrors($validator)
 							->withInput();
 			}
@@ -166,7 +166,7 @@ class IdentificationController extends Controller {
 		}
 	}
 
-	public function view($id)
+	public function show($id)
 	{
 		if(self::checkUserPermissions("system_identification_can_view"))
 		{
@@ -186,14 +186,14 @@ class IdentificationController extends Controller {
 				array
 				(
 					"title" => "Add Identification",
-					"route" => "/system/identification/add",
+					"route" => "/system/identification/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_identification_can_add"
 				),
 				array
 				(
 					"title" => "Edit Identification",
-					"route" => "/system/identification/edit/".$id,
+					"route" => "/system/identification/".$id."/edit",
 					"icon" => "<i class='fa fa-pencil'></i>",
 					"permission" => "system_identification_can_edit"
 				),

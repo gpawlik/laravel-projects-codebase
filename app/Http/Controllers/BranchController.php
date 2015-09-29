@@ -79,7 +79,7 @@ class BranchController extends Controller {
     if(self::checkUserPermissions("system_branch_can_add"))
 		{
       $rules = self::getRules();
-			$rules["branch_name"] = "unique:branches";
+			$rules["branch_name"] = "required | unique:branches";
 
       $validator = Validator::make(Input::all(), $rules);
 

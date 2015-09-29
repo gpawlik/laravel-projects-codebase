@@ -52,26 +52,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::get('/users/search','UserController@search');
 
       //Role routes
-      Route::get('/roles','RoleController@index');
-      Route::get('/roles/add','RoleController@add');
-      Route::post('/roles/create','RoleController@create');
-      Route::get('/roles/edit/{id}','RoleController@edit');
-      Route::post('/roles/update/{id}','RoleController@update');
-      Route::get('/roles/delete/{id}','RoleController@delete');
-      Route::get('/roles/view/{id}','RoleController@view');
-      Route::get('/roles/permissions/{id}','RoleController@permissions');
-      Route::post('/roles/save_permissions/{id}','RoleController@savePermissions');
       Route::get('/roles/search','RoleController@search');
+      Route::get('/roles/delete/{id}','RoleController@delete');
+      Route::resource('roles','RoleController');
 
       //permission routes
-      Route::get('/permissions','PermissionController@index');
-      Route::get('/permissions/add','PermissionController@add');
-      Route::post('/permissions/create','PermissionController@create');
-      Route::get('/permissions/edit/{id}','PermissionController@edit');
-      Route::post('/permissions/update/{id}','PermissionController@update');
-      Route::get('/permissions/delete/{id}','PermissionController@delete');
-      Route::get('/permissions/view/{id}','PermissionController@view');
       Route::get('/permissions/search','PermissionController@search');
+      Route::get('/permissions/delete/{id}','PermissionController@delete');
+      Route::resource('permissions','PermissionController');
 
       //company info routes
       Route::get('/company','CompanyController@index');
@@ -83,14 +71,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::resource('banks','BankController');
 
       //identification routes
-      Route::get('/identification','IdentificationController@index');
-      Route::get('/identification/add','IdentificationController@add');
-      Route::post('/identification/create','IdentificationController@create');
-      Route::get('/identification/edit/{id}','IdentificationController@edit');
-      Route::post('/identification/update/{id}','IdentificationController@update');
-      Route::get('/identification/delete/{id}','IdentificationController@delete');
-      Route::get('/identification/view/{id}','IdentificationController@view');
       Route::get('/identification/search','IdentificationController@search');
+      Route::get('/identification/delete/{id}','IdentificationController@delete');
+      Route::resource('identification','IdentificationController');
 
       //branches routes
       Route::get('/branches/search','BranchController@search');

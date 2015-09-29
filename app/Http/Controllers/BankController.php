@@ -78,7 +78,7 @@ class BankController extends Controller {
 		if(self::checkUserPermissions("system_bank_can_add"))
 		{
 			$rules = self::getRules();
-			$rules["bank_name"] = "unique:banks";
+			$rules["bank_name"] = "required | unique:banks";
 
 			$validator = Validator::make(Input::all(), $rules);
 

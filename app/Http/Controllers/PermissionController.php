@@ -26,7 +26,7 @@ class PermissionController extends Controller {
 				array
 				(
 					"title" => "Add Permission",
-					"route" => "/system/permissions/add",
+					"route" => "/system/permissions/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_permission_can_add"
 				),
@@ -47,7 +47,7 @@ class PermissionController extends Controller {
 		}
   }
 
-  public function add()
+  public function create()
   {
 		if(self::checkUserPermissions("system_permission_can_add"))
 		{
@@ -82,7 +82,7 @@ class PermissionController extends Controller {
 		}
   }
 
-  public function create()
+  public function store()
   {
 		if(self::checkUserPermissions("system_permission_can_add"))
 		{
@@ -92,7 +92,7 @@ class PermissionController extends Controller {
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/permissions/add')
+				return Redirect::to('/system/permissions/create')
 							->withErrors($validator)
 							->withInput();
 			}
@@ -165,7 +165,7 @@ class PermissionController extends Controller {
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/permissions/edit/'.$id)
+				return Redirect::to('/system/permissions/'.$id.'/edit')
 	        		->withErrors($validator)
 	        		->withInput();
 			}
@@ -187,7 +187,7 @@ class PermissionController extends Controller {
 
   }
 
-	public function view($id)
+	public function show($id)
 	{
 		if(self::checkUserPermissions("system_permission_can_view"))
 		{
@@ -207,14 +207,14 @@ class PermissionController extends Controller {
 				array
 				(
 					"title" => "Add Permission",
-					"route" => "/system/permissions/add",
+					"route" => "/system/permissions/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_permission_can_add"
 				),
 				array
 				(
 					"title" => "Edit Permission",
-					"route" => "/system/permissions/edit/".$id,
+					"route" => "/system/permissions/".$id."/edit",
 					"icon" => "<i class='fa fa-pencil'></i>",
 					"permission" => "system_permission_can_edit"
 				),
@@ -271,7 +271,7 @@ class PermissionController extends Controller {
 				array
 				(
 					"title" => "Add Permission",
-					"route" => "/system/permissions/add",
+					"route" => "/system/permissions/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_permission_can_add"
 				)
