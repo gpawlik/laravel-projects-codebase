@@ -6,7 +6,7 @@
 
   @include('errors.error_list')
 
-  {!! Form::open(['method' => 'POST','action' => 'BranchController@create'] ) !!}
+  {!! Form::open(['method' => 'POST','action' => 'BranchController@store'] ) !!}
 
     @include('dashboard.system.branches.partials._form',['submitButtonText'=>'Save','context'=>'add'])
 

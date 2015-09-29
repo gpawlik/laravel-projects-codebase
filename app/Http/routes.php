@@ -32,25 +32,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => "dashboard"], function()
   Route::get('/profile','DashboardController@profile');
   Route::post('/profile/save','DashboardController@saveProfile');
 
-  //reminders
-  Route::get('/reminders','ReminderController@index');
-  Route::get('/reminders/add','ReminderController@add');
-  Route::post('/reminders/create','ReminderController@create');
-  Route::get('/reminders/view/{id}','ReminderController@view');
-  Route::get('/reminders/edit/{id}','ReminderController@edit');
-  Route::post('/reminders/update/{id}','ReminderController@update');
-  Route::get('/reminders/delete/{id}','ReminderController@delete');
-
-  Route::get('/reminders/complete/{id}','ReminderController@complete');
-  Route::get('/reminders/undo/{id}','ReminderController@undoComplete');
-
-  //messages
-  Route::get('/messages','MessageController@index');
-  Route::get('/messages/add','MessageController@add');
-  Route::post('/messages/create','MessageController@create');
-  Route::get('/messages/view/{id}','MessageController@view');
-
-
   Route::get('/change_password','DashboardController@changePassword');
 
   Route::post('/password_change','DashboardController@passwordChange');
@@ -97,14 +78,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::post('/company/save','CompanyController@save');
 
       //banks routes
-      Route::get('/banks','BankController@index');
-      Route::get('/banks/add','BankController@add');
-      Route::post('/banks/create','BankController@create');
-      Route::get('/banks/edit/{id}','BankController@edit');
-      Route::post('/banks/update/{id}','BankController@update');
-      Route::get('/banks/delete/{id}','BankController@delete');
-      Route::get('/banks/view/{id}','BankController@view');
       Route::get('/banks/search','BankController@search');
+      Route::get('/banks/delete/{id}','BankController@delete');
+      Route::resource('banks','BankController');
 
       //identification routes
       Route::get('/identification','IdentificationController@index');
@@ -117,223 +93,20 @@ Route::group(['middleware' => ['auth'], 'prefix' => "system"], function()
       Route::get('/identification/search','IdentificationController@search');
 
       //branches routes
-      Route::get('/branches','BranchController@index');
-      Route::get('/branches/add','BranchController@add');
-      Route::post('/branches/create','BranchController@create');
-      Route::get('/branches/edit/{id}','BranchController@edit');
-      Route::post('/branches/update/{id}','BranchController@update');
-      Route::get('/branches/delete/{id}','BranchController@delete');
-      Route::get('/branches/view/{id}','BranchController@view');
       Route::get('/branches/search','BranchController@search');
+      Route::get('/branches/delete/{id}','BranchController@delete');
+      Route::resource('branches','BranchController');
 });
 
-Route::group(['middleware' => ['auth'], 'prefix' => "hrm"], function()
-{
-      //employee routes
-      Route::get('/employees','EmployeeController@index');
-      Route::get('/employees/add','EmployeeController@add');
-      Route::post('/employees/create','EmployeeController@create');
-      Route::get('/employees/edit/{id}','EmployeeController@edit');
-      Route::post('/employees/update/{id}','EmployeeController@update');
-      Route::get('/employees/delete/{id}','EmployeeController@delete');
-      Route::get('/employees/view/{id}','EmployeeController@view');
-      Route::get('/employees/search','EmployeeController@search');
-      Route::get('/employees/exportXLS','EmployeeController@exportXLS');
-      Route::get('/employees/exportIndividualXLS/{id}','EmployeeController@exportIndividualXLS');
-
-      //departments routes
-      Route::get('/departments','DepartmentController@index');
-      Route::get('/departments/add','DepartmentController@add');
-      Route::post('/departments/create','DepartmentController@create');
-      Route::get('/departments/edit/{id}','DepartmentController@edit');
-      Route::post('/departments/update/{id}','DepartmentController@update');
-      Route::get('/departments/delete/{id}','DepartmentController@delete');
-      Route::get('/departments/view/{id}','DepartmentController@view');
-      Route::get('/departments/search','DepartmentController@search');
-
-      //jobs routes
-      Route::get('/jobs','JobController@index');
-      Route::get('/jobs/add','JobController@add');
-      Route::post('/jobs/create','JobController@create');
-      Route::get('/jobs/edit/{id}','JobController@edit');
-      Route::post('/jobs/update/{id}','JobController@update');
-      Route::get('/jobs/delete/{id}','JobController@delete');
-      Route::get('/jobs/view/{id}','JobController@view');
-      Route::get('/jobs/search','JobController@search');
-
-      //pay grades routes
-      Route::get('/pay_grades','PayGradeController@index');
-      Route::get('/pay_grades/add','PayGradeController@add');
-      Route::post('/pay_grades/create','PayGradeController@create');
-      Route::get('/pay_grades/edit/{id}','PayGradeController@edit');
-      Route::post('/pay_grades/update/{id}','PayGradeController@update');
-      Route::get('/pay_grades/delete/{id}','PayGradeController@delete');
-      Route::get('/pay_grades/view/{id}','PayGradeController@view');
-      Route::get('/pay_grades/search','PayGradeController@search');
-
-      //applications routes
-      Route::get('/applications','ApplicationController@index');
-      Route::get('/applications/add','ApplicationController@add');
-      Route::post('/applications/create','ApplicationController@create');
-      Route::get('/applications/edit/{id}','ApplicationController@edit');
-      Route::post('/applications/update/{id}','ApplicationController@update');
-      Route::get('/applications/delete/{id}','ApplicationController@delete');
-      Route::get('/applications/view/{id}','ApplicationController@view');
-      Route::get('/applications/accept_application/{id}','ApplicationController@acceptApplication');
-      Route::get('/applications/decline_application/{id}','ApplicationController@declineApplication');
-      Route::get('/applications/search','ApplicationController@search');
-
-      //ranks routes
-      Route::get('/ranks','RankController@index');
-      Route::get('/ranks/add','RankController@add');
-      Route::post('/ranks/create','RankController@create');
-      Route::get('/ranks/edit/{id}','RankController@edit');
-      Route::post('/ranks/update/{id}','RankController@update');
-      Route::get('/ranks/delete/{id}','RankController@delete');
-      Route::get('/ranks/view/{id}','RankController@view');
-      Route::get('/ranks/search','RankController@search');
-
-      //ranks routes
-      Route::get('/leaves','LeaveController@index');
-      Route::get('/leaves/add','LeaveController@add');
-      Route::post('/leaves/create','LeaveController@create');
-      Route::get('/leaves/edit/{id}','LeaveController@edit');
-      Route::post('/leaves/update/{id}','LeaveController@update');
-      Route::get('/leaves/delete/{id}','LeaveController@delete');
-      Route::get('/leaves/view/{id}','LeaveController@view');
-      Route::get('/leaves/search','LeaveController@search');
-
-      //orientations routes
-      Route::get('/orientations','OrientationController@index');
-      Route::get('/orientations/add','OrientationController@add');
-      Route::post('/orientations/create','OrientationController@create');
-      Route::get('/orientations/edit/{id}','OrientationController@edit');
-      Route::post('/orientations/update/{id}','OrientationController@update');
-      Route::get('/orientations/delete/{id}','OrientationController@delete');
-      Route::get('/orientations/view/{id}','OrientationController@view');
-      Route::get('/orientations/search','OrientationController@search');
-
-      //terminations routes
-      Route::get('/job_terminations','TerminationController@index');
-      Route::get('/job_terminations/add','TerminationController@add');
-      Route::post('/job_terminations/create','TerminationController@create');
-      Route::get('/job_terminations/edit/{id}','TerminationController@edit');
-      Route::post('/job_terminations/update/{id}','TerminationController@update');
-      Route::get('/job_terminations/delete/{id}','TerminationController@delete');
-      Route::get('/job_terminations/view/{id}','TerminationController@view');
-      Route::get('/job_terminations/terminated_employee/{id}','TerminationController@terminatedEmployeeDetails');
-      Route::get('/job_terminations/revert_termination/{id}','TerminationController@revertTermination');
-      Route::get('/job_terminations/search','TerminationController@search');
-
-      //training routes
-      Route::get('/training','TrainingController@index');
-      Route::get('/training/add','TrainingController@add');
-      Route::post('/training/create','TrainingController@create');
-      Route::get('/training/edit/{id}','TrainingController@edit');
-      Route::post('/training/update/{id}','TrainingController@update');
-      Route::get('/training/delete/{id}','TrainingController@delete');
-      Route::get('/training/view/{id}','TrainingController@view');
-      Route::get('/training/trained_employee/{id}','TrainingController@trainedEmployee');
-      Route::get('/training/search','TrainingController@search');
-
-      //accident routes
-      Route::get('/accidents','AccidentController@index');
-      Route::get('/accidents/add','AccidentController@add');
-      Route::post('/accidents/create','AccidentController@create');
-      Route::get('/accidents/edit/{id}','AccidentController@edit');
-      Route::post('/accidents/update/{id}','AccidentController@update');
-      Route::get('/accidents/delete/{id}','AccidentController@delete');
-      Route::get('/accidents/view/{id}','AccidentController@view');
-      Route::get('/accidents/search','AccidentController@search');
-
-      //config  routes
-      Route::get('/configurations','ConfigController@index');
-      Route::post('/configurations/save','ConfigController@save');
-
-      //accident routes
-      Route::get('/disciplinaries','DisciplinaryController@index');
-      Route::get('/disciplinaries/add','DisciplinaryController@add');
-      Route::post('/disciplinaries/create','DisciplinaryController@create');
-      Route::get('/disciplinaries/edit/{id}','DisciplinaryController@edit');
-      Route::post('/disciplinaries/update/{id}','DisciplinaryController@update');
-      Route::get('/disciplinaries/delete/{id}','DisciplinaryController@delete');
-      Route::get('/disciplinaries/view/{id}','DisciplinaryController@view');
-      Route::get('/disciplinaries/search','DisciplinaryController@search');
-
-      //loan routes
-      Route::get('/loans','LoanController@index');
-      Route::get('/loans/add','LoanController@add');
-      Route::post('/loans/create','LoanController@create');
-      Route::get('/loans/edit/{id}','LoanController@edit');
-      Route::post('/loans/update/{id}','LoanController@update');
-      Route::get('/loans/delete/{id}','LoanController@delete');
-      Route::get('/loans/view/{id}','LoanController@view');
-      Route::get('/loans/payment_finished/{id}','LoanController@paymentFinished');
-      Route::get('/loans/revert_payment/{id}','LoanController@revertPayment');
-      Route::get('/loans/search','LoanController@search');
-
-      //tax route
-      Route::get('/tax_model','TaxController@index');
-      Route::post('/tax_model/save','TaxController@saveTaxModel');
-
-});
 
 //inner application API routes
 Route::group(['middleware' => 'auth', 'prefix' => "api/v1"], function()
 {
-  	Route::get('/users/{id}','UserController@apiGetUsers');
-    Route::get('/employees/{id}','EmployeeController@apiGetEmployees');
-
     //search api routes
-    Route::get('/employee_search/{id}','EmployeeController@apiSearch');
-    Route::get('/department_search/{id}','DepartmentController@apiSearch');
-    Route::get('/rank_search/{id}','RankController@apiSearch');
-    Route::get('/application_search/{id}','ApplicationController@apiSearch');
-    Route::get('/job_search/{id}','JobController@apiSearch');
-    Route::get('/leave_search/{id}','LeaveController@apiSearch');
-    Route::get('/orientation_search/{id}','OrientationController@apiSearch');
-    Route::get('/pay_grade_search/{id}','PayGradeController@apiSearch');
-    Route::get('/accident_search/{id}','AccidentController@apiSearch');
-    Route::get('/loan_search/{id}','LoanController@apiSearch');
-    Route::get('/termination_search/{id}','TerminationController@apiSearch');
-    Route::get('/training_search/{id}','TrainingController@apiSearch');
     Route::get('/bank_search/{id}','BankController@apiSearch');
     Route::get('/branch_search/{id}','BranchController@apiSearch');
     Route::get('/identification_search/{id}','IdentificationController@apiSearch');
     Route::get('/permission_search/{id}','PermissionController@apiSearch');
     Route::get('/role_search/{id}','RoleController@apiSearch');
     Route::get('/user_search/{id}','UserController@apiSearch');
-    Route::get('/disciplinary_search/{id}','DisciplinaryController@apiSearch');
-
-    //chart api routes
-    Route::get('/gender_distro',function(){
-      $distroArray = array();
-      $employeesMaleNumber = \DB::table("employees")->where("employment_status","ACTIVE")->where("gender","male")->count();
-      $employeesFemaleNumber = \DB::table("employees")->where("employment_status","ACTIVE")->where("gender","female")->count();
-      $distroArray['male_number'] = $employeesMaleNumber;
-      $distroArray['female_number'] = $employeesFemaleNumber;
-
-      return Response::json(
-          	$distroArray
-      	);
-
-    });
-
-    Route::get('/jobs_distro',function(){
-      $distroArray = array();
-
-      $jobs = \DB::table("jobs")->get();
-
-      foreach($jobs as $job)
-      {
-        $employeeCount = \DB::table("employees")->where("job_id",$job->id)->where("employment_status","ACTIVE")->count();
-        $distroArray[$job -> job_title] =  $employeeCount;
-      }
-
-      return Response::json(
-            $distroArray
-        );
-
-    });
-
 });

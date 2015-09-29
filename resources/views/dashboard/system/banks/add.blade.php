@@ -6,7 +6,7 @@
 
   @include('errors.error_list')
 
-  {!! Form::open(['method' => 'POST','action' => 'BankController@create'] ) !!}
+  {!! Form::open(['method' => 'POST','action' => 'BankController@store'] ) !!}
 
     @include('dashboard.system.banks.partials._form',['submitButtonText'=>'Save','context'=>'add'])
 

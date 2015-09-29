@@ -8,6 +8,17 @@ class Role extends Model{
 
 	protected $fillable = ['role_name'];
 
+	//define relationships
+	public function user()
+	{
+		return $this -> hasMany("App\User");
+	}
+
+	public function permission()
+	{
+		return $this -> hasMany("App\Permission");
+	}
+
 	public static function getPermissions()
 	{
 		return array(

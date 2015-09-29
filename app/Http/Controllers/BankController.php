@@ -27,7 +27,7 @@ class BankController extends Controller {
 				array
 				(
 					"title" => "Add Bank",
-					"route" => "/system/banks/add",
+					"route" => "/system/banks/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_bank_can_add"
 				),
@@ -48,7 +48,7 @@ class BankController extends Controller {
     }
   }
 
-  public function add()
+  public function create()
   {
     if(self::checkUserPermissions("system_bank_can_add"))
 		{
@@ -73,7 +73,7 @@ class BankController extends Controller {
     }
   }
 
-	public function create()
+	public function store()
 	{
 		if(self::checkUserPermissions("system_bank_can_add"))
 		{
@@ -84,7 +84,7 @@ class BankController extends Controller {
 
 			if ($validator->fails())
 			{
-				return Redirect::to('/system/banks/add')
+				return Redirect::to('/system/banks/create')
 							->withErrors($validator)
 							->withInput();
 			}
@@ -167,7 +167,7 @@ class BankController extends Controller {
 		}
 	}
 
-	public function view($id)
+	public function show($id)
 	{
 		if(self::checkUserPermissions("system_bank_can_view"))
 		{
@@ -187,14 +187,14 @@ class BankController extends Controller {
 				array
 				(
 					"title" => "Add Bank",
-					"route" => "/system/banks/add",
+					"route" => "/system/banks/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_bank_can_add"
 				),
 				array
 				(
 					"title" => "Edit Bank",
-					"route" => "/system/banks/edit/".$id,
+					"route" => "/system/banks/".$id."/edit",
 					"icon" => "<i class='fa fa-pencil'></i>",
 					"permission" => "system_bank_can_edit"
 				),
@@ -251,7 +251,7 @@ class BankController extends Controller {
 				array
 				(
 					"title" => "Add Bank",
-					"route" => "/system/banks/add",
+					"route" => "/system/banks/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_bank_can_add"
 				)

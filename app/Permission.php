@@ -6,7 +6,13 @@ class Permission extends Model{
 
 	protected $table = 'permissions';
 
-	protected $fillable = ['permission_name'];
+	protected $fillable = ['permission_name','role_id'];
+
+	//define relationships
+	public function role()
+	{
+		return $this -> belongsTo("App\Role");
+	}
 
 	public static function getPermissions()
 	{

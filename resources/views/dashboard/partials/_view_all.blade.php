@@ -95,7 +95,7 @@
                 @if($action == 'view')
                   @if(isset($viewPermission))
                   <td class = "table-actions">
-                    <a href = '/{{ strtolower($route) }}/{{ $action }}/{{ strtolower($d->id) }}' title = {{$action}} ><i class='fa fa-eye'></i></a>
+                    <a href = '/{{ strtolower($route) }}/{{ strtolower($d->id) }}' title = {{$action}} ><i class='fa fa-eye'></i></a>
                   </td>
                   @endif
                 @endif
@@ -103,7 +103,7 @@
                 @if($action == 'edit')
                   @if(isset($editPermission))
                   <td class = "table-actions">
-                    <a href = '/{{ strtolower($route) }}/{{ $action }}/{{ strtolower($d->id) }}' title = {{$action}} ><i class='fa fa-pencil'></i></a>
+                    <a href = '/{{ strtolower($route) }}/{{ strtolower($d->id) }}/{{ $action }}' title = {{$action}} ><i class='fa fa-pencil'></i></a>
                   </td>
                   @endif
                 @endif

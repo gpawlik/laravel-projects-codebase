@@ -27,7 +27,7 @@ class BranchController extends Controller {
 				array
 				(
 					"title" => "Add Branch",
-					"route" => "/system/branches/add",
+					"route" => "/system/branches/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_branch_can_add"
 				),
@@ -49,7 +49,7 @@ class BranchController extends Controller {
 
   }
 
-  public function add()
+  public function create()
   {
     if(self::checkUserPermissions("system_branch_can_add"))
 		{
@@ -74,7 +74,7 @@ class BranchController extends Controller {
     }
   }
 
-  public function create()
+  public function store()
   {
     if(self::checkUserPermissions("system_branch_can_add"))
 		{
@@ -85,7 +85,7 @@ class BranchController extends Controller {
 
       if ($validator->fails())
       {
-        return Redirect::to('/system/branches/add')
+        return Redirect::to('/system/branches/create')
               ->withErrors($validator)
               ->withInput();
       }
@@ -154,7 +154,7 @@ class BranchController extends Controller {
 
       if ($validator->fails())
       {
-        return Redirect::to('/system/branches/edit/'.$id)
+        return Redirect::to('/system/branches/'.$id."/edit")
               ->withErrors($validator)
               ->withInput();
       }
@@ -185,7 +185,7 @@ class BranchController extends Controller {
 		}
 	}
 
-	public function view($id)
+	public function show($id)
 	{
 		if(self::checkUserPermissions("system_branch_can_view"))
 		{
@@ -205,14 +205,14 @@ class BranchController extends Controller {
 				array
 				(
 					"title" => "Add Branch",
-					"route" => "/system/branches/add",
+					"route" => "/system/branches/create",
 					"icon" => "<i class='fa fa-plus'></i>",
 					"permission" => "system_branch_can_add"
 				),
 				array
 				(
 					"title" => "Edit Branch",
-					"route" => "/system/branches/edit/".$id,
+					"route" => "/system/branches/".$id."/edit",
 					"icon" => "<i class='fa fa-pencil'></i>",
 					"permission" => "system_branch_can_edit"
 				),
@@ -262,16 +262,16 @@ class BranchController extends Controller {
 				array
 				(
 					"title" => "Branch List",
-					"route" => "/hrm/branches",
+					"route" => "/system/branches",
 					"icon" => "<i class='fa fa-th-list'></i>",
-					"permission" => "hrm_branch_can_view"
+					"permission" => "system_branch_can_view"
 				),
 				array
 				(
 					"title" => "Add Branch",
-					"route" => "/hrm/branches/add",
+					"route" => "/system/branches/create",
 					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "hrm_branch_can_add"
+					"permission" => "system_branch_can_add"
 				)
 			);
 
