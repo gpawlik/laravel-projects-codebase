@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Tasks\RoleTasks;
+
 use App\Role;
 use App\User;
 use App\Permission;

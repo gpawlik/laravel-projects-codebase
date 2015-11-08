@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Tasks\IdentificationTasks;
+
 use App\Role;
 use App\Permission;
 use App\Bank;
@@ -18,11 +21,11 @@ class IdentificationController extends Controller {
 
 	public function index()
 	{
-    if(self::checkUserPermissions("system_identification_can_view"))
+		if(self::checkUserPermissions("system_identification_can_view"))
 		{
-      $data['title'] = "Identification Types";
-	    $data['banks'] = Identification::orderBy("updated_at","DESC")->paginate(20);
-      $data['activeLink'] = "identification";
+		  	$data['title'] = "Identification Types";
+		    $data['banks'] = Identification::orderBy("updated_at","DESC")->paginate(20);
+		  	$data['activeLink'] = "identification";
 			$data['subTitle'] = "Identification Types";
 			$data['subLinks'] = array(
 				array
@@ -41,40 +44,40 @@ class IdentificationController extends Controller {
 				)
 			);
 
-      return view('dashboard.system.identification.index',$data);
-    }
-    else
-    {
-        return "You are not authorized";die();
-    }
-  }
+		  		return view('dashboard.system.identification.index',$data);
+		}
+		else
+		{
+	    	return "You are not authorized";die();
+		}
+  	}
 
 	public function create()
 	{
 		if(self::checkUserPermissions("system_identification_can_add"))
 		{
-      $data['title'] = "Add Identification";
-      $data['activeLink'] = "identification";
+      		$data['title'] = "Add Identification";
+      		$data['activeLink'] = "identification";
 			$data['subTitle'] = "Add Identification Type";
-      $data['subLinks'] = array(
-        array
-        (
-          "title" => "Identification List",
-          "route" => "/system/identification",
-          "icon" => "<i class='fa fa-th-list'></i>",
-          "permission" => "system_identification_can_view"
-        )
-      );
+      		$data['subLinks'] = array(
+		        array
+		        (
+		          "title" => "Identification List",
+		          "route" => "/system/identification",
+		          "icon" => "<i class='fa fa-th-list'></i>",
+		          "permission" => "system_identification_can_view"
+		        )
+      		);
 
-      return view('dashboard.system.identification.add',$data);
-    }
-    else
-    {
-        return "You are not authorized";die();
-    }
+      		return view('dashboard.system.identification.add',$data);
+    	}
+    	else
+    	{
+        	return "You are not authorized";die();
+    	}
 	}
 
-	public function store()
+	public function store(Request $request)
 	{
 		if(self::checkUserPermissions("system_identification_can_add"))
 		{
@@ -93,9 +96,9 @@ class IdentificationController extends Controller {
 			{
 				$id = new Identification;
 
-				$id -> identification_name = Input::get("identification_name");
+				$model = IdentificationTasks::insertIntoModel($id,$request);
 
-				$id -> save();
+				$model -> save();
 				Session::flash('message','Identification Added');
 				return Redirect::to('/system/identification');
 			}
@@ -110,23 +113,24 @@ class IdentificationController extends Controller {
 	{
 		if(self::checkUserPermissions("system_identification_can_edit"))
 		{
-	    $id = Identification::find($id);
+	    	$id = Identification::find($id);
 
-	    $data['title'] = "Edit Identification";
+	    	$data['title'] = "Edit Identification";
 			$data['activeLink'] = "identification";
 			$data['subTitle'] = "Edit Identification Type";
-	    $data['subLinks'] = array(
-	      array
-	      (
-	        "title" => "Identification List",
-	        "route" => "/system/identification",
-	        "icon" => "<i class='fa fa-th-list'></i>",
+	    	$data['subLinks'] = array(
+	      		array
+	      		(
+	        		"title" => "Identification List",
+	        		"route" => "/system/identification",
+	        		"icon" => "<i class='fa fa-th-list'></i>",
 					"permission" => "system_identification_can_view"
-	      )
-	    );
-	    $data['identification'] = $id;
+	      		)
+	    	);
+	    	
+	    	$data['identification'] = $id;
 
-	    return view('dashboard.system.identification.edit',$data);
+	    	return view('dashboard.system.identification.edit',$data);
 		}
 		else
 		{
@@ -134,7 +138,7 @@ class IdentificationController extends Controller {
 		}
 	}
 
-    public function update($id)
+    public function update(Request $request,$id)
 	{
 		if(self::checkUserPermissions("system_identification_can_edit"))
 		{
@@ -152,9 +156,9 @@ class IdentificationController extends Controller {
 			}
 			else
 			{
-				$identification -> identification_name = Input::get("identification_name");
+				$model = IdentificationTasks::insertIntoModel($identification,$request);
 
-				$identification -> push();
+				$model -> push();
 				Session::flash('message', "Identification Details Updated");
 				return Redirect::to("/system/identification");
 			}

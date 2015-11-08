@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Tasks\PermissionTasks;
+
 use App\Role;
 use App\Permission;
 use Validator;
@@ -18,10 +21,10 @@ class PermissionController extends Controller {
 	{
 		if(self::checkUserPermissions("system_permission_can_view"))
 		{
-	    $data['title'] = "Permissions";
+	    	$data['title'] = "Permissions";
 			$data['activeLink'] = "permission";
 			$data['subTitle'] = "Permissions";
-	    $data['permissions'] = Permission::orderBy("permission_name","ASC")->paginate(20);
+	    	$data['permissions'] = Permission::orderBy("permission_name","ASC")->paginate(20);
 			$data['subLinks'] = array(
 				array
 				(
@@ -51,30 +54,30 @@ class PermissionController extends Controller {
   {
 		if(self::checkUserPermissions("system_permission_can_add"))
 		{
-	    $data['title'] = "Add Permission";
+	    	$data['title'] = "Add Permission";
 			$data['activeLink'] = "permission";
 			$data['subTitle'] = "Add Permission";
-	    $data['subLinks'] = array(
-	      array
-	      (
-	        "title" => "Permission List",
-	        "route" => "/system/permissions",
-	        "icon" => "<i class='fa fa-th-list'></i>",
+	    	$data['subLinks'] = array(
+	      		array
+	      		(
+	        		"title" => "Permission List",
+	        		"route" => "/system/permissions",
+	        		"icon" => "<i class='fa fa-th-list'></i>",
 					"permission" => "system_permission_can_view"
-	      )
-	    );
+	    	  	)
+	    	);
 
-	    //Obtain list of roles
-	    $roles = Role::all();
-	    $roles_array = array();
+		    //Obtain list of roles
+		    $roles = Role::all();
+		    $roles_array = array();
 
-	    foreach ($roles as $role) {
-	      $roles_array[$role->id] = $role->role_name;
-	    }
+		    foreach ($roles as $role) {
+		      $roles_array[$role->id] = $role->role_name;
+		    }
 
-	    $data['roles'] = $roles_array;
+		    $data['roles'] = $roles_array;
 
-	    return view('dashboard.system.permissions.add',$data);
+		    return view('dashboard.system.permissions.add',$data);
 		}
 		else
 		{
@@ -82,11 +85,11 @@ class PermissionController extends Controller {
 		}
   }
 
-  public function store()
+  public function store(Request $request)
   {
 		if(self::checkUserPermissions("system_permission_can_add"))
 		{
-	    $rules = self::getRules();
+	    	$rules = self::getRules();
 
 			$validator = Validator::make(Input::all(), $rules);
 
@@ -98,15 +101,14 @@ class PermissionController extends Controller {
 			}
 			else
 			{
-	      $permission = new Permission;
+	      		$permission = new Permission;
 
-	      $permission -> permission_name = Input::get("permission_name");
-	      $permission -> role_id = Input::get("role_id");
+	      		$model = PermissionTasks::insertIntoModel($permission, $request);
 
-				$permission -> save();
+				$model -> save();
 				Session::flash('message','Permission Added');
 				return Redirect::to('/system/permissions');
-	    }
+	    	}
 		}
 		else
 		{
@@ -153,11 +155,11 @@ class PermissionController extends Controller {
 		}
   }
 
-  public function update($id)
+  public function update(Request $request,$id)
   {
 		if(self::checkUserPermissions("system_permission_can_edit"))
 		{
-	    $permission = Permission::find($id);
+	    	$permission = Permission::find($id);
 
 			$rules = self::getRules();
 
@@ -169,10 +171,9 @@ class PermissionController extends Controller {
 	        		->withErrors($validator)
 	        		->withInput();
 			}
-	    else
-	    {
-				$permission -> permission_name = Input::get("permission_name");
-				$permission -> role_id = Input::get("role_id");
+	    	else
+	    	{
+				$model = PermissionTasks::insertIntoModel($permission, $request);
 
 				$permission -> push();
 				Session::flash('message', "Permission Details Updated");
@@ -240,11 +241,11 @@ class PermissionController extends Controller {
   {
 		if(self::checkUserPermissions("system_permission_can_edit"))
 		{
-	    $permission = Permission::find($id);
+	    	$permission = Permission::find($id);
 
-	    $permission -> delete();
+	    	$permission -> delete();
 
-	    Session::flash('message', 'Permission deleted');
+	    	Session::flash('message', 'Permission deleted');
 			return Redirect::to("/system/permissions");
 		}
 		else

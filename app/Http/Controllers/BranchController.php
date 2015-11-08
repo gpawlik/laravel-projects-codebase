@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Tasks\BranchTasks;
+use Illuminate\Http\Request;
+
 use App\Role;
 use App\Permission;
 use App\Branch;
@@ -17,11 +20,11 @@ class BranchController extends Controller {
 
 	public function index()
 	{
-    if(self::checkUserPermissions("system_branch_can_view"))
+    	if(self::checkUserPermissions("system_branch_can_view"))
 		{
-      $data['title'] = "Branches";
-	    $data['branches'] = Branch::orderBy("updated_at","DESC")->paginate(20);
-      $data['activeLink'] = "branch";
+      		$data['title'] = "Branches";
+	    	$data['branches'] = Branch::orderBy("updated_at","DESC")->paginate(20);
+      		$data['activeLink'] = "branch";
 			$data['subTitle'] = "Company's Branches";
 			$data['subLinks'] = array(
 				array
@@ -40,75 +43,65 @@ class BranchController extends Controller {
 				)
 			);
 
-      return view('dashboard.system.branches.index',$data);
-    }
-    else
-    {
-        return "You are not authorized";die();
-    }
+      		return view('dashboard.system.branches.index',$data);
+    	}
+    	else
+    	{
+        	return "You are not authorized";die();
+    	}
 
   }
 
   public function create()
   {
     if(self::checkUserPermissions("system_branch_can_add"))
-		{
-      $data['title'] = "Add Branch";
-      $data['activeLink'] = "branch";
-			$data['subTitle'] = "Add a Company Branch";
-      $data['subLinks'] = array(
-        array
-        (
-          "title" => "Branch List",
-          "route" => "/system/branches",
-          "icon" => "<i class='fa fa-th-list'></i>",
-          "permission" => "system_branch_can_view"
-        )
-      );
+	{
+     	$data['title'] = "Add Branch";
+      	$data['activeLink'] = "branch";
+		$data['subTitle'] = "Add a Company Branch";
+      	$data['subLinks'] = array(
+        	array
+        	(
+          		"title" => "Branch List",
+          		"route" => "/system/branches",
+          		"icon" => "<i class='fa fa-th-list'></i>",
+          		"permission" => "system_branch_can_view"
+        	)
+      	);
 
-      return view('dashboard.system.branches.add',$data);
-    }
-    else
-    {
-        return "You are not authorized";die();
-    }
+      	return view('dashboard.system.branches.add',$data);
+	}
+	else
+	{
+    	return "You are not authorized";die();
+	}
   }
 
-  public function store()
+  public function store(Request $request)
   {
-    if(self::checkUserPermissions("system_branch_can_add"))
-		{
-      $rules = self::getRules();
-			$rules["branch_name"] = "required | unique:branches";
+   	if(self::checkUserPermissions("system_branch_can_add"))
+	{
+    	$rules = self::getRules();
+		$rules["branch_name"] = "required | unique:branches";
 
-      $validator = Validator::make(Input::all(), $rules);
+      	$validator = Validator::make(Input::all(), $rules);
 
-      if ($validator->fails())
-      {
-        return Redirect::to('/system/branches/create')
+      	if ($validator->fails())
+      	{
+        	return Redirect::to('/system/branches/create')
               ->withErrors($validator)
               ->withInput();
-      }
-      else
-      {
-        $branch = new Branch;
+      	}
+      	else
+      	{
+        	$branch = new Branch;
 
-        $branch -> branch_name = Input::get("branch_name");
+        	$model = BranchTasks::insertIntoModel($branch,$request);
 
-        if(Input::get("branch_location"))
-        {
-          $branch -> branch_location = Input::get("branch_location");
-        }
-        else
-        {
-          $branch -> branch_location = null;
-        }
-
-
-        $branch -> save();
-        Session::flash('message','Branch Added');
-        return Redirect::to('/system/branches');
-      }
+        	$model -> save();
+        	Session::flash('message','Branch Added');
+        	return Redirect::to('/system/branches');
+      	}
     }
     else
     {
@@ -122,59 +115,50 @@ class BranchController extends Controller {
 		{
 			$branch = Branch::find($id);
 
-	    $data['title'] = "Edit Branch";
+	    	$data['title'] = "Edit Branch";
 			$data['activeLink'] = "branch";
 			$data['subTitle'] = "Edit Company's Branch";
-	    $data['subLinks'] = array(
-	      array
-	      (
-	        "title" => "Branch List",
-	        "route" => "/system/branches",
-	        "icon" => "<i class='fa fa-th-list'></i>",
+	    	$data['subLinks'] = array(
+	      		array
+	      		(
+	        		"title" => "Branch List",
+	        		"route" => "/system/branches",
+	        		"icon" => "<i class='fa fa-th-list'></i>",
 					"permission" => "system_branch_can_view"
-	      )
-	    );
-	    $data['branch'] = $branch;
+	      		)
+	    	);
+	    	
+	    	$data['branch'] = $branch;
 
-	    return view('dashboard.system.branches.edit',$data);
-    }
-    else
-    {
-        return "You are not authorized";die();
-    }
+	    	return view('dashboard.system.branches.edit',$data);
+    	}
+    	else
+    	{
+        	return "You are not authorized";die();
+    	}
 	}
 
-	public function update($id)
+	public function update(Request $request, $id)
 	{
 		if(self::checkUserPermissions("system_branch_can_edit"))
 		{
 			$rules = self::getRules();
 
-      $validator = Validator::make(Input::all(), $rules);
+      		$validator = Validator::make(Input::all(), $rules);
 
-      if ($validator->fails())
-      {
-        return Redirect::to('/system/branches/'.$id."/edit")
-              ->withErrors($validator)
-              ->withInput();
-      }
-      else
-      {
+      		if ($validator->fails())
+      		{
+        		return Redirect::to('/system/branches/'.$id."/edit")
+              		->withErrors($validator)
+              		->withInput();
+      		}
+      		else
+      		{
 				$branch = Branch::find($id);
 
-				$branch -> branch_name = Input::get("branch_name");
+				$model = BranchTasks::insertIntoModel($branch,$request);
 
-				if(Input::get("branch_location"))
-				{
-					$branch -> branch_location = Input::get("branch_location");
-				}
-				else
-				{
-					$branch -> branch_location = null;
-				}
-
-
-				$branch -> push();
+				$model -> push();
 				Session::flash('message','Branch Updated');
 				return Redirect::to('/system/branches');
 			}
@@ -286,8 +270,8 @@ class BranchController extends Controller {
 	public function apiSearch($data)
 	{
 		$branches = \DB::table("branches")->select("id","branch_name","branch_location")
-		->where("branch_name","ilike","%$data%")
-		->orWhere("branch_location","ilike","%$data%")
+			->where("branch_name","ilike","%$data%")
+			->orWhere("branch_location","ilike","%$data%")
 
 		->get();
 	return Response::json(

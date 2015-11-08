@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Tasks\BankTasks;
+use Illuminate\Http\Request;
+
 use App\Role;
 use App\Permission;
 use App\Bank;
@@ -18,27 +21,27 @@ class BankController extends Controller {
 	public function index()
 	{
     if(self::checkUserPermissions("system_bank_can_view"))
-		{
-      $data['title'] = "Banks";
-	    $data['banks'] = Bank::orderBy("updated_at","DESC")->paginate(20);
-      $data['activeLink'] = "bank";
-			$data['subTitle'] = "Banks";
-			$data['subLinks'] = array(
-				array
-				(
-					"title" => "Add Bank",
-					"route" => "/system/banks/create",
-					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "system_bank_can_add"
-				),
-				array
-				(
-					"title" => "Search for bank",
-					"icon" => "<i class='fa fa-search'></i>",
-					"route" => "/system/banks/search",
-					"permission" => "system_bank_can_search"
-				)
-			);
+	{
+      	$data['title'] = "Banks";
+		$data['banks'] = Bank::orderBy("updated_at","DESC")->paginate(20);
+      	$data['activeLink'] = "bank";
+		$data['subTitle'] = "Banks";
+		$data['subLinks'] = array(
+			array
+			(
+				"title" => "Add Bank",
+				"route" => "/system/banks/create",
+				"icon" => "<i class='fa fa-plus'></i>",
+				"permission" => "system_bank_can_add"
+			),
+			array
+			(
+				"title" => "Search for bank",
+				"icon" => "<i class='fa fa-search'></i>",
+				"route" => "/system/banks/search",
+				"permission" => "system_bank_can_search"
+			)
+		);
 
       return view('dashboard.system.banks.index',$data);
     }
@@ -50,19 +53,19 @@ class BankController extends Controller {
 
   public function create()
   {
-    if(self::checkUserPermissions("system_bank_can_add"))
-		{
-      $data['title'] = "Add Bank";
-      $data['activeLink'] = "bank";
-			$data['subTitle'] = "Add a Bank";
-      $data['subLinks'] = array(
-        array
-        (
-          "title" => "Bank List",
-          "route" => "/system/banks",
-          "icon" => "<i class='fa fa-th-list'></i>",
-          "permission" => "system_bank_can_view"
-        )
+  	if(self::checkUserPermissions("system_bank_can_add"))
+	{
+    	$data['title'] = "Add Bank";
+      	$data['activeLink'] = "bank";
+		$data['subTitle'] = "Add a Bank";
+      	$data['subLinks'] = array(
+        	array
+        	(
+          		"title" => "Bank List",
+          		"route" => "/system/banks",
+          		"icon" => "<i class='fa fa-th-list'></i>",
+          		"permission" => "system_bank_can_view"
+        	)
       );
 
       return view('dashboard.system.banks.add',$data);
@@ -73,7 +76,7 @@ class BankController extends Controller {
     }
   }
 
-	public function store()
+	public function store(Request $request)
 	{
 		if(self::checkUserPermissions("system_bank_can_add"))
 		{
@@ -92,41 +95,41 @@ class BankController extends Controller {
 			{
 				$bank = new Bank;
 
-				$bank -> bank_name = Input::get("bank_name");
-				$bank -> bank_swift_code = Input::get("bank_swift_code");
+				$model = BankTasks::insertIntoModel($bank,$request);
 
-				$bank -> save();
+				$model -> save();
 				Session::flash('message','Bank Added');
 				return Redirect::to('/system/banks');
 			}
-    }
-    else
-    {
-        return "You are not authorized";die();
-    }
+	    }
+	    else
+	    {
+	        return "You are not authorized";die();
+	    }
 	}
 
 	public function edit($id)
 	{
 		if(self::checkUserPermissions("system_bank_can_edit"))
 		{
-	    $bank = Bank::find($id);
+	    	$bank = Bank::find($id);
 
-	    $data['title'] = "Edit Bank";
+	    	$data['title'] = "Edit Bank";
 			$data['activeLink'] = "bank";
 			$data['subTitle'] = "Edit a Bank";
-	    $data['subLinks'] = array(
-	      array
-	      (
-	        "title" => "Bank List",
-	        "route" => "/system/banks",
-	        "icon" => "<i class='fa fa-th-list'></i>",
+	    	$data['subLinks'] = array(
+	      		array
+	      		(
+	        		"title" => "Bank List",
+	        		"route" => "/system/banks",
+	        		"icon" => "<i class='fa fa-th-list'></i>",
 					"permission" => "system_bank_can_view"
-	      )
-	    );
-	    $data['bank'] = $bank;
+	      		)
+	    	);
 
-	    return view('dashboard.system.banks.edit',$data);
+	    	$data['bank'] = $bank;
+
+	    	return view('dashboard.system.banks.edit',$data);
 		}
 		else
 		{
@@ -134,11 +137,11 @@ class BankController extends Controller {
 		}
 	}
 
-	public function update($id)
+	public function update(Request $request,$id)
 	{
 		if(self::checkUserPermissions("system_bank_can_edit"))
 		{
-	    $bank = Bank::find($id);
+	    	$bank = Bank::find($id);
 
 			$rules = self::getRules();
 
@@ -150,12 +153,11 @@ class BankController extends Controller {
 	        		->withErrors($validator)
 	        		->withInput();
 			}
-	    else
-	    {
-				$bank -> bank_name = Input::get("bank_name");
-				$bank -> bank_swift_code = Input::get("bank_swift_code");
-
-				$bank -> push();
+	    	else
+	    	{
+				$model = BankTasks::insertIntoModel($bank,$request);
+				
+				$model -> push();
 				Session::flash('message', "Bank Details Updated");
 				return Redirect::to("/system/banks");
 			}
@@ -206,6 +208,7 @@ class BankController extends Controller {
 					"permission" => "system_bank_can_delete"
 				)
 			);
+
 			$data['bank'] = $bank;
 
 			return view('dashboard.system.banks.view',$data);
@@ -270,9 +273,9 @@ class BankController extends Controller {
 		$banks = \DB::table("banks")->select("id","bank_name","bank_swift_code")
 		->where("bank_name","ilike","%$data%")
 		->orWhere("bank_swift_code","ilike","%$data%")
-
 		->get();
-	return Response::json(
+		
+		return Response::json(
 				$banks
 		);
 	}
@@ -280,7 +283,7 @@ class BankController extends Controller {
   public function getRules()
   {
     return array(
-      'bank_name' => 'required'
+     	'bank_name' => 'required'
     );
 
   }
