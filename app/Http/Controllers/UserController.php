@@ -1,10 +1,13 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Tasks\UserTasks;
+
 use App\User;
 use App\Role;
 use Validator;
-use Image;
 use Hash;
+use Image;
 use Session;
 use Input;
 use Redirect;
@@ -21,7 +24,7 @@ class UserController extends Controller {
 			$data['title'] = "Users";
 			$data['activeLink'] = "user";
 			$data['subTitle'] = "All System Users";
-	    $data['users'] = User::orderBy("updated_at","DESC")->paginate(20);
+	    	$data['users'] = User::orderBy("updated_at","DESC")->paginate(20);
 			$data['subLinks'] = array(
 				array
 				(
@@ -52,37 +55,38 @@ class UserController extends Controller {
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
 	    	$data['title'] = "Add User";
-				$data['activeLink'] = "user";
-				$data['subTitle'] = "Add a System User";
-				$data['subLinks'] = array(
-					array
-					(
-						"title" => "User List",
-						"route" => "/system/users",
-						"icon" => "<i class='fa fa-th-list'></i>",
-						"permission" => "system_user_can_view"
-					)
-				);
+			$data['activeLink'] = "user";
+			$data['subTitle'] = "Add a System User";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "User List",
+					"route" => "/system/users",
+					"icon" => "<i class='fa fa-th-list'></i>",
+					"permission" => "system_user_can_view"
+				)
+			);
 
-	      //Obtain list of roles
-	      $roles = Role::all();
-	      $roles_array = array();
+			//Obtain list of roles
+			$roles = Role::all();
+			$roles_array = array();
 
-	      foreach ($roles as $role) {
-	        $roles_array[$role->id] = $role->role_name;
-	      }
-
-	      $data['roles'] = $roles_array;
-
-	      return view('dashboard.system.users.add',$data);
-			}
-			else
+			foreach ($roles as $role) 
 			{
-				return "You are not authorized";die();
-			}
+				$roles_array[$role->id] = $role->role_name;
+      		}
+
+	      	$data['roles'] = $roles_array;
+
+	      	return view('dashboard.system.users.add',$data);
+		}
+		else
+		{
+			return "You are not authorized";die();
+		}
   }
 
-  public function store()
+  public function store(Request $request)
   {
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
@@ -101,37 +105,13 @@ class UserController extends Controller {
 			{
 				$user = new User;
 
-				if(Input::file(('image_name')))
-	      {
-
-		      $image = Input::file('image_name');
-
-		      $destinationImagePath = public_path('uploads/' . str_replace(" ","_",$image->getClientOriginalName()));
-
-		      $resizedImage = Image::make($image)->resize(200,200);
-
-		      $user -> image_name = str_replace(" ","_",$image->getClientOriginalName());
-
-		      $resizedImage -> save($destinationImagePath);
-	      }
-				else
-	      {
-	        $user -> image_name = null;
-	      }
-
-				$user -> first_name = Input::get("first_name");
-				$user -> last_name = Input::get("last_name");
-				$user -> email = Input::get("email");
-				$user -> username = Input::get("username");
-				$user -> role_id = Input::get("role_id");
-				$user -> status = 2;
-				$user -> password = Hash::make("password");
+				$model = UserTasks::insertIntoModel($user,$request);
 
 				$user -> save();
 				Session::flash('message','User Added');
 				return Redirect::to('/system/users');
 
-		  }
+		  	}
 		}
 		else
 		{
@@ -194,40 +174,41 @@ class UserController extends Controller {
 	        		->withErrors($validator)
 	        		->withInput();
 			}
-	    else
-	    {
+		    else
+		    {
 				//DEAL WITH IMAGE FILE
-	      if(Input::file(('image_name')))
-	      {
-	          if($user->image_name != null)
-	          {
-	            if (file_exists(public_path('uploads/'.$user -> image_name)))
-	        		{
-	              unlink(public_path('uploads/'.$user -> image_name));
-	        		}
-	          }
+	      		if(Input::file(('image_name')))
+	      		{
+	          		if($user->image_name != null)
+	          		{
+		            	if (file_exists(public_path('uploads/'.$user -> image_name)))
+		        		{
+		              		unlink(public_path('uploads/'.$user -> image_name));
+		        		}
+	          		}
 
-	          $image = Input::file('image_name');
+	          		$image = Input::file('image_name');
 
-	          $destinationImagePath = public_path('uploads/' . str_replace(" ","_",$image->getClientOriginalName()));
+	         		$destinationImagePath = public_path('uploads/' . str_replace(" ","_",$image->getClientOriginalName()));
 
-	          $resizedImage = Image::make($image)->resize(200,200);
+	          		$resizedImage = Image::make($image)->resize(200,200);
 
-	          $user -> image_name = str_replace(" ","_",$image->getClientOriginalName());
+	          		$user -> image_name = str_replace(" ","_",$image->getClientOriginalName());
 
-	          $resizedImage -> save($destinationImagePath);
+	          		$resizedImage -> save($destinationImagePath);
 
-	      }
-	      else
-	      {
+	      		}
+	      		else
+	      		{
 					if(Input::get("clear_check") == 'yes')
-	        {
-	          if(file_exists(public_path('uploads/'.$user -> image_name)))
-	          {
-	            unlink(public_path('uploads/'.$user -> image_name));
-	          }
-	          $user->image_name = null;
-	        }
+	        		{
+						if(file_exists(public_path('uploads/'.$user -> image_name)))
+						{
+							unlink(public_path('uploads/'.$user -> image_name));
+						}
+
+						$user->image_name = null;
+	        		}
 				}
 
 				$user -> first_name = Input::get("first_name");

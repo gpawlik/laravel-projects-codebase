@@ -76,7 +76,7 @@ class RoleController extends Controller {
 		}
   }
 
-  public function store()
+  public function store(Request $request)
   {
 		if(self::checkUserPermissions("system_role_can_add"))
 		{
@@ -95,9 +95,9 @@ class RoleController extends Controller {
 			{
 				$role = new Role;
 
-				$role -> role_name = Input::get("role_name");
+				$model = RoleTasks::insertIntoModel($role,$request);
 
-				$role -> save();
+				$model -> save();
 
 				Session::flash('message','Role Added');
 				return Redirect::to('/system/roles');
@@ -144,7 +144,7 @@ class RoleController extends Controller {
 		}
   }
 
-  public function update($id)
+  public function update(Request $request, $id)
   {
 		if(self::checkUserPermissions("system_role_can_edit"))
 		{
@@ -162,9 +162,9 @@ class RoleController extends Controller {
 			}
 	    else
 	    {
-				$role -> role_name = Input::get("role_name");
+				$model = RoleTasks::insertIntoModel($role,$request);
 
-				$role -> push();
+				$model -> push();
 				Session::flash('message', "Role Details Updated");
 				return Redirect::to("/system/roles");
 			}
