@@ -67,16 +67,8 @@ class UserController extends Controller {
 				)
 			);
 
-			//Obtain list of roles
-			$roles = Role::all();
-			$roles_array = array();
-
-			foreach ($roles as $role) 
-			{
-				$roles_array[$role->id] = $role->role_name;
-      		}
-
-	      	$data['roles'] = $roles_array;
+			$rolesArray = UserTasks::setUpRolesArray();
+	      	$data['roles'] = $rolesArray;
 
 	      	return view('dashboard.system.users.add',$data);
 		}
@@ -91,6 +83,7 @@ class UserController extends Controller {
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
 			$rules = self::getRules();
+
 			$rules["username"] = "required | unique:users";
 
 			$validator = Validator::make(Input::all(), $rules);
@@ -139,15 +132,9 @@ class UserController extends Controller {
 			);
 			$data['user'] = $user;
 
-			//Obtain list of roles
-			$roles = Role::all();
-			$roles_array = array();
-
-			foreach ($roles as $role) {
-				$roles_array[$role->id] = $role->role_name;
-			}
-
-			$data['roles'] = $roles_array;
+			$rolesArray = UserTasks::setUpRolesArray();
+			
+			$data['roles'] = $rolesArray;
 			$data['users_role'] = Role::where('id','=',$user -> role_id)->first();
 
 			return view('dashboard.system.users.edit',$data);
@@ -158,7 +145,7 @@ class UserController extends Controller {
 		}
 	}
 
-	public function update($id)
+	public function update(Request $request,$id)
 	{
 		if(self::checkUserPermissions("system_user_can_edit"))
 		{
@@ -176,46 +163,7 @@ class UserController extends Controller {
 			}
 		    else
 		    {
-				//DEAL WITH IMAGE FILE
-	      		if(Input::file(('image_name')))
-	      		{
-	          		if($user->image_name != null)
-	          		{
-		            	if (file_exists(public_path('uploads/'.$user -> image_name)))
-		        		{
-		              		unlink(public_path('uploads/'.$user -> image_name));
-		        		}
-	          		}
-
-	          		$image = Input::file('image_name');
-
-	         		$destinationImagePath = public_path('uploads/' . str_replace(" ","_",$image->getClientOriginalName()));
-
-	          		$resizedImage = Image::make($image)->resize(200,200);
-
-	          		$user -> image_name = str_replace(" ","_",$image->getClientOriginalName());
-
-	          		$resizedImage -> save($destinationImagePath);
-
-	      		}
-	      		else
-	      		{
-					if(Input::get("clear_check") == 'yes')
-	        		{
-						if(file_exists(public_path('uploads/'.$user -> image_name)))
-						{
-							unlink(public_path('uploads/'.$user -> image_name));
-						}
-
-						$user->image_name = null;
-	        		}
-				}
-
-				$user -> first_name = Input::get("first_name");
-				$user -> last_name = Input::get("last_name");
-				$user -> email = Input::get("email");
-				$user -> username = Input::get("username");
-				$user -> role_id = Input::get("role_id");
+				$model = UserTasks::executeUpdate($user,$request);
 
 				$user -> push();
 				Session::flash('message', "User Details Updated");
@@ -285,11 +233,11 @@ class UserController extends Controller {
 			$user = User::find($id);
 
 	    if($user -> image_name != null)
-			{
+		{
 
-	      if (file_exists(public_path('uploads/'.$user -> image_name)))
+	      	if (file_exists(public_path('uploads/'.$user -> image_name)))
 	  		{
-	        unlink(public_path('uploads/'.$user -> image_name));
+	        	unlink(public_path('uploads/'.$user -> image_name));
 	  		}
 
 	    }
@@ -307,22 +255,22 @@ class UserController extends Controller {
 
 	public function resetUserPassword($id)
 	{
-			$user = User::find($id);
+		$user = User::find($id);
 
-			$user -> status = 2;
-			$user -> password = Hash::make("password");
+		$user -> status = 2;
+		$user -> password = Hash::make("password");
 
-			$user -> push();
+		$user -> push();
 
-			Session::flash('message', 'User\'s password reset');
-			return Redirect::to("/system/users");
+		Session::flash('message', 'User\'s password reset');
+		return Redirect::to("/system/users");
 	}
 
   public function apiGetUsers($data)
   {
 		$data = ucfirst($data);
-    $users = \DB::table("users")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
-    return Response::json(
+    	$users = \DB::table("users")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
+    	return Response::json(
         	$users
     	);
   }
