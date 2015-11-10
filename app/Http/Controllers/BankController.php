@@ -20,30 +20,30 @@ class BankController extends Controller {
 
 	public function index()
 	{
-    if(self::checkUserPermissions("system_bank_can_view"))
-	{
-      	$data['title'] = "Banks";
-		$data['banks'] = Bank::orderBy("updated_at","DESC")->paginate(20);
-      	$data['activeLink'] = "bank";
-		$data['subTitle'] = "Banks";
-		$data['subLinks'] = array(
-			array
-			(
-				"title" => "Add Bank",
-				"route" => "/system/banks/create",
-				"icon" => "<i class='fa fa-plus'></i>",
-				"permission" => "system_bank_can_add"
-			),
-			array
-			(
-				"title" => "Search for bank",
-				"icon" => "<i class='fa fa-search'></i>",
-				"route" => "/system/banks/search",
-				"permission" => "system_bank_can_search"
-			)
-		);
+	    if(self::checkUserPermissions("system_bank_can_view"))
+		{
+	      	$data['title'] = "Banks";
+			$data['banks'] = Bank::orderBy("updated_at","DESC")->paginate(20);
+	      	$data['activeLink'] = "bank";
+			$data['subTitle'] = "Banks";
+			$data['subLinks'] = array(
+				array
+				(
+					"title" => "Add Bank",
+					"route" => "/system/banks/create",
+					"icon" => "<i class='fa fa-plus'></i>",
+					"permission" => "system_bank_can_add"
+				),
+				array
+				(
+					"title" => "Search for bank",
+					"icon" => "<i class='fa fa-search'></i>",
+					"route" => "/system/banks/search",
+					"permission" => "system_bank_can_search"
+				)
+			);
 
-      return view('dashboard.system.banks.index',$data);
+	      	return view('dashboard.system.banks.index',$data);
     }
     else
     {
