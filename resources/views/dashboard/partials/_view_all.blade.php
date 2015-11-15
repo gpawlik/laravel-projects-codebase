@@ -25,10 +25,22 @@
         <?php
           foreach($permissions as $permission)
           {
-            if($permission->permission_name == $permission_prefix."_can_".$action)
+            if(isset($permission_prefix))
             {
-              ${$action."Permission"} = 1;
-              echo "<th></th>";
+              if($permission->permission_name == $permission_prefix."_can_".$action)
+              {
+                ${$action."Permission"} = 1;
+                echo "<th></th>";
+              }
+            }
+
+            if(isset($permission_name))
+            {
+              if($permission->permission_name == $permission_name)
+              {
+                ${$action."Permission"} = 1;
+                echo "<th></th>";
+              }
             }
           }
         ?>
