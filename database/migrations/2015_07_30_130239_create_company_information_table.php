@@ -18,6 +18,12 @@ class CreateCompanyInformationTable extends Migration
             $table->string("company_name");
             $table->text("company_description");
             $table->string("company_logo_name")->nullable();
+            $table->text("company_address")->nullable();
+            $table->string("company_telephone")->nullable();
+            $table->string("company_tin_number")->nullable();
+            $table->string("company_ssnit_number")->nullable();
+            $table->string("company_email")->nullable();
+            $table->string("company_website")->nullable();
 
             $table->timestamps();
         });

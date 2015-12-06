@@ -6,8 +6,6 @@ class Role extends Model{
 
 	protected $table = 'roles';
 
-	protected $fillable = ['role_name'];
-
 	//define relationships
 	public function user()
 	{

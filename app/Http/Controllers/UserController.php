@@ -1,18 +1,20 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Tasks\UserTasks;
 
 use App\User;
 use App\Role;
 use Validator;
-use Hash;
 use Image;
+use Hash;
 use Session;
 use Input;
 use Redirect;
 use Response;
 use Auth;
+
+use App\Http\Tasks\UserTasks;
+use App\Http\Tasks\CommonTasks;
 
 
 class UserController extends Controller {
@@ -21,94 +23,37 @@ class UserController extends Controller {
 	{
 		if(self::checkUserPermissions("system_user_can_view"))
 		{
-			$data['title'] = "Users";
-			$data['activeLink'] = "user";
-			$data['subTitle'] = "All System Users";
-	    	$data['users'] = User::orderBy("updated_at","DESC")->paginate(20);
-			$data['subLinks'] = array(
-				array
-				(
-					"title" => "Add User",
-					"route" => "/system/users/create",
-					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "system_user_can_add"
-				),
-				array
-				(
-					"title" => "Search for User",
-					"route" => "/system/users/search",
-					"icon" => "<i class='fa fa-search'></i>",
-					"permission" => "system_user_can_search"
-				)
-			);
-
+			$data = UserTasks::populateIndexData();
 			return view('dashboard.system.users.index',$data);
 		}
 		else
 		{
-			return "You are not authorized";die();
+			CommonTasks::throwUnauthorized();
 		}
 	}
 
-  public function create()
-  {
+	public function create()
+	{
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
-	    	$data['title'] = "Add User";
-			$data['activeLink'] = "user";
-			$data['subTitle'] = "Add a System User";
-			$data['subLinks'] = array(
-				array
-				(
-					"title" => "User List",
-					"route" => "/system/users",
-					"icon" => "<i class='fa fa-th-list'></i>",
-					"permission" => "system_user_can_view"
-				)
-			);
-
-			$rolesArray = UserTasks::setUpRolesArray();
-	      	$data['roles'] = $rolesArray;
-
-	      	return view('dashboard.system.users.add',$data);
+	    	$data = UserTasks::populateCreateData();
+			return view('dashboard.system.users.add',$data);
 		}
 		else
 		{
-			return "You are not authorized";die();
+			CommonTasks::throwUnauthorized();
 		}
-  }
+  	}
 
-  public function store(Request $request)
-  {
+	public function store(Request $request)
+	{
 		if(self::checkUserPermissions("system_user_can_add"))
 		{
-			$rules = self::getRules();
-
-			$rules["username"] = "required | unique:users";
-
-			$validator = Validator::make(Input::all(), $rules);
-
-			if ($validator->fails())
-			{
-				return Redirect::to('/system/users/create')
-							->withErrors($validator)
-							->withInput();
-			}
-			else
-			{
-				$user = new User;
-
-				$model = UserTasks::insertIntoModel($user,$request);
-
-				$user -> save();
-				Session::flash('message','User Added');
-				return Redirect::to('/system/users');
-
-		  	}
+			UserTasks::storeUserData($request);
 		}
 		else
 		{
-			return "You are not authorized";die();
+			CommonTasks::throwUnauthorized();
 		}
 	}
 
@@ -116,32 +61,12 @@ class UserController extends Controller {
 	{
 		if(self::checkUserPermissions("system_user_can_edit"))
 		{
-			$user = User::find($id);
-
-			$data['title'] = "Edit User";
-			$data['activeLink'] = "user";
-			$data['subTitle'] = "Edit System User Details";
-			$data['subLinks'] = array(
-				array
-				(
-					"title" => "User List",
-					"route" => "/system/users",
-					"icon" => "<i class='fa fa-th-list'></i>",
-					"permission" => "system_user_can_view"
-				)
-			);
-			$data['user'] = $user;
-
-			$rolesArray = UserTasks::setUpRolesArray();
-			
-			$data['roles'] = $rolesArray;
-			$data['users_role'] = Role::where('id','=',$user -> role_id)->first();
-
+			$data = UserTasks::populateEditData($id);
 			return view('dashboard.system.users.edit',$data);
 		}
 		else
 		{
-			return "You are not authorized";die();
+			CommonTasks::throwUnauthorized();
 		}
 	}
 
@@ -149,30 +74,11 @@ class UserController extends Controller {
 	{
 		if(self::checkUserPermissions("system_user_can_edit"))
 		{
-			$user = User::find($id);
-
-			$rules = self::getRules();
-
-			$validator = Validator::make(Input::all(), $rules);
-
-			if ($validator->fails())
-			{
-				return Redirect::to('/system/users/'.$id.'/edit')
-	        		->withErrors($validator)
-	        		->withInput();
-			}
-		    else
-		    {
-				$model = UserTasks::executeUpdate($user,$request);
-
-				$user -> push();
-				Session::flash('message', "User Details Updated");
-				return Redirect::to("/system/users");
-			}
+			UserTasks::updateUserData($request,$id);
 		}
 		else
 		{
-			return "You are not authorized";die();
+			CommonTasks::throwUnauthorized();
 		}
 
 	}
@@ -181,48 +87,12 @@ class UserController extends Controller {
 	{
 		if(self::checkUserPermissions("system_user_can_view"))
 		{
-			$user = User::find($id);
-
-			$data['title'] = "View User Details";
-			$data['activeLink'] = "user";
-			$data['subTitle'] = "View System User Details";
-			$data['subLinks'] = array(
-				array
-				(
-					"title" => "User List",
-					"route" => "/system/users",
-					"icon" => "<i class='fa fa-th-list'></i>",
-					"permission" => "system_user_can_view"
-				),
-				array
-				(
-					"title" => "Add User",
-					"route" => "/system/users/create",
-					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "system_user_can_add"
-				),
-				array
-				(
-					"title" => "Edit User",
-					"route" => "/system/users/".$id."/edit",
-					"icon" => "<i class='fa fa-pencil'></i>",
-					"permission" => "system_user_can_edit"
-				),
-				array
-				(
-					"title" => "Delete User",
-					"route" => "/system/users/delete/".$id,
-					"icon" => "<i class = 'fa fa-trash'></i>",
-					"permission" => "system_user_can_delete"
-				)
-			);
-			$data['user'] = $user;
-
+			$data = UserTasks::populateShowData($id);
 			return view('dashboard.system.users.view',$data);
 		}
 		else
 		{
-			return "You are not authorized";die();
+			CommonTasks::throwUnauthorized();
 		}
 	}
 
@@ -230,80 +100,45 @@ class UserController extends Controller {
 	{
 		if(self::checkUserPermissions("system_user_can_delete"))
 		{
-			$user = User::find($id);
-
-	    if($user -> image_name != null)
-		{
-
-	      	if (file_exists(public_path('uploads/'.$user -> image_name)))
-	  		{
-	        	unlink(public_path('uploads/'.$user -> image_name));
-	  		}
-
-	    }
-
-	    $user -> delete();
-
-	    Session::flash('message', 'User deleted');
-			return Redirect::to("/system/users");
+			UserTasks::deleteUserData($id);
 		}
 		else
 		{
-			return "You are not authorized";die();
+			CommonTasks::throwUnauthorized();
 		}
 	}
 
 	public function resetUserPassword($id)
 	{
-		$user = User::find($id);
-
-		$user -> status = 2;
-		$user -> password = Hash::make("password");
-
-		$user -> push();
-
-		Session::flash('message', 'User\'s password reset');
-		return Redirect::to("/system/users");
+		if(self::checkUserPermissions("system_user_can_reset-password"))
+		{
+			UserTasks::resetUserPassword($id);
+		}
+		else
+		{
+			CommonTasks::throwUnauthorized();
+		}
 	}
 
-  public function apiGetUsers($data)
-  {
+	public function apiGetUsers($data)
+	{
 		$data = ucfirst($data);
-    	$users = \DB::table("users")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
-    	return Response::json(
-        	$users
-    	);
-  }
+		$users = \DB::table("users")->where("first_name","like","%$data%")->orWhere("last_name","like","%$data%")->get();
+		return Response::json(
+	    	$users
+		);
+	}
 
 	public function search()
 	{
 		if(self::checkUserPermissions("system_user_can_search"))
 		{
-			$data['title'] = "Search for User";
-			$data['activeLink'] = "user";
-			$data['subTitle'] = "Search For User";
-			$data['subLinks'] = array(
-				array
-				(
-					"title" => "Role List",
-					"route" => "/system/users",
-					"icon" => "<i class='fa fa-th-list'></i>",
-					"permission" => "system_user_can_view"
-				),
-				array
-				(
-					"title" => "Add Role",
-					"route" => "/system/users/create",
-					"icon" => "<i class='fa fa-plus'></i>",
-					"permission" => "system_user_can_add"
-				)
-			);
-
+			$data = UserTasks::populateSearchData();
 			return view('dashboard.system.users.search',$data);
 		}
 		else
 		{
-			return "You are not authorized";die();
+			CommonTasks::throwUnauthorized();
 		}
 	}
 
@@ -318,20 +153,9 @@ class UserController extends Controller {
 		->orWhere("role_name","ilike","%$data%")
 
 		->get();
-	return Response::json(
+		
+		return Response::json(
 				$users
 		);
 	}
-
-	public function getRules()
-	{
-		return array(
-			'first_name' => 'required',
-			'last_name' => 'required',
-			'username' => 'required',
-			'email' => 'required',
-		);
-
-	}
-
 }
