@@ -10,12 +10,14 @@
 	?>
 	<title>@if(isset($company->company_name)) {{ $company->company_name }} @else Company @endif | {{$title}}</title>
 
-  <link href="{{ asset('/css/normalize.css') }}" rel="stylesheet">
+	
+  	<link href="{{ asset('/css/normalize.css') }}" rel="stylesheet">
+  	<link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/dashboard.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
 
-  <script src="{{ asset('/js/jquery.js') }}" rel="stylesheet"></script>
-	<script src="{{ asset('/js/chart.js') }}" rel="stylesheet"></script>
+  	<script src="{{ asset('/js/jquery.js') }}" rel="stylesheet"></script>
+	<script src="{{ asset('/js/bootstrap.min.js') }}" rel="stylesheet"></script>
 	<script src="{{ asset('/js/masonry.pkgd.min.js') }}" rel="stylesheet"></script>
 	<script src="{{ asset('/js/dash.js') }}" rel="stylesheet"></script>
 
@@ -29,15 +31,7 @@
 
 </head>
 <body>
-
-  <nav id = "main-nav">
-		<a href = "/dashboard">
-	    <header>
-	      <h2><i class="fa fa-dashcube"></i>  &nbsp; Dashboard</h2>
-	    </header>
-		</a>
-
-		<!-- check if user has permissions -->
+	<!-- check if user has permissions -->
 		<?php
 			//variables for permissions
 
@@ -73,87 +67,99 @@
 			}
 		?>
 
-    <ul>
-      <li>
+	<header id = "main-header">
 
-				@if(isset($systemPermission))
-					<a id = "system" class = "main-link"> <i class="fa fa-plus"></i> &nbsp; System	</a>
+		<div class = "float-left">
+			<a href = "/dashboard">
+				<h2>Dashboard</h2>
+			</a>
+		</div>
 
-							@if(isset($companyPermission))
-								<a href = "/system/company" id = "company-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'company') { echo 'active-link'; } } ?>">
-									<i class="fa fa-user"></i> &nbsp; Company Details
-								</a>
-							@endif
+		
+		<div class = "float-right">
 
-							@if(isset($permissionPermission))
-								<a href = "/system/permissions" id = "permission-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'permission') { echo 'active-link'; } } ?>">
-									<i class="fa fa-key"></i> &nbsp; Permissions
-								</a>
-							@endif
+				@if(isset(Auth::user()->image_name))
+					<div class = "box">
+						<div id = "profile-pic">
+							<img src = "/uploads/{{Auth::user()->image_name}}" />
+						</div>
+					</div>
+				@else
+					<div class = "box-padding">
+						<i class="fa fa-user"></i>
+					</div>
+				@endif
+			<div class = "box-padding" id = "user-name">
+				{{Auth::user()->first_name}} {{Auth::user()->last_name}}
+			</div>
+		</div>
+		
+		<div class = "float-right">
+			<a href = "/dashboard/profile">
+				<div class = "box-padding" id = "profile-btn" title = "Profile Settings">
+					<i class="fa fa-cog"></i>
+				</div>
+			</a>
+			<a href = "/auth/logout">
+				<div class = "box-padding" id = "logout-btn" title = "Logout">
+					<i class="fa fa-power-off"></i>
+				</div>
+			</a>
+		</div>
+	</header>
 
-			        		@if(isset($rolePermission))
-								<a href = "/system/roles" id = "role-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'role') { echo 'active-link'; } } ?>">
-									<i class="fa fa-gavel"></i> &nbsp; Roles
-								</a>
-							@endif
+  	<nav id = "main-nav">
+	    <ul>
+	      <li>
 
-			        		@if(isset($userPermission))
-								<a href = "/system/users" id = "user-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'user') { echo 'active-link'; } } ?>">
-									<i class="fa fa-user"></i> &nbsp; Users
-								</a>
-							@endif
+			@if(isset($systemPermission))
+				<a id = "system" class = "main-link"> <i class="fa fa-plus"></i> &nbsp; System	</a>
+
+				@if(isset($companyPermission))
+					<a href = "/system/company" id = "company-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'company') { echo 'active-link'; } } ?>">
+						<i class="fa fa-user"></i> &nbsp; Company Details
+					</a>
 				@endif
 
-      </li>
+				@if(isset($permissionPermission))
+					<a href = "/system/permissions" id = "permission-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'permission') { echo 'active-link'; } } ?>">
+						<i class="fa fa-key"></i> &nbsp; Permissions
+					</a>
+				@endif
 
-    </ul>
+				@if(isset($rolePermission))
+					<a href = "/system/roles" id = "role-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'role') { echo 'active-link'; } } ?>">
+						<i class="fa fa-gavel"></i> &nbsp; Roles
+					</a>
+				@endif
 
-  </nav>
+				@if(isset($userPermission))
+					<a href = "/system/users" id = "user-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'user') { echo 'active-link'; } } ?>">
+						<i class="fa fa-user"></i> &nbsp; Users
+					</a>
+				@endif
+			@endif
 
-  <div id = "content-wrapper">
-    <header>
-			<div class = "float-left">
-				<a href = "/dashboard/profile">
-					<div class = "box-padding" id = "profile-btn" title = "Profile Settings">
-						<i class="fa fa-cog"></i>
-					</div>
-				</a>
-				<a href = "/auth/logout">
-					<div class = "box-padding" id = "logout-btn" title = "Logout">
-						<i class="fa fa-power-off"></i>
-					</div>
-				</a>
-			</div>
-			<div class = "float-right">
+	      </li>
 
-					@if(isset(Auth::user()->image_name))
-						<div class = "box">
-							<div id = "profile-pic">
-								<img src = "/uploads/{{Auth::user()->image_name}}" />
-							</div>
-						</div>
-					@else
-						<div class = "box-padding">
-							<i class="fa fa-user"></i>
-						</div>
-					@endif
-				<div class = "box-padding">
-					{{Auth::user()->first_name}} {{Auth::user()->last_name}}
-				</div>
-			</div>
-    </header>
+	    </ul>
+
+ 	</nav>
+
+  	<div id = "content-wrapper">
+    	
 
 		@if(isset($warningMessage))
-      <div id = "warning-box">
-        {{ $warningMessage }}
-      </div>
-    @endif
+	      	<div id = "warning-box">
+	        	{{ $warningMessage }}
+	      	</div>
+    	@endif
 
 		@if(Session::has('message'))
-      <div id = "session-box">
-        {{ Session::get('message') }}
-      </div>
-    @endif
+			<div id = "session-box">
+				{{ Session::get('message') }}
+			</div>
+    	@endif
 
 		@if(isset($subTitle))
 			<h3 class = "sub-title">
@@ -165,21 +171,21 @@
 
 			@if(isset($subLinks))
 				@foreach($subLinks as $subLink)
-				<?php
+					<?php
 
-					$subLinkAccess = null;
+						$subLinkAccess = null;
 
-					foreach($permissions as $permission)
-					{
-						if($permission->permission_name == $subLink['permission'])
+						foreach($permissions as $permission)
 						{
-							$subLinkAccess = 1;
-							break;
+							if($permission->permission_name == $subLink['permission'])
+							{
+								$subLinkAccess = 1;
+								break;
 
+							}
 						}
-					}
 
-				?>
+					?>
 
 					@if(isset($subLinkAccess))
 						<a @if(isset($subLink['route'])) href = "{{$subLink['route']}}" @endif>
@@ -191,11 +197,11 @@
 				@endforeach
 			@endif
 
-      @yield("content")
+      	@yield("content")
 
-			<div id = "signature">
-				<span><i class="fa fa-power-off"></i> &nbsp; Powered By : <b>DB Technologies</b></span>
-			</div>
+<!-- 		<div id = "signature">
+			<span><i class="fa fa-power-off"></i> &nbsp; Powered By : <b>DB Technologies</b></span>
+		</div> -->
 
     </div>
 

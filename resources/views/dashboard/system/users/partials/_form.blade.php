@@ -61,7 +61,7 @@
   @endif
 
   <tr>
-    <td colspan="2" align="right">{!! Form::submit($submitButtonText, array('class' => 'submit-button')) !!}</td>
+    <td colspan="2" align="right">{!! Form::submit($submitButtonText, array('class' => 'btn btn-primary')) !!}</td>
   </tr>
 
 </table>

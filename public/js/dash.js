@@ -13,9 +13,10 @@ $(document).ready(function(){
 function setup()
 {
 	var windowHeight = $(window).height();
+	var headerHeight = $("#main-header").height();
 
-	$("#main-nav").height(windowHeight);
-	$("#content-wrapper").height(windowHeight);
+	$("#main-nav").height(windowHeight - headerHeight);
+	$("#content-wrapper").height(windowHeight - headerHeight);
 
 	$(".hidden_question").hide();
 

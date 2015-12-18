@@ -11,7 +11,7 @@
 body{
   margin:0;
   padding:0;
-  background-color: #F5F5F5;
+  background-color: #E1E1E1;
   font-family: Open Sans Light;
   font-size: 12px;
 }
@@ -25,28 +25,33 @@ a{
   color:inherit;
 }
 
+a:hover{
+  text-decoration: none;
+}
+
+header#main-header{
+  width:100%;
+  background-color: #2980b9;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+  z-index: 99999;
+}
+
+header#main-header h2{
+  margin:0;
+  padding:0;
+  margin-left: 10px;
+  color:#FFF;
+  font-size: 18px;
+  display: inline;
+}
+
 nav#main-nav{
   float:left;
   width:15%;
-  background-color: #607D8B;
-  overflow-y: scroll;
-}
-
-nav#main-nav header{
-  height:40px;
-  background-color: #37474F;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
-  padding-left: 10px;
-  position: relative;
-  z-index: 9999;
-}
-
-nav#main-nav header h2{
-  line-height: 40px;
-  font-size: 16px;
-  color:#FFF;
-  margin: 0;
-  padding:0;
+  background-color: #E1E1E1;
 }
 
 nav#main-nav ul{
@@ -65,10 +70,11 @@ nav#main-nav ul li a{
 
 nav#main-nav ul li a.main-link{
   font-weight: bold;
-  background-color: #455A64;
-  border-top: 1px solid #37474F;
-  border-bottom: 1px solid #37474F;
+  background-color: #E1E1E1;
+  border-top: 1px solid #D1D1D1;
+  border-bottom: 1px solid #D1D1D1;
   padding:10px;
+  color:#111111;
   cursor: pointer;
 }
 
@@ -78,8 +84,13 @@ nav#main-nav ul li a.main-link i{
 }
 
 nav#main-nav ul li a.sub-link{
-  background-color: #546E7A;
+  background-color: #E1E1E1;
   padding:5px 10px;
+  color:#616161;
+}
+
+nav#main-nav ul li a.sub-link:hover{
+
 }
 
 nav#main-nav ul li a.sub-link i{
@@ -118,58 +129,10 @@ div#content-wrapper header{
 
 div#logout-btn{
   cursor: pointer;
-  background-color: #D1D1D1;
-}
-
-div#logout-btn:hover{
-  background-color: #f44336;
-  color:#FFF;
 }
 
 div#profile-btn{
   cursor: pointer;
-  background-color: #D1D1D1;
-}
-
-div#profile-btn:hover{
-  background-color: #27ae60;
-  color:#FFF;
-}
-
-div#reminders-btn{
-  cursor: pointer;
-  background-color: #D1D1D1;
-}
-
-div#reminders-btn:hover{
-  background-color: #27ae60;
-  color:#FFF;
-}
-
-div#messages-btn{
-  cursor: pointer;
-  background-color: #D1D1D1;
-  position: relative;
-}
-
-div#messages-btn:hover{
-  background-color: #27ae60;
-  color:#FFF;
-}
-
-div#unread-msg-badge{
-  background-color: #AA0000;
-  color:#FFF;
-  width: 20px;
-  height:20px;
-  line-height: 20px;
-  text-align: center;
-  font-family: monospace;
-  display: block;
-  position: absolute;
-  top:30px;
-  right:-10px;
-  border-radius: 50%;
 }
 
 #profile-pic{
@@ -269,7 +232,6 @@ div#unread-msg-badge{
   margin:0px;
   margin-bottom: 10px;
   padding:10px 20px;
-  background-color: #F1F1F1;
   position: relative;
   z-index: 99;
 }
@@ -279,7 +241,7 @@ div#unread-msg-badge{
 div.card{
   padding:5px;
   background-color: #FFF;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1)
+  /** box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 1px 1px rgba(0,0,0,0.1) **/
 }
 
 /**************************************************       DASHBOARD CARD STYLES    ************************************/
@@ -579,7 +541,8 @@ table.permission-table tr:hover{
 }
 
 .active-link{
-  background-color: #455A64 !important;
+  /* background-color: #455A64 !important; */
+  border-right:2px solid #2980b9;
 }
 
 .red-note{
@@ -691,6 +654,7 @@ table.permission-table tr:hover{
 
 .box{
   float:right;
+  color:#FFF;
 }
 
 .grey-back{
@@ -712,6 +676,7 @@ table.permission-table tr:hover{
 .box-padding{
   padding:0px 10px;
   float:right;
+  color:#FFF;
 }
 
 .float-left{
