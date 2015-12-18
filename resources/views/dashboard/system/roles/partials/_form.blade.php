@@ -2,7 +2,11 @@
 
   <tr>
     <td>{!! Form::label("role_name","Role Name") !!}</td>
-    <td>{!! Form::text("role_name", null , ['placeholder' => 'Role Name','class'=>'text-input']) !!}</td>
+    <td>
+    	<div class="form-group">
+    		{!! Form::text("role_name", null , ['placeholder' => 'Role Name','class'=>'form-control']) !!}
+    	</div>
+    </td>
   </tr>
 
   <tr>

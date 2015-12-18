@@ -70,14 +70,12 @@
 	<header id = "main-header">
 
 		<div class = "float-left">
-			<a href = "/dashboard">
-				<h2>Dashboard</h2>
+			<div id = "menu"><h4><i class="fa fa-bars"></i></div>
+			<a id = "dashboard" href = "/dashboard">
+				Dashboard
 			</a>
 		</div>
-
-		
 		<div class = "float-right">
-
 				@if(isset(Auth::user()->image_name))
 					<div class = "box">
 						<div id = "profile-pic">
@@ -106,7 +104,10 @@
 				</div>
 			</a>
 		</div>
+		<div class  = "clear-floats"></div>
 	</header>
+
+	<div class  = "clear-floats"></div>
 
   	<nav id = "main-nav">
 	    <ul>

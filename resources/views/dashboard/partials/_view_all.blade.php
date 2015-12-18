@@ -1,4 +1,4 @@
-<table class = "view-table">
+<table class = "table table-hover">
 <?php
   $permissions = \DB::table("permissions")->where("role_id",Auth::user()->role_id)->get();
 ?>

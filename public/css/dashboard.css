@@ -11,7 +11,7 @@
 body{
   margin:0;
   padding:0;
-  background-color: #E1E1E1;
+  background-color: #FFF;
   font-family: Open Sans Light;
   font-size: 12px;
 }
@@ -33,19 +33,27 @@ header#main-header{
   width:100%;
   background-color: #2980b9;
   box-shadow: 0 1px 1px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.2);
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   position: relative;
   z-index: 99999;
+  font-size: 14px;
 }
 
-header#main-header h2{
+header#main-header #dashboard{
   margin:0;
   padding:0;
   margin-left: 10px;
   color:#FFF;
-  font-size: 18px;
-  display: inline;
+  font-size: 20px;
+}
+
+div#menu{
+  display: inline-block;
+  cursor: pointer;
+  margin-left:20px;
+  margin-right:10px;
+  color:#FFF;
 }
 
 nav#main-nav{
@@ -136,8 +144,8 @@ div#profile-btn{
 }
 
 #profile-pic{
-  width:40px;
-  height:40px;
+  width:50px;
+  height:50px;
 }
 
 #profile-pic img{
@@ -160,6 +168,18 @@ div#profile-btn{
 .view-table td{
   padding:5px;
   border-bottom: 1px solid #E1E1E1;
+}
+
+/****** OVERRIDE THE BOOTSTRAP *********/
+.table th{
+  font-size:16px;
+  font-weight: normal;
+  background-color: #FAFAFA;
+}
+
+label{
+  font-weight: normal;
+  font-size: 14px;
 }
 
 .details-table{
@@ -196,7 +216,7 @@ div#profile-btn{
 }
 
 /* PAGINATION STYLES **************************/
-.page_links ul li{
+/*.page_links ul li{
 	display: inline-block;
 	padding:2px 5px;
 	margin:2px;
@@ -224,7 +244,7 @@ div#profile-btn{
 .page_links ul li a{
 	text-decoration: none;
 	color:#616161;
-}
+}*/
 
 .sub-title{
   color:#4183D7;
@@ -484,7 +504,7 @@ table.form-element .submit-button{
 
 div.error-box{
   background-color: #ffcdd2;
-  width:94%;
+  width:97%;
   border-radius: 5px;
   padding:0px 10px;
   margin-bottom: 10px;
@@ -541,8 +561,7 @@ table.permission-table tr:hover{
 }
 
 .active-link{
-  /* background-color: #455A64 !important; */
-  border-right:2px solid #2980b9;
+  background-color: #FFF !important;
 }
 
 .red-note{
