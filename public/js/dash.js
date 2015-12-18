@@ -96,7 +96,7 @@ function handleSearch(route,parentModel,model)
 {
 		$.ajax({
 		method: "GET",
-	  	url: "/api/v1/"+ route +"/"+ $(".search-input").val(),
+	  	url: "/api/v1/"+ route +"/"+ $(".form-control").val(),
 		success: function(data){
 			console.log(data);
 			if(data.length > 0)

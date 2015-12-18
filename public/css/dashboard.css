@@ -40,6 +40,10 @@ header#main-header{
   font-size: 14px;
 }
 
+div#dash-heading{
+  height: 50px !important;
+}
+
 header#main-header #dashboard{
   margin:0;
   padding:0;
@@ -59,7 +63,7 @@ div#menu-btn{
 nav#main-nav{
   float:left;
   width:15%;
-  background-color: #E1E1E1;
+  background-color: #FFF;
 }
 
 nav#main-nav ul{
@@ -77,13 +81,12 @@ nav#main-nav ul li a{
 }
 
 nav#main-nav ul li a.main-link{
-  font-weight: bold;
-  background-color: #E1E1E1;
-  border-top: 1px solid #D1D1D1;
-  border-bottom: 1px solid #D1D1D1;
+  font-size: 16px;
+  background-color: #F1F1F1;
   padding:10px;
   color:#111111;
   cursor: pointer;
+
 }
 
 nav#main-nav ul li a.main-link i{
@@ -92,9 +95,10 @@ nav#main-nav ul li a.main-link i{
 }
 
 nav#main-nav ul li a.sub-link{
-  background-color: #E1E1E1;
+  background-color: #FFF;
   padding:5px 10px;
   color:#616161;
+  font-size: 14px;
 }
 
 nav#main-nav ul li a.sub-link:hover{
@@ -415,7 +419,8 @@ div#warning-box{
 }
 
 .mini-link{
-  display: inline-block;
+    margin-bottom: 10px;
+ /* display: inline-block;
   width:30px;
   height:30px;
   text-align: center;
@@ -424,7 +429,7 @@ div#warning-box{
   color:#FFF;
   border-radius: 50%;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 10px;*/
 }
 
 .confirm_delete{
@@ -561,7 +566,7 @@ table.permission-table tr:hover{
 }
 
 .active-link{
-  background-color: #FFF !important;
+  background-color: #F1F1F1 !important;
 }
 
 .red-note{
@@ -793,4 +798,9 @@ table.permission-table tr:hover{
 
 .width-normal{
   width:85%;
+}
+
+/****** override bootstrap style ********/
+.row{
+  margin:0 !important;
 }

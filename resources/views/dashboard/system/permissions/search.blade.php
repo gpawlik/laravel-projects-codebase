@@ -4,7 +4,7 @@
 
     <div class = "search-wrapper">
 
-      <input type = "text" name = "search" onkeyup="handleSearch('permission_search','system','permissions')" class = "search-input"
+      <input type = "text" name = "search" onkeyup="handleSearch('permission_search','system','permissions')" class = "form-control"
         placeholder = "Search Permissions by Name"/>
 
     </div>

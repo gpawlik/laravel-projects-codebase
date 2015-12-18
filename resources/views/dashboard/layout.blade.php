@@ -69,7 +69,7 @@
 
 	<header id = "main-header">
 
-		<div class = "float-left">
+		<div id = "dash-heading" class = "float-left">
 			<div id = "menu-btn"><h4><i class="fa fa-bars"></i></div>
 			<a id = "dashboard" href = "/dashboard">
 				Dashboard
@@ -105,7 +105,6 @@
 		</div>
 		
 	</header>
-	<div class  = "clear-floats"></div>
 
   	<nav id = "main-nav">
 	    <ul>
@@ -188,7 +187,7 @@
 
 					@if(isset($subLinkAccess))
 						<a @if(isset($subLink['route'])) href = "{{$subLink['route']}}" @endif>
-							<div id = "{{ str_replace(" ","_",strtolower($subLink['title'])) }}" class = "mini-link" title = "{{$subLink['title']}}">
+							<div id = "{{ str_replace(" ","_",strtolower($subLink['title'])) }}" class="btn btn-primary btn-sm mini-link" title = "{{$subLink['title']}}">
 								{!! $subLink['icon'] !!}
 							</div>
 						</a>
