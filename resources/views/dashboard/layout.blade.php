@@ -70,7 +70,7 @@
 	<header id = "main-header">
 
 		<div class = "float-left">
-			<div id = "menu"><h4><i class="fa fa-bars"></i></div>
+			<div id = "menu-btn"><h4><i class="fa fa-bars"></i></div>
 			<a id = "dashboard" href = "/dashboard">
 				Dashboard
 			</a>
@@ -91,7 +91,6 @@
 				{{Auth::user()->first_name}} {{Auth::user()->last_name}}
 			</div>
 		</div>
-		
 		<div class = "float-right">
 			<a href = "/dashboard/profile">
 				<div class = "box-padding" id = "profile-btn" title = "Profile Settings">
@@ -104,9 +103,8 @@
 				</div>
 			</a>
 		</div>
-		<div class  = "clear-floats"></div>
+		
 	</header>
-
 	<div class  = "clear-floats"></div>
 
   	<nav id = "main-nav">
@@ -147,7 +145,7 @@
 
  	</nav>
 
-  	<div id = "content-wrapper">
+  	<div id = "content-wrapper" class = "width-normal">
     	
 
 		@if(isset($warningMessage))

@@ -7,6 +7,7 @@ $(document).ready(function(){
 	handleSessionBox();
 	handlePermissions();
 	handleCheckAll();
+	handleMenuButtonClick();
 
 });
 
@@ -43,6 +44,14 @@ function handleMenuClick()
 	$(".main-link").click(function(){
 		$(this).nextUntil(".main-link").slideToggle("fast");
 		$(this).find("i").toggleClass("fa-plus").toggleClass("fa-minus");
+	});
+}
+
+function handleMenuButtonClick()
+{
+	$("#menu-btn").click(function(){
+		$("#main-nav").toggle();
+		$("#content-wrapper").toggleClass("width-full").toggleClass("width-normal");
 	});
 }
 

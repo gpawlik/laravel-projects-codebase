@@ -48,7 +48,7 @@ header#main-header #dashboard{
   font-size: 20px;
 }
 
-div#menu{
+div#menu-btn{
   display: inline-block;
   cursor: pointer;
   margin-left:20px;
@@ -785,4 +785,12 @@ table.permission-table tr:hover{
   background-color: #FFF;
   text-align: center;
   color:#AA0000;
+}
+
+.width-full{
+  width:100% !important;
+}
+
+.width-normal{
+  width:85%;
 }
