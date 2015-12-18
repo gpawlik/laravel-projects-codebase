@@ -72,9 +72,19 @@ nav#main-nav ul li a.main-link{
   cursor: pointer;
 }
 
+nav#main-nav ul li a.main-link i{
+  display: inline-block;
+  width: 20px;
+}
+
 nav#main-nav ul li a.sub-link{
   background-color: #546E7A;
   padding:5px 10px;
+}
+
+nav#main-nav ul li a.sub-link i{
+  display: inline-block;
+  width: 20px;
 }
 
 nav#main-nav ul li a .nav-selection-icon{

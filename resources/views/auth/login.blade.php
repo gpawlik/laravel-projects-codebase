@@ -36,7 +36,7 @@
 
 				<input type="password" class="f-input" name="password" placeholder="Password">
 
-				<button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
+				<button id = "login-btn" type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
 
 			</form>
 

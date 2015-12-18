@@ -77,22 +77,30 @@
       <li>
 
 				@if(isset($systemPermission))
-					<a id = "system" class = "main-link"> <i class="fa fa-cogs"></i> &nbsp; System	</a>
+					<a id = "system" class = "main-link"> <i class="fa fa-plus"></i> &nbsp; System	</a>
 
 							@if(isset($companyPermission))
-								<a href = "/system/company" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'company') { echo 'active-link'; } } ?>"><i class="fa fa-user"></i> &nbsp; Company Details</a>
+								<a href = "/system/company" id = "company-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'company') { echo 'active-link'; } } ?>">
+									<i class="fa fa-user"></i> &nbsp; Company Details
+								</a>
 							@endif
 
 							@if(isset($permissionPermission))
-								<a href = "/system/permissions" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'permission') { echo 'active-link'; } } ?>"><i class="fa fa-key"></i> &nbsp; Permissions</a>
+								<a href = "/system/permissions" id = "permission-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'permission') { echo 'active-link'; } } ?>">
+									<i class="fa fa-key"></i> &nbsp; Permissions
+								</a>
 							@endif
 
 			        		@if(isset($rolePermission))
-								<a href = "/system/roles" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'role') { echo 'active-link'; } } ?>"><i class="fa fa-gavel"></i> &nbsp; Roles</a>
+								<a href = "/system/roles" id = "role-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'role') { echo 'active-link'; } } ?>">
+									<i class="fa fa-gavel"></i> &nbsp; Roles
+								</a>
 							@endif
 
 			        		@if(isset($userPermission))
-								<a href = "/system/users" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'user') { echo 'active-link'; } } ?>"><i class="fa fa-user"></i> &nbsp; Users</a>
+								<a href = "/system/users" id = "user-sub-link" class = "sub-link <?php if(isset($activeLink)) { if($activeLink == 'user') { echo 'active-link'; } } ?>">
+									<i class="fa fa-user"></i> &nbsp; Users
+								</a>
 							@endif
 				@endif
 
@@ -175,7 +183,7 @@
 
 					@if(isset($subLinkAccess))
 						<a @if(isset($subLink['route'])) href = "{{$subLink['route']}}" @endif>
-							<div class = "mini-link" title = "{{$subLink['title']}}">
+							<div id = "{{ str_replace(" ","_",strtolower($subLink['title'])) }}" class = "mini-link" title = "{{$subLink['title']}}">
 								{!! $subLink['icon'] !!}
 							</div>
 						</a>

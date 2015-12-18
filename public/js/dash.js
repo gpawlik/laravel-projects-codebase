@@ -41,6 +41,7 @@ function handleMenuClick()
 {
 	$(".main-link").click(function(){
 		$(this).nextUntil(".main-link").slideToggle("fast");
+		$(this).find("i").toggleClass("fa-plus").toggleClass("fa-minus");
 	});
 }
 

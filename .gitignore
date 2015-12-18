@@ -4,3 +4,6 @@
 Homestead.yaml
 .env
 /nbproject
+/test_reports
+/test_images
+selenium-server-standalone-2.48.2.jar

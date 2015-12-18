@@ -1,7 +1,9 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
-
+use App\Application\Role\Repositories\RoleRepository;
+use App\Application\Permission\Repositories\PermissionRepository;
+use App\Application\User\Repositories\UserRepository;
 use App\Http\Controllers\RoleController;
 use App\Http\Tasks\CommonTasks;
 use App\Role;
@@ -27,17 +29,11 @@ class RoleTasks
 		if ($validator->fails())
 		{
 			return Redirect::to('/system/roles/create')
-				->withErrors($validator)
-				->withInput()
-				->send();
+				->withErrors($validator)->withInput()->send();
 		}
 		else
 		{
-			$role = new Role;
-
-			$role -> role_name = $request -> input("role_name");
-
-			$role -> save();
+			RoleRepository::saveRole($request);
 
 			Session::flash('message','Role Added');
 			return Redirect::to('/system/roles')->send();
@@ -46,8 +42,6 @@ class RoleTasks
 
 	public static function updateRoleData(Request $request, $id)
 	{
-		$role = Role::find($id);
-
 		$rules = self::getRules();
 
 		$validator = Validator::make($request -> all(), $rules);
@@ -55,15 +49,12 @@ class RoleTasks
 		if ($validator->fails())
 		{
 			return Redirect::to('/system/roles/'.$id.'/edit')
-        		->withErrors($validator)
-        		->withInput()
-        		->send();
+        		->withErrors($validator)->withInput()->send();
 		}
 	    else
 	    {
-			$role -> role_name = Input::get("role_name");
+			RoleRepository::saveRole($request,$id);
 
-			$role -> push();
 			Session::flash('message', "Role Details Updated");
 			return Redirect::to("/system/roles")->send();
 		}
@@ -71,10 +62,10 @@ class RoleTasks
 
 	public static function deleteRoleData($id)
 	{
-		$role = Role::find($id);
+		$role = RoleRepository::getRole($id);
 
 		//check if users are assigned to this role, if not delete role else error (to avoid cascade delete)
-		$affiliatedUsers = \DB::table("users")->where("role_id",$role->id)->count();
+		$affiliatedUsers = UserRepository::getAffiliatedToCount("role_id",$id);
 
 		if($affiliatedUsers > 0)
 		{
@@ -83,7 +74,7 @@ class RoleTasks
 		}
 
 		//check if permissions are assigned to this role, if not delete role else error (to avoid cascade delete)
-		$affiliatedPermissions = \DB::table("permissions")->where("role_id",$role->id)->count();
+		$affiliatedPermissions = PermissionRepository::getAffiliatedToCount("role_id",$id);
 
 		if($affiliatedPermissions > 0)
 		{
@@ -106,12 +97,10 @@ class RoleTasks
 		array_shift($selectedPermissions);
 
 		//select all where role_id = selected id
-		$role = Role::find($id);
+		$role = RoleRepository::getRole($id);
 
 		//select all permissions with that role id
-		$rolesPermissions = \DB::table("permissions")->where("role_id",$role->id);
-
-		//var_dump($rolesPermissions);die();
+		$rolesPermissions = PermissionRepository::getWhere("role_id",$id,"MODEL_MODE");
 
 		//delete all permissions with that role id
 		$rolesPermissions->delete();
@@ -136,7 +125,7 @@ class RoleTasks
 		$data['title'] = "Roles";
 		$data['activeLink'] = "role";
 		$data['subTitle'] = "Roles";
-    	$data['roles'] = Role::orderBy("updated_at","DESC")->paginate(20);
+    	$data['roles'] = RoleRepository::getAllRolesPaginated(20);
     	$data['subLinks'] = array(
       		array
       		(
@@ -177,12 +166,9 @@ class RoleTasks
 
 	public static function populateEditData($id)
 	{
-		$role = Role::find($id);
-
 		$data['title'] = "Edit Role";
 		$data['activeLink'] = "role";
 		$data['subTitle'] = "Edit Role";
-		$data['role'] = $role;
     	$data['subLinks'] = array(
 			array
 			(
@@ -200,13 +186,13 @@ class RoleTasks
 			),
     	);
 
+		$data['role'] = RoleRepository::getRole($id);
+
     	return $data;
 	}
 
 	public static function populateShowData($id)
 	{
-		$role = Role::find($id);
-
 		$data['title'] = "View Role Details";
 		$data['activeLink'] = "role";
 		$data['subTitle'] = "View Role Details";
@@ -241,15 +227,13 @@ class RoleTasks
 			)
 		);
 
-		$data['role'] = $role;
+		$data['role'] = RoleRepository::getRole($id);
 
 		return $data;
 	}
 
 	public static function populatePermissionsData($id)
 	{
-		$role = Role::find($id);
-
 		$data['title'] = "Role Permissions";
 		$data['activeLink'] = "role";
 		$data['subTitle'] = "Role Permissions";
@@ -270,7 +254,8 @@ class RoleTasks
 			)
 		);
 
-		$roles_permissions = \DB::table("permissions")->where("role_id",$role->id)->get();
+		$role = RoleRepository::getRole($id);
+		$roles_permissions = PermissionRepository::getWhere("role_id",$id,"DATA_MODE");
 
 		$data['role'] = $role;
 		$data['permissions_parents'] = \Config::get("Permission.parents");

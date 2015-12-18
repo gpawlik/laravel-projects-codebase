@@ -1,6 +1,7 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
+use App\Application\Permission\Repositories\PermissionRepository;
 
 use App\Http\Tasks\CommonTasks;
 use App\Permission;
@@ -26,18 +27,12 @@ class PermissionTasks
 		if ($validator->fails())
 		{
 			return Redirect::to('/system/permissions/create')
-				->withErrors($validator)
-				->withInput()
-				->send();
+				->withErrors($validator)->withInput()->send();
 		}
 		else
 		{
-     		$permission = new Permission;
-
-      		$permission -> permission_name = $request -> input("permission_name");
-      		$permission -> role_id = $request -> input("role_id");
-
-			$permission -> save();
+     		PermissionRepository::savePermission($request);
+      		
 			Session::flash('message','Permission Added');
 			return Redirect::to('/system/permissions')->send();
     	}
@@ -54,16 +49,12 @@ class PermissionTasks
 		if ($validator->fails())
 		{
 			return Redirect::to('/system/permissions/'.$id.'/edit')
-        		->withErrors($validator)
-        		->withInput()
-        		->send();
+        		->withErrors($validator)->withInput()->send();
 		}
 	    else
 	    {
-			$permission -> permission_name = $request -> input("permission_name");
-			$permission -> role_id = $request -> input("role_id");
+			PermissionRepository::savePermission($request,$id);
 
-			$permission -> push();
 			Session::flash('message', "Permission Details Updated");
 			return Redirect::to("/system/permissions")->send();
 		}
@@ -71,9 +62,7 @@ class PermissionTasks
 
 	public static function deletePermissionData($id)
 	{
-		$permission = Permission::find($id);
-
-	    $permission -> delete();
+		PermissionRepository::deletePermission($id);
 
 	    Session::flash('message', 'Permission deleted');
 		return Redirect::to("/system/permissions")->send();
@@ -84,7 +73,7 @@ class PermissionTasks
 		$data['title'] = "Permissions";
 		$data['activeLink'] = "permission";
 		$data['subTitle'] = "Permissions";
-		$data['permissions'] = Permission::orderBy("permission_name","ASC")->paginate(20);
+		$data['permissions'] = PermissionRepository::getAllPermissionsPaginated(20);
 		$data['subLinks'] = array(
 			array
 			(
@@ -127,8 +116,6 @@ class PermissionTasks
 
 	public static function populateEditData($id)
 	{
-		$permission = Permission::find($id);
-
     	$data['title'] = "Edit Permission";
 		$data['activeLink'] = "permission";
 		$data['subTitle'] = "Edit Permission";
@@ -142,6 +129,7 @@ class PermissionTasks
 			)
     	);
 
+    	$permission = PermissionRepository::getPermission($id);
     	$data['permission'] = $permission;
 
 	    $data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
@@ -152,8 +140,6 @@ class PermissionTasks
 
 	public static function populateShowData($id)
 	{
-		$permission = Permission::find($id);
-
 		$data['title'] = "View Permission Details";
 		$data['activeLink'] = "permission";
 		$data['subTitle'] = "View Permission Details";
@@ -188,7 +174,7 @@ class PermissionTasks
 			)
 		);
 
-		$data['permission'] = $permission;
+		$data['permission'] = PermissionRepository::getPermission($id);
 
 		return $data;
 	}

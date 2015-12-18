@@ -1,7 +1,8 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
-
+use App\Application\User\Repositories\UserRepository;
+use App\Application\Role\Repositories\RoleRepository;
 use App\Http\Controllers\RoleController;
 use App\Http\Tasks\CommonTasks;
 use App\User;
@@ -27,9 +28,7 @@ class UserTasks
 		if ($validator->fails())
 		{
 			return Redirect::to('/system/users/create')
-				->withErrors($validator)
-				->withInput()
-				->send();
+				->withErrors($validator)->withInput()->send();
 		}
 		else
 		{
@@ -128,7 +127,7 @@ class UserTasks
 
 	public static function resetUserPassword($id)
 	{
-		$user = User::find($id);
+		$user = UserRepository::getUser($id);
 
 		$user -> status = 2;
 		$user -> password = Hash::make("password");
@@ -144,7 +143,7 @@ class UserTasks
 		$data['title'] = "Users";
 		$data['activeLink'] = "user";
 		$data['subTitle'] = "All System Users";
-    	$data['users'] = User::orderBy("updated_at","DESC")->paginate(20);
+    	$data['users'] = UserRepository::getAllUsersPaginated(20);
 		$data['subLinks'] = array(
 			array
 			(
@@ -180,7 +179,6 @@ class UserTasks
 			)
 		);
 
-
 		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
 
 		return $data;
@@ -188,8 +186,6 @@ class UserTasks
 
 	public static function populateEditData($id)
 	{
-		$user = User::find($id);
-
 		$data['title'] = "Edit User";
 		$data['activeLink'] = "user";
 		$data['subTitle'] = "Edit System User Details";
@@ -202,6 +198,8 @@ class UserTasks
 				"permission" => "system_user_can_view"
 			)
 		);
+
+		$user = UserRepository::getUser($id);
 		$data['user'] = $user;
 
 		$data['roles'] = CommonTasks::getSelectArray("roles","role_name","ASC");//CommonTasks::getRolesArray();
@@ -212,8 +210,6 @@ class UserTasks
 
 	public static function populateShowData($id)
 	{
-		$user = User::find($id);
-
 		$data['title'] = "View User Details";
 		$data['activeLink'] = "user";
 		$data['subTitle'] = "View System User Details";
@@ -248,7 +244,7 @@ class UserTasks
 			)
 		);
 
-		$data['user'] = $user;
+		$data['user'] = UserRepository::getUser($id);
 
 		return $data;
 	}

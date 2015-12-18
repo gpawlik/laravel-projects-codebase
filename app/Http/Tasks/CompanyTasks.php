@@ -1,6 +1,9 @@
 <?php namespace App\Http\Tasks; 
 
 use Illuminate\Http\Request;
+use App\Application\Company\Repositories\CompanyRepository;
+
+use App\Http\Tasks\CommonTasks;
 
 use App\Role;
 use App\Company;
@@ -21,11 +24,11 @@ class CompanyTasks
 		$data['activeLink'] = "company";
 		$data['subTitle'] = "Company Details";
 
-		$companyDetailsContent = Company::all()->count();
+		$companyDetailsContent = CompanyRepository::count();
 
 		if($companyDetailsContent > 0)
 		{
-			$data['companyDetails'] =  Company::all()->first();
+			$data['companyDetails'] =  CompanyRepository::getCompanyDetails();
 		}
 
 		return $data;
@@ -40,48 +43,32 @@ class CompanyTasks
 		if ($validator->fails())
 		{
 			return Redirect::to('/system/company')
-				->withErrors($validator)
-				->withInput()
-				->send();
+				->withErrors($validator)->withInput()->send();
 		}
 		else
 		{
-			$companyDetailsContent = Company::all()->count();
+			$companyDetailsContent = CompanyRepository::count();
 
 			if($companyDetailsContent > 0)
 			{
-				$companyDetails = Company::all()->first();
+				$companyDetails = CompanyRepository::getCompanyDetails();
 
 				if($request -> file('company_logo_name'))
 				{
 					if($companyDetails -> company_logo_name != null)
 					{
-						if(file_exists(public_path('uploads/' .$companyDetails -> company_logo_name)))
-						{
-							unlink(public_path("uploads/").$companyDetails -> company_logo_name);
-						}
+						CommonTasks::deleteImage($companyDetails -> company_logo_name);
 					}
 
-					$image = $request -> file('company_logo_name');
+					$storageName = CommonTasks::prepareImage($request -> file('company_logo_name'),200,200);
 
-					$storageImageName = time()."_".str_replace(" ","_",$image->getClientOriginalName());
-
-					$destinationImagePath = public_path('uploads/' . $storageImageName);
-
-					$resized_image = Image::make($image)->resize(200,200);
-
-					$resized_image -> save($destinationImagePath);
-
-					$companyDetails -> company_logo_name = $storageImageName;
+					$companyDetails -> company_logo_name = $storageName;
 				}
 				else
 				{
 					if($request -> get('clear_check') == 'checked')
 					{
-						if(file_exists(public_path('uploads/' .$companyDetails -> company_logo_name)))
-						{
-							unlink(public_path("uploads/").$companyDetails -> company_logo_name);
-						}
+						CommonTasks::deleteImage($companyDetails -> company_logo_name);
 
 						$companyDetails -> company_logo_name = null;
 					}
@@ -118,17 +105,9 @@ class CompanyTasks
 
 				if($request -> file('company_logo_name'))
 				{
-					$image = $request -> file('company_logo_name');
+					$storageName = CommonTasks::prepareImage($request -> file('company_logo_name'),200,200);
 
-					$storageImageName = time()."_".str_replace(" ","_",$image->getClientOriginalName());
-
-					$destinationImagePath = public_path('uploads/' . $storageImageName);
-
-					$resized_image = Image::make($image)->resize(200,200);
-
-					$company -> company_logo_name = $storageImageName;
-					
-					$resized_image -> save($destinationImagePath);
+					$company -> company_logo_name = $storageName;
 				}
 				else
 				{
