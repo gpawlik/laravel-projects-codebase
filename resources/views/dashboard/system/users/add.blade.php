@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class = "card half">
+<div class = "well half">
 
   @include('errors.error_list')
 

@@ -64,6 +64,7 @@ nav#main-nav{
   float:left;
   width:15%;
   background-color: #FFF;
+  border-right: 1px solid #E1E1E1;
 }
 
 nav#main-nav ul{
@@ -82,7 +83,7 @@ nav#main-nav ul li a{
 
 nav#main-nav ul li a.main-link{
   font-size: 16px;
-  background-color: #F1F1F1;
+  background-color: #E1E1E1;
   padding:10px;
   color:#111111;
   cursor: pointer;
@@ -567,6 +568,7 @@ table.permission-table tr:hover{
 
 .active-link{
   background-color: #F1F1F1 !important;
+  border-right: 3px solid #D1D1D1;
 }
 
 .red-note{
